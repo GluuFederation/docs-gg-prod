@@ -1,4 +1,4 @@
-Copyright (C) 2017 Gluu, Inc.
+Copyright (C) 2018 Gluu, Inc.
 
 This file is part of Gluu Gateway. 
  
