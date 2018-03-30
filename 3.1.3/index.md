@@ -12,7 +12,7 @@ Gluu Gateway uses the following components:
 1. **[OXD-Server v3.1.3](https://oxd.gluu.org):** OpenID Connect and UMA middleware service used for client credential management and cryptographic validation. 
 1. **[Kong v0.11.x](https://getkong.org):** The open-source API Gateway and Micro services Management Layer, delivering high performance and reliability.
 1. **[Gluu Kong plugins]()**: Use the Gluu Server to control access to upstream API's using OAuth 2.0 clients and UMA 2.0.
-1. **[Admin GUI Portal - Konga]()**: A web administration portal, based on [Konga](https://github.com/pantsel/konga) GUI, that makes it easier to manage your Gluu Gateway.
+1. **[Admin GUI - Konga]()**: A web administration portal, based on [Konga](https://github.com/pantsel/konga) GUI, that makes it easier to manage your Gluu Gateway.
 1. **Others**: Following runtime environment require by Gluu Gateway package. 
     - OpenJDK v8
     - Python v2.x
@@ -34,8 +34,10 @@ Use the following links to get started with credential manager:
 
 1. [Installation](./installation.md)
 1. [Configuration](./configuration.md)
-1. [Admin GUI Portal - Konga](./admin-gui-portal.md)
-1. [Admin API](./admin-api.md)
+1. [Admin GUI](./admin-gui.md)
+1. Plugin
+    1. [Configure plugin using Admin GUI](./plugins/gui.md)
+    2. [Configure plugin using Admin API](./plugins/api.md)
 1. [FAQ](./faq.md)
 
 ## License

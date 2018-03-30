@@ -1,19 +1,22 @@
 # Admin API
 
-There are two plugin for OAuth 2.0 client credential authentication and UMA 2.0 authorization.
+You can configure plugins without Admin GUI. There are two plugins.
 
-1. Gluu OAuth 2.0 client credential authentication
-2. Gluu OAuth 2.0 UMA RS plugin
+!!! Note
+    Configure using [Admin GUI](./gui.md)
+
+1. [Gluu OAuth 2.0 client credential authentication](#gluu-oauth-20-client-credential-authentication)
+2. [Gluu OAuth 2.0 UMA RS plugin](#gluu-oauth-20-uma-rs-plugin)
 
 # Gluu OAuth 2.0 client credential authentication
 
-It provides oauth 2.0 client credential authentication with [3 different modes](#create-oauth-credential).
+This plugin enables the use of an external OpenID Provider for OAuth2 client registration and authentication. It needs to connect via `https` to Gluu's `oxd-https-extension` service, which is an OAuth2 client middleware service. It provides OAuth 2.0 client credential authentication with three different modes.
 
 ## Terminology
 * `api`: your upstream service placed behind Kong, for which Kong proxies requests to.
 * `plugin`: a plugin executing actions inside Kong before or after a request has been proxied to the upstream API.
 * `consumer`: a developer or service using the API. When using Kong, a Consumer only communicates with Kong which proxies every call to the said, upstream API.
-* `credential`: in the gluu-aouth2-client-auth plugin context, an openId client is registered with consumer and client id is used to identify the credential.
+* `credential`: in the gluu-oauth2-client-auth plugin context, an openId client is registered with consumer and client id is used to identify the credential.
 
 ## Installation
 1. [Install Kong](https://getkong.org/install/)
@@ -33,7 +36,9 @@ It provides oauth 2.0 client credential authentication with [3 different modes](
 
 ## Configuration
 ### Add API
+
 The first step is to add your API in the kong. Below is the request for adding API in the kong.
+
 ```
 $ curl -X POST http://localhost:8001/apis \
       --data "name=example" \
@@ -50,6 +55,7 @@ $ curl -i -X GET \
 ```
 
 ### Enable gluu-oauth2-client-auth protection
+
 ```
 curl -X POST http://kong:8001/apis/{api}/plugins \
     --data "name=gluu-oauth2-client-auth" \
@@ -134,17 +140,18 @@ RESPONSE :
   "created_at": 1517216795000,
   "consumer_id": "81ae39fa-d08e-4978-a6af-be0127b9fb99"
   "name": <name>,
-  "op_host": <op_host>
-  "oxd_http_url": <oxd_http_url>
-  "oauth_mode": <true|false>
-  "uma_mode": <true|false>
-  "mix_mode": <true|false>
-  "oxd_id": <oxd_id>
-  "client_name": <client_name>
-  "client_id": <client_id>
-  "client_secret": <client_secret>
-  "allow_unprotected_path": <true|false>
-  "client_jwks_uri": <client_jwks_uri>
+  "op_host": <op_host>,
+  "oxd_http_url": <oxd_http_url>,
+  "oauth_mode": <true|false>,
+  "uma_mode": <true|false>,
+  "mix_mode": <true|false>,
+  "oxd_id": <oxd_id>,
+  "client_name": <client_name>,
+  "client_id": <client_id>,
+  "client_secret": <client_secret>,
+  "client_id_of_oxd_id": <client_id_of_oxd_id>,
+  "allow_unprotected_path": <true|false>,
+  "client_jwks_uri": <client_jwks_uri>,
   "client_token_endpoint_auth_method": <client_token_endpoint_auth_method>
   "client_token_endpoint_auth_signing_alg": <client_token_endpoint_auth_signing_alg>
 }
@@ -162,6 +169,7 @@ RESPONSE :
 | client_name(optional) | kong_oauth2_bc_client | An optional string value for client name. |
 | client_id(optional) | | You can use existing client id. |
 | client_secret(optional) | | You can use existing client secret. |
+| client_id_of_oxd_id(optional) | | You can use existing client id of oxd id. |
 | allow_unprotected_path(false) | | It is used to allow or deny unprotected path by UMA-RS. |
 | client_jwks_uri(optional) | | An optional string value for client jwks uri. |
 | client_token_endpoint_auth_method(optional) | | An optional string value for client token endpoint auth method. |

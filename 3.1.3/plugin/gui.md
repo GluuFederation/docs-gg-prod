@@ -1,0 +1,104 @@
+# Admin GUI
+
+You can configure plugins using Admin GUI - Konga. There are two plugins. 
+
+!!! Note
+    Configure using [Admin API(./api.md)
+    
+1. [Gluu OAuth 2.0 client credential authentication](#gluu-oauth-20-client-credential-authentication)
+2. [Gluu OAuth 2.0 UMA RS plugin](#gluu-oauth-20-uma-rs-plugin)
+
+# Gluu OAuth 2.0 client credential authentication
+
+This plugin enables the use of an external OpenID Provider for OAuth2 client registration and authentication. It needs to connect via `https` to Gluu's `oxd-https-extension` service, which is an OAuth2 client middleware service. It provides OAuth 2.0 client credential authentication with three different modes.
+
+## Add API
+
+The first step is to add your API in the kong. Use [API Section](../admin-gui.md#3-apis) to add API in kong.
+
+## Enable gluu-oauth2-client-auth protection
+
+Use [Manage APIs](../admin-gui.md#manage-apis) section to enable `gluu-oauth2-client-auth` plugin. In the `custom` section, there is `Gluu OAuth2 Client Auth` box. Click on `+` icon to enable plugin.
+
+![add_plugin_api](../img/3_1_add_plugin_api.png)
+
+| **FORM PARAMETER** | **DESCRIPTION** |
+|---------------|-----------------|
+| oxd id(optional) | Used to introspect the token. This above is oxd_id from Konga config. You can also enter any other oxd_id. If you leave it as blank then plugin creates new client itself. |
+| anonymous(optional) | An optional string (consumer uuid) value to use as an `anonymous` consumer if authentication fails. If empty (default), the request will fail with an authentication failure 4xx. Please note that this value must refer to the Consumer id attribute which is internal to Kong, and not its custom_id. |
+| hide credentials(optional) | An optional boolean value telling the plugin to hide the credential to the upstream API server. It will be removed by Kong before proxying the request |
+
+!!! Note
+    See all the attribute description in [Admin API](api.md#enable-gluu-oauth2-client-auth-protection) section. 
+
+## Usage
+
+In order to use the plugin, you first need to create a Consumer to associate one or more credentials to. The Consumer represents a developer using the final service/API.
+
+### Create a Consumer
+
+You need to associate a credential to an existing Consumer object, that represents a user consuming the API. To create a Consumer you can use [Consumer section](../admin-gui.md#4-consumers).
+
+### Create OAuth credential
+
+This process registers OpenId client with oxd which help you to get tokens and authenticate the token. Plugin behaves as per selected mode. There are three modes. 
+
+| Mode | DESCRIPTION |
+|----------------|-------------|
+| oauth_mode | If yes then kong act as OAuth client only. |
+| uma_mode | If yes then this indicates your client is a valid UMA client, and obtain and send an RPT as the access token. You must need to configure [gluu-oauth2-rs](https://github.com/GluuFederation/gluu-gateway/tree/master/gluu-oauth2-rs) plugin for uma_mode. |
+| mix_mode | If yes then the gluu-oauth2 plugin will try to obtain an UMA RPT token if the RS returns a 401/Unauthorized. You must need to configure [gluu-oauth2-rs](https://github.com/GluuFederation/gluu-gateway/tree/master/gluu-oauth2-rs) plugin for uma_mode. |
+
+Use [Consumer credential configuration](../admin-gui.md#consumer-credential-configuration) section to create OAuth credential. In the `Credential` section, there is `OAuth2` section. Click on `+ Create credential` button.
+
+![consumer_credential_list](../img/4_1_consumer_credential_list.png)
+
+You can see below add OAuth credential form
+
+![consumer_credential_add](../img/4_2_consumer_credential_add.png)
+
+| FORM PARAMETER | DESCRIPTION |
+|----------------|-------------|
+| name | The name to associate to the credential. In OAuth 2.0 this would be the application name. |
+| OAuth mode(semi-optional) | If true, kong act as OAuth client only. |
+| UMA mode(semi-optional) | This indicates your client is a valid UMA client, and obtain and send an RPT as the access token. |
+| Mix mode(semi-optional) | If Yes, then the gluu-oauth2 plugin will try to obtain an UMA RPT token if the RS returns a 401/Unauthorized. |
+| Allow unprotected path(false) | It is used to allow or deny unprotected path by UMA-RS. |
+| oxd id(optional) | If you have existing oxd entry then enter oxd_id(also client id, client secret and client id of oxd id). If you have client created from OP server then skip it and enter only client_id and client_secret. |
+| client name(optional) | An optional string value for client name. |
+| client id(optional) | You can use existing client id. |
+| client secret(optional) | You can use existing client secret. |
+| client id of oxd id(optional) | You can use existing client id of oxd id. |
+| client jwks uri(optional) | An optional string value for client jwks uri. |
+| client token endpoint auth method(optional) | An optional string value for client token endpoint auth method. |
+| client token endpoint auth signing_alg(optional) | An optional string value for client token endpoint auth signing alg. |
+
+### Verify that your API is protected by gluu-oauth2-client-auth
+
+You need to pass token as per your authentication mode(oauth_mode, uma_mode, and mix_mode). In oauth_mode and mix_mode, you need to pass oauth2 access token and in uma_mode, you need to RPT token.
+
+```
+$ curl -X GET \
+    http://localhost:8000/your_api_endpoint \
+    -H 'authorization: Bearer 481aa800-5282-4d6c-8001-7dcdf37031eb' \
+    -H 'host: your.api.server.com'
+```
+
+If your toke is not valid or time expired then you will get failed message.
+
+```
+HTTP/1.1 401 Unauthorized
+{
+    "message": "Unauthorized"
+}
+```
+
+### Verify that your API can be accessed with valid token
+(This sample assumes that below bearer token is valid and grant by OP server).
+
+```
+$ curl -X GET \
+    http://localhost:8000/your_api_endpoint \
+    -H 'authorization: Bearer 7475ebc5-9b92-4031-b849-c70a0e3024f9' \
+    -H 'host: your_api_server'
+```
