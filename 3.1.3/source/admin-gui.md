@@ -47,10 +47,10 @@ Below is the attributes of API object.
 
 You can edit API and add manage plugin by click on pencil icon in API's list. There are two sections.
 
-1. **API Details:** This section is used to view and edit your API.
+**API Details:** This section is used to view and edit your API.
 ![api_details](img/3_3_api_details.png)
 
-2. **Plugins:** This section is used to view the list of added plugin and add new plugin.
+**Plugins:** This section is used to view the list of added plugin and add new plugin.
 
     Plugin list
     ![api_plugin_list](img/3_2_api_plugin_list.png)
