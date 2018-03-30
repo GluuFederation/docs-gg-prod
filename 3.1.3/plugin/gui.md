@@ -3,7 +3,7 @@
 You can configure plugins using Admin GUI - Konga. There are two plugins. 
 
 !!! Note
-    Configure using [Admin API(./api.md)
+    Configure using [Admin API](./api.md)
     
 1. [Gluu OAuth 2.0 client credential authentication](#gluu-oauth-20-client-credential-authentication)
 2. [Gluu OAuth 2.0 UMA RS plugin](#gluu-oauth-20-uma-rs-plugin)
@@ -102,3 +102,15 @@ $ curl -X GET \
     -H 'authorization: Bearer 7475ebc5-9b92-4031-b849-c70a0e3024f9' \
     -H 'host: your_api_server'
 ```
+
+### Upstream Headers
+When a client has been authenticated, the plugin will append some headers to the request before proxying it to the upstream service, so that you can identify the consumer and the end-user in your code:
+1. **X-Consumer-ID**, the ID of the Consumer on Kong
+2. **X-Consumer-Custom-ID**, the custom_id of the Consumer (if set)
+3. **X-Consumer-Username**, the username of the Consumer (if set)
+4. **X-Authenticated-Scope**, the comma-separated list of scopes that the end user has authenticated, if available (only if the consumer is not the 'anonymous' consumer)
+5. **X-OAuth-Client-ID**, the authenticated client id, if oauth_mode is enabled(only if the consumer is not the 'anonymous' consumer)
+6. **X-OAuth-Expiration**, the token expiration time, Integer timestamp, measured in the number of seconds since January 1 1970 UTC, indicating when this token will expire, as defined in JWT RFC7519. It only returns in oauth_mode(only if the consumer is not the 'anonymous' consumer)
+7. **X-Anonymous-Consumer**, will be set to true when authentication failed, and the 'anonymous' consumer was set instead.
+
+You can use this information on your side to implement additional logic. You can use the X-Consumer-ID value to query the Kong Admin API and retrieve more information about the Consumer.
