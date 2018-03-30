@@ -1,4 +1,4 @@
-# Gluu Gateway
+# Gluu Gateway 3.1.3
 
 ## Overview
 
