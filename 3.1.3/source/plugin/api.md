@@ -8,17 +8,17 @@ You can configure plugins without Admin GUI. There are two plugins.
 1. [Gluu OAuth 2.0 client credential authentication](#gluu-oauth-20-client-credential-authentication)
 2. [Gluu OAuth 2.0 UMA RS plugin](#gluu-oauth-20-uma-rs-plugin)
 
-# Gluu OAuth 2.0 client credential authentication
+## Gluu OAuth 2.0 client credential authentication
 
 This plugin enables the use of an external OpenID Provider for OAuth2 client registration and authentication. It needs to connect via `https` to Gluu's `oxd-https-extension` service, which is an OAuth2 client middleware service. It provides OAuth 2.0 client credential authentication with three different modes.
 
-## Terminology
+### Terminology
 * `api`: your upstream service placed behind Kong, for which Kong proxies requests to.
 * `plugin`: a plugin executing actions inside Kong before or after a request has been proxied to the upstream API.
 * `consumer`: a developer or service using the API. When using Kong, a Consumer only communicates with Kong which proxies every call to the said, upstream API.
 * `credential`: in the gluu-oauth2-client-auth plugin context, an openId client is registered with consumer and client id is used to identify the credential.
 
-## Installation
+### Installation
 1. [Install Kong](https://getkong.org/install/)
 2. [Install oxd server v3.1.3](https://oxd.gluu.org/docs/)
 3. Install gluu-oauth2-client-auth
@@ -34,8 +34,8 @@ This plugin enables the use of an external OpenID Provider for OAuth2 client reg
         custom_plugins = gluu-oauth2-client-auth
     ```
 
-## Configuration
-### Add API
+### Configuration
+#### Add API
 
 The first step is to add your API in the kong. Below is the request for adding API in the kong.
 
@@ -54,7 +54,7 @@ $ curl -i -X GET \
   --header 'Host: your_api_server'
 ```
 
-### Enable gluu-oauth2-client-auth protection
+#### Enable gluu-oauth2-client-auth protection
 
 ```
 curl -X POST http://kong:8001/apis/{api}/plugins \
@@ -77,11 +77,11 @@ curl -X POST http://kong:8001/apis/{api}/plugins \
 | config.oxd_id(optional) | | Used to introspect the token. You can use any other oxd_id. If you not pass then plugin creates new client itself. |
 | config.anonymous(optional) | | An optional string (consumer uuid) value to use as an "anonymous" consumer if authentication fails. If empty (default), the request will fail with an authentication failure 4xx. Please note that this value must refer to the Consumer id attribute which is internal to Kong, and not its custom_id. |
 
-## Usage
+### Usage
 
 In order to use the plugin, you first need to create a Consumer to associate one or more credentials to. The Consumer represents a developer using the final service/API.
 
-### Create a Consumer
+#### Create a Consumer
 
 You need to associate a credential to an existing Consumer object, that represents a user consuming the API. To create a Consumer you can execute the following request:
 
@@ -104,7 +104,7 @@ HTTP/1.1 201 Created
 | username(semi-optional) | | The username of the Consumer. Either this field or ``custom_id` must be specified. |
 | custom_id(semi-optional) | | A custom identifier used to map the Consumer to another database. Either this field or `username` must be specified. |
 
-### Create OAuth credential
+#### Create OAuth credential
 
 This process registers OpenId client with oxd which help you to get tokens and authenticate the token. Plugin behaves as per selected mode. There are three modes.
 
@@ -175,7 +175,7 @@ RESPONSE :
 | client_token_endpoint_auth_method(optional) | | An optional string value for client token endpoint auth method. |
 | client_token_endpoint_auth_signing_alg(optional) | | An optional string value for client token endpoint auth signing alg. |
 
-### Verify that your API is protected by gluu-oauth2-client-auth
+#### Verify that your API is protected by gluu-oauth2-client-auth
 
 You need to pass token as per your authentication mode(oauth_mode, uma_mode, and mix_mode). In oauth_mode and mix_mode, you need to pass oauth2 access token and in uma_mode, you need to RPT token.
 
@@ -195,7 +195,7 @@ HTTP/1.1 401 Unauthorized
 }
 ```
 
-### Verify that your API can be accessed with valid token
+#### Verify that your API can be accessed with valid token
 (This sample assumes that below bearer token is valid and grant by OP server).
 
 ```
@@ -205,15 +205,16 @@ $ curl -X GET \
     -H 'host: your_api_server'
 ```
 
-# Gluu OAuth 2.0 UMA RS plugin
+## Gluu OAuth 2.0 UMA RS plugin
 
 User-Managed Access Resource Server plugin.
 
 It allows to protect your API (which is proxied by Kong) with [UMA](https://docs.kantarainitiative.org/uma/rec-uma-core.html)
 
-> Note: You must need to configure first **gluu-oauth2-client-auth** plugin.
+!!! Note: 
+    You must need to configure first **gluu-oauth2-client-auth** plugin.
 
-## Installation
+### Installation
 
 1. [Install Kong](https://getkong.org/install/)
 2. [Install oxd server v3.1.3](https://oxd.gluu.org/docs/)
@@ -232,7 +233,7 @@ It allows to protect your API (which is proxied by Kong) with [UMA](https://docs
             custom_plugins = gluu-oauth2-rs
         ```
 
-## Configuration
+### Configuration
 
  - oxd_host - OPTIONAL, host of the oxd server (default: localhost. It is recommended to have oxd server on localhost.)
  - protection_document - REQUIRED, json document that describes UMA protection
@@ -240,7 +241,7 @@ It allows to protect your API (which is proxied by Kong) with [UMA](https://docs
                      (For example [Gluu Server](https://www.gluu.org/gluu-server/overview/)). 
                      Check that UMA implementation is up and running by visiting `.well-known/uma2-configuration` endpoint.
                
-### Protection document   
+#### Protection document   
 
 Protection document - json document which describes UMA protection in declarative way and is based on [uma-rs](https://github.com/GluuFederation/uma-rs) project.
 
@@ -250,6 +251,7 @@ Protection document - json document which describes UMA protection in declarativ
  - ticketScopes - optional parameter which may be used to keep ticket scope as narrow as possible. If not specified plugin will register ticket with scopes specified by "scope" which often may be unwanted. (For example scope may have "http://photoz.example.com/dev/actions/all" and the authorized ticket may grant access also to other resources).
     
 Lets say we have APIs which we would like to protect:
+
  - GET https://your.api.server.com/photo  (UMA scope: http://photoz.example.com/dev/actions/view)
  - PUT https://your.api.server.com/photo  (UMA scope: http://photoz.example.com/dev/actions/all or http://photoz.example.com/dev/actions/add)
  - POST https://your.api.server.com/photo  (UMA scope: http://photoz.example.com/dev/actions/all or http://photoz.example.com/dev/actions/add)
@@ -294,7 +296,7 @@ Protection document for this sample (upstream_url=http://your.api.server.com/, r
 ]
 ```
 
-You can also pass scope-expression formate.
+You can also pass scope-expression format.
 
 ```
 [
@@ -370,9 +372,9 @@ You can also pass scope-expression formate.
 ]
 ```
 
-## Protect your API with UMA
+### Protect your API with UMA
 
-### Add your API server to kong /apis
+#### Add your API server to kong /apis
 
 ```curl
 $ curl -i -X POST \
@@ -406,7 +408,7 @@ $ curl -i -X GET \
   --header 'Host: your.api.server.com'
 ```
 
-### Enable gluu-oauth2-rs protection
+#### Enable gluu-oauth2-rs protection
 
 Important : each protection_document double quotes must be escaped by '\\' sign. This limitation comes from Kong configuration parameter type limitation which are limited to : "id", "number", "boolean", "string", "table", "array", "url", "timestamp".
    
@@ -456,7 +458,7 @@ $ curl -i -X POST \
                                      }\"
 ```
 
-### Verify that your API is protected by gluu-oauth2-rs
+#### Verify that your API is protected by gluu-oauth2-rs
 
 ```
 $ curl -i -X GET \
@@ -481,7 +483,7 @@ HTTP/1.1 403 Forbidden
 Warning: 199 - "UMA Authorization Server Unreachable"
 ```
 
-### Verify that your API can be accessed with valid RPT
+#### Verify that your API can be accessed with valid RPT
  
 (This sample assumes that "481aa800-5282-4d6c-8001-7dcdf37031eb" is valid and authorized by UMA Authorization Server RPT).
 
@@ -492,8 +494,10 @@ $ curl -i -X GET \
   --header 'Authorization: Bearer 481aa800-5282-4d6c-8001-7dcdf37031eb'
 ```
 
-### Upstream Headers
+## Upstream Headers
+
 When a client has been authenticated, the plugin will append some headers to the request before proxying it to the upstream service, so that you can identify the consumer and the end-user in your code:
+
 1. **X-Consumer-ID**, the ID of the Consumer on Kong
 2. **X-Consumer-Custom-ID**, the custom_id of the Consumer (if set)
 3. **X-Consumer-Username**, the username of the Consumer (if set)

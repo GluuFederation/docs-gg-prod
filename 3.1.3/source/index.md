@@ -42,4 +42,11 @@ Use the following links to get started with credential manager:
 
 ## License
 
-Gluu Gateway is licensed under the free open source [MIT License](https://github.com/GluuFederation/gluu-gateway/blob/master/LICENSE).
+The Gluu Gateway is a container distribution composed of software written by Gluu and incorporated from other open source projects. The license for each software component is listed below.
+
+| Component | License |
+|-----------|---------|
+| [Gluu Server](https://www.gluu.org/) | [MIT License](http://opensource.org/licenses/MIT) |
+| [OXD-Server](https://oxd.gluu.org) | [OXD License](https://github.com/GluuFederation/oxd/blob/master/LICENSE) |
+| [Kong](https://getkong.org/) | [Apache2]( http://www.apache.org/licenses/LICENSE-2.0) |
+| Gluu-Gateway | [MIT License](http://opensource.org/licenses/MIT) |
