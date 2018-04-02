@@ -8,45 +8,45 @@ Installation is a three part process:
 
 ### Required Third Party repositories
 
-1. Add Gluu repo:
+* Add Gluu repo:
 
-   ```
-   # echo "deb https://repo.gluu.org/ubuntu/ trusty-devel main" > /etc/apt/sources.list.d/gluu-repo.list
-   # curl https://repo.gluu.org/ubuntu/gluu-apt.key | apt-key add -
-   ```
+```
+# echo "deb https://repo.gluu.org/ubuntu/ trusty-devel main" > /etc/apt/sources.list.d/gluu-repo.list
+# curl https://repo.gluu.org/ubuntu/gluu-apt.key | apt-key add -
+```
 
-1. Add openjdk-8 PPA:
+* Add openjdk-8 PPA:
 
-   ```
-   # add-apt-repository ppa:openjdk-r/ppa
-   ```
+```
+# add-apt-repository ppa:openjdk-r/ppa
+```
 
-1. Add Postgresql-10 repo:
+* Add Postgresql-10 repo:
 
-   ```
-   # echo "deb http://apt.postgresql.org/pub/repos/apt/ trusty-pgdg main" > /etc/apt/sources.list.d/psql.list
-   # wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
-   ```
+```
+# echo "deb http://apt.postgresql.org/pub/repos/apt/ trusty-pgdg main" > /etc/apt/sources.list.d/psql.list
+# wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
+```
 
-1. Add Node repo:
+* Add Node repo:
 
-   ```
-   # curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
-   ```
+```
+# curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
+```
 
 ### Install gluu-gateway package
 
 ```
-# apt update
-# apt install gluu-gateway
+ # apt update
+ # apt install gluu-gateway
 ```
 
 
 ### Run setup script
 
 ```
-# cd /opt/gluu-gateway/setup
-# python setup-gluu-gateway.py
+ # cd /opt/gluu-gateway/setup
+ # python setup-gluu-gateway.py
 ```
 
 You will be prompted to answer some questions. Just hit Enter to accept the
@@ -77,7 +77,7 @@ default value, specified in square brackets.
 ### Finish setup
 
 ```
-Gluu Gateway configuration successful!!! https://localhost:1338
+ Gluu Gateway configuration successful!!! https://localhost:1338
 ```
 
 If you see the above message it means installation was successful. To login
