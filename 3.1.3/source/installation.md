@@ -64,10 +64,10 @@ default value, specified in square brackets.
 | **Password** | If you already have a database password for user `postgres`, enter it here, otherwise enter a new password. |
 | **Would you like to configure oxd-server?** | If you already have oxd-web on the network, skip this configuration. |
 | **OP hostname** | Used to configure the oxd default OP hostname. Many deployments use a single domain's OP service, so it makes sense to set it as the default. |
-| **License Id** | From [oxd-server license](https://oxd.gluu.org/#pricing) |
-| **Public key** | From [oxd-server license](https://oxd.gluu.org/#pricing) |
-| **Public password** | From [oxd-server license](https://oxd.gluu.org/#pricing) |
-| **License password** | From [oxd-server license](https://oxd.gluu.org/#pricing) |
+| **License Id** | From [oxd-server license](https://oxd.gluu.org/) |
+| **Public key** | From [oxd-server license](https://oxd.gluu.org/) |
+| **Public password** | From [oxd-server license](https://oxd.gluu.org/) |
+| **License password** | From [oxd-server license](https://oxd.gluu.org/) |
 | **oxd https url** | Make sure oxd-https-extension is running. |
 | **Would you like to generate client_id/client_secret for konga?** | You can register a new OpenID Client or enter existing client credentials manually. You may want to extend the client expiration date if on the Gluu Server if you plan to use this service more then one day. If you enter existing client details then your client must have `https://localhost:1338` URL entry in Redirect Login URIs and Post Logout Redirect URIs. |
 | **oxd_id** | Used to manually set oxd id. |
