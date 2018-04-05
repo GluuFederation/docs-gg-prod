@@ -4,7 +4,7 @@ Installation is a three part process:
 
 1. [Add required third party repositories](#required-third-party-repositories)
 2. [Install `gluu-gateway` package](#install-gluu-gateway-package)
-3. [Run `setup-gluu-gateway.py`](##run-setup-script)
+3. [Run `setup-gluu-gateway.py`](#run-setup-script)
 
 ### Required Third Party repositories
 

@@ -31,15 +31,13 @@ Use [Manage APIs](../admin-gui.md#manage-apis) section to enable `gluu-oauth2-cl
 !!! Note
     See all the attribute description in [Admin API](api.md#enable-gluu-oauth2-client-auth-protection) section. 
 
-### Usage
-
 In order to use the plugin, you first need to create a Consumer to associate one or more credentials to. The Consumer represents a developer using the final service/API.
 
-#### Create a Consumer 
+### Create a Consumer 
 
-You need to associate a credential to an existing Consumer object, that represents a user consuming the API. To create a Consumer you can use [Consumer section](../admin-gui.md#4-consumers).
+You need to associate a credential to an existing Consumer object, that represents a user consuming the API. To create a Consumer you can use [Consumer section](../admin-gui.md#consumers).
 
-#### Create OAuth credential
+### Create OAuth credential
 
 This process registers OpenId client with oxd which help you to get tokens and authenticate the token. Plugin behaves as per selected mode. There are three modes. 
 
@@ -73,37 +71,7 @@ You can see below add OAuth credential form
 | client token endpoint auth method(optional) | An optional string value for client token endpoint auth method. |
 | client token endpoint auth signing_alg(optional) | An optional string value for client token endpoint auth signing alg. |
 
-#### Verify that your API is protected by gluu-oauth2-client-auth
-
-You need to pass token as per your authentication mode(oauth_mode, uma_mode, and mix_mode). In oauth_mode and mix_mode, you need to pass oauth2 access token and in uma_mode, you need to RPT token.
-
-```
-$ curl -X GET \
-    http://localhost:8000/your_api_endpoint \
-    -H 'authorization: Bearer 481aa800-5282-4d6c-8001-7dcdf37031eb' \
-    -H 'host: your.api.server.com'
-```
-
-If your toke is not valid or time expired then you will get failed message.
-
-```
-HTTP/1.1 401 Unauthorized
-{
-    "message": "Unauthorized"
-}
-```
-
-#### Verify that your API can be accessed with valid token
-(This sample assumes that below bearer token is valid and grant by OP server).
-
-```
-$ curl -X GET \
-    http://localhost:8000/your_api_endpoint \
-    -H 'authorization: Bearer 7475ebc5-9b92-4031-b849-c70a0e3024f9' \
-    -H 'host: your_api_server'
-```
-
-You can use this information on your side to implement additional logic. You can use the X-Consumer-ID value to query the Kong Admin API and retrieve more information about the Consumer.
+Next step is to configure [Gluu OAuth 2.0 UMA RS plugin](#gluu-oauth-20-uma-rs-plugin).
 
 ## Gluu OAuth 2.0 UMA RS Plugin
 
@@ -225,15 +193,43 @@ You can see the below json by clicking on `VIEW RESOURCES JSON` button.
 ]
 ```
 
-#### Verify that your API is protected by gluu-oauth2-rs
+Next step is to access and verify your API using kong proxy endpoint.
+
+## Verify API
+
+After configuration you are ready to verify your API is protected by plugins or not. You need to pass token as per configured [authentication mode](#create-oauth-credential).
+
+Sample of request to proxy endpoint. You can configure port for proxy endpoint using [kong config](../configuration.md#kong).
+
+| Protocol | Proxy endpoints |
+|----------|-----------------|
+| https | https://your.gg.host.com |
+| http | http://your.gg.host.com:8000 |
+
+!!! Note
+    By default kong provides 8443 port for https but during setup script installation, we change it to 443.
+    
+```
+$ curl -X GET \
+    http://your.gg.server.com:8000/your_api_endpoint \
+    -H 'authorization: Bearer 481aa800-5282-4d6c-8001-7dcdf37031eb' \
+    -H 'host: your.api.server.com'
+```
+
+### 401/Unauthorized 
+
+Return 401/Unauthorized, When your token is not valid or time expired.
 
 ```
-$ curl -i -X GET \
-  --url http://localhost:8000/your/api \
-  --header 'Host: your.api.server.com'
+HTTP/1.1 401 Unauthorized
+{
+    "message": "Unauthorized"
+}
 ```
 
-Since you did not specify the required authorized RPT in "Authorization" header (e.g. "Authorization: Bearer vF9dft4qmT"), the response should be 403 Forbidden:
+### 403/Forbidden
+
+Return 403/Forbidden, When you did not specify the required authorized RPT in "Authorization" header. Also, you will also get the `WWW-Authenticate` header with `ticket`.
 
 ```
 HTTP/1.1 403 Forbidden
@@ -242,24 +238,14 @@ WWW-Authenticate: UMA realm="rs",
   error="insufficient_scope",
   ticket="016f84e8-f9b9-11e0-bd6f-0021cc6004de"
 
-{"message":"Unauthorized"}
+{
+    "message": "Unauthorized"
+}
 ```
 
-```
-HTTP/1.1 403 Forbidden
-Warning: 199 - "UMA Authorization Server Unreachable"
-```
+### 200 Success
 
-#### Verify that your API can be accessed with valid RPT
- 
-(This sample assumes that "481aa800-5282-4d6c-8001-7dcdf37031eb" is valid and authorized by UMA Authorization Server RPT).
-
-```
-$ curl -i -X GET \
-  --url http://localhost:8000/your/api \
-  --header 'Host: your.api.server.com'
-  --header 'Authorization: Bearer 481aa800-5282-4d6c-8001-7dcdf37031eb'
-```
+If your token is valid then you will get success response from your upstream API.
 
 ## Upstream Headers
 
