@@ -2,9 +2,9 @@
 
 ### Gluu Gateway
 
-The Gluu Gateway service used to manage all the gluu-gateway components (Admin GUI Portal - Konga, Kong, Postgres, OXD-Server, OXD-https-extension).
+The Gluu Gateway service is used to manage all the gluu-gateway components (Admin GUI Portal - Konga, Kong, Postgres, OXD-Server, OXD-https-extension).
 
-* Gluu-gateway service
+* the Gluu Gateway service
 
     ```
      # service gluu-gateway [start|stop|restart|status]
@@ -12,13 +12,13 @@ The Gluu Gateway service used to manage all the gluu-gateway components (Admin G
 
 ### Admin GUI Portal - Konga
 
-* You can configure konga by setting properties in local.js file. This is used to set port, oxd, OP and client settings.
+* You can configure Konga by setting properties in the local.js file. This is used to set the port, oxd, OP and client settings.
 
     ```
      /opt/gluu-gateway/konga/config/local.js
     ```
 
-* Konga service
+* the Konga service
 
     ```
      # service konga [start|stop|restart|status]
@@ -26,13 +26,13 @@ The Gluu Gateway service used to manage all the gluu-gateway components (Admin G
 
 ### Kong
 
-* You can configure kong by using kong.conf file.
+* You can configure Kong by using the kong.conf file.
 
     ```
      /etc/kong/kong.conf
     ```
 
-* Kong service
+* the Kong service
 
     ```
      # service kong [restart|stop|restart|status]
@@ -46,13 +46,13 @@ The Gluu Gateway service used to manage all the gluu-gateway components (Admin G
 
 ### OXD
 
-* Configure oxd-server
+* Configure the OXD-Server
 
     ```
      /etc/oxd/oxd-server/oxd-conf.json
     ```
 
-* OXD-Server service
+* The OXD-Server service
 
     ```
      # service oxd-server [start|stop|restart|status]
@@ -64,35 +64,35 @@ The Gluu Gateway service used to manage all the gluu-gateway components (Admin G
      /opt/oxd-https-extension/lib/oxd-https.yml
     ```
 
-* Start/Stop/Restart/Status oxd-https-extension
+* Start/Stop/Restart/Status OXD-https-extension
 
     ```
      # service oxd-https-extension [start|stop|restart|status]
     ```
 
-### Restore KONG to factory default
+### Restore Kong to factory default
 
-Execute below following command in sequence.
+Execute the following sequence of commands:
 
-1. Stop the kong.
+1. Stop Kong.
 
     ```
      # kong stop
     ```
 
-1. `reset` option is used to reset the configured database. It deleted all the table and data of the configured database.
+1. The `reset` option is used to reset the configured database. It deletes all the tables and data of the configured database.
 
     ```
      # kong migrations reset
     ```
 
-1. `up` option is used to create the table in the configured database. Also, execute all missing migrations up to the latest available.
+1. The `up` option is used to create a table in the configured database. It also executes all missing migrations up to the latest available.
 
     ```
      # kong migrations up
     ```
 
-1. Start kong
+1. Start Kong.
 
     ```
      # kong start
