@@ -79,7 +79,7 @@ curl -X POST http://kong:8001/apis/{api}/plugins \
 
 ### Usage
 
-In order to use the plugin, you first need to create a Consumer to associate one or more credentials to. The Consumer represents a developer using the final service/API.
+In order to use the plugin, you first need to create a Consumer to associate one or more credentials with. The Consumer represents a developer using the final service/API.
 
 #### Create a Consumer
 
@@ -104,7 +104,7 @@ HTTP/1.1 201 Created
 | username(semi-optional) | | The username of the Consumer. Either this field or ``custom_id` must be specified. |
 | custom_id(semi-optional) | | A custom identifier used to map the Consumer to another database. Either this field or `username` must be specified. |
 
-#### Create OAuth credential
+#### Create an OAuth credential
 
 This process registers OpenId client with oxd which help you get tokens and authenticate the token. The Plugin behaves as per selected mode. There are three modes.
 
