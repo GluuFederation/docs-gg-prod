@@ -3,7 +3,7 @@
 You can configure plugins without Admin GUI. There are two plugins.
 
 !!! Note
-    Configure using [Admin GUI](./gui.md)
+    Configure the plugins using [Admin GUI](./gui.md)
 
 1. [Gluu OAuth 2.0 client credential authentication](#gluu-oauth-20-client-credential-authentication)
 2. [Gluu OAuth 2.0 UMA RS plugin](#gluu-oauth-20-uma-rs-plugin)
