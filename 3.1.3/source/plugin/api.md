@@ -159,10 +159,10 @@ RESPONSE :
 
 | FORM PARAMETER | DEFAULT | DESCRIPTION |
 |----------------|---------|-------------|
-| name | | The name to associate with the credential. In OAuth 2.0 this would be the application name. |
+| name | | The name to associate with the credential. In OAuth 2.0, this would be the application name. |
 | op_host | | An OpenId connect provider. Example: https://gluu.example.org |
-| oxd_http_url | | An OXD https extenstion url. |
-| oauth_mode(semi-optional) | | If true, Kong acts as an OAuth client only. |
+| oxd_http_url | | An OXD https extention url. |
+| oauth_mode(semi-optional) | | If True, Kong acts as an OAuth client only. |
 | uma_mode(semi-optional) | | This indicates your client is a valid UMA client, and obtains and sends an RPT as the access token. |
 | mix_mode(semi-optional) | | If Yes, then the gluu-oauth2 plugin will try to obtain an UMA RPT token if the RS returns  401/Unauthorized. |
 | oxd_id(optional) | | If you have an existing oxd entry, then enter the oxd_id (also client id, client secret and client id of oxd id). If you have a client created from an OP server, skip it and enter only the client_id and client_secret. |
