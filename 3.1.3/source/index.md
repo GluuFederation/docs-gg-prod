@@ -2,18 +2,18 @@
 
 ## Overview
 
-The Gluu Gateway is a API Gateway which can be used to quickly deploy an OAuth 2.0 and User-Managed Access (UMA) 2.0 Grant protected API gateway.
+Gluu Gateway is an API Gateway which can be used to quickly deploy an OAuth 2.0 and User-Managed Access (UMA) 2.0 Grant protected API gateway.
 
 ## Components
 
 Gluu Gateway uses the following components:
 
-1. **[Gluu Server v3.1.3](https://gluu.org):** free open source software package for identity and access management. You should need to use Gluu server version >= 3.1.3.
-1. **[OXD-Server v3.1.3](https://oxd.gluu.org):** OpenID Connect and UMA middleware service used for client credential management and cryptographic validation. 
+1. **[Gluu Server v3.1.3](https://gluu.org):** A free open-source software package for identity and access management. You should need to use Gluu Server version >= 3.1.3.
+1. **[OXD-Server v3.1.3](https://oxd.gluu.org):** An OpenID Connect and UMA middleware service used for client credential management and cryptographic validation. 
 1. **[Kong v0.11.x](https://getkong.org):** The open-source API Gateway and Micro services Management Layer, delivering high performance and reliability.
-1. **[Gluu Kong plugins]()**: Use the Gluu Server to control access to upstream API's using OAuth 2.0 clients and UMA 2.0.
+1. **[Gluu Kong plugins]()**: Use Gluu Server to control access to upstream APIs using OAuth 2.0 clients and UMA 2.0.
 1. **[Admin GUI - Konga]()**: A web administration portal, based on [Konga](https://github.com/pantsel/konga) GUI, that makes it easier to manage your Gluu Gateway.
-1. **Others**: Following runtime environment require by Gluu Gateway package. 
+1. **Others**: The following runtime environment required by the Gluu Gateway package: 
     - OpenJDK v8
     - Python v2.x
     - Postgres v10
@@ -22,15 +22,15 @@ Gluu Gateway uses the following components:
 
 ## Features
 
-1. Manage Kong Admin API, Consumer and plugin objects.
+1. Manage Kong Admin API, Consumer and Plugin objects.
 1. Configure User-Managed Access (UMA) 2.0 Grant for OAuth 2.0 Authorization to register API objects.
 1. API Dashboard to configure and monitor the health of your servers.
 1. Backup, restore and migrate Kong instances using snapshots.
-1. Leverages the security and upgradability of the oxd-server.
+1. Leverage the security and upgradability of the oxd-server.
 
 ## Get Started
 
-Use the following links to get started with credential manager:  
+Use the following links to get started with the credentials manager:  
 
 1. [Installation](./installation.md)
 1. [Configuration](./configuration.md)
@@ -42,7 +42,7 @@ Use the following links to get started with credential manager:
 
 ## License
 
-The Gluu Gateway is a container distribution composed of software written by Gluu and incorporated from other open source projects. The license for each software component is listed below.
+Gluu Gateway is a container distribution composed of software written by Gluu and incorporated from other open-source projects. The license for each software component is listed below.
 
 | Component | License |
 |-----------|---------|
