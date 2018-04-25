@@ -166,7 +166,7 @@ RESPONSE :
 | uma_mode(semi-optional) | | This indicates your client is a valid UMA client, and obtains and sends an RPT as the access token. |
 | mix_mode(semi-optional) | | If Yes, then the gluu-oauth2 plugin will try to obtain an UMA RPT token if the RS returns  401/Unauthorized. |
 | oxd_id(optional) | | If you have an existing oxd entry, then enter the oxd_id (also client id, client secret and client id of oxd id). If you have a client created from the OP server, skip it and enter only the client_id and client_secret. |
-| client_name(optional) | kong_oauth2_bc_client | An optional string value for a client name. |
+| client_name(optional) | kong_oauth2_bc_client | An optional string value for the client name. |
 | client_id(optional) | | You can use an existing client id. |
 | client_secret(optional) | | You can use an existing client secret. |
 | client_id_of_oxd_id(optional) | | You can use an existing client id of oxd id. |
