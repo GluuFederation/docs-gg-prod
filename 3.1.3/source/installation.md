@@ -54,6 +54,8 @@ The istallation is a three-part process:
 You will be prompted to answer some questions. Just hit Enter to accept the
 default value which is specified in square brackets.
 
+!!! Warning If you are asked to provide a two-letter value, make sure you follow the instructions. A mistake may result in the lack of certificates.
+
 | **Question** | **Explanation** |
 |----------|-------------|
 | **Enter IP Address** | IP Address of your API gateway  |
