@@ -10,34 +10,34 @@ You can configure plugins without Admin GUI. There are two plugins.
 
 ## Gluu OAuth 2.0 client credential authentication
 
-This plugin enables the use of an external OpenID Provider for OAuth2 client registration and authentication. It needs to connect via `https` to Gluu's `oxd-https-extension` service, which is an OAuth2 client middleware service. It provides OAuth 2.0 client credential authentication with three different modes.
+This plugin enables the use of an external OpenId Provider for OAuth2 client registration and authentication. It needs to connect via `https` to Gluu's `oxd-https-extension` service, which is an OAuth2 client middleware service. It provides OAuth 2.0 client credential authentication with three different modes.
 
 ### Terminology
-* `api`: your upstream service placed behind Kong, for which Kong proxies requests to.
+* `api`: your upstream service placed behind Kong, which Kong proxies requests to.
 * `plugin`: a plugin executing actions inside Kong before or after a request has been proxied to the upstream API.
-* `consumer`: a developer or service using the API. When using Kong, a Consumer only communicates with Kong which proxies every call to the said, upstream API.
-* `credential`: in the gluu-oauth2-client-auth plugin context, an openId client is registered with consumer and client id is used to identify the credential.
+* `consumer`: a developer or service using the API. When using Kong, a Consumer only communicates with Kong which proxies every call to the said upstream API.
+* `credentials`: in the gluu-oauth2-client-auth plugin context, an openId client is registered with consumer and client id is used to identify the credentials.
 
 ### Installation
 1. [Install Kong](https://getkong.org/install/)
 2. [Install oxd server v3.1.3](https://oxd.gluu.org/docs/)
 3. Install gluu-oauth2-client-auth
     1. Stop kong : `kong stop`
-    2. Copy `gluu-oauth2-client-auth/kong/plugins/gluu-oauth2-client-auth` Lua sources to kong plugins folder `/usr/local/share/lua/<version>/kong/plugins/gluu-oauth2-client-auth`
+    2. Copy `gluu-oauth2-client-auth/kong/plugins/gluu-oauth2-client-auth` Lua sources to the Kong plugins folder `/usr/local/share/lua/<version>/kong/plugins/gluu-oauth2-client-auth`
 
          or
 
        `luarocks install gluu-oauth2-client-auth`
-    3. Enable plugin in your `kong.conf` (typically located at `/etc/kong/kong.conf`) and start kong `kong start`.
+    3. Enable the plugin in your `kong.conf` (typically located at `/etc/kong/kong.conf`) and start Kong `kong start`.
 
     ```
         custom_plugins = gluu-oauth2-client-auth
     ```
 
 ### Configuration
-#### Add API
+#### Add an API
 
-The first step is to add your API in the kong. Below is the request for adding API in the kong.
+The first step is to add your API in Kong. In order to do that, use the following request: 
 
 ```
 $ curl -X POST http://localhost:8001/apis \
@@ -46,7 +46,7 @@ $ curl -X POST http://localhost:8001/apis \
       --data "upstream_url=http://your.api.server.com"
 ```
 
-Validate your API is correctly proxied via Kong.
+Validate that your API is correctly proxied via Kong.
 
 ```
 $ curl -i -X GET \
@@ -54,7 +54,7 @@ $ curl -i -X GET \
   --header 'Host: your_api_server'
 ```
 
-#### Enable gluu-oauth2-client-auth protection
+#### Enable the gluu-oauth2-client-auth protection
 
 ```
 curl -X POST http://kong:8001/apis/{api}/plugins \
@@ -66,7 +66,7 @@ curl -X POST http://kong:8001/apis/{api}/plugins \
     --data "config.anonymous=<consumer_id>"
 ```
 
-**api**: The `id` or `name` of the API that this plugin configuration will target
+**api**: The `id` or `name` of the API which this plugin configuration will target
 
 | FORM PARAMETER | DEFAULT | DESCRIPTION |
 |----------------|---------|-------------|
@@ -74,8 +74,8 @@ curl -X POST http://kong:8001/apis/{api}/plugins \
 | config.hide_credentials(optional) | false | An optional boolean value telling the plugin to hide the credential to the upstream API server. It will be removed by Kong before proxying the request. |
 | config.op_server | | OP server |
 | config.oxd_http_url | | OXD HTTP extension URL |
-| config.oxd_id(optional) | | Used to introspect the token. You can use any other oxd_id. If you not pass then plugin creates new client itself. |
-| config.anonymous(optional) | | An optional string (consumer uuid) value to use as an "anonymous" consumer if authentication fails. If empty (default), the request will fail with an authentication failure 4xx. Please note that this value must refer to the Consumer id attribute which is internal to Kong, and not its custom_id. |
+| config.oxd_id(optional) | | Used to introspect the token. You can use any other oxd_id. If you do not pass it, the plugin creates a new client itself. |
+| config.anonymous(optional) | | An optional string (Consumer uuid) value to use as an "anonymous" Consumer in case  authentication fails. If empty (default), the request will fail with an authentication failure 4xx. Please note that this value must refer to the Consumer id attribute which is internal to Kong, and not its custom_id. |
 
 ### Usage
 
@@ -83,7 +83,7 @@ In order to use the plugin, you first need to create a Consumer to associate one
 
 #### Create a Consumer
 
-You need to associate a credential to an existing Consumer object, that represents a user consuming the API. To create a Consumer you can execute the following request:
+You need to associate a credential to an existing Consumer object which represents a user consuming the API. To create a Consumer, you can execute the following request:
 
 ```
 $ curl -X POST http://localhost:8001/consumers/ \
@@ -106,13 +106,13 @@ HTTP/1.1 201 Created
 
 #### Create OAuth credential
 
-This process registers OpenId client with oxd which help you to get tokens and authenticate the token. Plugin behaves as per selected mode. There are three modes.
+This process registers OpenId client with oxd which help you get tokens and authenticate the token. The Plugin behaves as per selected mode. There are three modes.
 
 | Mode | DESCRIPTION |
 |----------------|-------------|
-| oauth_mode | If yes, the client must present an `ACTIVE` OAuth token to call an API. |
-| uma_mode | If yes, the client must present an ACTIVE UMA RPT token to call an  API. You must need to configure [gluu-oauth2-rs](https://github.com/GluuFederation/gluu-gateway/tree/master/gluu-oauth2-rs) plugin for uma_mode. |
-| mix_mode | If yes, the client must present an ACTIVE OAuth token to call an API. Kong will obtain an UMA permission ticket, and attempt to obtain an RPT on behalf of the client. Client can send pushed claims using header, `UMA_PUSHED_CLAIMS` with JSON in the following format: `{"claim_token":"...","claim_token_format":"..."}`. You must need to configure [gluu-oauth2-rs](https://github.com/GluuFederation/gluu-gateway/tree/master/gluu-oauth2-rs) plugin for mix_mode. |
+| oauth_mode | If Yes, the client must present an `ACTIVE` OAuth token to call an API. |
+| uma_mode | If Yes, the client must present an ACTIVE UMA RPT token to call an  API. You must need to configure [gluu-oauth2-rs](https://github.com/GluuFederation/gluu-gateway/tree/master/gluu-oauth2-rs) plugin for uma_mode. |
+| mix_mode | If Yes, the client must present an ACTIVE OAuth token to call an API. Kong will obtain an UMA permission ticket, and attempt to obtain an RPT on behalf of the client. The client can send pushed claims using the `UMA_PUSHED_CLAIMS` header with JSON in the following format: `{"claim_token":"...","claim_token_format":"..."}`. You need to configure the [gluu-oauth2-rs](https://github.com/GluuFederation/gluu-gateway/tree/master/gluu-oauth2-rs) plugin for mix_mode. |
 
 You can provision new credentials by making the following HTTP request:
 
@@ -159,21 +159,21 @@ RESPONSE :
 
 | FORM PARAMETER | DEFAULT | DESCRIPTION |
 |----------------|---------|-------------|
-| name | | The name to associate to the credential. In OAuth 2.0 this would be the application name. |
-| op_host | | Open Id connect provider. Example: https://gluu.example.org |
-| oxd_http_url | | OXD https extenstion url. |
-| oauth_mode(semi-optional) | | If true, kong act as OAuth client only. |
-| uma_mode(semi-optional) | | This indicates your client is a valid UMA client, and obtain and send an RPT as the access token. |
-| mix_mode(semi-optional) | | If Yes, then the gluu-oauth2 plugin will try to obtain an UMA RPT token if the RS returns a 401/Unauthorized. |
-| oxd_id(optional) | | If you have existing oxd entry then enter oxd_id(also client id, client secret and client id of oxd id). If you have client created from OP server then skip it and enter only client_id and client_secret. |
-| client_name(optional) | kong_oauth2_bc_client | An optional string value for client name. |
-| client_id(optional) | | You can use existing client id. |
-| client_secret(optional) | | You can use existing client secret. |
-| client_id_of_oxd_id(optional) | | You can use existing client id of oxd id. |
-| allow_unprotected_path(false) | | It is used to allow or deny unprotected path by UMA-RS. |
-| client_jwks_uri(optional) | | An optional string value for client jwks uri. |
-| client_token_endpoint_auth_method(optional) | | An optional string value for client token endpoint auth method. |
-| client_token_endpoint_auth_signing_alg(optional) | | An optional string value for client token endpoint auth signing alg. |
+| name | | The name to associate with the credential. In OAuth 2.0 this would be the application name. |
+| op_host | | An OpenId connect provider. Example: https://gluu.example.org |
+| oxd_http_url | | An OXD https extenstion url. |
+| oauth_mode(semi-optional) | | If true, Kong acts as an OAuth client only. |
+| uma_mode(semi-optional) | | This indicates your client is a valid UMA client, and obtains and sends an RPT as the access token. |
+| mix_mode(semi-optional) | | If Yes, then the gluu-oauth2 plugin will try to obtain an UMA RPT token if the RS returns  401/Unauthorized. |
+| oxd_id(optional) | | If you have an existing oxd entry, then enter the oxd_id (also client id, client secret and client id of oxd id). If you have a client created from an OP server, skip it and enter only the client_id and client_secret. |
+| client_name(optional) | kong_oauth2_bc_client | An optional string value for a client name. |
+| client_id(optional) | | You can use an existing client id. |
+| client_secret(optional) | | You can use an existing client secret. |
+| client_id_of_oxd_id(optional) | | You can use an existing client id of oxd id. |
+| allow_unprotected_path(false) | | It is used to allow or deny an unprotected path by UMA-RS. |
+| client_jwks_uri(optional) | | An optional string value for a client jwks uri. |
+| client_token_endpoint_auth_method(optional) | | An optional string value for the client token endpoint auth method. |
+| client_token_endpoint_auth_signing_alg(optional) | | An optional string value for the client token endpoint auth signing alg. |
 
 Next step is to configure [Gluu OAuth 2.0 UMA RS plugin](#gluu-oauth-20-uma-rs-plugin).
 
@@ -184,22 +184,22 @@ User-Managed Access Resource Server plugin.
 It allows to protect your API (which is proxied by Kong) with [UMA](https://docs.kantarainitiative.org/uma/rec-uma-core.html)
 
 !!! Note: 
-    You must need to configure first **gluu-oauth2-client-auth** plugin.
+    You must need to configure the **gluu-oauth2-client-auth** plugin first.
 
 ### Installation
 
 1. [Install Kong](https://getkong.org/install/)
 2. [Install oxd server v3.1.3](https://oxd.gluu.org/docs/)
 3. Install gluu-oauth2-rs
-    1. Stop kong : `kong stop`
+    1. Stop Kong : `kong stop`
     2. 
         Using luarocks `luarocks install gluu-oauth2-rs`
         
         or
         
-        Copy `gluu-oauth2-rs/kong/plugins/gluu-oauth2-rs` Lua sources to kong plugins folder `kong/plugins/gluu-oauth2-rs`        
+        Copy `gluu-oauth2-rs/kong/plugins/gluu-oauth2-rs` Lua sources to the Kong plugins folder `kong/plugins/gluu-oauth2-rs`        
             
-    3. Enable plugin in your `kong.conf` (typically located at `/etc/kong/kong.conf`) and start kong `kong start`.
+    3. Enable the plugin in your `kong.conf` (typically located at `/etc/kong/kong.conf`) and start Kong `kong start`.
 
         ```
             custom_plugins = gluu-oauth2-rs
@@ -207,29 +207,29 @@ It allows to protect your API (which is proxied by Kong) with [UMA](https://docs
 
 ### Configuration
 
- - oxd_host - OPTIONAL, host of the oxd server (default: localhost. It is recommended to have oxd server on localhost.)
- - protection_document - REQUIRED, json document that describes UMA protection
- - uma_server_host - REQUIRED, UMA Server that implements UMA 2.0 specification.
+ - oxd_host - OPTIONAL, the host of the oxd server (default: localhost. It is recommended to have the oxd server on localhost.)
+ - protection_document - REQUIRED, a JSON document that describes UMA protection
+ - uma_server_host - REQUIRED, an UMA Server which implements UMA 2.0 specification.
                      (For example [Gluu Server](https://www.gluu.org/gluu-server/overview/)). 
-                     Check that UMA implementation is up and running by visiting `.well-known/uma2-configuration` endpoint.
+                     Check that the UMA implementation is up and running by visiting the `.well-known/uma2-configuration` endpoint.
                
 #### Protection document   
 
-Protection document - json document which describes UMA protection in declarative way and is based on [uma-rs](https://github.com/GluuFederation/uma-rs) project.
+Protection document - a JSON document which describes UMA protection in a declarative way and is based on the [uma-rs](https://github.com/GluuFederation/uma-rs) project.
 
- - path - relative path to protect (exact match)
+ - path - a relative path to protect (exact match)
  - httpMethods - GET, HEAD, POST, PUT, DELETE
- - scope - scope required to access given path
- - ticketScopes - optional parameter which may be used to keep ticket scope as narrow as possible. If not specified plugin will register ticket with scopes specified by "scope" which often may be unwanted. (For example scope may have "http://photoz.example.com/dev/actions/all" and the authorized ticket may grant access also to other resources).
+ - scope - the scope required to access the given path
+ - ticketScopes - an optional parameter which may be used to keep the ticket scope as narrow as possible. If not specified, the plugin will register the ticket with its scopes specified by "scope," which may often  be unwanted. (For example, the scope may have "http://photoz.example.com/dev/actions/all" and the authorized ticket may grant access also to other resources).
     
-Lets say we have APIs which we would like to protect:
+Let's say we have APIs which we would like to protect:
 
  - GET https://your.api.server.com/photo  (UMA scope: http://photoz.example.com/dev/actions/view)
  - PUT https://your.api.server.com/photo  (UMA scope: http://photoz.example.com/dev/actions/all or http://photoz.example.com/dev/actions/add)
  - POST https://your.api.server.com/photo  (UMA scope: http://photoz.example.com/dev/actions/all or http://photoz.example.com/dev/actions/add)
  - GET https://your.api.server.com/document  (UMA scope: http://photoz.example.com/dev/actions/view)
 
-Protection document for this sample (upstream_url=http://your.api.server.com/, request_host=your.api.server.com for Kong add API):
+A protection document for this sample (upstream_url=http://your.api.server.com/, request_host=your.api.server.com for Kong add API):
 
 ```
 [
@@ -268,7 +268,7 @@ Protection document for this sample (upstream_url=http://your.api.server.com/, r
 ]
 ```
 
-You can also pass scope-expression format.
+You can also pass the scope-expression format.
 
 ```
 [
@@ -356,7 +356,7 @@ $ curl -i -X POST \
   --data 'request_host=your.api.server.com'
 ```
 
-Response must confirm the API is added
+The response must confirm the API has been added
 
 ```
 HTTP/1.1 201 Created
@@ -372,7 +372,7 @@ Connection: keep-alive
 }
 ```
 
-Validate your API is correctly proxied via Kong.
+Validate that your API is correctly proxied via Kong.
 
 ```
 $ curl -i -X GET \
@@ -382,9 +382,9 @@ $ curl -i -X GET \
 
 #### Enable gluu-oauth2-rs protection
 
-Important : each protection_document double quotes must be escaped by '\\' sign. This limitation comes from Kong configuration parameter type limitation which are limited to : "id", "number", "boolean", "string", "table", "array", "url", "timestamp".
+Important : each protection_document double quotes must be escaped the by '\\' sign. This limitation comes from Kong configuration parameter type limitation which is limited to : "id", "number", "boolean", "string", "table", "array", "url", "timestamp".
    
-During gluu-oauth2-rs addition to /plugins keep in mind that oxd must be up and running otherwise registration will fail. It's because during POST to kong's /plugin endpoint, plugin performs self registration on oxd server at oxd_host provided in configuration. For this reason if plugin is added and you remove oxd (install new version of oxd) without configuration persistence then gluu-oauth2-rs must be re-registered (to force registration with newly installed oxd).
+During gluu-oauth2-rs addition to /plugins, keep in mind that oxd must be up and running; otherwise, the registration will fail. It's because during a POST call to kong's /plugin endpoint, the plugin performs self-registration on the oxd server at oxd_host provided in the configuration. For this reason, if the plugin is added and you remove oxd (or install a new version of oxd) without configuration persistence, then gluu-oauth2-rs must be re-registered (to force registration with the newly installed oxd).
     
 
 ```
@@ -430,15 +430,15 @@ $ curl -i -X POST \
                                      }\"
 ```
 
-Next step is to access and verify your API using kong proxy endpoint. 
+The next step is to access and verify your API using the kong proxy endpoint. 
 
-## Verify API
+## Verify your API
 
-After configuration you are ready to verify your API is protected by plugins or not. You need to pass token as per configured [authentication mode](#create-oauth-credential).
+After the configuration, you are ready to verify if your API is protected by plugins or not. You need to pass the token as per configured [authentication mode](#create-oauth-credential).
 
-Sample of request to proxy endpoint. You can configure port for proxy endpoint using [kong config](../configuration.md#kong).
+A sample request to the proxy endpoint. You can configure the port for the proxy endpoint using [kong config](../configuration.md#kong).
 
-By default kong provides, two endpoints.
+By default, kong provides two endpoints.
 
 | Protocol | Proxy endpoints |
 |----------|-----------------|
@@ -446,7 +446,7 @@ By default kong provides, two endpoints.
 | http | http://your.gg.host.com:8000 |
 
 !!! Note
-    By default kong provides 8443 port for https but during setup script installation, we change it to 443.
+    By default, kong provides the 8443 port for https, but during the setup script installation, we change it to 443.
 
 ```
 $ curl -X GET \
@@ -457,7 +457,7 @@ $ curl -X GET \
 
 ### 401/Unauthorized 
 
-Return 401/Unauthorized, When your token is not valid or time expired.
+Return 401/Unauthorized when your token is not valid or time expired.
 
 ```
 HTTP/1.1 401 Unauthorized
@@ -468,7 +468,7 @@ HTTP/1.1 401 Unauthorized
 
 ### 403/Forbidden
 
-Return 403/Forbidden, When you did not specify the required authorized RPT in "Authorization" header. Also, you will also get the `WWW-Authenticate` header with `ticket`.
+Return 403/Forbidden when you did not specify the required authorized RPT in the "Authorization" header. Also, you will get the `WWW-Authenticate` header with `ticket`.
 
 ```
 HTTP/1.1 403 Forbidden
@@ -484,7 +484,7 @@ WWW-Authenticate: UMA realm="rs",
 
 ### 200 Success
 
-If your token is valid then you will get success response from your upstream API.
+If your token is valid, you will get a success response from your upstream API.
 
 ## Upstream Headers
 
@@ -493,9 +493,9 @@ When a client has been authenticated, the plugin will append some headers to the
 1. **X-Consumer-ID**, the ID of the Consumer on Kong
 2. **X-Consumer-Custom-ID**, the custom_id of the Consumer (if set)
 3. **X-Consumer-Username**, the username of the Consumer (if set)
-4. **X-Authenticated-Scope**, the comma-separated list of scopes that the end user has authenticated, if available (only if the consumer is not the 'anonymous' consumer)
-5. **X-OAuth-Client-ID**, the authenticated client id, if oauth_mode is enabled(only if the consumer is not the 'anonymous' consumer)
-6. **X-OAuth-Expiration**, the token expiration time, Integer timestamp, measured in the number of seconds since January 1 1970 UTC, indicating when this token will expire, as defined in JWT RFC7519. It only returns in oauth_mode(only if the consumer is not the 'anonymous' consumer)
-7. **X-Anonymous-Consumer**, will be set to true when authentication failed, and the 'anonymous' consumer was set instead.
+4. **X-Authenticated-Scope**, the comma-separated list of scopes that the end user has authenticated, if available (only if the consumer is not an 'anonymous' consumer)
+5. **X-OAuth-Client-ID**, the authenticated client id, if oauth_mode is enabled (only if the consumer is not an 'anonymous' consumer)
+6. **X-OAuth-Expiration**, the token expiration time, Integer timestamp, measured in the number of seconds since January 1, 1970 UTC, indicating when this token will expire, as defined in JWT RFC7519. It only returns in oauth_mode(only if the consumer is not an 'anonymous' consumer)
+7. **X-Anonymous-Consumer**, will be set to true when authentication fails, and the 'anonymous' consumer was set instead.
 
 You can use this information on your side to implement additional logic. You can use the X-Consumer-ID value to query the Kong Admin API and retrieve more information about the Consumer.
