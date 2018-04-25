@@ -106,7 +106,7 @@ HTTP/1.1 201 Created
 
 #### Create an OAuth credential
 
-This process registers OpenId client with oxd which help you get tokens and authenticate the token. The Plugin behaves as per selected mode. There are three modes.
+This process registers an OpenId client with oxd which help you get tokens and authenticate the token. The Plugin behaves as per selected mode. There are three modes.
 
 | Mode | DESCRIPTION |
 |----------------|-------------|
