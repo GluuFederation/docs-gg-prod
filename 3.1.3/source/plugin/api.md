@@ -175,16 +175,16 @@ RESPONSE :
 | client_token_endpoint_auth_method(optional) | | An optional string value for the client token endpoint auth method. |
 | client_token_endpoint_auth_signing_alg(optional) | | An optional string value for the client token endpoint auth signing alg. |
 
-Next step is to configure [Gluu OAuth 2.0 UMA RS plugin](#gluu-oauth-20-uma-rs-plugin).
+The next step is to configure [Gluu OAuth 2.0 UMA RS plugin](#gluu-oauth-20-uma-rs-plugin).
 
 ## Gluu OAuth 2.0 UMA RS plugin
 
 User-Managed Access Resource Server plugin.
 
-It allows to protect your API (which is proxied by Kong) with [UMA](https://docs.kantarainitiative.org/uma/rec-uma-core.html)
+It allows you to protect your API (which is proxied by Kong) with [UMA](https://docs.kantarainitiative.org/uma/rec-uma-core.html)
 
 !!! Note: 
-    You must need to configure the **gluu-oauth2-client-auth** plugin first.
+    You need to configure the **gluu-oauth2-client-auth** plugin first.
 
 ### Installation
 
