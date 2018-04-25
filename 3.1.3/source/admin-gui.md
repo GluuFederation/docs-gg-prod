@@ -39,7 +39,7 @@ Attributes of an API object are listed below.
 | **retries** *(optional)* | The number of retries to execute upon failure to proxy. The default is `5`. |
 | **upstream_connect_timeout** *(optional)* | The timeout in milliseconds for establishing a connection to your upstream service. Defaults to `60000`. |
 | **upstream_send_timeout** *(optional)* | The timeout in milliseconds between two successive write operations for transmitting a request to your upstream service. Defaults to `60000`. |
-| **upstream_read_timeout** *(optional)* | The timeout in milliseconds between two successive read operations for transmitting a request to your upstream service Defaults to `60000`. |
+| **upstream_read_timeout** *(optional)* | The timeout in milliseconds between two successive read operations for transmitting a request to your upstream service. Defaults to `60000`. |
 | **https_only** *(optional)* | Enable if you wish to only serve an API through HTTPS, on the appropriate port (`443` by default). Default: `false`. |
 | **http_if_terminated** *(optional)* | Consider the `X-Forwarded-Proto` header when enforcing HTTPS-only traffic. Default: `false`. |
 
