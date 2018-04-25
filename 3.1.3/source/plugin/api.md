@@ -434,7 +434,7 @@ The next step is to access and verify your API using the kong proxy endpoint.
 
 ## Verify your API
 
-After the configuration, you are ready to verify if your API is protected by plugins or not. You need to pass the token as per configured [authentication mode](#create-oauth-credential).
+After the configuration, you are ready to verify whether your API is protected by plugins or not. You need to pass the token as per configured [authentication mode](#create-oauth-credential).
 
 A sample request to the proxy endpoint. You can configure the port for the proxy endpoint using [kong config](../configuration.md#kong).
 
@@ -446,7 +446,7 @@ By default, kong provides two endpoints.
 | http | http://your.gg.host.com:8000 |
 
 !!! Note
-    By default, kong provides the 8443 port for https, but during the setup script installation, we change it to 443.
+    Kong provides the 8443 port for https by default, but during the setup script installation, we change it to 443.
 
 ```
 $ curl -X GET \
@@ -496,6 +496,6 @@ When a client has been authenticated, the plugin will append some headers to the
 4. **X-Authenticated-Scope**, the comma-separated list of scopes that the end user has authenticated, if available (only if the consumer is not an 'anonymous' consumer)
 5. **X-OAuth-Client-ID**, the authenticated client id, if oauth_mode is enabled (only if the consumer is not an 'anonymous' consumer)
 6. **X-OAuth-Expiration**, the token expiration time, Integer timestamp, measured in the number of seconds since January 1, 1970 UTC, indicating when this token will expire, as defined in JWT RFC7519. It only returns in oauth_mode(only if the consumer is not an 'anonymous' consumer)
-7. **X-Anonymous-Consumer**, will be set to true when authentication fails, and the 'anonymous' consumer was set instead.
+7. **X-Anonymous-Consumer**, will be set to true when authentication fails, and the 'anonymous' consumer is set instead.
 
 You can use this information on your side to implement additional logic. You can use the X-Consumer-ID value to query the Kong Admin API and retrieve more information about the Consumer.
