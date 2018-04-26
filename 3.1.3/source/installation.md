@@ -8,7 +8,8 @@ The istallation is a three-part process:
 
 ### Required Third Party repositories
 
-!!! Note Always run the following commands as root.
+!!! Note 
+    Always run the following commands as root.
 
 * Add the Gluu repo:
 
@@ -54,7 +55,8 @@ The istallation is a three-part process:
 You will be prompted to answer some questions. Just hit Enter to accept the
 default value which is specified in square brackets.
 
-!!! Warning When you are prompted to provide a two-letter value, make sure you follow the instructions. A mistake may result in the lack of certificates.
+!!! Warning 
+    When you are prompted to provide a two-letter value, make sure you follow the instructions. A mistake may result in the lack of certificates.
 
 | **Question** | **Explanation** |
 |----------|-------------|
