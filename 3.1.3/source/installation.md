@@ -1,6 +1,6 @@
 # Installation
 
-The istallation is a three-part process:
+The installation is a three-part process:
 
 1. [Add the required third party repositories](#required-third-party-repositories)
 2. [Install the `gluu-gateway` package](#install-gluu-gateway-package)
