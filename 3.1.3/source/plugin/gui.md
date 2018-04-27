@@ -14,7 +14,7 @@ This plugin enables the use of an external OpenId Provider for OAuth2 client reg
 
 ### Add an API
 
-The first step is to add your API in Kong. Use [API Section](../admin-gui.md#apis) to add API in Kong.
+The first step is to add your API in Kong. Use the [API Section](../admin-gui.md#apis) to add API in Kong.
 
 ### Enable gluu-oauth2-client-auth protection
 
