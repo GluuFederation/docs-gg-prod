@@ -37,7 +37,7 @@ In order to use the plugin, you first need to create a Consumer to associate one
 
 You need to associate a credential with an existing Consumer object which represents a user consuming the API. To create a Consumer, you can use [Consumer section](../admin-gui.md#consumers).
 
-### Create an OAuth credential
+### Create OAuth credential
 
 This process registers an OpenId client with oxd which helps you get tokens and authenticate the token. The Plugin behaves as per selected mode. There are three modes. 
 
