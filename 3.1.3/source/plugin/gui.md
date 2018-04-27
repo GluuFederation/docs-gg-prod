@@ -198,7 +198,7 @@ The next step is to access and verify your API using the Kong proxy endpoint.
 
 ## Verify you API
 
-After the configuration, you are ready to verify whether your API is protected by plugins or not. You need to pass the token as per configured [authentication mode](#create-oauth-credential).
+After the configuration, you are ready to verify whether your API is protected by plugins or not. You need to pass the token as per configured [authentication mode](#create-an-oauth-credential).
 
 A sample request to the proxy endpoint. You can configure the port for the proxy endpoint using [kong config](../configuration.md#kong).
 
