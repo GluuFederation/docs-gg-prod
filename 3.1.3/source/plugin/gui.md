@@ -37,7 +37,7 @@ In order to use the plugin, you first need to create a Consumer to associate one
 
 You need to associate a credential with an existing Consumer object which represents a user consuming the API. To create a Consumer, you can use [Consumer section](../admin-gui.md#consumers).
 
-### Create OAuth credential
+### Create an OAuth credential
 
 This process registers an OpenId client with oxd which helps you get tokens and authenticate the token. The Plugin behaves as per selected mode. There are three modes. 
 
@@ -198,7 +198,7 @@ The next step is to access and verify your API using the Kong proxy endpoint.
 
 ## Verify you API
 
-After the configuration, you are ready to verify whether your API is protected by plugins or not. You need to pass the token as per configured [authentication mode](#create-oauth-credential).
+After the configuration, you are ready to verify whether your API is protected by plugins or not. You need to pass the token as per configured [authentication mode](#create-an-oauth-credential).
 
 A sample request to the proxy endpoint. You can configure the port for the proxy endpoint using [kong config](../configuration.md#kong).
 
