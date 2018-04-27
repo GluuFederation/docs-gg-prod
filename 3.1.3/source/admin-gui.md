@@ -21,7 +21,7 @@ The API object describes an API that's being exposed by Kong. Kong needs to know
 
 ### Add an API
 
-Add your API by using `+ ADD NEW API` button in the [API section](#3-apis).
+Add your API by using `+ ADD NEW API` button in the [API section](#3-APIs).
 
 ![api_add](img/3_api_add.png)
 
