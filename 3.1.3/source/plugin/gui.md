@@ -35,7 +35,7 @@ In order to use the plugin, you first need to create a Consumer to associate one
 
 ### Create a Consumer 
 
-You need to associate a credential with an existing Consumer object which represents a user consuming the API. To create a Consumer, you can use [Consumer section](../admin-gui.md#consumers).
+You need to associate a credential with an existing Consumer object which represents a user consuming the API. To create a Consumer, you can use the [Consumer section](../admin-gui.md#consumers).
 
 ### Create an OAuth credential
 
@@ -43,7 +43,7 @@ This process registers an OpenId client with oxd which helps you get tokens and 
 
 | Mode | DESCRIPTION |
 |----------------|-------------|
-| oauth_mode | If yes, then Kong acts as an OAuth client only. |
+| oauth_mode | If Yes, then Kong acts as an OAuth client only. |
 | uma_mode | If Yes, then this indicates your client is a valid UMA client, and obtains and sends an RPT as the access token. You need to configure the [gluu-oauth2-rs](https://github.com/GluuFederation/gluu-gateway/tree/master/gluu-oauth2-rs) plugin for uma_mode. |
 | mix_mode | If Yes, then the gluu-oauth2 plugin will try to obtain an UMA RPT token if the RS returns 401/Unauthorized. You need to configure the [gluu-oauth2-rs](https://github.com/GluuFederation/gluu-gateway/tree/master/gluu-oauth2-rs) plugin for uma_mode. |
 
@@ -58,7 +58,7 @@ Below you can see the add OAuth credential form
 | FORM PARAMETER | DESCRIPTION |
 |----------------|-------------|
 | name | The name to associate with the credential. In OAuth 2.0, this would be the application name. |
-| OAuth mode(semi-optional) | If True, Kong acts as an OAuth client only. |
+| OAuth mode(semi-optional) | If Yes, Kong acts as an OAuth client only. |
 | UMA mode(semi-optional) | This indicates your client is a valid UMA client, and obtains and sends an RPT as the access token. |
 | Mix mode(semi-optional) | If Yes, then the gluu-oauth2 plugin will try to obtain an UMA RPT token if the RS returns 401/Unauthorized. |
 | Allow unprotected path(false) | It is used to allow or deny an unprotected path by UMA-RS. |
