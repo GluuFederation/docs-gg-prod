@@ -18,12 +18,6 @@ The installation is a three-part process:
 # curl https://repo.gluu.org/ubuntu/gluu-apt.key | apt-key add -
 ```
 
-* Add openjdk-8 PPA:
-
-```
-# add-apt-repository ppa:openjdk-r/ppa
-```
-
 * Add the Postgresql-10 repo:
 
 ```
