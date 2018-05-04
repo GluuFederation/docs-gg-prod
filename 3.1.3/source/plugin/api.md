@@ -393,41 +393,47 @@ $ curl -i -X POST \
   --data "name=gluu-oauth2-rs" \
   --data "config.oxd_host=localhost" \
   --data "config.uma_server_host=https://uma.server.com" \
-  --data "config.protection_document={\"resources\":[
-                                         {
-                                             \"path\":\"/photo\",
-                                             \"conditions\":[
-                                                 {
-                                                     \"httpMethods\":[\"GET\"],
-                                                     \"scopes\":[
-                                                         \"http://photoz.example.com/dev/actions/view\"
-                                                     ]
-                                                 },
-                                                 {
-                                                     \"httpMethods\":[\"PUT\", \"POST\"],
-                                                     \"scopes\":[
-                                                         \"http://photoz.example.com/dev/actions/all\",
-                                                         \"http://photoz.example.com/dev/actions/add\"
-                                                     ],
-                                                     \"ticketScopes\":[
-                                                         \"http://photoz.example.com/dev/actions/add\"
-                                                     ]
-                                                 }
-                                             ]
-                                         },
-                                         {
-                                             \"path\":\"/document\",
-                                             \"conditions\":[
-                                                 {
-                                                     \"httpMethods\":[\"GET\"],
-                                                     \"scopes\":[
-                                                         \"http://photoz.example.com/dev/actions/view\"
-                                                     ]
-                                                 }
-                                             ]
-                                         }
-                                     ]
-                                     }\"
+  --data "config.protection_document=[  
+                                        {  
+                                           \"path\":\"/photo\",
+                                           \"conditions\":[  
+                                              {  
+                                                 \"httpMethods\":[  
+                                                    \"GET\"
+                                                 ],
+                                                 \"scopes\":[  
+                                                    \"http://photoz.example.com/dev/actions/view\"
+                                                 ]
+                                              },
+                                              {  
+                                                 \"httpMethods\":[  
+                                                    \"PUT\",
+                                                    \"POST\"
+                                                 ],
+                                                 \"scopes\":[  
+                                                    \"http://photoz.example.com/dev/actions/all\",
+                                                    \"http://photoz.example.com/dev/actions/add\"
+                                                 ],
+                                                 \"ticketScopes\":[  
+                                                    \"http://photoz.example.com/dev/actions/add\"
+                                                 ]
+                                              }
+                                           ]
+                                        },
+                                        {  
+                                           \"path\":\"/document\",
+                                           \"conditions\":[  
+                                              {  
+                                                 \"httpMethods\":[  
+                                                    \"GET\"
+                                                 ],
+                                                 \"scopes\":[  
+                                                    \"http://photoz.example.com/dev/actions/view\"
+                                                 ]
+                                              }
+                                           ]
+                                        }
+                                     ]\"
 ```
 
 The next step is to access and verify your API using the kong proxy endpoint. 
