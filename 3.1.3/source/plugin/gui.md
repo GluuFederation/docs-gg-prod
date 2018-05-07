@@ -62,6 +62,9 @@ Below you can see the add OAuth credential form
 | UMA mode(semi-optional) | This indicates your client is a valid UMA client, and obtains and sends an RPT as the access token. |
 | Mix mode(semi-optional) | If Yes, then the gluu-oauth2 plugin will try to obtain an UMA RPT token if the RS returns 401/Unauthorized. |
 | Allow unprotected path(false) | It is used to allow or deny an unprotected path by UMA-RS. |
+| OAuth scope security(false) | If true, OAuth scope expression will be applied on scope of token in oauth mode. |
+| Restrict API's(false) | The client can only call specified API's if client restriction is enabled. You can choose list of APIs by using `+ SELECT RESTRICTED API` button. |
+| Show Consumer custom Id(true) | If true, then the plugin will set consumer custom id in legacy header otherwise not. |
 | oxd id(optional) | If you have an existing oxd entry, then enter the oxd_id (also client id, client secret and client id of oxd id). If you have a client created from the OP server, skip it and enter only the client_id and client_secret. |
 | client name(optional) | An optional string value for the client name. |
 | client id(optional) | You can use an existing client id. |
@@ -91,16 +94,21 @@ The first step is to add your API in Kong. Use the [API Section](../admin-gui.md
 
 Use the `SECURITY` link in the [API](../admin-gui.md#apis) section.
 
-![add_uma_rs](../img/3_add_uma_rs.png)
+![add_uma_rs](../img/3_add_oauth2_rs.png)
 
 !!! Note
     See all the attribute descriptions in the [Admin API](api.md#gluu-oauth-20-uma-rs-plugin) section. 
 
-You can register your resources using this section. It generates the `scope_expression` JSON. you can view and confirm your [protection document](#protection-document) by clicking the `VIEW RESOURCES JSON` button. 
+You can register your two type of resources using this section.
+ 
+ 1. [Protection document](#protection-document)
+ 2. [OAuth Scope Expression](#oauth-scope-expression)
 
-#### Protection document   
+#### Protection document
 
-Protection document - a JSON document which describes UMA protection in a declarative way and is based on the [uma-rs](https://github.com/GluuFederation/uma-rs) project.
+Protection document(UMA Resources) is a JSON document which describes UMA protection in a declarative way and is based on the [uma-rs](https://github.com/GluuFederation/uma-rs) project. Use `UMA Resources` button to open protection document section. 
+
+![UMA Resources](../img/3_4_add_uma_rs.png)
 
  - path - a relative path to protect (exact match)
  - httpMethods - GET, HEAD, POST, PUT, DELETE
@@ -193,6 +201,63 @@ You can see the below JSON by clicking on the `VIEW RESOURCES JSON` button.
   }
 ]
 ```
+
+#### OAuth Scope Expression
+
+OAuth Scope Expression is json expression, security for OAuth scopes. It checks the scope(from introspection of token) of the token with the configure OAuth json expression. Use `OAuth Scope Security` button to switch. 
+
+!!! Note
+    You can enable and disable oauth scope expression by using [OAuth credential's `OAuth scope security`](#create-an-oauth-credential) flag.
+
+![OAuth_Expression](../img/3_4_add_oauth_scope_expression.png)
+
+ - path - a relative path to protect (exact match)
+ - httpMethods - GET, HEAD, POST, PUT, DELETE
+ - scope - the OAuth scope required to access the given path
+ 
+Let's say we have API which we would like to protect:
+
+![Add_OAuth_Expression](../img/3_5_oauth_scopes.png)
+
+Use `VIEW RESOURCE JSON` button to see json expression.
+
+```
+[
+  {
+    "path": "/images",
+    "conditions": [
+      {
+        "httpMethods": [
+          "GET"
+        ],
+        "scope_expression": {
+          "and": [
+            "openid",
+            {
+              "or": [
+                "email",
+                "clientinfo"
+              ]
+            }
+          ]
+        }
+      }
+    ]
+  }
+]
+```
+
+At the runtime it matches the scope expression with token scopes. Inner expression execute first. It take one by one scope from expression and match with requested scope if it is exist then return true otherwise false.
+
+1. Let's assume token with `["clientinfo"]` scope only.
+    - `"email"` or `"clientinfo"` = `false` or `true` = `true`
+    - `"openid"` and `true` = `false` and `true` = `false`
+    - The result is `false` so request is not allowed
+
+2. Let's assume token with `["openid", "clientinfo"]` scopes.
+    - `"email"` or `"clientinfo"` = `false` or `true` = `true`
+    - `"openid"` and `true` = `true` and `true` = `true`
+    - The result is `true` so request is allowed
 
 The next step is to access and verify your API using the Kong proxy endpoint.
 

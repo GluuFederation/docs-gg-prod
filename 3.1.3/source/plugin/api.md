@@ -165,6 +165,11 @@ RESPONSE :
 | oauth_mode(semi-optional) | | If True, Kong acts as an OAuth client only. |
 | uma_mode(semi-optional) | | This indicates your client is a valid UMA client, and obtains and sends an RPT as the access token. |
 | mix_mode(semi-optional) | | If Yes, then the gluu-oauth2 plugin will try to obtain an UMA RPT token if the RS returns  401/Unauthorized. |
+| allow_unprotected_path(optional) | false | It is used to allow or deny an unprotected path by UMA-RS. |
+| allow_oauth_scope_expression(optional) | false | If true, OAuth scope expression will be applied on scope of token in oauth mode. |
+| restrict_api(optional) | false | The client can only call specified API's if client restriction is enabled. |
+| restrict_api_list(optional) | | String comma separated api_ids. We must have to enable `restrict_api` to use this feature. |
+| show_consumer_custom_id(optional) | true | If true, then the plugin will set consumer custom id in legacy header otherwise not. |
 | oxd_id(optional) | | If you have an existing oxd entry, then enter the oxd_id (also client id, client secret and client id of oxd id). If you have a client created from the OP server, skip it and enter only the client_id and client_secret. |
 | client_name(optional) | kong_oauth2_bc_client | An optional string value for the client name. |
 | client_id(optional) | | You can use an existing client id. |
@@ -212,6 +217,7 @@ It allows you to protect your API (which is proxied by Kong) with [UMA](https://
  - uma_server_host - REQUIRED, an UMA Server which implements UMA 2.0 specification.
                      (For example [Gluu Server](https://www.gluu.org/gluu-server/overview/)). 
                      Check that the UMA implementation is up and running by visiting the `.well-known/uma2-configuration` endpoint.
+ - oauth_scope_expression - OAuth Scope Expression is json expression, security for OAuth scopes. It checks the scope(from introspection of token) of the token with the configure OAuth json expression. 
                
 #### Protection document   
 
@@ -343,6 +349,58 @@ You can also pass the scope-expression format.
   }
 ]
 ```
+
+#### OAuth Scope Expression
+
+OAuth Scope Expression is json expression, security for OAuth scopes. It checks the scope(from introspection of token) of the token with the configure OAuth json expression. 
+
+!!! Note
+    You can enable and disable oauth scope expression by using [OAuth credential's `OAuth scope security`](#create-an-oauth-credential) flag.
+
+ - path - a relative path to protect (exact match)
+ - httpMethods - GET, HEAD, POST, PUT, DELETE
+ - scope - the OAuth scope required to access the given path
+ 
+Let's say we have API which we would like to protect:
+
+```
+[
+  {
+    "path": "/images",
+    "conditions": [
+      {
+        "httpMethods": [
+          "GET"
+        ],
+        "scope_expression": {
+          "and": [
+            "openid",
+            {
+              "or": [
+                "email",
+                "clientinfo"
+              ]
+            }
+          ]
+        }
+      }
+    ]
+  }
+]
+```
+
+At the runtime it matches the scope expression with token scopes. Inner expression execute first. It take one by one scope from expression and match with requested scope if it is exist then return true otherwise false.
+
+1. Let's assume token with `["clientinfo"]` scope only.
+    - `"email"` or `"clientinfo"` = `false` or `true` = `true`
+    - `"openid"` and `true` = `false` and `true` = `false`
+    - The result is `false` so request is not allowed
+
+2. Let's assume token with `["openid", "clientinfo"]` scopes.
+    - `"email"` or `"clientinfo"` = `false` or `true` = `true`
+    - `"openid"` and `true` = `true` and `true` = `true`
+    - The result is `true` so request is allowed
+
 
 ### Protect your API with UMA
 
