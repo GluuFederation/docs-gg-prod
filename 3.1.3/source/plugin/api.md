@@ -1,9 +1,9 @@
 # Admin API
 
-You can configure plugins without Admin GUI. There are two plugins.
+You can configure the plugins without the Admin GUI. There are two plugins.
 
 !!! Note
-    Configure the plugins using [Admin GUI](./gui.md)
+    Configure the plugins using the [Admin GUI](./gui.md)
 
 1. [Gluu OAuth 2.0 client credential authentication](#gluu-oauth-20-client-credential-authentication)
 2. [Gluu OAuth 2.0 UMA RS plugin](#gluu-oauth-20-uma-rs-plugin)
@@ -15,14 +15,14 @@ This plugin enables the use of an external OpenId Provider for OAuth2 client reg
 ### Terminology
 * `api`: your upstream service placed behind Kong, which Kong proxies requests to.
 * `plugin`: a plugin executing actions inside Kong before or after a request has been proxied to the upstream API.
-* `consumer`: a developer or service using the API. When using Kong, a Consumer only communicates with Kong which proxies every call to the said upstream API.
+* `consumer`: a developer or service using the API. When using Kong, a Consumer only communicates with Kong, which proxies every call to the said upstream API.
 * `credentials`: in the gluu-oauth2-client-auth plugin context, an openId client is registered with consumer and client id is used to identify the credentials.
 
 ### Installation
 1. [Install Kong](https://getkong.org/install/)
 2. [Install oxd server v3.1.3](https://oxd.gluu.org/docs/)
 3. Install gluu-oauth2-client-auth
-    1. Stop kong : `kong stop`
+    1. Stop Kong : `kong stop`
     2. Copy `gluu-oauth2-client-auth/kong/plugins/gluu-oauth2-client-auth` Lua sources to the Kong plugins folder `/usr/local/share/lua/<version>/kong/plugins/gluu-oauth2-client-auth`
 
          or
@@ -46,7 +46,7 @@ $ curl -X POST http://localhost:8001/apis \
       --data "upstream_url=http://your.api.server.com"
 ```
 
-Validate that your API is correctly proxied via Kong.
+Validate that your API is correctly proxied via Kong:
 
 ```
 $ curl -i -X GET \
@@ -106,7 +106,7 @@ HTTP/1.1 201 Created
 
 #### Create an OAuth credential
 
-This process registers an OpenId client with oxd which help you get tokens and authenticate the token. The Plugin behaves as per selected mode. There are three modes.
+This process registers an OpenId client with oxd which help you get tokens and authenticate the token. The plugin behaves as per selected mode. There are three modes.
 
 | Mode | DESCRIPTION |
 |----------------|-------------|
@@ -162,11 +162,11 @@ RESPONSE :
 | name | | The name to associate with the credential. In OAuth 2.0, this would be the application name. |
 | op_host | | An OpenId connect provider. Example: https://gluu.example.org |
 | oxd_http_url | | An OXD https extention url. |
-| oauth_mode(semi-optional) | | If True, Kong acts as an OAuth client only. |
+| oauth_mode(semi-optional) | | If Yes, Kong acts as an OAuth client only. |
 | uma_mode(semi-optional) | | This indicates your client is a valid UMA client, and obtains and sends an RPT as the access token. |
 | mix_mode(semi-optional) | | If Yes, then the gluu-oauth2 plugin will try to obtain an UMA RPT token if the RS returns  401/Unauthorized. |
 | allow_unprotected_path(optional) | false | It is used to allow or deny an unprotected path by UMA-RS. |
-| allow_oauth_scope_expression(optional) | false | If true, OAuth scope expression will be applied on scope of token in oauth mode. |
+| allow_oauth_scope_expression(optional) | false | If Allow, OAuth scope expression will be applied on scope of token in oauth mode. |
 | restrict_api(optional) | false | The client can only call specified API's if client restriction is enabled. |
 | restrict_api_list(optional) | | String comma separated api_ids. We must have to enable `restrict_api` to use this feature. |
 | show_consumer_custom_id(optional) | true | If true, then the plugin will set consumer custom id in legacy header otherwise not. |
@@ -180,7 +180,7 @@ RESPONSE :
 | client_token_endpoint_auth_method(optional) | | An optional string value for the client token endpoint auth method. |
 | client_token_endpoint_auth_signing_alg(optional) | | An optional string value for the client token endpoint auth signing alg. |
 
-The next step is to configure [Gluu OAuth 2.0 UMA RS plugin](#gluu-oauth-20-uma-rs-plugin).
+The next step is to configure the [Gluu OAuth 2.0 UMA RS plugin](#gluu-oauth-20-uma-rs-plugin).
 
 ## Gluu OAuth 2.0 UMA RS plugin
 
@@ -216,8 +216,8 @@ It allows you to protect your API (which is proxied by Kong) with [UMA](https://
  - protection_document - REQUIRED, a JSON document that describes UMA protection
  - uma_server_host - REQUIRED, an UMA Server which implements UMA 2.0 specification.
                      (For example [Gluu Server](https://www.gluu.org/gluu-server/overview/)). 
-                     Check that the UMA implementation is up and running by visiting the `.well-known/uma2-configuration` endpoint.
- - oauth_scope_expression - OAuth Scope Expression is json expression, security for OAuth scopes. It checks the scope(from introspection of token) of the token with the configure OAuth json expression. 
+                     Make sure that the UMA implementation is up and running by visiting the `.well-known/uma2-configuration` endpoint.
+ - oauth_scope_expression - OAuth Scope Expression is a json expression, security for OAuth scopes. It checks the scope (from token introspection) of the token with the configured OAuth json expression. 
                
 #### Protection document   
 
@@ -352,16 +352,16 @@ You can also pass the scope-expression format.
 
 #### OAuth Scope Expression
 
-OAuth Scope Expression is json expression, security for OAuth scopes. It checks the scope(from introspection of token) of the token with the configure OAuth json expression. 
+OAuth Scope Expression is a json expression, security for OAuth scopes. It checks the scope (from token introspection) of the token with the configured OAuth json expression. 
 
 !!! Note
-    You can enable and disable oauth scope expression by using [OAuth credential's `OAuth scope security`](#create-an-oauth-credential) flag.
+    You can enable and disable the oauth scope expression by using [OAuth credential's `OAuth scope security`](#create-an-oauth-credential) flag.
 
  - path - a relative path to protect (exact match)
  - httpMethods - GET, HEAD, POST, PUT, DELETE
  - scope - the OAuth scope required to access the given path
  
-Let's say we have API which we would like to protect:
+Let's say we have an API which we would like to protect:
 
 ```
 [
@@ -389,17 +389,17 @@ Let's say we have API which we would like to protect:
 ]
 ```
 
-At the runtime it matches the scope expression with token scopes. Inner expression execute first. It take one by one scope from expression and match with requested scope if it is exist then return true otherwise false.
+In the runtime, it matches the scope expression with token scopes. The inner expression is executed first. It takes the scopes from the expression one by one and matches them with the requested scope. If it exists, 'true' is returned. If not, it is 'false'.
 
-1. Let's assume token with `["clientinfo"]` scope only.
+1. Let's assume a token with the `["clientinfo"]` scope only.
     - `"email"` or `"clientinfo"` = `false` or `true` = `true`
     - `"openid"` and `true` = `false` and `true` = `false`
-    - The result is `false` so request is not allowed
+    - The result is `false`, so the request is not allowed.
 
-2. Let's assume token with `["openid", "clientinfo"]` scopes.
+2. Let's assume a token with `["openid", "clientinfo"]` scopes.
     - `"email"` or `"clientinfo"` = `false` or `true` = `true`
     - `"openid"` and `true` = `true` and `true` = `true`
-    - The result is `true` so request is allowed
+    - The result is `true`, so the request is allowed.
 
 
 ### Protect your API with UMA
@@ -440,7 +440,7 @@ $ curl -i -X GET \
 
 #### Enable gluu-oauth2-rs protection
 
-Important : each protection_document double quotes must be escaped by the '\\' sign. This limitation comes from Kong configuration parameter type limitation which is limited to : "id", "number", "boolean", "string", "table", "array", "url", "timestamp".
+Important : each protection_document double quotes must be escaped by the '\\' sign. This limitation comes from Kong configuration parameter type limitation which is limited to: "id", "number", "boolean", "string", "table", "array", "url", "timestamp".
    
 During gluu-oauth2-rs addition to /plugins, keep in mind that oxd must be up and running; otherwise, the registration will fail. It's because during a POST call to kong's /plugin endpoint, the plugin performs self-registration on the oxd server at oxd_host provided in the configuration. For this reason, if the plugin is added and you remove oxd (or install a new version of oxd) without configuration persistence, then gluu-oauth2-rs must be re-registered (to force registration with the newly installed oxd).
     
@@ -494,7 +494,7 @@ $ curl -i -X POST \
                                      ]\"
 ```
 
-The next step is to access and verify your API using the kong proxy endpoint. 
+The next step is to access and verify your API using the Kong proxy endpoint. 
 
 ## Verify your API
 
@@ -502,7 +502,7 @@ After the configuration, you are ready to verify whether your API is protected b
 
 A sample request to the proxy endpoint. You can configure the port for the proxy endpoint using [kong config](../configuration.md#kong).
 
-By default, kong provides two endpoints.
+By default, Kong provides two endpoints.
 
 | Protocol | Proxy endpoints |
 |----------|-----------------|
@@ -521,7 +521,7 @@ $ curl -X GET \
 
 ### 401/Unauthorized 
 
-Return 401/Unauthorized when your token is not valid or time expired.
+Return 401/Unauthorized when your token is not valid or expired.
 
 ```
 HTTP/1.1 401 Unauthorized
@@ -559,7 +559,7 @@ When a client has been authenticated, the plugin will append some headers to the
 3. **X-Consumer-Username**, the username of the Consumer (if set)
 4. **X-Authenticated-Scope**, the comma-separated list of scopes that the end user has authenticated, if available (only if the consumer is not an 'anonymous' consumer)
 5. **X-OAuth-Client-ID**, the authenticated client id, if oauth_mode is enabled (only if the consumer is not an 'anonymous' consumer)
-6. **X-OAuth-Expiration**, the token expiration time, Integer timestamp, measured in the number of seconds since January 1, 1970 UTC, indicating when this token will expire, as defined in JWT RFC7519. It only returns in oauth_mode(only if the consumer is not an 'anonymous' consumer)
+6. **X-OAuth-Expiration**, the token expiration time, integer timestamp, measured in the number of seconds since January 1, 1970 UTC, indicating when this token will expire, as defined in JWT RFC7519. It only returns in oauth_mode (only if the consumer is not an 'anonymous' consumer)
 7. **X-Anonymous-Consumer**, will be set to true when authentication fails, and the 'anonymous' consumer is set instead.
 
 You can use this information on your side to implement additional logic. You can use the X-Consumer-ID value to query the Kong Admin API and retrieve more information about the Consumer.
