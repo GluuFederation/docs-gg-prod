@@ -20,7 +20,7 @@ pages:
 - 'Installation' : 'installation.md'
 - 'Configuration' : 'configuration.md'
 - 'Admin console' :  'admin-gui.md'   
-- 'FAQ' : 'faq.md'
-- Plugins: 
+- Plugins:
     - 'GUI' : 'plugin/gui.md'
-    - 'API' :  'plugin/api.md'  
+    - 'API' :  'plugin/api.md'
+- 'FAQ' : 'faq.md'
