@@ -45,8 +45,8 @@ Use the following links to get started with the credentials manager:
 1. [Configuration](./configuration.md)
 1. [Admin GUI](./admin-gui.md)
 1. Plugin
-    1. [Configure plugin using Admin GUI](./plugin/gui.md)
-    2. [Configure plugin using Admin API](./plugin/api.md)
+    1. [Configure a plugin using Admin GUI](./plugin/gui.md)
+    2. [Configure a plugin using Admin API](./plugin/api.md)
 1. [FAQ](./faq.md)
 
 ## License
