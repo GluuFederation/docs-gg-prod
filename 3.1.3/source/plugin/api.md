@@ -552,7 +552,7 @@ If your token is valid, you will get a success response from your upstream API.
 
 ## Upstream Headers
 
-When a client has been authenticated, the plugin will append some headers to the request before proxying it to the upstream service, so that you can identify the consumer and the end-user in your code:
+When a client has been authenticated, the plugin will append some headers to the request before proxying it to the upstream service, so that you can identify the consumer and the end user in your code:
 
 1. **X-Consumer-ID**, the ID of the Consumer on Kong
 2. **X-Consumer-Custom-ID**, the custom_id of the Consumer (if set)
