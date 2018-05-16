@@ -2,7 +2,7 @@
 
 ### Gluu Gateway
 
-The Gluu Gateway service is used to manage all the gluu-gateway components (Admin GUI Portal - Konga, Kong, Postgres, OXD-Server, OXD-https-extension).
+The Gluu Gateway service is used to manage all gluu-gateway components: the Admin GUI Portal - Konga, Kong, Postgres, OXD-Server and OXD-https-extension.
 
 * the Gluu Gateway service
 
@@ -12,7 +12,7 @@ The Gluu Gateway service is used to manage all the gluu-gateway components (Admi
 
 ### Admin GUI Portal - Konga
 
-* You can configure Konga by setting properties in the local.js file. This is used to set the port, oxd, OP and client settings.
+* Configure Konga by setting properties in the local.js file. This is used to set the port, oxd, OP and client settings.
 
     ```
      /opt/gluu-gateway/konga/config/local.js
@@ -26,7 +26,7 @@ The Gluu Gateway service is used to manage all the gluu-gateway components (Admi
 
 ### Kong
 
-* You can configure Kong by using the kong.conf file.
+* Configure Kong by using the kong.conf file.
 
     ```
      /etc/kong/kong.conf
@@ -86,7 +86,7 @@ Execute the following sequence of commands:
      # kong migrations reset
     ```
 
-1. The `up` option is used to create a table in the configured database. It also executes all missing migrations up to the latest available.
+1. The `up` option is used to create a table in the configured database. It also executes all missing migrations up to the latest available one.
 
     ```
      # kong migrations up
