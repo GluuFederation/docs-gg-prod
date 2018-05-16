@@ -11,7 +11,7 @@ Gluu Gateway should be used in every API gateway where you need advanced securit
 ### How can I investigate Gluu Gateway problems?
 Gluu Gateway uses Gluu Server and oxd with the oxd-https-extension. That means every potential issue on these servers can influence the work of Gluu Gateway.
 
-![](../img/10_oxd_error_faq.png)
+![](./img/10_oxd_error_faq.png)
 
 If you see an error message such as the one in the screenshot, you should check the logs for possible issues:
 
