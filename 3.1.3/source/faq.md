@@ -3,13 +3,13 @@
 ## General FAQs and troubleshooting
 
 ### How is Gluu Gateway licensed, and how much does it cost?
-The use of Gluu Gateway is subject to the MIT License. oxd is commercially licensed software. You can read more about its pricing [in the oxd FAQ section](https://gluu.org/docs/oxd/3.1.3/faq/).
+The use of Gluu Gateway is subject to the MIT License, but uses commercially licensed oxd software. You can read more about its pricing [in the oxd FAQ section](https://gluu.org/docs/oxd/3.1.3/faq/).
 
 ### Where should Gluu Gateway be used?
 Gluu Gateway should be used in every API gateway where you need advanced security measures with OAuth 2.0 and User-Managed Access (UMA) 2.0 Grant.
 
 ### How can I investigate Gluu Gateway problems?
-Gluu Gateway uses Gluu Server and oxd with the oxd-https-extension. That means every potential issue on these servers can influence the work of Gluu Gateway.
+Gluu Gateway uses Gluu Server and oxd with the oxd-https-extension. That means any potential issue on these servers can influence the work of Gluu Gateway.
 
 ![](./img/10_oxd_error_faq.png)
 
@@ -46,6 +46,6 @@ The process is the same as for OAuth token generation. The Consumer must have th
 By default, Gluu Gateway listens to localhost only, but you can change it manually by configuring the `local.js` config file using the [Configuration section](https://gluu.org/docs/gg/3.1.3/configuration/#admin-gui-portal-konga). You just need to update the `explicitHost` to your global IP or remove this attribute. Read more about the configuration [here](https://sailsjs.com/documentation/reference/configuration/sails-config).
  
 ### How can I change Gluu Gateway Client expiration date?
-By default, Gluu Gateway Client expiration date is set for one day during the installation process. In order to change it, set a different value on your Gluu Server.
+By default, the Gluu Gateway Client expiration date is set for one day during the installation process. To change it, set a different value on your Gluu Server.
 
 If you require any further support, please open a ticket on the [Gluu support portal](https://support.gluu.org).
