@@ -24,9 +24,9 @@ Use the [Manage APIs](../admin-gui.md#manage-apis) section to enable the `gluu-o
 
 | **FORM PARAMETER** | **DESCRIPTION** |
 |---------------|-----------------|
-| oxd id (optional) | Used to introspect the token. By default it fills oxd_id from [Config](../configuration.md#admin-gui-portal-konga). You can also enter any other oxd_id. If you leave it blank, the plugin creates a new client itself. |
-| anonymous(optional) | An optional string (consumer uuid) value to use as an `anonymous` consumer if authentication fails. If empty (default), the request will fail with an authentication failure 4xx. Please note that this value must refer to the Consumer id attribute which is internal to Kong, and not its custom_id. |
-| hide credentials(optional) | An optional boolean value telling the plugin to hide the credential to the upstream API server. It will be removed by Kong before proxying the request |
+| oxd id (optional) | Used to introspect the token. By default it completes oxd_id with [Config](../configuration.md#admin-gui-portal-konga). You can also enter any other oxd_id. If you leave it blank, the plugin creates a new client itself. |
+| anonymous (optional) | An optional string (consumer uuid) value to use as an `anonymous` consumer if authentication fails. If empty (default), the request will fail with an authentication failure 4xx. Please note that this value must refer to the Consumer id attribute which is internal to Kong, and not its custom_id. |
+| hide credentials (optional) | An optional boolean value telling the plugin to hide the credential to the upstream API server. It will be removed by Kong before proxying the request |
 
 !!! Note
     See all the attribute descriptions in the [Admin API](api.md#enable-gluu-oauth2-client-auth-protection) section. 
@@ -47,32 +47,32 @@ This process registers an OpenId client with oxd which helps you get tokens and 
 | uma_mode | If set to Yes, then this indicates your client is a valid UMA client, and obtains and sends an RPT as the access token. You need to configure the [gluu-oauth2-rs](https://github.com/GluuFederation/gluu-gateway/tree/master/gluu-oauth2-rs) plugin for uma_mode. |
 | mix_mode | If set to Yes, then the gluu-oauth2 plugin will try to obtain an UMA RPT token if the RS returns 401/Unauthorized. You need to configure the [gluu-oauth2-rs](https://github.com/GluuFederation/gluu-gateway/tree/master/gluu-oauth2-rs) plugin for uma_mode. |
 
-Use the [Consumer credential configuration](../admin-gui.md#consumer-credential-configuration) section to create an OAuth credential. In the `Credential` section, there is an `OAuth2` section. Click on the `+ Create credential` button.
+Use the [Consumer credentials configuration](../admin-gui.md#consumer-credentials-configuration) section to create an OAuth credential. In the `Credentials` section, there is an `OAuth2` section. Click on the `+ Create credentials` button.
 
 ![consumer_credential_list](../img/4_1_consumer_credential_list.png)
 
-Below you can see the add OAuth credential form
+Below you can see the OAuth credential creation form:
 
 ![consumer_credential_add](../img/4_2_consumer_credential_add.png)
 
 | FORM PARAMETER | DESCRIPTION |
 |----------------|-------------|
 | name | The name to associate with the credential. In OAuth 2.0, this would be the application name. |
-| OAuth mode(semi-optional) | If set to Yes, Kong acts as an OAuth client only. |
-| UMA mode(semi-optional) | This indicates your client is a valid UMA client, and obtains and sends an RPT as the access token. |
-| Mix mode(semi-optional) | If set to Yes, then the gluu-oauth2 plugin will try to obtain an UMA RPT token if the RS returns 401/Unauthorized. |
-| Allow unprotected path(false) | It is used to allow or deny an unprotected path by UMA-RS. |
-| OAuth scope security(false) | If true, OAuth scope expression will be applied on scope of token in oauth mode. |
-| Restrict API's(false) | The client can only call specified API's if client restriction is enabled. You can choose list of APIs by using `+ SELECT RESTRICTED API` button. |
-| Show Consumer custom Id(true) | If true, then the plugin will set consumer custom id in legacy header otherwise not. |
-| oxd id(optional) | If you have an existing oxd entry, then enter the oxd_id (also client id, client secret and client id of oxd id). If you have a client created from the OP server, skip it and enter only the client_id and client_secret. |
-| client name(optional) | An optional string value for the client name. |
-| client id(optional) | You can use an existing client id. |
-| client secret(optional) | You can use an existing client secret. |
-| client id of oxd id(optional) | You can use an existing client id of oxd id. |
-| client jwks uri(optional) | An optional string value for a client jwks uri. |
-| client token endpoint auth method(optional) | An optional string value for the client token endpoint auth method. |
-| client token endpoint auth signing_alg(optional) | An optional string value for the client token endpoint auth signing alg. |
+| OAuth mode (semi-optional) | If set to Yes, Kong acts as an OAuth client only. |
+| UMA mode (semi-optional) | This indicates your client is a valid UMA client, and obtains and sends an RPT as the access token. |
+| Mix mode (semi-optional) | If set to Yes, then the gluu-oauth2 plugin will try to obtain an UMA RPT token if the RS returns 401/Unauthorized. |
+| Allow unprotected path (false) | It is used to allow or deny an unprotected path by UMA-RS. |
+| OAuth scope security (false) | If true, OAuth scope expression will be applied on scope of token in oauth mode. |
+| Restrict API's (false) | The client can only call specified API's if client restriction is enabled. You can choose list of APIs by using `+ SELECT RESTRICTED API` button. |
+| Show Consumer custom Id (true) | If true, then the plugin will set consumer custom id in legacy header otherwise not. |
+| oxd id (optional) | If you have an existing oxd entry, then enter the oxd_id (also client id, client secret and client id of oxd id). If you have a client created from the OP server, skip it and enter only the client_id and client_secret. |
+| client name (optional) | An optional string value for the client name. |
+| client id (optional) | You can use an existing client id. |
+| client secret (optional) | You can use an existing client secret. |
+| client id of oxd id (optional) | You can use an existing client id of oxd id. |
+| client jwks uri (optional) | An optional string value for a client jwks uri. |
+| client token endpoint auth method (optional) | An optional string value for the client token endpoint auth method. |
+| client token endpoint auth signing_alg (optional) | An optional string value for the client token endpoint auth signing alg. |
 
 The next step is to configure [Gluu OAuth 2.0 UMA RS plugin](#gluu-oauth-20-uma-rs-plugin).
 
@@ -99,14 +99,14 @@ Use the `SECURITY` link in the [API](../admin-gui.md#apis) section.
 !!! Note
     See all the attribute descriptions in the [Admin API](api.md#gluu-oauth-20-uma-rs-plugin) section. 
 
-You can register your two type of resources using this section.
+You can register your two types of resources using this section.
  
  1. [Protection document](#protection-document)
  2. [OAuth Scope Expression](#oauth-scope-expression)
 
 #### Protection document
 
-Protection document(UMA Resources) is a JSON document which describes UMA protection in a declarative way and is based on the [uma-rs](https://github.com/GluuFederation/uma-rs) project. Use `UMA Resources` button to open protection document section. 
+Protection document (UMA Resources) is a JSON document which describes UMA protection in a declarative way and is based on the [uma-rs](https://github.com/GluuFederation/uma-rs) project. Use `UMA Resources` button to open protection document section. 
 
 ![UMA Resources](../img/3_4_add_uma_rs.png)
 
@@ -115,7 +115,7 @@ Protection document(UMA Resources) is a JSON document which describes UMA protec
  - scope - the scope required to access the given path
  - ticketScopes - an optional parameter which may be used to keep the ticket scope as narrow as possible. If not specified, the plugin will register the ticket with its scopes specified by "scope," which may often be unwanted. (For example, the scope may have "http://photoz.example.com/dev/actions/all" and the authorized ticket may grant access also to other resources).
     
-Let's say we have APIs which we would like to protect:
+Let's say you have APIs which you would like to protect:
 
  - GET https://your.api.server.com/photo  (UMA scope: http://photoz.example.com/dev/actions/view)
  - PUT https://your.api.server.com/photo  (UMA scope: http://photoz.example.com/dev/actions/all or http://photoz.example.com/dev/actions/add)
@@ -204,10 +204,10 @@ You can see the below JSON by clicking on the `VIEW RESOURCES JSON` button.
 
 #### OAuth Scope Expression
 
-OAuth Scope Expression is json expression, security for OAuth scopes. It checks the scope(from introspection of token) of the token with the configure OAuth json expression. Use `OAuth Scope Security` button to switch. 
+OAuth Scope Expression is a JSON expression which defines security for OAuth scopes. It checks the scope (from token introspection) of the token with the configured OAuth JSON expression. Use the `OAuth Scope Security` button to switch. 
 
 !!! Note
-    You can enable and disable oauth scope expression by using [OAuth credential's `OAuth scope security`](#create-an-oauth-credential) flag.
+    You can enable and disable OAuth scope expression by using the [OAuth credential's `OAuth scope security`](#create-an-oauth-credential) flag.
 
 ![OAuth_Expression](../img/3_4_add_oauth_scope_expression.png)
 
@@ -215,11 +215,11 @@ OAuth Scope Expression is json expression, security for OAuth scopes. It checks 
  - httpMethods - GET, HEAD, POST, PUT, DELETE
  - scope - the OAuth scope required to access the given path
  
-Let's say we have API which we would like to protect:
+Let's say you have an API which you would like to protect:
 
 ![Add_OAuth_Expression](../img/3_5_oauth_scopes.png)
 
-Use `VIEW RESOURCE JSON` button to see json expression.
+Use the `VIEW RESOURCE JSON` button to see the JSON expression.
 
 ```
 [
@@ -247,17 +247,17 @@ Use `VIEW RESOURCE JSON` button to see json expression.
 ]
 ```
 
-At the runtime it matches the scope expression with token scopes. Inner expression execute first. It take one by one scope from expression and match with requested scope if it is exist then return true otherwise false.
+In the runtime, it matches the scope expression with token scopes. The inner expression is executed first. It takes the scopes from the expression one by one and matches them with the requested scope. If it exists, 'true' is returned. If not, it is 'false'.
 
-1. Let's assume token with `["clientinfo"]` scope only.
+1. Let's assume a token with the `["clientinfo"]` scope only.
     - `"email"` or `"clientinfo"` = `false` or `true` = `true`
     - `"openid"` and `true` = `false` and `true` = `false`
-    - The result is `false` so request is not allowed
+    - The result is `false`, so the request is not allowed
 
-2. Let's assume token with `["openid", "clientinfo"]` scopes.
+2. Let's assume a token with `["openid", "clientinfo"]` scopes.
     - `"email"` or `"clientinfo"` = `false` or `true` = `true`
     - `"openid"` and `true` = `true` and `true` = `true`
-    - The result is `true` so request is allowed
+    - The result is `true`, so the request is allowed
 
 The next step is to access and verify your API using the Kong proxy endpoint.
 
@@ -265,7 +265,7 @@ The next step is to access and verify your API using the Kong proxy endpoint.
 
 After the configuration, you are ready to verify whether your API is protected by plugins or not. You need to pass the token as per configured [authentication mode](#create-an-oauth-credential).
 
-A sample request to the proxy endpoint. You can configure the port for the proxy endpoint using [kong config](../configuration.md#kong).
+A sample request to the proxy endpoint is given below. You can configure the port for the proxy endpoint using [kong config](../configuration.md#kong).
 
 | Protocol | Proxy endpoints |
 |----------|-----------------|
@@ -284,7 +284,7 @@ $ curl -X GET \
 
 ### 401/Unauthorized 
 
-Return 401/Unauthorized when your token is not valid or time expired.
+The call returns 401/Unauthorized when your token is invalid or expired.
 
 ```
 HTTP/1.1 401 Unauthorized
@@ -295,7 +295,7 @@ HTTP/1.1 401 Unauthorized
 
 ### 403/Forbidden
 
-Return 403/Forbidden when you did not specify the required authorized RPT in the "Authorization" header. Also, you will get the `WWW-Authenticate` header with `ticket`.
+The call returns 403/Forbidden when you did not specify the required authorized RPT in the "Authorization" header. Also, you will get the `WWW-Authenticate` header with `ticket`.
 
 ```
 HTTP/1.1 403 Forbidden
@@ -322,7 +322,7 @@ When a client has been authenticated, the plugin will append some headers to the
 3. **X-Consumer-Username**, the username of the Consumer (if set)
 4. **X-Authenticated-Scope**, the comma-separated list of scopes that the end user has authenticated, if available (only if the consumer is not an 'anonymous' consumer)
 5. **X-OAuth-Client-ID**, the authenticated client id, if oauth_mode is enabled (only if the consumer is not an 'anonymous' consumer)
-6. **X-OAuth-Expiration**, the token expiration time, Integer timestamp, measured in the number of seconds since January 1, 1970 UTC, indicating when this token will expire, as defined in JWT RFC7519. It only returns in oauth_mode (only if the consumer is not an 'anonymous' consumer)
+6. **X-OAuth-Expiration**, the token expiration time, Integer timestamp, measured in the number of seconds since January 1, 1970 UTC, indicating when this token will expire, as defined in JWT RFC7519. It is only returned in oauth_mode (only if the consumer is not an 'anonymous' consumer)
 7. **X-Anonymous-Consumer**, will be set to true when authentication fails, and the 'anonymous' consumer is set instead.
 
 You can use this information on your side to implement additional logic. You can use the X-Consumer-ID value to query the Kong Admin API and retrieve more information about the Consumer.
