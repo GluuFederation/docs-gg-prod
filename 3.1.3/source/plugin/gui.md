@@ -1,9 +1,9 @@
 # Admin GUI
 
-You can configure plugins using Admin GUI - Konga. There are two plugins. 
+You can configure the plugins using the Admin GUI - Konga. There are two plugins. 
 
 !!! Note
-    Configure the plugins using [Admin API](./api.md)
+    Configure the plugins using the [Admin API](./api.md)
     
 1. [Gluu OAuth 2.0 client credential authentication](#gluu-oauth-20-client-credential-authentication)
 2. [Gluu OAuth 2.0 UMA RS plugin](#gluu-oauth-20-uma-rs-plugin)
@@ -14,7 +14,7 @@ This plugin enables the use of an external OpenId Provider for OAuth2 client reg
 
 ### Add an API
 
-The first step is to add your API in Kong. Use the [API Section](../admin-gui.md#apis) to add API in Kong.
+The first step is to add an API in Kong. Use the [API Section](../admin-gui.md#apis) to add your API in Kong.
 
 ### Enable gluu-oauth2-client-auth protection
 
@@ -24,7 +24,7 @@ Use the [Manage APIs](../admin-gui.md#manage-apis) section to enable the `gluu-o
 
 | **FORM PARAMETER** | **DESCRIPTION** |
 |---------------|-----------------|
-| oxd id(optional) | Used to introspect the token. By default it fills oxd_id from [Config](../configuration.md#admin-gui-portal-konga). You can also enter any other oxd_id. If you leave it blank, the plugin creates a new client itself. |
+| oxd id (optional) | Used to introspect the token. By default it fills oxd_id from [Config](../configuration.md#admin-gui-portal-konga). You can also enter any other oxd_id. If you leave it blank, the plugin creates a new client itself. |
 | anonymous(optional) | An optional string (consumer uuid) value to use as an `anonymous` consumer if authentication fails. If empty (default), the request will fail with an authentication failure 4xx. Please note that this value must refer to the Consumer id attribute which is internal to Kong, and not its custom_id. |
 | hide credentials(optional) | An optional boolean value telling the plugin to hide the credential to the upstream API server. It will be removed by Kong before proxying the request |
 
@@ -43,9 +43,9 @@ This process registers an OpenId client with oxd which helps you get tokens and 
 
 | Mode | DESCRIPTION |
 |----------------|-------------|
-| oauth_mode | If Yes, then Kong acts as an OAuth client only. |
-| uma_mode | If Yes, then this indicates your client is a valid UMA client, and obtains and sends an RPT as the access token. You need to configure the [gluu-oauth2-rs](https://github.com/GluuFederation/gluu-gateway/tree/master/gluu-oauth2-rs) plugin for uma_mode. |
-| mix_mode | If Yes, then the gluu-oauth2 plugin will try to obtain an UMA RPT token if the RS returns 401/Unauthorized. You need to configure the [gluu-oauth2-rs](https://github.com/GluuFederation/gluu-gateway/tree/master/gluu-oauth2-rs) plugin for uma_mode. |
+| oauth_mode | If set to Yes, then Kong acts as an OAuth client only. |
+| uma_mode | If set to Yes, then this indicates your client is a valid UMA client, and obtains and sends an RPT as the access token. You need to configure the [gluu-oauth2-rs](https://github.com/GluuFederation/gluu-gateway/tree/master/gluu-oauth2-rs) plugin for uma_mode. |
+| mix_mode | If set to Yes, then the gluu-oauth2 plugin will try to obtain an UMA RPT token if the RS returns 401/Unauthorized. You need to configure the [gluu-oauth2-rs](https://github.com/GluuFederation/gluu-gateway/tree/master/gluu-oauth2-rs) plugin for uma_mode. |
 
 Use the [Consumer credential configuration](../admin-gui.md#consumer-credential-configuration) section to create an OAuth credential. In the `Credential` section, there is an `OAuth2` section. Click on the `+ Create credential` button.
 
@@ -58,9 +58,9 @@ Below you can see the add OAuth credential form
 | FORM PARAMETER | DESCRIPTION |
 |----------------|-------------|
 | name | The name to associate with the credential. In OAuth 2.0, this would be the application name. |
-| OAuth mode(semi-optional) | If Yes, Kong acts as an OAuth client only. |
+| OAuth mode(semi-optional) | If set to Yes, Kong acts as an OAuth client only. |
 | UMA mode(semi-optional) | This indicates your client is a valid UMA client, and obtains and sends an RPT as the access token. |
-| Mix mode(semi-optional) | If Yes, then the gluu-oauth2 plugin will try to obtain an UMA RPT token if the RS returns 401/Unauthorized. |
+| Mix mode(semi-optional) | If set to Yes, then the gluu-oauth2 plugin will try to obtain an UMA RPT token if the RS returns 401/Unauthorized. |
 | Allow unprotected path(false) | It is used to allow or deny an unprotected path by UMA-RS. |
 | OAuth scope security(false) | If true, OAuth scope expression will be applied on scope of token in oauth mode. |
 | Restrict API's(false) | The client can only call specified API's if client restriction is enabled. You can choose list of APIs by using `+ SELECT RESTRICTED API` button. |
@@ -315,7 +315,7 @@ If your token is valid, you will get a success response from your upstream API.
 
 ## Upstream Headers
 
-When a client has been authenticated, the plugin will append some headers to the request before proxying it to the upstream service, so that you can identify the consumer and the end-user in your code:
+When a client has been authenticated, the plugin will append some headers to the request before proxying it to the upstream service, so that you can identify the consumer and the end user in your code:
 
 1. **X-Consumer-ID**, the ID of the Consumer on Kong
 2. **X-Consumer-Custom-ID**, the custom_id of the Consumer (if set)
