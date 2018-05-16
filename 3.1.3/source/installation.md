@@ -1,5 +1,8 @@
 # Installation
 
+!!! Note 
+    Currently, Gluu Gateway can only run in Ubuntu 14.04 (Trusty Tahr).
+    
 The installation is a three-part process:
 
 1. [Add the required third party repositories](#required-third-party-repositories)
