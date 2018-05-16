@@ -15,13 +15,13 @@ The Info section shows generic details about the Kong node.
 The API object describes an API that's being exposed by Kong. Kong needs to know how to retrieve the API when a consumer is calling it from the Proxy port. Each API object must specify some combination of `hosts`, `uris`, and `methods`. Kong will proxy all requests to the API to the specified upstream URL. 
 
 !!! Note
-    `SECURITY` option is for [gluu-oauth2-rs plugin](./plugin/gui.md) configuration.
+   The `SECURITY` option is for the [gluu-oauth2-rs plugin](./plugin/gui.md) configuration.
     
 ![apis](img/3_apis.png)
 
 ### Add an API
 
-Add your API by using `+ ADD NEW API` button in the [API section](#3-apis).
+Add your API by using the `+ ADD NEW API` button in the [API section](#3-apis).
 
 ![api_add](img/3_api_add.png)
 
@@ -45,7 +45,7 @@ Attributes of an API object are listed below.
 
 ### Manage APIS
 
-You can edit an API and manage its plugins by clicking on the pencil icon in the API list. There are two sections.
+You can edit an API and manage its plugins by clicking on the pencil icon on the API list. There are two sections.
 
 **API Details:** This section is used to view and edit your API.
 
@@ -67,7 +67,7 @@ The Consumer object represents a consumer - or a user - of an API. You can eithe
 
 ![consumers](img/4_consumers.png)
 
-Add consumers by using the `+ CREATE CONSUMER` button. The add form shows details of every field.
+Add consumers by using the `+ CREATE CONSUMER` button. The creation form shows details of every field.
 
 ![consumers_add](img/4_customer_add.png)
 
@@ -83,7 +83,7 @@ A Plugin entity represents a plugin configuration that will be executed during t
 
 ![plugins](img/5_plugins.png)
 
-Add Plugins by using `+ ADD GLOBAL PLUGINS` button.
+Add Plugins by using the `+ ADD GLOBAL PLUGINS` button.
 
 ![plugins_add](img/5_plugins_add.png)
 
