@@ -217,7 +217,7 @@ It allows you to protect your API (which is proxied by Kong) with [UMA](https://
  - uma_server_host - REQUIRED, an UMA Server which implements UMA 2.0 specification.
                      (For example [Gluu Server](https://www.gluu.org/gluu-server/overview/)). 
                      Make sure that the UMA implementation is up and running by visiting the `.well-known/uma2-configuration` endpoint.
- - oauth_scope_expression - OAuth Scope Expression is a JSON expression, security for OAuth scopes. It checks the scope (from token introspection) of the token with the configured OAuth JSON expression. 
+ - oauth_scope_expression - OAuth Scope Expression is a JSON expression which defines security for OAuth scopes. It checks the scope (from token introspection) of the token with the configured OAuth JSON expression. 
                
 #### Protection document   
 
@@ -228,7 +228,7 @@ Protection document - a JSON document which describes UMA protection in a declar
  - scope - the scope required to access the given path
  - ticketScopes - an optional parameter which may be used to keep the ticket scope as narrow as possible. If not specified, the plugin will register the ticket with its scopes specified by "scope," which may often  be unwanted. (For example, the scope may have "http://photoz.example.com/dev/actions/all" and the authorized ticket may grant access also to other resources).
     
-Let's say we have APIs which we would like to protect:
+Let's say you have APIs which you would like to protect:
 
  - GET https://your.api.server.com/photo  (UMA scope: http://photoz.example.com/dev/actions/view)
  - PUT https://your.api.server.com/photo  (UMA scope: http://photoz.example.com/dev/actions/all or http://photoz.example.com/dev/actions/add)
@@ -361,7 +361,7 @@ OAuth Scope Expression is a JSON expression, security for OAuth scopes. It check
  - httpMethods - GET, HEAD, POST, PUT, DELETE
  - scope - the OAuth scope required to access the given path
  
-Let's say we have an API which we would like to protect:
+Let's say you have an API which you would like to protect:
 
 ```
 [
