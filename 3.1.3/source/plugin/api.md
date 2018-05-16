@@ -71,11 +71,11 @@ curl -X POST http://kong:8001/apis/{api}/plugins \
 | FORM PARAMETER | DEFAULT | DESCRIPTION |
 |----------------|---------|-------------|
 | name | | The name of the plugin to use, in this case: gluu-oauth2-client-auth. |
-| config.hide_credentials(optional) | false | An optional boolean value telling the plugin to hide the credential to the upstream API server. It will be removed by Kong before proxying the request. |
+| config.hide_credentials (optional) | false | An optional boolean value telling the plugin to hide the credential to the upstream API server. It will be removed by Kong before proxying the request. |
 | config.op_server | | OP server |
 | config.oxd_http_url | | OXD HTTP extension URL |
-| config.oxd_id(optional) | | Used to introspect the token. You can use any other oxd_id. If you do not pass it, the plugin creates a new client itself. |
-| config.anonymous(optional) | | An optional string (Consumer uuid) value to use as an "anonymous" Consumer in case  authentication fails. If empty (default), the request will fail with an authentication failure 4xx. Please note that this value must refer to the Consumer id attribute which is internal to Kong, and not its custom_id. |
+| config.oxd_id (optional) | | Used to introspect the token. You can use any other oxd_id. If you do not pass it, the plugin creates a new client itself. |
+| config.anonymous (optional) | | An optional string (Consumer uuid) value to use as an "anonymous" Consumer in case  authentication fails. If empty (default), the request will fail with an authentication failure 4xx. Please note that this value must refer to the Consumer id attribute which is internal to Kong, and not its custom_id. |
 
 ### Usage
 
@@ -101,18 +101,18 @@ HTTP/1.1 201 Created
 
 | PARAMETER | DEFAULT | DESCRIPTION |
 |----------------|---------|-------------|
-| username(semi-optional) | | The username of the Consumer. Either this field or ``custom_id` must be specified. |
-| custom_id(semi-optional) | | A custom identifier used to map the Consumer to another database. Either this field or `username` must be specified. |
+| username (semi-optional) | | The username of the Consumer. Either this field or `custom_id` must be specified. |
+| custom_id (semi-optional) | | A custom identifier used to map the Consumer to another database. Either this field or `username` must be specified. |
 
 #### Create an OAuth credential
 
-This process registers an OpenId client with oxd which help you get tokens and authenticate the token. The plugin behaves as per selected mode. There are three modes.
+This process registers an OpenId client with oxd which helps you get tokens and authenticate the token. The plugin behaves as per selected mode. There are three modes.
 
 | Mode | DESCRIPTION |
 |----------------|-------------|
-| oauth_mode | If Yes, the client must present an `ACTIVE` OAuth token to call an API. |
-| uma_mode | If Yes, the client must present an ACTIVE UMA RPT token to call an  API. You must need to configure [gluu-oauth2-rs](https://github.com/GluuFederation/gluu-gateway/tree/master/gluu-oauth2-rs) plugin for uma_mode. |
-| mix_mode | If Yes, the client must present an ACTIVE OAuth token to call an API. Kong will obtain an UMA permission ticket, and attempt to obtain an RPT on behalf of the client. The client can send pushed claims using the `UMA_PUSHED_CLAIMS` header with JSON in the following format: `{"claim_token":"...","claim_token_format":"..."}`. You need to configure the [gluu-oauth2-rs](https://github.com/GluuFederation/gluu-gateway/tree/master/gluu-oauth2-rs) plugin for mix_mode. |
+| oauth_mode | If set to Yes, the client must present an `ACTIVE` OAuth token to call an API. |
+| uma_mode | If set to Yes, the client must present an `ACTIVE` UMA RPT token to call an  API. You must need to configure [gluu-oauth2-rs](https://github.com/GluuFederation/gluu-gateway/tree/master/gluu-oauth2-rs) plugin for uma_mode. |
+| mix_mode | If set to Yes, the client must present an `ACTIVE` OAuth token to call an API. Kong will obtain an UMA permission ticket, and attempt to obtain an RPT on behalf of the client. The client can send pushed claims using the `UMA_PUSHED_CLAIMS` header with JSON in the following format: `{"claim_token":"...","claim_token_format":"..."}`. You need to configure the [gluu-oauth2-rs](https://github.com/GluuFederation/gluu-gateway/tree/master/gluu-oauth2-rs) plugin for mix_mode. |
 
 You can provision new credentials by making the following HTTP request:
 
@@ -161,24 +161,24 @@ RESPONSE :
 |----------------|---------|-------------|
 | name | | The name to associate with the credential. In OAuth 2.0, this would be the application name. |
 | op_host | | An OpenId connect provider. Example: https://gluu.example.org |
-| oxd_http_url | | An OXD https extention url. |
-| oauth_mode(semi-optional) | | If Yes, Kong acts as an OAuth client only. |
-| uma_mode(semi-optional) | | This indicates your client is a valid UMA client, and obtains and sends an RPT as the access token. |
-| mix_mode(semi-optional) | | If Yes, then the gluu-oauth2 plugin will try to obtain an UMA RPT token if the RS returns  401/Unauthorized. |
-| allow_unprotected_path(optional) | false | It is used to allow or deny an unprotected path by UMA-RS. |
-| allow_oauth_scope_expression(optional) | false | If Allow, OAuth scope expression will be applied on scope of token in oauth mode. |
-| restrict_api(optional) | false | The client can only call specified API's if client restriction is enabled. |
-| restrict_api_list(optional) | | String comma separated api_ids. We must have to enable `restrict_api` to use this feature. |
-| show_consumer_custom_id(optional) | true | If true, then the plugin will set consumer custom id in legacy header otherwise not. |
-| oxd_id(optional) | | If you have an existing oxd entry, then enter the oxd_id (also client id, client secret and client id of oxd id). If you have a client created from the OP server, skip it and enter only the client_id and client_secret. |
-| client_name(optional) | kong_oauth2_bc_client | An optional string value for the client name. |
-| client_id(optional) | | You can use an existing client id. |
-| client_secret(optional) | | You can use an existing client secret. |
-| client_id_of_oxd_id(optional) | | You can use an existing client id of oxd id. |
-| allow_unprotected_path(false) | | It is used to allow or deny an unprotected path by UMA-RS. |
-| client_jwks_uri(optional) | | An optional string value for a client jwks uri. |
-| client_token_endpoint_auth_method(optional) | | An optional string value for the client token endpoint auth method. |
-| client_token_endpoint_auth_signing_alg(optional) | | An optional string value for the client token endpoint auth signing alg. |
+| oxd_http_url | | An OXD https extension url. |
+| oauth_mode (semi-optional) | | If set to Yes, Kong acts as an OAuth client only. |
+| uma_mode (semi-optional) | | This indicates your client is a valid UMA client, and obtains and sends an RPT as the access token. |
+| mix_mode (semi-optional) | | If set to Yes, then the gluu-oauth2 plugin will try to obtain an UMA RPT token if the RS returns  401/Unauthorized. |
+| allow_unprotected_path (optional) | false | It is used to allow or deny an unprotected path by UMA-RS. |
+| allow_oauth_scope_expression (optional) | false | If set to Allow, an OAuth scope expression will be applied on the scope of the token in the oauth mode. |
+| restrict_api (optional) | false | The client can only call specified APIs if client restriction is enabled. |
+| restrict_api_list (optional) | | String comma separated api_ids. You have to enable `restrict_api` to use this feature. |
+| show_consumer_custom_id (optional) | true | If true, then the plugin will set consumer custom id in legacy header otherwise not. |
+| oxd_id (optional) | | If you have an existing oxd entry, then enter the oxd_id (also client id, client secret and client id of oxd id). If you have a client created from the OP server, skip it and enter only the client_id and client_secret. |
+| client_name (optional) | kong_oauth2_bc_client | An optional string value for the client name. |
+| client_id (optional) | | You can use an existing client id. |
+| client_secret (optional) | | You can use an existing client secret. |
+| client_id_of_oxd_id (optional) | | You can use an existing client id of oxd id. |
+| allow_unprotected_path (false) | | It is used to allow or deny an unprotected path by UMA-RS. |
+| client_jwks_uri (optional) | | An optional string value for a client jwks uri. |
+| client_token_endpoint_auth_method (optional) | | An optional string value for the client token endpoint auth method. |
+| client_token_endpoint_auth_signing_alg (optional) | | An optional string value for the client token endpoint auth signing alg. |
 
 The next step is to configure the [Gluu OAuth 2.0 UMA RS plugin](#gluu-oauth-20-uma-rs-plugin).
 
@@ -352,7 +352,7 @@ You can also pass the scope-expression format.
 
 #### OAuth Scope Expression
 
-OAuth Scope Expression is a json expression, security for OAuth scopes. It checks the scope (from token introspection) of the token with the configured OAuth json expression. 
+OAuth Scope Expression is a json expression, security for OAuth scopes. It checks the scope (from token introspection) of the token with the configured OAuth JSON expression. 
 
 !!! Note
     You can enable and disable the oauth scope expression by using [OAuth credential's `OAuth scope security`](#create-an-oauth-credential) flag.
