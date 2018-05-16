@@ -15,7 +15,7 @@ The Info section shows generic details about the Kong node.
 The API object describes an API that's being exposed by Kong. Kong needs to know how to retrieve the API when a consumer is calling it from the Proxy port. Each API object must specify some combination of `hosts`, `uris`, and `methods`. Kong will proxy all requests to the API to the specified upstream URL. 
 
 !!! Note
-   The `SECURITY` option is for the [gluu-oauth2-rs plugin](./plugin/gui.md) configuration.
+    The `SECURITY` option is for the [gluu-oauth2-rs plugin](./plugin/gui.md) configuration.
     
 ![apis](img/3_apis.png)
 

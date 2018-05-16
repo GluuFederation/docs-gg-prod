@@ -23,4 +23,5 @@ pages:
 - Plugins:
     - 'GUI' : 'plugin/gui.md'
     - 'API' :  'plugin/api.md'
+- Logs : 'logs/index.md'
 - 'FAQ' : 'faq.md'

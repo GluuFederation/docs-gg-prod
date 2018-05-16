@@ -23,16 +23,17 @@ This plugin enables the use of an external OpenId Provider for OAuth2 client reg
 2. [Install oxd server v3.1.3](https://oxd.gluu.org/docs/)
 3. Install gluu-oauth2-client-auth:
     1. Stop Kong : `kong stop`
-    2. Copy the `gluu-oauth2-client-auth/kong/plugins/gluu-oauth2-client-auth` Lua sources to the Kong plugins folder -- `/usr/local/share/lua/<version>/kong/plugins/gluu-oauth2-client-auth`
-
-         or
-
-       `luarocks install gluu-oauth2-client-auth`
+    2. Using luarocks `luarocks install gluu-oauth2-client-auth`
+       
+        **or**
+       
+        Copy the `gluu-oauth2-client-auth/kong/plugins/gluu-oauth2-client-auth` Lua sources to the Kong plugins folder -- `/usr/local/share/lua/<version>/kong/plugins/gluu-oauth2-client-auth`
+        
     3. Enable the plugin in your `kong.conf` (typically located at `/etc/kong/kong.conf`) and start Kong with `kong start`.
-
-    ```
-        custom_plugins = gluu-oauth2-client-auth
-    ```
+    
+        ```
+            custom_plugins = gluu-oauth2-client-auth
+        ```
 
 ### Configuration
 #### Add an API
@@ -200,7 +201,7 @@ It allows you to protect your API (which is proxied by Kong) with [UMA](https://
     2. 
         Using luarocks `luarocks install gluu-oauth2-rs`
         
-        or
+        **or**
         
         Copy the `gluu-oauth2-rs/kong/plugins/gluu-oauth2-rs` Lua sources to the Kong plugins folder `kong/plugins/gluu-oauth2-rs`        
             

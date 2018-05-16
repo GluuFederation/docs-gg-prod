@@ -87,3 +87,6 @@ If you see the above message, it means the installation was successful. To log i
 to the Gluu Gateway admin portal, create an ssh tunnel on port 1338 from your
 workstation to the Gluu Gateway server, and point your browser at
 `https://localhost:1338`.
+
+!!! Note
+    See [FAQ](./faq.md#how-can-i-change-the-listening-address-and-port) for global access configuration.
