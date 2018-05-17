@@ -1,7 +1,7 @@
 # Installation
 
 !!! Note 
-    Currently, Gluu Gateway can only run in Ubuntu 14.04 (Trusty Tahr).
+    Currently, Gluu Gateway can only run in the Ubuntu 14.04 (Trusty Tahr) operating system. Look for support for other distributions in the near future.
     
 The installation is a three-part process:
 
@@ -50,7 +50,7 @@ The installation is a three-part process:
 ```
 
 You will be prompted to answer some questions. Just hit Enter to accept the
-default value which is specified in square brackets.
+default value, which is specified in square brackets.
 
 !!! Warning 
     When you are prompted to provide a two-letter value, make sure you follow the instructions. A mistake may result in the lack of certificates.
@@ -83,8 +83,8 @@ default value which is specified in square brackets.
  Gluu Gateway configuration successful!!! https://localhost:1338
 ```
 
-If you see the above message, it means the installation was successful. To log in
-to the Gluu Gateway admin portal, create an ssh tunnel on port 1338 from your
+If you see the above message, it means the installation was successful. To log into
+the Gluu Gateway admin portal, create an SSH tunnel on port 1338 from your
 workstation to the Gluu Gateway server, and point your browser at
 `https://localhost:1338`.
 
