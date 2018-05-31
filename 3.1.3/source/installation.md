@@ -78,6 +78,40 @@ The installation is a three-part process:
 # curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
 ```
 
+### For CentOS 6
+* Add the Gluu repo:
+```
+# wget https://repo.gluu.org/centos/Gluu-centos-testing.repo -O /etc/yum.repos.d/Gluu.repo
+# wget https://repo.gluu.org/centos/RPM-GPG-KEY-GLUU -O /etc/pki/rpm-gpg/RPM-GPG-KEY-GLUU
+# rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-GLUU
+```
+* Add the Postgresql-9.6 repo:
+```
+# rpm -Uvh http://yum.postgresql.org/9.6/redhat/rhel-6-x86_64/pgdg-redhat96-9.6-3.noarch.rpm
+```
+* Add the Node repo:
+```
+yum install -y gcc-c++ make
+curl -sL https://rpm.nodesource.com/setup_8.x | sudo -E bash -
+``
+
+### For CentOS 7
+* Add the Gluu repo:
+```
+# wget https://repo.gluu.org/centos/Gluu-centos-testing.repo -O /etc/yum.repos.d/Gluu.repo
+# wget https://repo.gluu.org/centos/RPM-GPG-KEY-GLUU -O /etc/pki/rpm-gpg/RPM-GPG-KEY-GLUU
+# rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-GLUU
+```
+* Add the Postgresql-9.6 repo:
+```
+# rpm -Uvh http://yum.postgresql.org/9.6/redhat/rhel-6-x86_64/pgdg-redhat96-9.6-3.noarch.rpm
+```
+* Add the Node repo:
+```
+yum install -y gcc-c++ make
+curl -sL https://rpm.nodesource.com/setup_8.x | sudo -E bash -
+``
+
 ## Install the gluu-gateway package
 
 ### For Ubuntu 14, Ubuntu 16, Debian 8, Debian 9
