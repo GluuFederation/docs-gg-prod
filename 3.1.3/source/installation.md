@@ -93,7 +93,7 @@ The installation is a three-part process:
 ```
 yum install -y gcc-c++ make
 curl -sL https://rpm.nodesource.com/setup_8.x | sudo -E bash -
-``
+```
 
 ### For CentOS 7
 * Add the Gluu repo:
@@ -110,7 +110,7 @@ curl -sL https://rpm.nodesource.com/setup_8.x | sudo -E bash -
 ```
 yum install -y gcc-c++ make
 curl -sL https://rpm.nodesource.com/setup_8.x | sudo -E bash -
-``
+```
 
 ## Install the gluu-gateway package
 
