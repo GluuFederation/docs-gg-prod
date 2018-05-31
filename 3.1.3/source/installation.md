@@ -9,12 +9,12 @@ The installation is a three-part process:
 2. [Install the `gluu-gateway` package](#install-the-gluu-gateway-package)
 3. [Run `setup-gluu-gateway.py`](#run-the-setup-script)
 
-### Required Third Party repositories
+## Required Third Party repositories
 
 !!! Note 
     Always run the following commands as root.
 
-## For Ubuntu 14
+### For Ubuntu 14
 * Add the Gluu repo:
 ```
 # echo "deb https://repo.gluu.org/ubuntu/ trusty-devel main" > /etc/apt/sources.list.d/gluu-repo.list
@@ -30,7 +30,7 @@ The installation is a three-part process:
 # curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
 ```
 
-## For Ubuntu 16
+### For Ubuntu 16
 * Add the Gluu repo:
 ```
 # echo "deb https://repo.gluu.org/ubuntu/ xenial-devel main" > /etc/apt/sources.list.d/gluu-repo.list
@@ -46,7 +46,7 @@ The installation is a three-part process:
 # curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
 ```
 
-## For Debian 8
+### For Debian 8
 * Add the Gluu repo:
 ```
 # echo "deb https://repo.gluu.org/debian/ testing main" > /etc/apt/sources.list.d/gluu-repo.list
@@ -62,7 +62,7 @@ The installation is a three-part process:
 # curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
 ```
 
-## For Debian 9
+### For Debian 9
 * Add the Gluu repo:
 ```
 # echo "deb https://repo.gluu.org/debian/ stretch-testing main" > /etc/apt/sources.list.d/gluu-repo.list
@@ -78,21 +78,21 @@ The installation is a three-part process:
 # curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
 ```
 
-### Install the gluu-gateway package
+## Install the gluu-gateway package
 
-## For Ubuntu 14, Ubuntu 16, Debian 8, Debian 9
+### For Ubuntu 14, Ubuntu 16, Debian 8, Debian 9
 ```
  # apt update
  # apt install gluu-gateway
 ```
 
-## For CentOS 6, Centos 7, RHEL 6, RHEL 7
+### For CentOS 6, Centos 7, RHEL 6, RHEL 7
 ```
  # yum clean all
  # yum install gluu-gateway
 ```
 
-### Run the setup script
+## Run the setup script
 
 ```
  # cd /opt/gluu-gateway/setup
@@ -127,7 +127,7 @@ default value, which is specified in square brackets.
 | **client_id** | Used to manually set client id. |
 | **client_secret** | Used to manually set client secret. |
 
-### Finish the setup
+## Finish the setup
 
 ```
  Gluu Gateway configuration successful!!! https://localhost:1338
