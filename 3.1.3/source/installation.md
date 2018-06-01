@@ -85,13 +85,12 @@ The installation is a three-part process:
 # wget https://repo.gluu.org/centos/RPM-GPG-KEY-GLUU -O /etc/pki/rpm-gpg/RPM-GPG-KEY-GLUU
 # rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-GLUU
 ```
-* Add the Postgresql-9.6 repo:
+* Add the Postgresql-10 repo:
 ```
-# rpm -Uvh http://yum.postgresql.org/9.6/redhat/rhel-6-x86_64/pgdg-redhat96-9.6-3.noarch.rpm
+# rpm -Uvh https://yum.postgresql.org/10/redhat/rhel-6-x86_64/pgdg-redhat10-10-2.noarch.rpm
 ```
 * Add the Node repo:
 ```
-yum install -y gcc-c++ make
 curl -sL https://rpm.nodesource.com/setup_8.x | sudo -E bash -
 ```
 
@@ -102,13 +101,12 @@ curl -sL https://rpm.nodesource.com/setup_8.x | sudo -E bash -
 # wget https://repo.gluu.org/centos/RPM-GPG-KEY-GLUU -O /etc/pki/rpm-gpg/RPM-GPG-KEY-GLUU
 # rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-GLUU
 ```
-* Add the Postgresql-9.6 repo:
+* Add the Postgresql-10 repo:
 ```
-# rpm -Uvh http://yum.postgresql.org/9.6/redhat/rhel-6-x86_64/pgdg-redhat96-9.6-3.noarch.rpm
+# rpm -Uvh https://yum.postgresql.org/10/redhat/rhel-7-x86_64/pgdg-centos10-10-2.noarch.rpm
 ```
 * Add the Node repo:
 ```
-yum install -y gcc-c++ make
 curl -sL https://rpm.nodesource.com/setup_8.x | sudo -E bash -
 ```
 
