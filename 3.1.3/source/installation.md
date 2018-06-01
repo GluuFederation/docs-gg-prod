@@ -97,7 +97,7 @@ curl -sL https://rpm.nodesource.com/setup_8.x | sudo -E bash -
 ### For CentOS 7
 * Add the Gluu repo:
 ```
-# wget https://repo.gluu.org/centos/Gluu-centos-testing.repo -O /etc/yum.repos.d/Gluu.repo
+# wget https://repo.gluu.org/centos/Gluu-centos-7-testing.repo -O /etc/yum.repos.d/Gluu.repo
 # wget https://repo.gluu.org/centos/RPM-GPG-KEY-GLUU -O /etc/pki/rpm-gpg/RPM-GPG-KEY-GLUU
 # rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-GLUU
 ```
