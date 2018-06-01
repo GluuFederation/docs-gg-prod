@@ -1,8 +1,8 @@
 # Configuration
 
-### Gluu Gateway
+## Gluu Gateway
 
-The Gluu Gateway service is used to manage all gluu-gateway components: the Admin GUI Portal - Konga, Kong, Postgres, OXD-Server and OXD-https-extension.
+The Gluu Gateway service is used to manage all components, including: the Admin GUI Portal "Konga", Kong, Postgres, OXD-Server and OXD-https-extension.
 
 * the Gluu Gateway service
 
@@ -10,7 +10,7 @@ The Gluu Gateway service is used to manage all gluu-gateway components: the Admi
      # service gluu-gateway [start|stop|restart|status]
     ```
 
-### Admin GUI Portal - Konga
+## Admin GUI Portal - Konga
 
 * Configure Konga by setting properties in the local.js file. This is used to set the port, oxd, OP and client settings.
 
@@ -24,7 +24,7 @@ The Gluu Gateway service is used to manage all gluu-gateway components: the Admi
      # service konga [start|stop|restart|status]
     ```
 
-### Kong
+## Kong
 
 * Configure Kong by using the kong.conf file.
 
@@ -44,7 +44,9 @@ The Gluu Gateway service is used to manage all gluu-gateway components: the Admi
      # kong [restart|stop|restart|status]
     ```
 
-### OXD
+## OXD
+
+Refer to the [oxd docs](https://gluu.org/docs/oxd/3.1.3) for more information on the topics below. 
 
 * Configure the OXD-Server
 
@@ -70,7 +72,7 @@ The Gluu Gateway service is used to manage all gluu-gateway components: the Admi
      # service oxd-https-extension [start|stop|restart|status]
     ```
 
-### Restore Kong to factory default
+## Restore Kong to factory default
 
 Execute the following sequence of commands:
 
