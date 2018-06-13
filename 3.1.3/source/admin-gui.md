@@ -123,3 +123,9 @@ Take snapshots of currently active nodes.
 All APIs, Plugins, Consumers, Upstreams and Targets will be saved and available for later import.
 
 ![snapshot](img/9_snapshot.png)
+
+## Settings
+
+You can set dashboard refresh interval and logout session timeout in settings section.
+
+![settings](img/10_settings.png)
