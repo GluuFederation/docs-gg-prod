@@ -107,6 +107,38 @@ curl -sL https://rpm.nodesource.com/setup_8.x | sudo -E bash -
 curl -sL https://rpm.nodesource.com/setup_8.x | sudo -E bash -
 ```
 
+### For RHEL 6
+* Add the Gluu repo:
+```
+# wget https://repo.gluu.org/rhel/Gluu-rhel-testing.repo -O /etc/yum.repos.d/Gluu.repo
+# wget https://repo.gluu.org/rhel/RPM-GPG-KEY-GLUU -O /etc/pki/rpm-gpg/RPM-GPG-KEY-GLUU
+# rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-GLUU
+```
+* Add the Postgresql-10 repo:
+```
+# rpm -Uvh https://yum.postgresql.org/10/redhat/rhel-6-x86_64/pgdg-redhat10-10-2.noarch.rpm
+```
+* Add the Node repo:
+```
+curl -sL https://rpm.nodesource.com/setup_8.x | sudo -E bash -
+```
+
+### For RHEL 7
+* Add the Gluu repo:
+```
+# wget https://repo.gluu.org/rhel/Gluu-rhel-7-testing.repo -O /etc/yum.repos.d/Gluu.repo
+# wget https://repo.gluu.org/rhel/RPM-GPG-KEY-GLUU -O /etc/pki/rpm-gpg/RPM-GPG-KEY-GLUU
+# rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-GLUU
+```
+* Add the Postgresql-10 repo:
+```
+# rpm -Uvh https://yum.postgresql.org/10/redhat/rhel-7-x86_64/pgdg-centos10-10-2.noarch.rpm
+```
+* Add the Node repo:
+```
+curl -sL https://rpm.nodesource.com/setup_8.x | sudo -E bash -
+```
+
 ## Install the gluu-gateway package
 
 ### For Ubuntu 14, Ubuntu 16, Debian 8, Debian 9
