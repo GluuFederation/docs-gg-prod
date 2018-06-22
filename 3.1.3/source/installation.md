@@ -11,7 +11,7 @@ The installation is a three-part process:
 !!! Note 
     Always run the following commands as root.
 
-### For Ubuntu 14
+### Ubuntu 14
 * Add the Gluu repo:
 ```
 # echo "deb https://repo.gluu.org/ubuntu/ trusty-devel main" > /etc/apt/sources.list.d/gluu-repo.list
@@ -27,7 +27,9 @@ The installation is a three-part process:
 # curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
 ```
 
-### For Ubuntu 16
+<!--- 
+
+### Ubuntu 16
 * Add the Gluu repo:
 ```
 # echo "deb https://repo.gluu.org/ubuntu/ xenial-devel main" > /etc/apt/sources.list.d/gluu-repo.list
@@ -43,7 +45,7 @@ The installation is a three-part process:
 # curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
 ```
 
-### For Debian 8
+### Debian 8
 * Add the Gluu repo:
 ```
 # echo "deb https://repo.gluu.org/debian/ testing main" > /etc/apt/sources.list.d/gluu-repo.list
@@ -59,7 +61,7 @@ The installation is a three-part process:
 # curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
 ```
 
-### For Debian 9
+### Debian 9
 * Add the Gluu repo:
 ```
 # echo "deb https://repo.gluu.org/debian/ stretch-testing main" > /etc/apt/sources.list.d/gluu-repo.list
@@ -75,7 +77,7 @@ The installation is a three-part process:
 # curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
 ```
 
-### For CentOS 6
+### CentOS 6
 * Add the Gluu repo:
 ```
 # wget https://repo.gluu.org/centos/Gluu-centos-testing.repo -O /etc/yum.repos.d/Gluu.repo
@@ -91,7 +93,7 @@ The installation is a three-part process:
 curl -sL https://rpm.nodesource.com/setup_8.x | sudo -E bash -
 ```
 
-### For CentOS 7
+### CentOS 7
 * Add the Gluu repo:
 ```
 # wget https://repo.gluu.org/centos/Gluu-centos-7-testing.repo -O /etc/yum.repos.d/Gluu.repo
@@ -107,7 +109,7 @@ curl -sL https://rpm.nodesource.com/setup_8.x | sudo -E bash -
 curl -sL https://rpm.nodesource.com/setup_8.x | sudo -E bash -
 ```
 
-### For RHEL 6
+### RHEL 6
 * Add the Gluu repo:
 ```
 # wget https://repo.gluu.org/rhel/Gluu-rhel-testing.repo -O /etc/yum.repos.d/Gluu.repo
@@ -123,7 +125,7 @@ curl -sL https://rpm.nodesource.com/setup_8.x | sudo -E bash -
 curl -sL https://rpm.nodesource.com/setup_8.x | sudo -E bash -
 ```
 
-### For RHEL 7
+### RHEL 7
 * Add the Gluu repo:
 ```
 # wget https://repo.gluu.org/rhel/Gluu-rhel-7-testing.repo -O /etc/yum.repos.d/Gluu.repo
@@ -139,19 +141,30 @@ curl -sL https://rpm.nodesource.com/setup_8.x | sudo -E bash -
 curl -sL https://rpm.nodesource.com/setup_8.x | sudo -E bash -
 ```
 
+--->
+
 ## Install the gluu-gateway package
 
-### For Ubuntu 14, Ubuntu 16, Debian 8, Debian 9
+### Ubuntu 14
+
 ```
  # apt update
  # apt install gluu-gateway
 ```
 
-### For CentOS 6, Centos 7, RHEL 6, RHEL 7
+<!----
+### Ubuntu 14, Ubuntu 16, Debian 8, Debian 9
+```
+ # apt update
+ # apt install gluu-gateway
+```
+
+### CentOS 6, Centos 7, RHEL 6, RHEL 7
 ```
  # yum clean all
  # yum install gluu-gateway
 ```
+--->
 
 ## Run the setup script
 
