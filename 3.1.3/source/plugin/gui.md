@@ -261,6 +261,9 @@ In the runtime, it matches the scope expression with token scopes. The inner exp
 
 The next step is to access and verify your API using the Kong proxy endpoint.
 
+!!! Note
+    If you have access to the used oxTrust admin UI, you can manage your users and their authentication following [this documentation](https://gluu.org/docs/ce/admin-guide/oxtrust-ui/).
+
 ## Verify you API
 
 After the configuration, you are ready to verify whether your API is protected by plugins or not. You need to pass the token as per configured [authentication mode](#create-an-oauth-credential).
