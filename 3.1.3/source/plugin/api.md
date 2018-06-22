@@ -442,7 +442,7 @@ $ curl -i -X GET \
 
 #### Enable gluu-oauth2-rs protection
 
-Important : each protection_document double quotes must be escaped by the '\\' sign. This limitation comes from the Kong configuration parameter type limitation which is limited to: "id", "number", "boolean", "string", "table", "array", "url", "timestamp".
+Important : each protection_document and oauth_scope_expression double quotes must be escaped by the '\\' sign. This limitation comes from the Kong configuration parameter type limitation which is limited to: "id", "number", "boolean", "string", "table", "array", "url", "timestamp".
    
 During gluu-oauth2-rs addition to /plugins, keep in mind that oxd must be up and running; otherwise, the registration will fail. It's because during a POST call to Kong's /plugin endpoint, the plugin performs self-registration on the oxd server at oxd_host provided in the configuration. For this reason, if the plugin is added and you remove oxd (or install a new version of oxd) without configuration persistence, then gluu-oauth2-rs must be re-registered (to force registration with the newly installed oxd).
     
