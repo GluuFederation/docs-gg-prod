@@ -14,7 +14,7 @@ The installation is a three-part process:
 ### Ubuntu 14
 * Add the Gluu repo:
 ```
-# echo "deb https://repo.gluu.org/ubuntu/ trusty-devel main" > /etc/apt/sources.list.d/gluu-repo.list
+# echo "deb https://repo.gluu.org/ubuntu/ trusty main" > /etc/apt/sources.list.d/gluu-repo.list
 # curl https://repo.gluu.org/ubuntu/gluu-apt.key | apt-key add -
 ```
 * Add the Postgresql-10 repo:
