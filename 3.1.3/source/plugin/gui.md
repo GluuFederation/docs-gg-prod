@@ -65,10 +65,12 @@ Below you can see the OAuth credential creation form:
 | OAuth scope security (false) | If true, OAuth scope expression will be applied on scope of token in oauth mode. |
 | Restrict API's (false) | The client can only call specified API's if client restriction is enabled. You can choose list of APIs by using `+ SELECT RESTRICTED API` button. |
 | Show Consumer custom Id (true) | If true, then the plugin will set consumer custom id in legacy header otherwise not. |
-| oxd id (optional) | If you have an existing oxd entry, then enter the oxd_id (also client id, client secret and client id of oxd id). If you have a client created from the OP server, skip it and enter only the client_id and client_secret. |
+| oxd id (optional) | If you have an existing oxd entry, enter the oxd_id(also client id, client secret and client id of oxd id). If you have a client created from the OP server, skip it and enter only the client_id and client_secret below. If you skip all the five fields (oxd_id, setup_client_oxd_id, client_id, client_secret and  client_id_of_oxd_id), then it will create a new client for you. |
 | client name (optional) | An optional string value for the client name. |
 | client id (optional) | You can use an existing client id. |
 | client secret (optional) | You can use an existing client secret. |
+| client id of oxd id (optional) | If you have an existing oxd id, add value in client id of oxd id. |
+| setup client oxd id(optional) | If you have an existing oxd id, add value in setup client oxd Id. |
 | client id of oxd id (optional) | You can use an existing client id of oxd id. |
 | client jwks uri (optional) | An optional string value for a client jwks uri. |
 | client token endpoint auth method (optional) | An optional string value for the client token endpoint auth method. |

@@ -171,11 +171,12 @@ RESPONSE :
 | restrict_api (optional) | false | The client can only call specified APIs if client restriction is enabled. |
 | restrict_api_list (optional) | | A string of comma-separated api_ids. You have to enable `restrict_api` to use this feature. |
 | show_consumer_custom_id (optional) | true | If true, then the plugin will set a consumer custom id in the legacy header.|
-| oxd_id (optional) | | If you have an existing oxd entry, then enter oxd_id (also client id, client secret and client id of oxd id). If you have a client created from the OP server, skip it and enter only client_id and client_secret. |
+| oxd_id (optional) | | If you have an existing oxd entry, enter the oxd_id(also client id, client secret and client id of oxd id). If you have a client created from the OP server, skip it and enter only the client_id and client_secret below. If you skip all the five fields (oxd_id, setup_client_oxd_id, client_id, client_secret and  client_id_of_oxd_id), then it will create a new client for you. |
 | client_name (optional) | kong_oauth2_bc_client | An optional string value for the client name. |
 | client_id (optional) | | You can use an existing client id. |
 | client_secret (optional) | | You can use an existing client secret. |
 | client_id_of_oxd_id (optional) | | You can use an existing client id of oxd id. |
+| setup_client_oxd_id (optional) | | If you have an existing oxd id, add value in setup client oxd Id. |
 | allow_unprotected_path (false) | | It is used to allow or deny an unprotected path by UMA-RS. |
 | client_jwks_uri (optional) | | An optional string value for a client jwks uri. |
 | client_token_endpoint_auth_method (optional) | | An optional string value for the client token endpoint auth method. |
