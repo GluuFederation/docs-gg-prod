@@ -24,11 +24,11 @@ In the Mix Mode, an OAuth token is generated with the use of Consumer credential
 
 ## Features
 
-1. Leverage the Gluu Server for central client authentication
-1. Controll access to APIs using OAuth and UMA scopes
-1. Manage Kong Admin API, Consumer and Plugin objects.
-1. API Dashboard to configure and monitor the health of your servers.
-1. Backup, restore and migrate Kong instances using snapshots.
+- Leverage the Gluu Server for central client authentication
+- Controll access to APIs using OAuth and UMA scopes
+- Manage Kong Admin API, Consumer and Plugin objects.
+- API Dashboard to configure and monitor the health of your servers.
+- Backup, restore and migrate Kong instances using snapshots.
 
 ## Components
 
@@ -36,11 +36,11 @@ The Gluu Gateway software package bundles the following components:
 
 - [Kong v0.11.x](https://getkong.org): An open source API Gateway and Micro services Management Layer, delivering high performance and reliability.
 
-- [Gluu Kong plugins](https://github.com/GluuFederation/gluu-gateway): Use Gluu Server to control access to upstream APIs using OAuth 2.0 clients and UMA 2.0.
+- [Gluu Konga Admin GUI](https://github.com/GluuFederation/gluu-gateway/tree/master/konga): A web administration portal, based on [Konga](https://github.com/pantsel/konga) GUI, which makes it easier to manage your Gluu Gateway.
+
+- [Gluu Gateway Kong plugins](https://github.com/GluuFederation/gluu-gateway): Use Gluu Server to control access to upstream APIs using OAuth 2.0 clients and UMA 2.0.
 
 - [oxd-Server v3.1.3.1](https://oxd.gluu.org): An OpenID Connect and UMA middleware service used to enable client credential management and cryptographic validation against an OAuth 2.0 Authorization Server, like the Gluu Server .
-
-- [Gluu Konga Admin GUI](https://github.com/GluuFederation/gluu-gateway/tree/master/konga): A web administration portal, based on [Konga](https://github.com/pantsel/konga) GUI, which makes it easier to manage your Gluu Gateway.
 
 - Others: The following runtime environment is required by the Gluu Gateway package: 
     - OpenJDK v8
