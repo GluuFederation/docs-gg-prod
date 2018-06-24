@@ -9,7 +9,7 @@ Gluu Gateway is an API Gateway that leverages the open source [Gluu Server](http
 Gluu Gateway inherits its API Gateway features from the open source Kong API Gateway, and adds the following additional functionality:
 
 - Leverage the Gluu Server IAM platform for central client authentication
-- Controll access to APIs using OAuth and UMA scopes
+- Control access to APIs using OAuth and UMA scopes
 - Manage Kong Admin API, Consumer and Plugin objects.
 - API Dashboard to configure and monitor the health of your servers.
 - Backup, restore and migrate Kong instances using snapshots.    
