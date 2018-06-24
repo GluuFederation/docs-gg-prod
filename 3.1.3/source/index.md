@@ -69,5 +69,6 @@ Gluu Gateway leverages software written by Gluu and incorporated from other proj
 | Component | License |
 |-----------|---------|
 | Kong API Gateway | [Apache2]( http://www.apache.org/licenses/LICENSE-2.0) |
-| Gluu-Gateway | [MIT License](http://opensource.org/licenses/MIT) |
+| Konga GUI | [MIT License](http://opensource.org/licenses/MIT) |
+| Gluu Gateway plugins | [MIT License](http://opensource.org/licenses/MIT) |
 | oxd-Server | [OXD License](https://github.com/GluuFederation/oxd/blob/master/LICENSE) |
