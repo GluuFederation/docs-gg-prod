@@ -64,7 +64,7 @@ Use the following links to get started:
 
 ## Licenses
 
-Gluu Gateway is a container distribution composed of software written by Gluu and incorporated from other projects. The license for each software component is listed below.
+Gluu Gateway leverages software written by Gluu and incorporated from other projects. The license for each software component is listed below.
 
 | Component | License |
 |-----------|---------|
