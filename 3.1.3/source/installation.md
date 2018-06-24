@@ -199,7 +199,7 @@ default value, which is specified in square brackets.
 | **Public password** | From [oxd-server license](https://oxd.gluu.org/) |
 | **License password** | From [oxd-server license](https://oxd.gluu.org/) |
 | **oxd https url** | Make sure oxd-https-extension is running. |
-| **Would you like to generate client_id/client_secret for konga?** | You can register a new OpenID Client or enter existing client credentials manually. You may want to extend the client expiration date on the Gluu Server if you plan to use this service more than one day. If you enter existing client details, then your client must have the `https://localhost:1338` URL entry in Redirect Login URIs and Post Logout Redirect URIs. |
+| **Would you like to generate client_id/client_secret for konga?** | Register an OpenID Client for Konga, or enter existing client credentials manually. By default, the client expiration is set to 24 hours; make sure to extend this expiration date in the Gluu Server. If you enter existing client details, make sure your client in Redirect Login URIs and Post Logout Redirect URIs field, you have the value `https://localhost:1338`. |
 | **oxd_id** | Used to manually set oxd id. |
 | **client_id** | Used to manually set client id. |
 | **client_secret** | Used to manually set client secret. |
