@@ -14,7 +14,7 @@ Gluu Gateway inherits its API Gateway features from the open source Kong API Gat
 - API Dashboard to configure and monitor the health of your servers.
 - Backup, restore and migrate Kong instances using snapshots.    
 
-## Modes
+## Access Control
 Gluu Gateway enables API access management via OAuth scopes, UMA scopes or both ("mix mode"). 
 
 ### OAuth Mode
