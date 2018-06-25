@@ -79,7 +79,10 @@ Some plugins are consumer-based and store some plugin configuration in consumer 
 
 ## Plugins
 
-A Plugin entity represents a plugin configuration that will be executed during the HTTP request/response workflow. It also enables the user to add functionalities to APIs that run behind Kong, e.g. Authentication or Rate Limiting.
+A Plugin entity represents a plugin configuration that will be executed during the HTTP request/response workflow. It also enables the user to add functionalities to APIs that run behind Kong, e.g. Authentication or Rate Limiting. You can read about the available Kong Plugins [here](https://konghq.com/plugins/). 
+
+Plugins added in this section of the Gluu Gateway will be applied to all APIs. If you need to add plugins to a specific API, you can do it in the APIs section.
+If you need to add plugins to a specific Consumer, you can do it in the respective Consumer page.
 
 ![plugins](img/5_plugins.png)
 
