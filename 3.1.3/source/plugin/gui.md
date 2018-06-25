@@ -76,6 +76,9 @@ Below you can see the OAuth credential creation form:
 | client token endpoint auth method (optional) | An optional string value for the client token endpoint auth method. |
 | client token endpoint auth signing_alg (optional) | An optional string value for the client token endpoint auth signing alg. |
 
+!!! Note
+    Remember to copy and save the created consumer credentials because there is no other way to recover the client secret.
+    
 The next step is to configure [Gluu OAuth 2.0 UMA RS plugin](#gluu-oauth-20-uma-rs-plugin).
 
 ## Gluu OAuth 2.0 UMA RS Plugin
