@@ -15,7 +15,7 @@ The Info section shows generic details about the Kong node.
 The API object describes an API that's being exposed by Kong. Kong needs to know how to retrieve the API when a consumer is calling it from the Proxy port. Each API object must specify some combination of `hosts`, `uris`, and `methods`. Kong will proxy all requests to the API to the specified upstream URL. 
 
 !!! Note
-    The `SECURITY` option is for the [gluu-oauth2-rs plugin](./plugin/gui.md) configuration. Saving any configuration of paths, HTTP methods and scopes in the UMA Resources means adding the gluu-oauth2-rs plugin to the given API, which is necessary for successful execution of [UMA and Mix flows](https://gluu.org/docs/gg/3.1.3/#uma-mode).
+    The `SECURITY` option is for the [gluu-oauth2-rs plugin](https://gluu.org/docs/gg/3.1.3/plugin/gui/#gluu-oauth-20-uma-rs-plugin) configuration. Saving any configuration of paths, HTTP methods and scopes in the UMA Resources means adding the gluu-oauth2-rs plugin to the given API, which is necessary for successful execution of [UMA and Mix flows](https://gluu.org/docs/gg/3.1.3/#uma-mode).
     
 ![apis](img/3_apis.png)
 
