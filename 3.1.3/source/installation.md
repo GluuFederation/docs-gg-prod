@@ -192,7 +192,7 @@ default value, which is specified in square brackets.
 | **Organization** | Used to generate web X.509 certificates |
 | **Email** | Used to generate web X.509 certificates |
 | **Password** | If you already have a database password for user `postgres`, enter it here. Otherwise, enter a new password. |
-| **Would you like to configure oxd-server?** | Enables intergration with the Gluu Server. |
+| **Would you like to configure oxd-server?** | Enables intergration with the Gluu Server. If you skip the configuration, you will have to configure the oxd-server manually. Without this step, you will not be able to log in to the Gluu Gateway. |
 | **OP hostname** | The hostname of the Gluu Server that will be used for OAuth 2.0 client credentials and access management. |
 | **License Id** | From [oxd-server license](https://oxd.gluu.org/) |
 | **Public key** | From [oxd-server license](https://oxd.gluu.org/) |
