@@ -7,7 +7,7 @@ The installation is a three-part process:
 3. [Run `setup-gluu-gateway.py`](#run-the-setup-script)
 
 !!! Note
-    Before proceeding with Gluu Gateway installation, you should have a [Gluu Server](https://gluu.org/docs/ce) installed and operational. You will be asked to input the hostname of your Gluu Server while running the Gluu Gateway setuop script. 
+    Before proceeding with Gluu Gateway installation, you should have a [Gluu Server](https://gluu.org/docs/ce) installed and operational. You will be asked to input the hostname of your Gluu Server while running the Gluu Gateway setup script. 
 
 ## Required Third Party repositories
 
