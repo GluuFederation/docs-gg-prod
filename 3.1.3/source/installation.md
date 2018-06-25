@@ -176,8 +176,7 @@ curl -sL https://rpm.nodesource.com/setup_8.x | sudo -E bash -
  # python setup-gluu-gateway.py
 ```
 
-You will be prompted to answer some questions. Just hit Enter to accept the
-default value, which is specified in square brackets.
+After acknowledging that the use of the Gluu Gateway is under the MIT license, you will be prompted to answer several questions. Just hit Enter to accept the default values, which are specified in square brackets.
 
 !!! Warning 
     When you are prompted to provide a two-letter value, make sure you follow the instructions. A mistake may result in the lack of certificates.
@@ -186,19 +185,19 @@ default value, which is specified in square brackets.
 |----------|-------------|
 | **Enter IP Address** | IP Address of your API gateway  |
 | **Enter Kong hostname** | Internet-facing FQDN to generate certificates and metadata. Do not use an IP address or localhost. |
-| **Country** | Used to generate web X.509 certificates |
-| **State** | Used to generate web X.509 certificates |
-| **City** | Used to generate web X.509 certificates |
-| **Organization** | Used to generate web X.509 certificates |
-| **Email** | Used to generate web X.509 certificates |
+| **Enter two-letter Country Code** | Used to generate web X.509 certificates |
+| **Enter two-letter State Code** | Used to generate web X.509 certificates |
+| **Enter your City or locality** | Used to generate web X.509 certificates |
+| **Enter Organization name** | Used to generate web X.509 certificates |
+| **Email address** | Used to generate web X.509 certificates |
 | **Password** | If you already have a database password for user `postgres`, enter it here. Otherwise, enter a new password. |
-| **Would you like to configure oxd-server?** | Enables intergration with the Gluu Server. |
+| **Would you like to configure oxd-server?** | Enables integration with the Gluu Server. |
 | **OP hostname** | The hostname of the Gluu Server that will be used for OAuth 2.0 client credentials and access management. |
 | **License Id** | From [oxd-server license](https://oxd.gluu.org/) |
 | **Public key** | From [oxd-server license](https://oxd.gluu.org/) |
 | **Public password** | From [oxd-server license](https://oxd.gluu.org/) |
 | **License password** | From [oxd-server license](https://oxd.gluu.org/) |
-| **oxd https url** | Make sure oxd-https-extension is running. |
+| **oxd https url** | Make sure the oxd-https-extension is running. |
 | **Would you like to generate client_id/client_secret for konga?** | Register an OpenID Client for Konga, or enter existing client credentials manually. By default, the client expiration is set to 24 hours; make sure to extend this expiration date in the Gluu Server. If you enter existing client details, make sure your client in Redirect Login URIs and Post Logout Redirect URIs field, you have the value `https://localhost:1338`. |
 | **oxd_id** | Used to manually set oxd id. |
 | **client_id** | Used to manually set client id. |
