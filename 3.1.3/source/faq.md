@@ -39,8 +39,10 @@ In order to generate an UMA token, follow these steps:
 1. Send an `uma-rp-get-rpt` request with Consumer `oxd_id`, the ticket from Step 2 and the access token from Step 3.
 
 ### How can I generate Mix mode tokens?
-
 The process is the same as for OAuth token generation. The Consumer must have the Mix mode set.  
+
+### What can I do if I get "Unauthorized! gluu-oauth2-client-auth cache is not found"?
+If you see this message in any response, it means that you haven't added the custom gluu-oauth2-client-auth plugin to your API. Go back to the API details and add it in the [Plugins section](https://gluu.org/docs/gg/3.1.3/admin-gui/#manage-apis). 
 
 ### How can I change the listening address and port?
 By default, Gluu Gateway listens to localhost only, but you can change it manually by configuring the `local.js` config file using the [Configuration section](https://gluu.org/docs/gg/3.1.3/configuration/#admin-gui-portal-konga). You just need to update the `explicitHost` to your global IP or remove this attribute. Read more about the configuration [here](https://sailsjs.com/documentation/reference/configuration/sails-config).
