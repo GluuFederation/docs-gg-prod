@@ -10,7 +10,7 @@ You can configure the plugins using the Admin GUI - Konga. There are two plugins
 
 ## Gluu OAuth 2.0 client credential authentication
 
-This plugin enables the use of an external OpenId Provider for OAuth2 client registration and authentication. It needs to connect via `https` to Gluu's `oxd-https-extension` service, which is an OAuth2 client middleware service. It provides OAuth 2.0 client credential authentication with three different modes.
+This plugin enables the use of an external OpenId Provider for OAuth2 client registration and authentication. It needs to connect via `https` to Gluu's `oxd-https-extension` service, which is an OAuth2 client middleware service. It provides OAuth 2.0 client credential authentication with [three different modes.](https://gluu.org/docs/gg/3.1.3/#oauth-mode)
 
 ### Add an API
 
