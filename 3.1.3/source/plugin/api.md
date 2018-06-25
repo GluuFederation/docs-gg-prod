@@ -550,6 +550,7 @@ WWW-Authenticate: UMA realm="rs",
     "message": "Unauthorized"
 }
 ```
+You can make an uma-rp-get-rpt call to the oxd server, passing the obtained ticket with a consumer access token to obtain an RPT. Then you can use it to access an API. To learn more about the request, follow the [oxd documentation.](https://gluu.org/docs/oxd/3.1.3.1/api/#uma-rp-get-rpt)
 
 ### 200 Success
 
