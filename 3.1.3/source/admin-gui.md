@@ -1,8 +1,18 @@
 # Admin GUI Portal - Konga Guide
 
 ## Dashboard
+The Dashboard section is divided into subsections which show application configuration details. 
 
-The Dashboard section shows all application configuration details. You can see oxd and client details used by Konga.
+In the Global Info you can see oxd and client details used by Konga. If you want to check the version of the currently used oxd server or the address of the Gluu Server, all the necessary information is provided here. OXD Id Client, Id of OXD Id, Setup client OXD Id, Client Id and Client Secret are the credentials created during the Gluu Gateway installation and setup. 
+
+By default, two oxd clients are created during the installation and setup of the Gluu Gateway. You can always check their activity and billing status by clicking the green button in the Pricing subsection, which will take you to the oxd ecommerce platform. The Pricing table also provides more information on the oxd usage and billing.
+
+The Gateway and Database Info show information on the gateway itself and the used postgres database, respectively. 
+
+The Plugins section displays all the plugins supported by the Gluu Gateway. When inactive, a plugin is shown as gray. If you add a plugin to an API/a Consumer or set a global one, its name will turn green on the dashboard.
+
+The remaining subsections of Requests, Connections and Timers show real-time metrics on the Gluu Gateway health.  
+
 ![dashboard](img/1_dashboard.png)
 
 ## Info
