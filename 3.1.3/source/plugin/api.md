@@ -574,7 +574,7 @@ You can use this information on your side to implement additional logic. You can
 
 An application, as presented in the oxd ecommerce platform, is an oxd client created in the Gluu Gateway and actively used to make a call to the oxd-server. Each setup of the Gluu Gateway will require multiple clients. The following actions result in the creation of active clients which you can always inspect in the oxd ecommerce platform:
 
-- installation and setup of the Gluu Gateway = 2 applications (2 active clients used)
+- installation, setup and logging in to the Gluu Gateway = 2 applications (2 active clients used)
 - creation of an API protected with `gluu-oauth2-rs` = 2 applications (2 active clients used)
 - an `Oauth flow` = 1 application (1 active client used) 
 - an `UMA flow` = 2 applications (2 active clients used)
