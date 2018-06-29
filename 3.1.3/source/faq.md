@@ -3,7 +3,7 @@
 ## General FAQs and troubleshooting
 
 ### How is Gluu Gateway licensed, and how much does it cost?
-Gluu Gateway is subject to the MIT License, but uses commercially licensed oxd OAuth 2.0 client software to leverage the Gluu Server for client credentials and policy enforcement. oxd is commercial software, priced $10 per OAuth client per month. The first 10 oxd clients are always free, and there is a five (5) day grace period for each new client–meaning: only clients active for 5 or more days are recorded for billing purposes.
+Gluu Gateway is subject to the MIT License, but uses commercially licensed OAuth 2.0 client software called oxd to leverage the Gluu Server for client credentials and policy enforcement. oxd is priced $10 per month per client created in an Authorization Server. The first 10 clients created by oxd are free forever. Additional clients active five (5) consecutive days or more are eligible for billing.
 
 ### Where should Gluu Gateway be used?
 Gluu Gateway should be used in every API gateway where you need advanced security measures with OAuth 2.0 and User-Managed Access (UMA) 2.0 Grant.
