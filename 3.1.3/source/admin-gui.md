@@ -77,7 +77,7 @@ The Consumer object represents a consumer - or a user - of an API. You can eithe
 
 ![consumers](img/4_consumers_new.png)
 
-Add consumers by using the `+ CREATE CONSUMER` button. The creation form shows details of every field.
+Add Consumers by using the `+ CREATE CONSUMER` button. The creation form shows details of every field.
 
 ![consumers_add](img/4_customer_add.png)
 
@@ -106,7 +106,7 @@ The Upstream object represents a virtual hostname and can be used to load balanc
 
 ![upstreams](img/6_upstream.png)
 
-Add upstreams by using the `+ CREATE UPSTREAM` button.
+Add Upstreams by using the `+ CREATE UPSTREAM` button.
 
 ![plugins_add](img/6_upstream_add.png)
 
@@ -116,7 +116,7 @@ A Certificate object represents a public certificate/private key pair for an SSL
 
 ![cert](img/7_cert.png)
 
-Add certificates by using the `+ CREATE CERTIFICATE` button.
+Add Certificates by using the `+ CREATE CERTIFICATE` button.
 
 ![cert_add](img/7_cert_add.png)
 
@@ -126,7 +126,7 @@ Create connections to Kong nodes and select the one to use by clicking on the re
 
 ![conn](img/8_conn.png)
 
-Add connections by using the `+ NEW CONNECTION` button.
+Add Connections by using the `+ NEW CONNECTION` button.
 
 ![conn_add](img/8_conn_add.png)
 
