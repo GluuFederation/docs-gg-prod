@@ -8,9 +8,10 @@ You can configure the plugins using the Admin GUI - Konga. There are two plugins
 1. [Gluu OAuth 2.0 client credential authentication](#gluu-oauth-20-client-credential-authentication)
 2. [Gluu OAuth 2.0 UMA RS plugin](#gluu-oauth-20-uma-rs-plugin)
 
+
 ## Gluu OAuth 2.0 client credential authentication
 
-This plugin enables the use of an external OpenId Provider for OAuth2 client registration and authentication. It needs to connect via `https` to Gluu's `oxd-https-extension` service, which is an OAuth2 client middleware service. It provides OAuth 2.0 client credential authentication with three different modes.
+This plugin enables the use of an external OpenId Provider for OAuth2 client registration and authentication. It needs to connect via `https` to Gluu's `oxd-https-extension` service, which is an OAuth2 client middleware service. It provides OAuth 2.0 client credential authentication with [three different modes.](https://gluu.org/docs/gg/3.1.3/#oauth-mode)
 
 ### Add an API
 
@@ -76,6 +77,9 @@ Below you can see the OAuth credential creation form:
 | client token endpoint auth method (optional) | An optional string value for the client token endpoint auth method. |
 | client token endpoint auth signing_alg (optional) | An optional string value for the client token endpoint auth signing alg. |
 
+!!! Note
+    Remember to copy and save the created consumer credentials because there is no other way to recover the client secret.
+    
 The next step is to configure [Gluu OAuth 2.0 UMA RS plugin](#gluu-oauth-20-uma-rs-plugin).
 
 ## Gluu OAuth 2.0 UMA RS Plugin
@@ -313,6 +317,7 @@ WWW-Authenticate: UMA realm="rs",
     "message": "Unauthorized"
 }
 ```
+You can make an uma-rp-get-rpt call to the oxd server, passing the obtained ticket with a consumer access token to obtain an RPT. Then you can use it to access an API. To learn more about the request, follow the [oxd documentation.](https://gluu.org/docs/oxd/3.1.3.1/api/#uma-rp-get-rpt)
 
 ### 200 Success
 
@@ -331,3 +336,26 @@ When a client has been authenticated, the plugin will append some headers to the
 7. **X-Anonymous-Consumer**, will be set to true when authentication fails, and the 'anonymous' consumer is set instead.
 
 You can use this information on your side to implement additional logic. You can use the X-Consumer-ID value to query the Kong Admin API and retrieve more information about the Consumer.
+
+## Application creation in oxd
+
+An application, as presented in the oxd ecommerce platform, is an oxd client created in the Gluu Gateway and actively used to make a call to the oxd-server. Each setup of the Gluu Gateway will require multiple clients. The following actions result in the creation of active clients which you can always inspect in the oxd ecommerce platform:
+
+- installation, setup and logging in to the Gluu Gateway = 2 applications (2 active clients used)
+- creation of an API protected with `gluu-oauth2-rs` = 2 applications (2 active clients used)
+- an `Oauth flow` = 1 application (1 active client used) 
+- an `UMA flow` = 2 applications (2 active clients used)
+- a `Mix flow` = 1 application (1 active client used)
+
+Note!!!
+    A flow is an end-to-end sequence of calls to get the token necessary to make a successful call for a protected resource, used in any of the three modes of access management provided by the Gluu Gateway. You can test the three modes and their basic flows using the prepared `Katalon` tests available [here]( https://github.com/GluuFederation/gluu-gateway/tree/master/tests), as well as the `REST Postman` collections available in [this repo]( https://github.com/GluuFederation/gluu-gateway/tree/master/postman).
+    
+These actions do not result in the creation of active clients and therefore are not shown in the oxd ecommerce platform:
+
+- creation of unprotected APIs = 0 applications
+- creation of an API protected with `gluu-oauth2-client-auth` = 0 applications
+- creation of Consumers = 0 applications
+- creation of Consumers protected with `gluu-oauth2-client-auth` = 0 applications
+
+Remember that Gluu Gateway uses oxd OAuth 2.0 client software to leverage the Gluu Server for client credentials and policy enforcement. oxd is commercial software, priced $10 per OAuth client per month.
+The first 10 oxd clients are always free, and there is a five (5) day grace period for each new client–meaning: only clients active for 5 or more days are recorded for billing purposes.

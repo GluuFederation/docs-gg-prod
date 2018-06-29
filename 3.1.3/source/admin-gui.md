@@ -1,8 +1,18 @@
 # Admin GUI Portal - Konga Guide
 
 ## Dashboard
+The Dashboard section is divided into subsections which show application configuration details. 
 
-The Dashboard section shows all application configuration details. You can see oxd and client details used by Konga.
+In the Global Info you can see oxd and client details used by Konga. If you want to check the version of the currently used oxd server or the address of the Gluu Server, all the necessary information is provided here. OXD Id Client, Id of OXD Id, Setup client OXD Id, Client Id and Client Secret are the credentials created during the Gluu Gateway installation and setup. 
+
+By default, two oxd clients are created during the installation and setup of the Gluu Gateway. You can always check their activity and billing status by clicking the green button in the Pricing subsection, which will take you to the oxd ecommerce platform. The Pricing table also provides more information on the oxd usage and billing.
+
+The Gateway and Database Info show information on the gateway itself and the used postgres database, respectively. 
+
+The Plugins section displays all the plugins supported by the Gluu Gateway. When inactive, a plugin is shown as gray. If you add a plugin to an API/a Consumer or set a global one, its name will turn green on the dashboard.
+
+The remaining subsections of Requests, Connections and Timers show real-time metrics on the Gluu Gateway health.  
+
 ![dashboard](img/1_dashboard.png)
 
 ## Info
@@ -15,7 +25,7 @@ The Info section shows generic details about the Kong node.
 The API object describes an API that's being exposed by Kong. Kong needs to know how to retrieve the API when a consumer is calling it from the Proxy port. Each API object must specify some combination of `hosts`, `uris`, and `methods`. Kong will proxy all requests to the API to the specified upstream URL. 
 
 !!! Note
-    The `SECURITY` option is for the [gluu-oauth2-rs plugin](./plugin/gui.md) configuration.
+    The `SECURITY` option is for the [gluu-oauth2-rs plugin](https://gluu.org/docs/gg/3.1.3/plugin/gui/#gluu-oauth-20-uma-rs-plugin) configuration. Saving any configuration of paths, HTTP methods and scopes in the UMA Resources means adding the gluu-oauth2-rs plugin to the given API, which is necessary for successful execution of [UMA and Mix flows](https://gluu.org/docs/gg/3.1.3/#uma-mode).
     
 ![apis](img/3_apis.png)
 
@@ -31,10 +41,10 @@ Attributes of an API object are listed below.
 |-----------|-------------|
 | **name** | The API name. |
 | **hosts** *(semi-optional)* | A comma-separated list of domain names that point to your API. For example: `example.com`. At least one of `hosts`, `uris`, or `methods` should be specified. |
-| **uris** *(semi-optional)* | A comma-separated list of URIs prefixes that point to your API. For example: `/my-path`. At least one of `hosts`, `uris`, or `methods` should be specified. |
+| **uris** *(semi-optional)* | A comma-separated list of URI's prefixes that point to your API. For example: `/my-path`. At least one of `hosts`, `uris`, or `methods` should be specified. |
 | **methods** *(semi-optional)* | A comma-separated list of HTTP methods that point to your API. For example: `GET`,`POST`. At least one of `hosts`, `uris`, or `methods` should be specified. |
 | **upstream_url** | The base target URL that points to your API server. This URL will be used for proxying requests. For example: `https://example.com`. |
-| **strip_uri** *(optional)* | When matching an API via one of the uris prefixes, strip that matching prefix from the upstream URI to be requested. Default: `true`. |
+| **strip_uri** *(optional)* | When matching an API via one of the uri's prefixes, strip that matching prefix from the upstream URI to be requested. Default: `true`. |
 | **preserve_host** *(optional)* | When matching an API via one of the `hosts` domain names, make sure the request `Host` header is forwarded to the upstream service. By default, this is `false`, and the upstream `Host` header will be extracted from the configured `upstream_url`. |
 | **retries** *(optional)* | The number of retries to execute upon failure to proxy. The default is `5`. |
 | **upstream_connect_timeout** *(optional)* | The timeout in milliseconds for establishing a connection to your upstream service. Defaults to `60000`. |
@@ -79,7 +89,10 @@ Some plugins are consumer-based and store some plugin configuration in consumer 
 
 ## Plugins
 
-A Plugin entity represents a plugin configuration that will be executed during the HTTP request/response workflow. It also enables the user to add functionalities to APIs that run behind Kong, e.g. Authentication or Rate Limiting.
+A Plugin entity represents a plugin configuration that will be executed during the HTTP request/response workflow. It also enables the user to add functionalities to APIs that run behind Kong, e.g. Authentication or Rate Limiting. You can read about the available Kong Plugins [here](https://konghq.com/plugins/). 
+
+Plugins added in this section of the Gluu Gateway will be applied to all APIs. If you need to add plugins to a specific API, you can do it in the APIs section.
+If you need to add plugins to a specific Consumer, you can do it in the respective Consumer page.
 
 ![plugins](img/5_plugins.png)
 

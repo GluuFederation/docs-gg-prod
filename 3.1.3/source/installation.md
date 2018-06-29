@@ -191,7 +191,7 @@ After acknowledging that the use of the Gluu Gateway is under the MIT license, y
 | **Enter Organization name** | Used to generate web X.509 certificates |
 | **Email address** | Used to generate web X.509 certificates |
 | **Password** | If you already have a database password for user `postgres`, enter it here. Otherwise, enter a new password. |
-| **Would you like to configure oxd-server?** | Enables integration with the Gluu Server. |
+| **Would you like to configure oxd-server?** | Enables intergration with the Gluu Server. If you skip the configuration, you will have to configure the oxd-server manually. Without this step, you will not be able to log in to the Gluu Gateway. |
 | **OP hostname** | The hostname of the Gluu Server that will be used for OAuth 2.0 client credentials and access management. |
 | **License Id** | From [oxd-server license](https://oxd.gluu.org/) |
 | **Public key** | From [oxd-server license](https://oxd.gluu.org/) |
@@ -199,9 +199,11 @@ After acknowledging that the use of the Gluu Gateway is under the MIT license, y
 | **License password** | From [oxd-server license](https://oxd.gluu.org/) |
 | **oxd https url** | Make sure the oxd-https-extension is running. |
 | **Would you like to generate client_id/client_secret for konga?** | Register an OpenID Client for Konga, or enter existing client credentials manually. By default, the client expiration is set to 24 hours; make sure to extend this expiration date in the Gluu Server. If you enter existing client details, make sure your client in Redirect Login URIs and Post Logout Redirect URIs field, you have the value `https://localhost:1338`. |
-| **oxd_id** | Used to manually set oxd id. |
-| **client_id** | Used to manually set client id. |
-| **client_secret** | Used to manually set client secret. |
+| **oxd_id** | Used to manually set the oxd id. |
+| **client_id_of_oxd_id** | Used to manually set the client id of oxd id. |
+| **setup_client_oxd_id** | Used to manually set the setup client oxd id. |
+| **client_id** | Used to manually set the client id. |
+| **client_secret** | Used to manually set the client secret. |
 
 ## Finish the setup
 
@@ -209,10 +211,10 @@ After acknowledging that the use of the Gluu Gateway is under the MIT license, y
  Gluu Gateway configuration successful!!! https://localhost:1338
 ```
 
-If you see the above message, it means the installation was successful. To log into
+If you see the above message, it means the installation was successful. To log in to
 the Gluu Gateway admin portal, create an SSH tunnel on port 1338 from your
 workstation to the Gluu Gateway server, and point your browser at
-`https://localhost:1338`.
+`https://localhost:1338`. Use the login and password which you also use to access the Gluu Server.
 
 !!! Note
     See [FAQ](./faq.md#how-can-i-change-the-listening-address-and-port) for global access configuration.
