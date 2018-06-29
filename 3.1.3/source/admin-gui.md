@@ -106,7 +106,7 @@ The Upstream object represents a virtual hostname and can be used to load balanc
 
 ![upstreams](img/6_upstream.png)
 
-Add Plugins by using the `+ CREATE UPSTREAM` button.
+Add upstreams by using the `+ CREATE UPSTREAM` button.
 
 ![plugins_add](img/6_upstream_add.png)
 
@@ -116,7 +116,7 @@ A Certificate object represents a public certificate/private key pair for an SSL
 
 ![cert](img/7_cert.png)
 
-Add Plugins by using the `+ CREATE CERTIFICATE` button.
+Add certificates by using the `+ CREATE CERTIFICATE` button.
 
 ![cert_add](img/7_cert_add.png)
 
