@@ -2,24 +2,15 @@
 
 ## Overview
 
-Gluu Gateway is an API Gateway that leverages the open source [Gluu Server](https://gluu.org/) for central client management and access control, and inherits its core gateway functionality from the open source [Kong API Gateway](https://konghq.com/kong-community-edition/). 
-    
-
-## Business Model
-Gluu Gateway as an API gateway solution:
-
-- is made up of free open source software [components](#components).
-- uses oxd, commercial client software, to leverage the security of [the Gluu Server](https://gluu.org/docs/ce/3.1.3/)
-- makes use of oxd's freemium [pricing model](https://gluu.org/docs/oxd/3.1.3.1/#pricing-billing)
-
+Gluu Gateway is an API Gateway that leverages the open source [Gluu Server](https://gluu.org/) for central client management and access control, and inherits core gateway functionality from the open source [Kong API Gateway](https://konghq.com/kong-community-edition/). 
 
 ## Features
-Gluu Gateway inherits its API Gateway features from the open source Kong API Gateway, and adds the following additional functionality:
+Gluu Gateway adds the following functionality to the Kong API Gateway:
 
-- Leverage the Gluu Server IAM platform for central client authentication
-- Control access to APIs using OAuth and UMA scopes
-- Manage Kong Admin API, Consumer and Plugin objects.
-- Use the API Dashboard to configure and monitor the health of your servers.
+- Leverage Gluu's OAuth 2.0 authorization server for central client authentication.
+- Control access to APIs using OAuth and UMA scopes.
+- GUI to manage Kong API, Consumer and Plugin objects.
+- API Dashboard to configure and monitor the health of your servers.
 - Backup, restore and migrate Kong instances using snapshots.    
 
 ## Access Control
@@ -40,17 +31,17 @@ In the Mix Mode, an OAuth token is generated with the use of Consumer credential
 
 ![](img/diagram-mix-mode.jpg)
 
-## <a name="components"></a>Components
+## Components
 
-The Gluu Gateway software package bundles the following software components:
+Gluu Gateway makes use of the following software components:
 
 - [Kong v0.11.x](https://getkong.org): An open source API Gateway and Micro services Management Layer, delivering high performance and reliability.
 
-- [Gluu Konga Admin GUI](https://github.com/GluuFederation/gluu-gateway/tree/master/konga): A web administration portal, based on [Konga](https://github.com/pantsel/konga) GUI, which makes it easier to manage your Gluu Gateway.
+- [Gluu Konga Admin GUI](https://github.com/GluuFederation/gluu-gateway/tree/master/konga): A web administration portal, based on [Konga](https://github.com/pantsel/konga) GUI, to manage your Gluu Gateway.
 
-- [Gluu Gateway Kong plugins](https://github.com/GluuFederation/gluu-gateway): Use Gluu Server to control access to upstream APIs using OAuth 2.0 clients and UMA 2.0.
+- [Gluu Gateway plugins](https://github.com/GluuFederation/gluu-gateway): Use Gluu Server for central client management and to control access to upstream APIs using OAuth 2.0 and UMA 2.0.
 
-- [oxd-Server v3.1.3.1](https://oxd.gluu.org): An OpenID Connect and UMA middleware service used to enable client credential management and cryptographic validation against an OAuth 2.0 Authorization Server, like the Gluu Server .
+- [oxd-Server v3.1.3.1](https://oxd.gluu.org): An OpenID Connect and UMA middleware service used to enable client credential management and cryptographic validation against an OAuth 2.0 Authorization Server, like the Gluu Server.
 
 - Others: The following runtime environment is required by the Gluu Gateway package: 
     - OpenJDK v8
@@ -58,7 +49,6 @@ The Gluu Gateway software package bundles the following software components:
     - Postgres v10
     - Node v8.9.4
     - NPM v5.6.0'
-    
     
 ## Get Started
 
@@ -71,6 +61,17 @@ Use the following links to get started:
     1. [Admin GUI](./plugin/gui.md)
     2. [Admin API](./plugin/api.md)
 1. [FAQ](./faq.md)
+
+## Business Model
+Gluu Gateway uses free open source software components to achieve its API gateway functionality. To obtain client credentials and leverage access management policies from the central authorization server (i.e. the Gluu Server), Gluu Gateway uses commercial OAuth 2.0 client software called oxd. 
+
+- oxd offers a freemium pricing model based on the number of active OAuth2 clients it creates in an authorization server.  
+
+- oxd will create two clients in the authorization server for each API secured by Gluu Gateway.
+
+- oxd includes up to 10 free clients per month. Additional clients active for longer than 5 consecutive days are billed $10 per month. 
+
+- Learn more about oxd's [freemium pricing model](https://gluu.org/docs/oxd/3.1.3.1/#pricing-billing) in the docs. 
 
 ## Licenses
 
