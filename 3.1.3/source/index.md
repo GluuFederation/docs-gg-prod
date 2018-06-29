@@ -5,6 +5,14 @@
 Gluu Gateway is an API Gateway that leverages the open source [Gluu Server](https://gluu.org/) for central client management and access control, and inherits its core gateway functionality from the open source [Kong API Gateway](https://konghq.com/kong-community-edition/). 
     
 
+## Business Model
+Gluu Gateway as an API gateway solution:
+
+- is made up of free open source software [components](#components).
+- uses oxd, commercial client software, to leverage the security of [the Gluu Server](https://gluu.org/docs/ce/3.1.3/)
+- makes use of oxd's freemium [pricing model](https://gluu.org/docs/oxd/3.1.3.1/#pricing-billing)
+
+
 ## Features
 Gluu Gateway inherits its API Gateway features from the open source Kong API Gateway, and adds the following additional functionality:
 
@@ -32,7 +40,7 @@ In the Mix Mode, an OAuth token is generated with the use of Consumer credential
 
 ![](img/diagram-mix-mode.jpg)
 
-## Components
+## <a name="components"></a>Components
 
 The Gluu Gateway software package bundles the following software components:
 
