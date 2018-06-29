@@ -75,7 +75,7 @@ You can edit an API and manage its plugins by clicking on the pencil icon on the
 
 The Consumer object represents a consumer - or a user - of an API. You can either rely on Kong as the primary datastore, or you can map the consumer list with your database to keep consistency between Kong and your existing primary datastore.
 
-![consumers](img/4_consumers.png)
+![consumers](img/4_consumers_new.png)
 
 Add consumers by using the `+ CREATE CONSUMER` button. The creation form shows details of every field.
 
