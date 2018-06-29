@@ -61,13 +61,13 @@ You can edit an API and manage its plugins by clicking on the pencil icon on the
 
 ![api_details](img/3_3_api_details.png)
 
-**Plugins:** This section is used to view the list of added Plugins and add a new Plugin.
+**Plugins:** This section is used to view the list of added Plugins and add a new Plugin. If you want to switch a plugin on/off, just use the toggle bar. Editing a plugin’s details is possible after clicking on its name on the list. You can also delete a plugin by clicking on the DELETE button.
 
 * The Plugin list
   
   ![api_plugin_list](img/3_2_api_plugin_list.png)
 
-* Add a Plugin
+* Add a Plugin by clicking the plus icon next to a plugin’s name
   
   ![add_plugin_api](img/3_1_add_plugin_api.png)
 
@@ -109,6 +109,11 @@ The Upstream object represents a virtual hostname and can be used to load balanc
 Add Upstreams by using the `+ CREATE UPSTREAM` button.
 
 ![plugins_add](img/6_upstream_add.png)
+
+You can modify the details of your Upstream by clicking the `DETAILS` button next to its name. While changing the number of slots, make sure that the number corresponds to the `Orderlist` and exactly matches its value. For instance, if you want 999 slots, delete slot 1000, for 998 - delete 999 and 1000, etc.).
+
+The `Targets` section enables target addition. Because the upstream maintains a history of target changes, the targets cannot be deleted from the list or modified. To disable a target, post a new one with weight=0 or click on the `DELETE` button next to its name, which will automatically assign 0 to its weight. 
+
 
 ## CERTIFICATE
 
