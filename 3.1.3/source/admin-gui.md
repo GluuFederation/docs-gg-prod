@@ -126,7 +126,7 @@ Create connections to Kong nodes and select the one to use by clicking on the re
 
 ![conn](img/8_conn.png)
 
-Add Connections by using the `+ NEW CONNECTION` button.
+Add connections by using the `+ NEW CONNECTION` button.
 
 ![conn_add](img/8_conn_add.png)
 
