@@ -67,9 +67,9 @@ Gluu Gateway uses free open source software components to achieve its API gatewa
 
 - oxd offers a freemium pricing model based on the number of active OAuth2 clients it creates in an authorization server.  
 
-- oxd will create two clients in the authorization server for each API secured by Gluu Gateway.
+- oxd creates two clients in the authorization server for each API secured by Gluu Gateway.
 
-- oxd includes up to 10 free clients per month. Additional clients active for longer than 5 consecutive days are billed $10 per month. 
+- The first 10 clients created by oxd each month are free. Additional clients active for longer than 5 consecutive days are billed $10 per month. 
 
 - Learn more about oxd's [freemium pricing model](https://gluu.org/docs/oxd/3.1.3.1/#pricing-billing) in the docs. 
 
