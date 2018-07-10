@@ -1,2 +1,2 @@
-# docs-credmanager-prod
-Production documentation repo for the credential manager application. 
+# docs-gg-prod
+Production documentation repo for the Gluu Gateway application. 
