@@ -207,6 +207,33 @@ You can see the below JSON by clicking on the `VIEW RESOURCES JSON` button.
   }
 ]
 ```
+#### Dynamic resource protection
+
+If you want to protect a dynamic resource with UMA or OAuth scopes, you can do this by securing the parent path. For example, if you want to secure both `/folder` and `/folder/[id]`, you only need to secure `/folder` with a chosen scope. The protection of the parent will be applied to its children, unless different protection is explicitly defined.
+
+Use cases for different resource security:
+- Rule1 for path GET /root                  `{scope: a and b}`
+- Rule2 for path GET /root/folder1          `{scope: c}`
+- Rule3 for path GET /root/folder1/folder2  `{scope: d}`
+
+```
+GET /root     --> Apply Rule1
+GET /root/1    --> Apply Rule1
+GET /root/one    --> Apply Rule1
+GET /root/one/two  --> Apply Rule1
+GET /root/two?id=df4edfdf  --> Apply Rule1
+
+GET /root/folder1   --> Apply Rule2
+GET /root/folder1/1   --> Apply Rule2
+GET /root/folder1?id=dfdf454gtfg  --> Apply Rule2
+GET /root/folder1/one/two  --> Apply Rule2
+GET /root/folder1/one/two/treww?id=w4354f  --> Apply Rule2
+
+GET /root/folder1/folder2/1    --> Apply Rule3
+GET /root/folder1/folder2/one/two  --> Apply Rule3
+GET /root/folder1/folder2/dsd545df   --> Apply Rule3
+GET /root/folder1/folder2/one?id=fdfdf  --> Apply Rule3
+```
 
 #### OAuth Scope Expression
 
