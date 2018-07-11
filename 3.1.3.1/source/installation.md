@@ -220,7 +220,7 @@ workstation to the Gluu Gateway server, and point your browser at
 !!! Note
     See [FAQ](./faq.md#how-can-i-change-the-listening-address-and-port) for global access configuration.
     
-    # Removal
+# Removal
 
 !!! Note 
     Always run the following commands as root.
