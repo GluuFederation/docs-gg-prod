@@ -218,3 +218,29 @@ workstation to the Gluu Gateway server, and point your browser at
 
 !!! Note
     See [FAQ](./faq.md#how-can-i-change-the-listening-address-and-port) for global access configuration.
+    
+    
+# Removal
+
+!!! Note 
+    Always run the following commands as root.
+
+Use apt to remove gluu-gateway package.
+```
+apt-get remove gluu-gateway
+```
+
+If you want to also remove configuration files (/etc/init.d/gluu-gateway and /opt/gluu-gateway/konga/config) use purge.
+```    	
+apt-get purge gluu-gateway
+```
+
+Using --auto-remove parameter will also remove package dependencies (kong-community-edition, lua-cjson, nodejs, oxd-server, postgresql)
+```
+apt-get remove --auto-remove gluu-gateway
+```
+
+
+   
+ 
+    
