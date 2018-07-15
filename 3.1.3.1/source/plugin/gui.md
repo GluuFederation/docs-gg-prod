@@ -132,7 +132,7 @@ A protection document for this sample:
 
 ![add_resources](../img/3_3_add_resource.png)
 
-You can see the below JSON by clicking on the `VIEW RESOURCES JSON` button.
+You can see the below JSON by clicking on the `VIEW RESOURCES JSON` button. Scope expression is defined as JsonLogic rule.
 
 ```
 [
