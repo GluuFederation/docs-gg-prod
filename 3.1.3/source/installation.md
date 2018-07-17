@@ -225,17 +225,17 @@ workstation to the Gluu Gateway server, and point your browser at
 !!! Note 
     Always run the following commands as root.
 
-Use apt to remove gluu-gateway package.
+Use `apt` to remove gluu-gateway package.
 ```
 apt-get remove gluu-gateway
 ```
 
-If you want to also remove configuration files (/etc/init.d/gluu-gateway and /opt/gluu-gateway/konga/config) use purge.
+If you want to also remove the configuration files (/etc/init.d/gluu-gateway and /opt/gluu-gateway/konga/config), use `purge`.
 ```    	
 apt-get purge gluu-gateway
 ```
 
-Using --auto-remove parameter will also remove package dependencies (kong-community-edition, lua-cjson, nodejs, oxd-server, postgresql)
+Using the `--auto-remove` parameter will also remove the package dependencies (kong-community-edition, lua-cjson, nodejs, oxd-server, postgresql).
 ```
 apt-get remove --auto-remove gluu-gateway
 ```
