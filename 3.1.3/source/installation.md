@@ -219,6 +219,8 @@ workstation to the Gluu Gateway server, and point your browser at
 !!! Note
     See [FAQ](./faq.md#how-can-i-change-the-listening-address-and-port) for global access configuration.
     
+!!! Warning
+    By default, the Gluu Gateway Client expiration date is set for one day during the installation process. To change it, follow    [these instructions](https://gluu.org/docs/oxd/3.1.3/faq/#how-can-i-avoid-client-expiration).  
     
 # Removal
 
