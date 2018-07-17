@@ -225,7 +225,7 @@ workstation to the Gluu Gateway server, and point your browser at
 !!! Note 
     Always run the following commands as root.
 
-Use `apt` to remove gluu-gateway package.
+Use `apt` to remove the gluu-gateway package.
 ```
 apt-get remove gluu-gateway
 ```
