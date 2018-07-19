@@ -36,7 +36,7 @@ In order to use the plugin, you first need to create a Consumer to associate one
 
 ### Create a Consumer 
 
-You need to associate a credential with an existing Consumer object which represents a user consuming the API. To create a Consumer, you can use the [Consumer section](../admin-gui.md#consumers).
+You need to associate a credential with an existing Consumer object which represents a user consuming the API. To create a Consumer, you can use the [Consumer section](https://gluu.org/docs/gg/3.1.3/admin-gui/#consumers).
 
 ### Create an OAuth credential
 
