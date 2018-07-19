@@ -198,7 +198,7 @@ After acknowledging that the use of the Gluu Gateway is under the MIT license, y
 | **Public password** | From [oxd-server license](https://oxd.gluu.org/) |
 | **License password** | From [oxd-server license](https://oxd.gluu.org/) |
 | **oxd https url** | Make sure the oxd-https-extension is running. |
-| **Would you like to generate client_id/client_secret for konga?** | Register an OpenID Client for Konga, or enter existing client credentials manually. By default, the client expiration is set to 24 hours; make sure to extend this expiration date in the Gluu Server. If you enter existing client details, make sure your client in Redirect Login URIs and Post Logout Redirect URIs field, you have the value `https://localhost:1338`. |
+| **Would you like to generate client_id/client_secret for konga?** | Register an OpenID Client for Konga, or enter existing client credentials manually. By default, the client expiration is set to 24 hours; make sure to [extend this expiration date](https://gluu.org/docs/oxd/3.1.3/faq/#how-can-i-avoid-client-expiration). Without this step, after 24 hours you will no longer be able to log in to the Gluu Gateway. If you enter existing client details, make sure your client in Redirect Login URIs and Post Logout Redirect URIs field, you have the value `https://localhost:1338`. |
 | **oxd_id** | Used to manually set the oxd id. |
 | **client_id_of_oxd_id** | Used to manually set the client id of oxd id. |
 | **setup_client_oxd_id** | Used to manually set the setup client oxd id. |
@@ -220,12 +220,13 @@ workstation to the Gluu Gateway server, and point your browser at
     See [FAQ](./faq.md#how-can-i-change-the-listening-address-and-port) for global access configuration.
     
 !!! Warning
-    By default, the Gluu Gateway Client expiration date is set for one day during the installation process. To change it, follow    [these instructions](https://gluu.org/docs/oxd/3.1.3/faq/#how-can-i-avoid-client-expiration).  
+    By default, the Gluu Gateway Client expiration date is set for one day during the installation process. To change it, follow    [these instructions](https://gluu.org/docs/oxd/3.1.3/faq/#how-can-i-avoid-client-expiration). Without this step, after 24 hours you will no longer be able to log in to the Gluu Gateway. 
     
 # Removal
 
 !!! Note 
-    Always run the following commands as root.
+    Always run the following commands as root. To avoid errors, run them in the order given below.
+
 
 Use `apt` to remove the gluu-gateway package.
 ```
