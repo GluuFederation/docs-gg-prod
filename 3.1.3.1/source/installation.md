@@ -222,7 +222,7 @@ workstation to the Gluu Gateway server, and point your browser at
 !!! Warning
     By default, the Gluu Gateway Client expiration date is set for one day during the installation process. To change it, follow    [these instructions](https://gluu.org/docs/oxd/3.1.3/faq/#how-can-i-avoid-client-expiration). Without this step, after 24 hours you will no longer be able to log in to the Gluu Gateway. 
     
-# Removal
+## Removal
 
 !!! Note 
     Always run the following commands as root. To avoid errors, run them in the order given below.
