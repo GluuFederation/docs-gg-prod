@@ -47,7 +47,5 @@ If you see this message in any response, it means that you haven't added the cus
 ### How can I change the listening address and port?
 By default, Gluu Gateway listens to localhost only, but you can change it manually by configuring the `local.js` config file using the [Configuration section](https://gluu.org/docs/gg/3.1.3/configuration/#admin-gui-portal-konga). You just need to update the `explicitHost` to your global IP or remove this attribute. Read more about the configuration [here](https://sailsjs.com/documentation/reference/configuration/sails-config).
  
-### How can I change Gluu Gateway Client expiration date?
-By default, the Gluu Gateway Client expiration date is set for one day during the installation process. To change it, set a different value on your Gluu Server.
-
+ 
 If you require any further support, please open a ticket on the [Gluu support portal](https://support.gluu.org).
