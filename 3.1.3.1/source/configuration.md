@@ -49,7 +49,7 @@ The Gluu Gateway service is used to manage all components, including: the Admin 
 
 ## OXD
 
-Refer to the [oxd docs](https://gluu.org/docs/oxd/3.1.3) for more information on the topics below. 
+Refer to the [oxd docs](https://gluu.org/docs/oxd) for more information on the topics below. 
 
 * Configure the OXD-Server
 

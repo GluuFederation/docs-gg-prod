@@ -186,11 +186,9 @@ The next step is to configure the [Gluu OAuth 2.0 UMA RS plugin](#gluu-oauth-20-
 
 ## Gluu OAuth 2.0 UMA RS plugin
 
-User-Managed Access Resource Server plugin.
+It is a User-Managed Access Resource Server plugin which allows you to protect your API (proxied by Kong) with [UMA](https://docs.kantarainitiative.org/uma/rec-uma-core.html).
 
-It allows you to protect your API (which is proxied by Kong) with [UMA](https://docs.kantarainitiative.org/uma/rec-uma-core.html)
-
-!!! Note: 
+!!! Note
     You need to configure the **gluu-oauth2-client-auth** plugin first.
 
 ### Installation
@@ -225,7 +223,7 @@ It allows you to protect your API (which is proxied by Kong) with [UMA](https://
 
 Protection document - a JSON document which describes UMA protection in a declarative way and is based on the [uma-rs](https://github.com/GluuFederation/uma-rs) project.
 
- - path - a relative path to protect (exact match)
+ - path - a relative path to [protect](#dynamic-resource-protection)
  - httpMethods - GET, HEAD, POST, PUT, DELETE
  - scope - the scope required to access the given path
  - ticketScopes - an optional parameter which may be used to keep the ticket scope as narrow as possible. If not specified, the plugin will register the ticket with its scopes specified by "scope," which may often  be unwanted. (For example, the scope may have "http://photoz.example.com/dev/actions/all" and the authorized ticket may grant access also to other resources).
@@ -351,33 +349,6 @@ You can also pass the scope-expression format.
   }
 ]
 ```
-#### Dynamic resource protection
-
-If you want to protect a dynamic resource with UMA or OAuth scopes, you can do this by securing the parent path. For example, if you want to secure both `/folder` and `/folder/[id]`, you only need to secure `/folder` with a chosen scope. The protection of the parent will be applied to its children, unless different protection is explicitly defined.
-
-Use cases for different resource security:
-- Rule1 for path GET /root                  `{scope: a and b}`
-- Rule2 for path GET /root/folder1          `{scope: c}`
-- Rule3 for path GET /root/folder1/folder2  `{scope: d}`
-
-```
-GET /root     --> Apply Rule1
-GET /root/1    --> Apply Rule1
-GET /root/one    --> Apply Rule1
-GET /root/one/two  --> Apply Rule1
-GET /root/two?id=df4edfdf  --> Apply Rule1
-
-GET /root/folder1   --> Apply Rule2
-GET /root/folder1/1   --> Apply Rule2
-GET /root/folder1?id=dfdf454gtfg  --> Apply Rule2
-GET /root/folder1/one/two  --> Apply Rule2
-GET /root/folder1/one/two/treww?id=w4354f  --> Apply Rule2
-
-GET /root/folder1/folder2/1    --> Apply Rule3
-GET /root/folder1/folder2/one/two  --> Apply Rule3
-GET /root/folder1/folder2/dsd545df   --> Apply Rule3
-GET /root/folder1/folder2/one?id=fdfdf  --> Apply Rule3
-```
 
 #### Dynamic resource protection
 
@@ -414,10 +385,6 @@ OAuth Scope Expression is a JSON expression, security for OAuth scopes. It check
 !!! Note
     You can enable and disable the OAuth scope expression by using [OAuth credential's `OAuth scope security`](#create-an-oauth-credential) flag.
 
- - path - a relative path to protect (exact match)
- - httpMethods - GET, HEAD, POST, PUT, DELETE
- - scope - the OAuth scope required to access the given path
- 
 Let's say you have an API which you would like to protect:
 
 ```

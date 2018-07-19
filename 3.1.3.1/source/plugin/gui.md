@@ -11,7 +11,7 @@ You can configure the plugins using the Admin GUI - Konga. There are two plugins
 
 ## Gluu OAuth 2.0 client credential authentication
 
-This plugin enables the use of an external OpenId Provider for OAuth2 client registration and authentication. It needs to connect via `https` to Gluu's `oxd-https-extension` service, which is an OAuth2 client middleware service. It provides OAuth 2.0 client credential authentication with [three different modes.](https://gluu.org/docs/gg/3.1.3/#oauth-mode)
+This plugin enables the use of an external OpenId Provider for OAuth2 client registration and authentication. It needs to connect via `https` to Gluu's `oxd-https-extension` service, which is an OAuth2 client middleware service. It provides OAuth 2.0 client credential authentication with [three different modes.](/#oauth-mode)
 
 ### Add an API
 
@@ -36,7 +36,7 @@ In order to use the plugin, you first need to create a Consumer to associate one
 
 ### Create a Consumer 
 
-You need to associate a credential with an existing Consumer object which represents a user consuming the API. To create a Consumer, you can use the [Consumer section](https://gluu.org/docs/gg/3.1.3/admin-gui/#consumers).
+You need to associate a credential with an existing Consumer object which represents a user consuming the API. To create a Consumer, you can use the [Consumer section](/admin-gui/#consumers).
 
 ### Create an OAuth credential
 
@@ -44,9 +44,9 @@ This process registers an OpenId client with oxd which helps you get tokens and 
 
 | Mode | DESCRIPTION |
 |----------------|-------------|
-| oauth_mode | If set to Yes, then Kong acts as an OAuth client only. |
-| uma_mode | If set to Yes, then this indicates your client is a valid UMA client, and obtains and sends an RPT as the access token. You need to configure the [gluu-oauth2-rs](https://github.com/GluuFederation/gluu-gateway/tree/master/gluu-oauth2-rs) plugin for uma_mode. |
-| mix_mode | If set to Yes, then the gluu-oauth2 plugin will try to obtain an UMA RPT token if the RS returns 401/Unauthorized. You need to configure the [gluu-oauth2-rs](https://github.com/GluuFederation/gluu-gateway/tree/master/gluu-oauth2-rs) plugin for uma_mode. |
+| oauth_mode | If set to Yes, the client must present an `ACTIVE` OAuth token to call an API. |
+| uma_mode | If set to Yes, the client must present an `ACTIVE` UMA RPT token to call an  API. You need to configure the [gluu-oauth2-rs](https://github.com/GluuFederation/gluu-gateway/tree/master/gluu-oauth2-rs) plugin for uma_mode. |
+| mix_mode | If set to Yes, the client must present an `ACTIVE` OAuth token to call an API. Kong will obtain an UMA permission ticket, and attempt to obtain an RPT on behalf of the client. The client can send pushed claims using the `UMA_PUSHED_CLAIMS` header with JSON in the following format: `{"claim_token":"...","claim_token_format":"..."}`. You need to configure the [gluu-oauth2-rs](https://github.com/GluuFederation/gluu-gateway/tree/master/gluu-oauth2-rs) plugin for mix_mode. |
 
 Use the [Consumer credentials configuration](../admin-gui.md#consumer-credentials-configuration) section to create an OAuth credential. In the `Credentials` section, there is an `OAuth2` section. Click on the `+ Create credentials` button.
 
@@ -84,9 +84,7 @@ The next step is to configure [Gluu OAuth 2.0 UMA RS plugin](#gluu-oauth-20-uma-
 
 ## Gluu OAuth 2.0 UMA RS Plugin
 
-User-Managed Access Resource Server plugin.
-
-It allows you to protect your API (which is proxied by Kong) with [UMA](https://docs.kantarainitiative.org/uma/rec-uma-core.html)
+It is a User-Managed Access Resource Server plugin which allows you to protect your API (proxied by Kong) with [UMA](https://docs.kantarainitiative.org/uma/rec-uma-core.html).
 
 !!! Note
     You need to configure the **gluu-oauth2-client-auth** plugin first.
@@ -116,7 +114,7 @@ Protection document (UMA Resources) is a JSON document which describes UMA prote
 
 ![UMA Resources](../img/3_4_add_uma_rs.png)
 
- - path - a relative path to protect (exact match)
+ - path - a relative path to [protect](#dynamic-resource-protection)
  - httpMethods - GET, HEAD, POST, PUT, DELETE
  - scope - the scope required to access the given path
  - ticketScopes - an optional parameter which may be used to keep the ticket scope as narrow as possible. If not specified, the plugin will register the ticket with its scopes specified by "scope," which may often be unwanted. (For example, the scope may have "http://photoz.example.com/dev/actions/all" and the authorized ticket may grant access also to other resources).
@@ -244,7 +242,7 @@ OAuth Scope Expression is a JSON expression which defines security for OAuth sco
 
 ![OAuth_Expression](../img/3_4_add_oauth_scope_expression.png)
 
- - path - a relative path to protect (exact match)
+ - path - a relative path to [protect](#dynamic-resource-protection)
  - httpMethods - GET, HEAD, POST, PUT, DELETE
  - scope - the OAuth scope required to access the given path
  
