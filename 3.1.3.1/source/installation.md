@@ -221,7 +221,30 @@ workstation to the Gluu Gateway server, and point your browser at
     
 !!! Warning
     By default, the Gluu Gateway Client expiration date is set for one day during the installation process. To change it, follow    [these instructions](https://gluu.org/docs/oxd/3.1.3/faq/#how-can-i-avoid-client-expiration). Without this step, after 24 hours you will no longer be able to log in to the Gluu Gateway. 
+
+## Upgrade
+
+When a Gluu Gateway upgrade is available, follow these steps:
+
+* Go to the Gluu repo:
+```
+# echo "deb https://repo.gluu.org/ubuntu/ trusty main" > /etc/apt/sources.list.d/gluu-repo.list
+```
+* Run:
+```
+ # apt update
+ # apt install --only-upgrade gluu-gateway
+```
+* Run the setup script:
+```
+ # cd /opt/gluu-gateway/setup
+ # python setup-gluu-gateway.py
+```
+!!! Warning 
+    During the setup, choose to enter the existing client credentials manually if you want to continue using them. If you want to start afresh, choose to generate client credentials again. By doing so, you might lose your previously created APIs or Consumers, and thus generate more [applications](/plugin/gui/#application-creation-in-oxd) in the oxd platform.
     
+* [Finish](#finish-the-setup) the setup
+
 ## Removal
 
 !!! Note 

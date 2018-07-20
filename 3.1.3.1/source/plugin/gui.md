@@ -25,7 +25,7 @@ Use the [Manage APIs](../admin-gui.md#manage-apis) section to enable the `gluu-o
 
 | **FORM PARAMETER** | **DESCRIPTION** |
 |---------------|-----------------|
-| oxd id (optional) | Used to introspect the token. By default it completes oxd_id with [Config](../configuration.md#admin-gui-portal-konga). You can also enter any other oxd_id. If you leave it blank, the plugin creates a new client itself. |
+| oxd id (optional) | Used to introspect the token. By default it takes oxd_id from [Config](../configuration.md#admin-gui-portal-konga). You can also enter any other oxd_id. If you leave `oxd_id` blank during `gluu-oauth2-client-auth` addition, it will register the client in oxd and generate an application in the oxd-ecommerce platform when the plugin uses it for token introspection. |
 | anonymous (optional) | An optional string (consumer uuid) value to use as an `anonymous` consumer if authentication fails. If empty (default), the request will fail with an authentication failure 4xx. Please note that this value must refer to the Consumer id attribute which is internal to Kong, and not its custom_id. |
 | hide credentials (optional) | An optional boolean value telling the plugin to hide the credential to the upstream API server. It will be removed by Kong before proxying the request |
 
@@ -40,13 +40,18 @@ You need to associate a credential with an existing Consumer object which repres
 
 ### Create an OAuth credential
 
+!!! Note
+    Consumer creation only registers the client in oxd. It will generate an [application](#application-creation-in-oxd) when you make a token request.
+    `UMA-RS` addition registers the client and resources, so it will create 2 applications.
+    If you leave `oxd_id` blank during `gluu-oauth2-client-auth` addition, it will register the client in oxd and generate an application in the oxd-ecommerce platform when the plugin uses it for token introspection.
+    
 This process registers an OpenId client with oxd which helps you get tokens and authenticate the token. The Plugin behaves as per selected mode. There are three modes. 
 
 | Mode | DESCRIPTION |
 |----------------|-------------|
 | oauth_mode | If set to Yes, the client must present an `ACTIVE` OAuth token to call an API. |
-| uma_mode | If set to Yes, the client must present an `ACTIVE` UMA RPT token to call an  API. You need to configure the [gluu-oauth2-rs](https://github.com/GluuFederation/gluu-gateway/tree/master/gluu-oauth2-rs) plugin for uma_mode. |
-| mix_mode | If set to Yes, the client must present an `ACTIVE` OAuth token to call an API. Kong will obtain an UMA permission ticket, and attempt to obtain an RPT on behalf of the client. The client can send pushed claims using the `UMA_PUSHED_CLAIMS` header with JSON in the following format: `{"claim_token":"...","claim_token_format":"..."}`. You need to configure the [gluu-oauth2-rs](https://github.com/GluuFederation/gluu-gateway/tree/master/gluu-oauth2-rs) plugin for mix_mode. |
+| uma_mode | If set to Yes, the client must present an `ACTIVE` UMA RPT token to call an  API. You need to configure the [gluu-oauth2-rs](/plugin/gui/#gluu-oauth-20-uma-rs-plugin) plugin for uma_mode. |
+| mix_mode | If set to Yes, the client must present an `ACTIVE` OAuth token to call an API. Kong will obtain an UMA permission ticket, and attempt to obtain an RPT on behalf of the client. The client can send pushed claims using the `UMA_PUSHED_CLAIMS` header with JSON in the following format: `{"claim_token":"...","claim_token_format":"..."}`. You need to configure the [gluu-oauth2-rs](/plugin/gui/#gluu-oauth-20-uma-rs-plugin) plugin for mix_mode. |
 
 Use the [Consumer credentials configuration](../admin-gui.md#consumer-credentials-configuration) section to create an OAuth credential. In the `Credentials` section, there is an `OAuth2` section. Click on the `+ Create credentials` button.
 
@@ -95,6 +100,9 @@ It is a User-Managed Access Resource Server plugin which allows you to protect y
 The first step is to add your API in Kong. Use the [API Section](../admin-gui.md#apis) to add it in Kong.
 
 ### Enable gluu-oauth2-rs protection
+
+!!! Note
+    `UMA-RS` addition registers the client and resources, so it will create 2 [applications](#application-creation-in-oxd).
 
 Use the `SECURITY` link in the [API](../admin-gui.md#apis) section.
 
@@ -368,9 +376,11 @@ An application, as presented in the oxd ecommerce platform, is an oxd client cre
 
 - installation, setup and logging in to the Gluu Gateway = 2 applications (2 active clients used)
 - creation of an API protected with `gluu-oauth2-rs` = 2 applications (2 active clients used)
-- an `Oauth flow` = 1 application (1 active client used) 
+- an `Oauth flow` = 1 application* (1 active client used) 
 - an `UMA flow` = 2 applications (2 active clients used)
-- a `Mix flow` = 1 application (1 active client used)
+- a `Mix flow` = 1 application* (1 active client used)
+
+(*) When you choose to leave `oxd_id` blank in the `gluu-oauth2-client-auth` protection process, two applications are created.
 
 !!! Note
     A flow is an end-to-end sequence of calls to get the token necessary to make a successful call for a protected resource, used in any of the three modes of access management provided by the Gluu Gateway. You can test the three modes and their basic flows using the prepared `Katalon` tests available [here]( https://github.com/GluuFederation/gluu-gateway/tree/master/tests), as well as the `REST Postman` collections available in [this repo]( https://github.com/GluuFederation/gluu-gateway/tree/master/postman).

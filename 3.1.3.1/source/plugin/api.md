@@ -75,7 +75,7 @@ curl -X POST http://kong:8001/apis/{api}/plugins \
 | config.hide_credentials (optional) | false | An optional boolean value telling the plugin to hide the credential to the upstream API server. It will be removed by Kong before proxying the request. |
 | config.op_server | | OP server |
 | config.oxd_http_url | | OXD HTTP extension URL |
-| config.oxd_id (optional) | | Used to introspect the token. You can use any other oxd_id. If you do not pass it, the plugin creates a new client itself. |
+| config.oxd_id (optional) | | Used to introspect the token. You can use any other oxd_id. If you leave `oxd_id` blank during `gluu-oauth2-client-auth` addition, it will register the client in oxd and generate an application in the oxd-ecommerce platform when the plugin uses it for token introspection. |
 | config.anonymous (optional) | | An optional string (Consumer uuid) value to use as an "anonymous" Consumer in case  authentication fails. If empty (default), the request will fail with an authentication failure 4xx. Please note that this value must refer to the Consumer id attribute which is internal to Kong, and not its custom_id. |
 
 ### Usage
@@ -107,6 +107,11 @@ HTTP/1.1 201 Created
 
 #### Create an OAuth credential
 
+!!! Note
+    Consumer creation only registers the client in oxd. It will generate an [application](#application-creation-in-oxd) when you make a token request.
+    `UMA-RS` addition registers the client and resources, so it will create 2 applications.
+    If you leave `oxd_id` blank during `gluu-oauth2-client-auth` addition, it will register the client in oxd and generate an application in the oxd-ecommerce platform when the plugin uses it for token introspection.
+    
 This process registers an OpenId client with oxd which helps you get tokens and authenticate the token. The plugin behaves as per selected mode. There are three modes.
 
 | Mode | DESCRIPTION |
@@ -464,6 +469,9 @@ $ curl -i -X GET \
 
 #### Enable gluu-oauth2-rs protection
 
+!!! Note
+    `UMA-RS` addition registers the client and resources, so it will create 2 [applications](#application-creation-in-oxd).
+
 Important : each protection_document and oauth_scope_expression double quotes must be escaped by the '\\' sign. This limitation comes from the Kong configuration parameter type limitation which is limited to: "id", "number", "boolean", "string", "table", "array", "url", "timestamp".
    
 During gluu-oauth2-rs addition to /plugins, keep in mind that oxd must be up and running; otherwise, the registration will fail. It's because during a POST call to Kong's /plugin endpoint, the plugin performs self-registration on the oxd server at oxd_host provided in the configuration. For this reason, if the plugin is added and you remove oxd (or install a new version of oxd) without configuration persistence, then gluu-oauth2-rs must be re-registered (to force registration with the newly installed oxd).
@@ -598,11 +606,13 @@ An application, as presented in the oxd ecommerce platform, is an oxd client cre
 
 - installation, setup and logging in to the Gluu Gateway = 2 applications (2 active clients used)
 - creation of an API protected with `gluu-oauth2-rs` = 2 applications (2 active clients used)
-- an `Oauth flow` = 1 application (1 active client used) 
+- an `Oauth flow` = 1 application* (1 active client used) 
 - an `UMA flow` = 2 applications (2 active clients used)
-- a `Mix flow` = 1 application (1 active client used)
+- a `Mix flow` = 1 application* (1 active client used)
 
-Note!!!
+(*) When you choose to leave `oxd_id` blank in the `gluu-oauth2-client-auth` protection process, two applications are created.
+
+!!! Note
     A flow is an end-to-end sequence of calls to get the token necessary to make a successful call for a protected resource, used in any of the three modes of access management provided by the Gluu Gateway. You can test the three modes and their basic flows using the prepared `Katalon` tests available [here]( https://github.com/GluuFederation/gluu-gateway/tree/master/tests), as well as the `REST Postman` collections available in [this repo]( https://github.com/GluuFederation/gluu-gateway/tree/master/postman).
     
 These actions do not result in the creation of active clients and therefore are not shown in the oxd ecommerce platform:
