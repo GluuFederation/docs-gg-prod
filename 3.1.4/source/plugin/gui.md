@@ -213,6 +213,10 @@ You can see the below JSON by clicking on the `VIEW RESOURCES JSON` button. Scop
   }
 ]
 ```
+
+!!! Note
+    If there is no authorization policy in your UMA scope then you need to set `umaGrantAccessIfNoPolicies` oxAuth property to `true` in your AS(authorization server). 
+
 #### Dynamic resource protection
 
 If you want to protect a dynamic resource with UMA or OAuth scopes, you can do this by securing the parent path. For example, if you want to secure both `/folder` and `/folder/[id]`, you only need to secure `/folder` with a chosen scope. The protection of the parent will be applied to its children, unless different protection is explicitly defined.
