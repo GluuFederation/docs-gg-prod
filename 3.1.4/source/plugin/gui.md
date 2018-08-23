@@ -26,6 +26,8 @@ Use the [Manage APIs](../admin-gui.md#manage-apis) section to enable the `gluu-o
 | **FORM PARAMETER** | **DESCRIPTION** |
 |---------------|-----------------|
 | oxd id (optional) | Used to introspect the token. By default it takes oxd_id from [Config](../configuration.md#admin-gui-portal-konga). You can also enter any other oxd_id. If you leave `oxd_id` blank during `gluu-oauth2-client-auth` addition, it will register the client in oxd and generate an application in the oxd-ecommerce platform when the plugin uses it for token introspection. |
+| config.client_id (optional) | Used to get protection access token for introspection api. You can use any other oxd_id. If you leave `oxd_id` blank during `gluu-oauth2-client-auth` addition, it will register the client in oxd and generate an application in the oxd-ecommerce platform when the plugin uses it for token introspection. |
+| config.client_secret (optional) | Used to get protection access token for introspection api. You can use any other oxd_id. If you leave `oxd_id` blank during `gluu-oauth2-client-auth` addition, it will register the client in oxd and generate an application in the oxd-ecommerce platform when the plugin uses it for token introspection. |
 | anonymous (optional) | An optional string (consumer uuid) value to use as an `anonymous` consumer if authentication fails. If empty (default), the request will fail with an authentication failure 4xx. Please note that this value must refer to the Consumer id attribute which is internal to Kong, and not its custom_id. |
 | hide credentials (optional) | An optional boolean value telling the plugin to hide the credential to the upstream API server. It will be removed by Kong before proxying the request |
 

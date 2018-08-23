@@ -64,6 +64,8 @@ curl -X POST http://kong:8001/apis/{api}/plugins \
     --data "config.op_server=<op_server.com>" \
     --data "config.oxd_http_url=<oxd_http_url>" \
     --data "config.oxd_id=<oxd_id>" \
+    --data "config.client_id=<client_id>" \
+    --data "config.client_secret=<client_secret>" \
     --data "config.anonymous=<consumer_id>"
 ```
 
@@ -76,6 +78,8 @@ curl -X POST http://kong:8001/apis/{api}/plugins \
 | config.op_server | | OP server |
 | config.oxd_http_url | | OXD HTTP extension URL |
 | config.oxd_id (optional) | | Used to introspect the token. You can use any other oxd_id. If you leave `oxd_id` blank during `gluu-oauth2-client-auth` addition, it will register the client in oxd and generate an application in the oxd-ecommerce platform when the plugin uses it for token introspection. |
+| config.client_id (optional) | | Used to get protection access token for introspection api. You can use any other oxd_id. If you leave `oxd_id` blank during `gluu-oauth2-client-auth` addition, it will register the client in oxd and generate an application in the oxd-ecommerce platform when the plugin uses it for token introspection. |
+| config.client_secret (optional) | | Used to get protection access token for introspection api. You can use any other oxd_id. If you leave `oxd_id` blank during `gluu-oauth2-client-auth` addition, it will register the client in oxd and generate an application in the oxd-ecommerce platform when the plugin uses it for token introspection. |
 | config.anonymous (optional) | | An optional string (Consumer uuid) value to use as an "anonymous" Consumer in case  authentication fails. If empty (default), the request will fail with an authentication failure 4xx. Please note that this value must refer to the Consumer id attribute which is internal to Kong, and not its custom_id. |
 
 ### Usage
