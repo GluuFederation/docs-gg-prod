@@ -71,7 +71,7 @@ Gluu Gateway uses free open source software components to achieve its API gatewa
 
 - The first 10 clients created by oxd each month are free. Additional clients active for longer than 5 consecutive days are billed $10 per month. 
 
-- Learn more about oxd's [freemium pricing model](https://gluu.org/docs/oxd/3.1.3.1/#pricing-billing) in the docs. 
+- Learn more about oxd's [freemium pricing model](https://gluu.org/docs/oxd/3.1.4/#pricing-billing) in the docs. 
 
 ## Licenses
 
