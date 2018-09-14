@@ -20,7 +20,7 @@ This plugin enables the use of an external OpenId Provider for OAuth2 client reg
 
 ### Installation
 1. [Install Kong](https://getkong.org/install/)
-2. [Install oxd server v3.1.3](https://oxd.gluu.org/docs/)
+2. [Install oxd server v3.1.4](https://oxd.gluu.org/docs/)
 3. Install gluu-oauth2-client-auth:
     1. Stop Kong : `kong stop`
     2. Using luarocks `luarocks install gluu-oauth2-client-auth`
@@ -203,7 +203,7 @@ It is a User-Managed Access Resource Server plugin which allows you to protect y
 ### Installation
 
 1. [Install Kong](https://getkong.org/install/)
-2. [Install oxd server v3.1.3](https://oxd.gluu.org/docs/)
+2. [Install oxd server v3.1.4](https://oxd.gluu.org/docs/)
 3. Install gluu-oauth2-rs
     1. Stop Kong : `kong stop`
     2. 
@@ -440,7 +440,7 @@ In the runtime, it matches the scope expression with token scopes. The inner exp
 
 ### Protect your API with UMA
 
-#### Add your API server to kong /apis
+#### Add your API server to Kong /apis
 
 ```curl
 $ curl -i -X POST \
@@ -587,7 +587,7 @@ WWW-Authenticate: UMA realm="rs",
     "message": "Unauthorized"
 }
 ```
-You can make an uma-rp-get-rpt call to the oxd server, passing the obtained ticket with a consumer access token to obtain an RPT. Then you can use it to access an API. To learn more about the request, follow the [oxd documentation.](https://gluu.org/docs/oxd/3.1.3.1/api/#uma-rp-get-rpt)
+You can make an uma-rp-get-rpt call to the oxd server, passing the obtained ticket with a consumer access token to obtain an RPT. Then you can use it to access an API. To learn more about the request, follow the [oxd documentation.](https://gluu.org/docs/oxd/3.1.4/api/#uma-rp-get-rpt)
 
 ### 200 Success
 
@@ -617,7 +617,7 @@ An application, as presented in the oxd ecommerce platform, is an oxd client cre
 - an `UMA flow` = 2 applications (2 active clients used)
 - a `Mix flow` = 1 application* (1 active client used)
 
-(*) When you choose to leave `oxd_id` blank in the `gluu-oauth2-client-auth` protection process, two applications are created.
+When you choose to leave `oxd_id` blank in the `gluu-oauth2-client-auth` protection process, two applications are created.
 
 !!! Note
     A flow is an end-to-end sequence of calls to get the token necessary to make a successful call for a protected resource, used in any of the three modes of access management provided by the Gluu Gateway. You can test the three modes and their basic flows using the prepared `Katalon` tests available [here]( https://github.com/GluuFederation/gluu-gateway/tree/master/tests), as well as the `REST Postman` collections available in [this repo]( https://github.com/GluuFederation/gluu-gateway/tree/master/postman).
