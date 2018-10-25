@@ -2,7 +2,7 @@
 
 ## Gluu Gateway
 
-The Gluu Gateway service is used to manage all components, including: the Admin GUI Portal "Konga", Kong, Postgres, OXD-Server and OXD-https-extension.
+The Gluu Gateway service is used to manage all components, including: the Admin GUI Portal "Konga", Kong, Postgres, oxd Server and oxd-https-extension.
 
 !!! Warning 
     Stopping one service influences the work of the others. Make sure all the required services are up and running to provide a stable Gluu Gateway environment. 
@@ -51,25 +51,25 @@ The Gluu Gateway service is used to manage all components, including: the Admin 
 
 Refer to the [oxd docs](https://gluu.org/docs/oxd) for more information on the topics below. 
 
-* Configure the OXD-Server
+* Configure the oxd Server
 
     ```
      /etc/oxd/oxd-server/oxd-conf.json
     ```
 
-* Manage the OXD-Server service
+* Manage the oxd Server service
 
     ```
      # service oxd-server [start|stop|restart|status]
     ```
 
-* Configure OXD-https-extension
+* Configure oxd-https-extension
 
     ```
      /opt/oxd-https-extension/lib/oxd-https.yml
     ```
 
-* Start/Stop/Restart/Status OXD-https-extension
+* Start/Stop/Restart/Status oxd-https-extension
 
     ```
      # service oxd-https-extension [start|stop|restart|status]
