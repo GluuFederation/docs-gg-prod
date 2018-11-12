@@ -20,56 +20,72 @@ The remaining subsections of Requests, Connections and Timers show real-time met
 The Info section shows generic details about the Kong node.
 ![info](img/2_info.png)
 
-## APIs
+## SERVICEs
 
-The API object describes an API that's being exposed by Kong. Kong needs to know how to retrieve the API when a consumer is calling it from the Proxy port. Each API object must specify some combination of `hosts`, `uris`, and `methods`. Kong will proxy all requests to the API to the specified upstream URL. 
+### Service List
 
-!!! Note
-    The `SECURITY` option is for the [gluu-oauth2-rs plugin](plugin/gui/#gluu-oauth-20-uma-rs-plugin) configuration. Saving any configuration of paths, HTTP methods and scopes in the UMA Resources means adding the gluu-oauth2-rs plugin to the given API, which is necessary for successful execution of [UMA and Mix flows](/#uma-mode).
+Service entities, as the name implies, are abstractions of each of your own upstream services. Examples of Services would be a data transformation microservice, a billing API, etc. [More details](https://docs.konghq.com).   
     
-![apis](img/3_apis.png)
+![3_service_list](img/3_1_service_list.png)
 
-### Add an API
+| Tools | Details |
+|---|-----|
+| **+ ADD NEW SERVICE** | This button is used to add new service.|
+| **Gluu Security** | This column only shows the added gluu plugins.|
+| **Edit Button** | This button is used to edit service, configure route and configure plugins of selected service. You can click on **service name** to edit service.|
+| **Delete Button** | This button is used to delete selected service. |
+   
+### Add an Service
 
-Add your API by using the `+ ADD NEW API` button in the API section.
+Add your Service using the `+ ADD NEW SERVICE` button.
 
-![api_add](img/3_api_add.png)
+![3_2_add_service](img/3_2_add_service.png)
 
-Attributes of an API object are listed below.
-
-| **FORM PARAMETER** | **DESCRIPTION** |
-|-----------|-------------|
-| **name** | The API name. |
-| **hosts** *(semi-optional)* | A comma-separated list of domain names that point to your API. For example: `example.com`. At least one of `hosts`, `uris`, or `methods` should be specified. |
-| **uris** *(semi-optional)* | A comma-separated list of URI's prefixes that point to your API. For example: `/my-path`. At least one of `hosts`, `uris`, or `methods` should be specified. |
-| **methods** *(semi-optional)* | A comma-separated list of HTTP methods that point to your API. For example: `GET`,`POST`. At least one of `hosts`, `uris`, or `methods` should be specified. |
-| **upstream_url** | The base target URL that points to your API server. This URL will be used for proxying requests. For example: `https://example.com`. |
-| **strip_uri** *(optional)* | When matching an API via one of the uri's prefixes, strip that matching prefix from the upstream URI to be requested. Default: `true`. |
-| **preserve_host** *(optional)* | When matching an API via one of the `hosts` domain names, make sure the request `Host` header is forwarded to the upstream service. By default, this is `false`, and the upstream `Host` header will be extracted from the configured `upstream_url`. |
-| **retries** *(optional)* | The number of retries to execute upon failure to proxy. The default is `5`. |
-| **upstream_connect_timeout** *(optional)* | The timeout in milliseconds for establishing a connection to your upstream service. Defaults to `60000`. |
-| **upstream_send_timeout** *(optional)* | The timeout in milliseconds between two successive write operations for transmitting a request to your upstream service. Defaults to `60000`. |
-| **upstream_read_timeout** *(optional)* | The timeout in milliseconds between two successive read operations for transmitting a request to your upstream service. Defaults to `60000`. |
-| **https_only** *(optional)* | Enable if you wish to only serve an API through HTTPS, on the appropriate port (`443` by default). Default: `false`. |
-| **http_if_terminated** *(optional)* | Consider the `X-Forwarded-Proto` header when enforcing HTTPS-only traffic. Default: `false`. |
-
-### Manage APIS
+### Manage Service
 
 You can edit an API and manage its plugins by clicking on the pencil icon on the API list. There are two sections.
 
-**API Details:** This section is used to view and edit your API.
+#### Service Details
+This section is used to view and edit your Service.
 
-![api_details](img/3_3_api_details.png)
+![3_3_service_details](img/3_3_service_details.png)
 
-**Plugins:** This section is used to view the list of added Plugins and add a new Plugin. If you want to switch a plugin on/off, just use the toggle bar. Editing a plugin’s details is possible after clicking on its name on the list. You can also delete a plugin by clicking on the DELETE button.
+#### Routes
+This section is used to manage route within selected service.
 
-* The Plugin list
+![3_4_service_route](img/3_4_service_route.png)
+
+| Tools | Details |
+|---|-----|
+| **+ ADD ROUTE** | This button is used to add new route.|
+| **Edit Button** | This button is used to edit route, configure route and configure plugins of selected service.|
+| **Delete Button** | This button is used to delete selected route. |
+
+#### Plugins
+This section is used to view the list of added Plugins and add a new Plugin.
+
+##### Plugin list
   
-  ![api_plugin_list](img/3_2_api_plugin_list.png)
+  ![3_5_service_plugins](img/3_5_service_plugins.png)
 
-* Add a Plugin by clicking the plus icon next to a plugin’s name
+  | Tools | Details |
+  |---|-----|
+  | **+ ADD PLUGIN** | This button is used to add plugin.|
+  | **Edit Plugin** | Click on plugin name to edit plugin configurations.|
+  | **Delete Button** | This button is used to delete selected route. |
+  | **ON/OFF Switch** |If you want to switch a plugin on/off, just use the toggle bar.|
+
+##### Add Plugin
+
+  Add a Plugin by clicking the plus icon next to a plugin’s name.
   
-  ![add_plugin_api](img/3_1_add_plugin_api.png)
+  ![3_6_add_plugins](img/3_6_add_plugins.png)
+
+#### Eligible consumers
+
+  This section is for ACL kong plugin which Restrict access to an API by whitelisting or blacklisting consumers using arbitrary ACL group names. It shows the list of consumers which is configure with ACL Groups.
+
+  ![3_7_eligible_consumers](img/3_7_eligible_consumers.png)
 
 ## Consumers
 
