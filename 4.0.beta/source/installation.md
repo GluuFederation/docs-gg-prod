@@ -191,17 +191,10 @@ After acknowledging that the use of the Gluu Gateway is under the MIT license, y
 | **Enter Organization name** | Used to generate web X.509 certificates |
 | **Email address** | Used to generate web X.509 certificates |
 | **Password** | If you already have a database password for user `postgres`, enter it here. Otherwise, enter a new password. |
-| **Would you like to configure oxd-server?** | Enables intergration with the Gluu Server. If you want to skip the configuration, make sure that you already have the oxd-server configured manually. Read how to do it [here](https://gluu.org/docs/oxd/configuration/). Without this step, you will not be able to log in to the Gluu Gateway. |
-| **OP hostname** | The hostname of the Gluu Server that will be used for OAuth 2.0 client credentials and access management. |
-| **License Id** | From [oxd-server license](https://oxd.gluu.org/) |
-| **Public key** | From [oxd-server license](https://oxd.gluu.org/) |
-| **Public password** | From [oxd-server license](https://oxd.gluu.org/) |
-| **License password** | From [oxd-server license](https://oxd.gluu.org/) |
+| **OP hostname** | The hostname of the Gluu Server that will be used for OAuth 2.0 client credentials and access management. **Example**: op-server.com |
 | **oxd https url** | Make sure the oxd-https-extension is running. |
 | **Would you like to generate client_id/client_secret for konga?** | Register an OpenID Client for Konga, or enter existing client credentials manually. By default, the client expiration is set to 24 hours; make sure to [extend this expiration date](https://gluu.org/docs/oxd/3.1.3/faq/#how-can-i-avoid-client-expiration). Without this step, after 24 hours you will no longer be able to log in to the Gluu Gateway. If you enter existing client details, make sure your client in Redirect Login URIs and Post Logout Redirect URIs field, you have the value `https://localhost:1338`. |
 | **oxd_id** | Used to manually set the oxd id. |
-| **client_id_of_oxd_id** | Used to manually set the client id of oxd id. |
-| **setup_client_oxd_id** | Used to manually set the setup client oxd id. |
 | **client_id** | Used to manually set the client id. |
 | **client_secret** | Used to manually set the client secret. |
 
@@ -217,7 +210,7 @@ workstation to the Gluu Gateway server, and point your browser at
 `https://localhost:1338`. Use the login and password which you also use to access the Gluu Server.
 
 !!! Note
-    See [FAQ](./faq.md#how-can-i-change-the-listening-address-and-port) for global access configuration.
+    If you do not want ssh tunnel connection. See [FAQ](./faq.md#how-can-i-change-the-listening-address-and-port) for global access configuration.
     
 !!! Warning
     By default, the Gluu Gateway Client expiration date is set for one day during the installation process. To change it, follow    [these instructions](https://gluu.org/docs/oxd/3.1.4/faq/#how-can-i-avoid-client-expiration). Without this step, after 24 hours you will no longer be able to log in to the Gluu Gateway. 
@@ -241,7 +234,7 @@ When a Gluu Gateway upgrade is available, follow these steps:
  # python setup-gluu-gateway.py
 ```
 !!! Warning 
-    During the setup, choose to enter the existing client credentials manually if you want to continue using them. If you want to start afresh, choose to generate client credentials again. By doing so, you might lose your previously created APIs or Consumers, and thus generate more [applications](/plugin/gui/#application-creation-in-oxd) in the oxd platform.
+    During the setup, choose to enter the existing client credentials manually if you want to continue using them. If you want to start a fresh, choose to generate client credentials again. By doing so, you might lose your previously created Services or Consumers.
     
 * [Finish](#finish-the-setup) the setup
 
