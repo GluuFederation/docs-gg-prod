@@ -22,7 +22,7 @@ The Info section shows generic details about the Kong node.
 
 ## SERVICEs
 
-### Service List
+### 1. Service List
 
 Service entities, as the name implies, are abstractions of each of your own upstream services. Examples of Services would be a data transformation microservice, a billing API, etc. [More details](https://docs.konghq.com).   
     
@@ -35,22 +35,22 @@ Service entities, as the name implies, are abstractions of each of your own upst
 | **Edit Button** | This button is used to edit service, configure route and configure plugins of selected service. You can click on **service name** to edit service.|
 | **Delete Button** | This button is used to delete selected service. |
    
-### Add an Service
+### 2. Add Service
 
 Add your Service using the `+ ADD NEW SERVICE` button.
 
 ![3_2_add_service](img/3_2_add_service.png)
 
-### Manage Service
+### 3. Manage Service
 
-You can edit an API and manage its plugins by clicking on the pencil icon on the API list. There are two sections.
+You can edit a Service and manage its plugins by clicking on the pencil icon on the Service list. There are four sections.
 
-#### Service Details
+#### 3.1 Service Details
 This section is used to view and edit your Service.
 
 ![3_3_service_details](img/3_3_service_details.png)
 
-#### Routes
+#### 3.2 Routes
 This section is used to manage route within selected service.
 
 ![3_4_service_route](img/3_4_service_route.png)
@@ -61,10 +61,10 @@ This section is used to manage route within selected service.
 | **Edit Button** | This button is used to edit route, configure route and configure plugins of selected service.|
 | **Delete Button** | This button is used to delete selected route. |
 
-#### Plugins
+#### 3.3 Plugins
 This section is used to view the list of added Plugins and add a new Plugin.
 
-##### Plugin list
+##### 3.3.1 Plugin list
   
   ![3_5_service_plugins](img/3_5_service_plugins.png)
 
@@ -75,61 +75,154 @@ This section is used to view the list of added Plugins and add a new Plugin.
   | **Delete Button** | This button is used to delete selected route. |
   | **ON/OFF Switch** |If you want to switch a plugin on/off, just use the toggle bar.|
 
-##### Add Plugin
+##### 3.3.2 Add Plugin
 
   Add a Plugin by clicking the plus icon next to a plugin’s name.
   
   ![3_6_add_plugins](img/3_6_add_plugins.png)
 
-#### Eligible consumers
+#### 3.4 Eligible consumers
 
   This section is for ACL kong plugin which Restrict access to an API by whitelisting or blacklisting consumers using arbitrary ACL group names. It shows the list of consumers which is configure with ACL Groups.
 
   ![3_7_eligible_consumers](img/3_7_eligible_consumers.png)
 
+## ROUTEs
+
+### 1. Route List
+
+The Route entities defines rules to match client requests. Each Route is associated with a Service, and a Service may have multiple Routes associated to it. Every request matching a given Route will be proxied to its associated Service. [More details](https://docs.konghq.com).
+
+![4_1_route_list](img/4_1_route_list.png)
+
+| Tools | Details |
+|---|-----|
+| **Gluu Security** | This column only shows the added gluu plugins.|
+| **Edit Button** | This button is used to edit route and configure plugins of selected route. You can click on **ROUTE ID** to edit route.|
+| **Delete Button** | This button is used to delete selected route. |
+
+### 2. Add Route
+
+[Use Service section to add new route](#32-routes).
+
+### 3. Manage Route
+
+You can edit a Route and manage its plugins by clicking on the pencil icon on the Route list. There are three sections.
+
+#### 3.1 Route Details
+This section is used to view and edit your Route.
+
+![4_2_route_details](img/4_2_route_details.png)
+
+#### 3.2 Plugins
+This section is used to view the list of added Plugins and add a new Plugin.
+
+##### 3.2.1 Plugin list
+
+  ![4_3_route_plugin](img/4_3_route_plugin.png)
+
+  | Tools | Details |
+  |---|-----|
+  | **+ ADD PLUGIN** | This button is used to add plugin.|
+  | **Edit Plugin** | Click on plugin name to edit plugin configurations.|
+  | **Delete Button** | This button is used to delete selected route. |
+  | **ON/OFF Switch** |If you want to switch a plugin on/off, just use the toggle bar.|
+
+##### 3.2.2 Add Plugin
+
+  Add a Plugin by clicking the plus icon next to a plugin’s name.
+
+  ![4_4_add_plugins](img/3_6_add_plugins.png)
+
+#### 3.3 Eligible consumers
+
+  This section is for ACL kong plugin which Restrict access to an API by whitelisting or blacklisting consumers using arbitrary ACL group names. It shows the list of consumers which is configure with ACL Groups.
+
+  ![4_5_route_eligible_consumer](img/4_5_route_eligible_consumer.png)
+
 ## Consumers
 
-The Consumer object represents a consumer - or a user - of an API. You can either rely on Kong as the primary datastore, or you can map the consumer list with your database to keep consistency between Kong and your existing primary datastore.
+The Consumer object represents a consumer - or a user - of a Service. You can either rely on Kong as the primary datastore, or you can map the consumer list with your database to keep consistency between Kong and your existing primary datastore.
 
-![consumers](img/4_consumers_new.png)
+![consumers](img/4_consumers.png)
 
-Add Consumers by using the `+ CREATE CONSUMER` button. The creation form shows details of every field.
+Add Consumers by using the `+ CREATE CONSUMER` button.
 
 ![consumers_add](img/4_customer_add.png)
 
-### Consumer credentials configuration
+| Fields | Details |
+|---|-----|
+| **Consumer Name** | It is Kong Consumer Username, Identifier used by Kong for the client. Should contain no spaces or special characters.|
+| **Gluu Client Id** | It is Kong Consumer Custom Id, Used to correlate an access token with a Kong consumer. You must create a client before you can register it here as a way to identify a consumer.|
 
-Some plugins are consumer-based and store some plugin configuration in consumer credentials. You need to go to the consumer credentials section by clicking on a consumer's `username`.
+### Manage Consumer
 
-![consumer_credential_list](img/4_1_consumer_credential_list.png)
+Click on **Consumer Name** of consumer to manage consumer. You can edit, manage ACLs plugin group and add plugins in manage consumer.
+
+#### 1. Details
+
+You can see and edit the selected consumer details.
+
+![4_edit_consumer](img/4_edit_consumer.png)
+
+#### 2. Groups
+
+You can create a group for ACL plugin. which whitelist and blacklist consumer according to ACL plugin configuration.
+
+![4_consumer_groups](img/4_consumer_groups.png)
+
+#### 3. Plugins
+
+Some plugins provide facility to configure plugin with specific consumer. You can use this section to configure plugin for selected consumer. It will add plugin as global plugin which will apply for every service and route.
+
+![4_consumer_plugin](img/4_consumer_plugin.png)
+
+### Create Client
+
+Click on `+ CREATE CLIENT` button to create OP client. It will create client with `openid`, `oxd` scope and with `client_credentials` grant type.
+
+![4_consumer_client](img/4_consumer_client.png)
+
+| Fields | Details |
+|---|-----|
+| **Client Name**(required) |Use to create client with name.|
+| **Client Id**(optional) |Use any existing OP Client's client_id. If you leave it blank, OXD server will create new client in your OP server.|
+| **Client Secret**(optional) |Use any existing OP Client's client_secret. If you leave it blank, OXD server will create new client in your OP server.|
 
 ## Plugins
 
-A Plugin entity represents a plugin configuration that will be executed during the HTTP request/response workflow. It also enables the user to add functionalities to APIs that run behind Kong, e.g. Authentication or Rate Limiting. You can read about the available Kong Plugins [here](https://konghq.com/plugins/). 
+A Plugin entity represents a plugin configuration that will be executed during the HTTP request/response lifecycle. It is how you can add functionalities to Services that run behind Kong, like Authentication or Rate Limiting for example.
 
-Plugins added in this section of the Gluu Gateway will be applied to all APIs. If you need to add plugins to a specific API, you can do it in the APIs section.
-If you need to add plugins to a specific Consumer, you can do it in the respective Consumer page.
+Plugins added in this section of the Gluu Gateway will be applied to all SERVICEs and ROUTEs. If you need to add plugins to a specific SERVICEs or ROUTEs, you can do it in the [SERVICEs](#services) or [ROUTEs](#routes) section.
+If you need to add plugins to a specific Consumer, you can do it in the respective [Consumer page](#consumers).
 
-![plugins](img/5_plugins.png)
+### Plugin list
+
+![5_plugins](img/5_plugins.png)
+
+### Add Plugin
 
 Add Plugins by using the `+ ADD GLOBAL PLUGINS` button.
 
-![plugins_add](img/5_plugins_add.png)
+![5_plugins_add](img/5_plugins_add.png)
 
 ## Upstreams
 
-The Upstream object represents a virtual hostname and can be used to load balance incoming requests over multiple services (targets), e.g. an upstream named service.v1.xyz with an API object created with an upstream_url=https://service.v1.xyz/some/path. Requests for this API would be proxied to the targets defined within the upstream.
+The upstream object represents a virtual hostname and can be used to loadbalance incoming requests over multiple services (targets). So for example an upstream named service.v1.xyz for a Service object whose host is service.v1.xyz. Requests for this Service would be proxied to the targets defined within the upstream.
 
-![upstreams](img/6_upstream.png)
+![6_upstream](img/6_upstream.png)
 
 Add Upstreams by using the `+ CREATE UPSTREAM` button.
 
-![plugins_add](img/6_upstream_add.png)
+![6_upstream_add](img/6_upstream_add.png)
 
-You can modify the details of your Upstream by clicking the `DETAILS` button next to its name. While changing the number of slots, make sure that the number corresponds to the `Orderlist` and exactly matches its value. For instance, if you want 999 slots, delete slot 1000, for 998 - delete 999 and 1000, etc.).
+You can modify the details of your Upstream by clicking the `DETAILS` button next to its name.
 
-The `Targets` section enables target addition. Because the upstream maintains a history of target changes, the targets cannot be deleted from the list or modified. To disable a target, post a new one with weight=0 or click on the `DELETE` button next to its name, which will automatically assign 0 to its weight. 
+![6_upstream_details](img/6_upstream_details.png)
 
+The `Targets` section is for manage targets. A target is an ip address/hostname with a port that identifies an instance of a backend service. Every upstream can have many targets, and the targets can be dynamically added. Changes are effectuated on the fly.
+
+![6_upstream_targets](img/6_upstream_targets.png)
 
 ## CERTIFICATE
 
