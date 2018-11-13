@@ -247,9 +247,39 @@ Add Connections by using the `+ NEW CONNECTION` button.
 ## Snapshots
 
 Take snapshots of currently active nodes.
-All APIs, Plugins, Consumers, Upstreams and Targets will be saved and available for later import.
+All SERVICEs, ROUTEs, Plugins, Consumers, Upstreams and Targets will be saved and available for later import.
 
-![snapshot](img/9_snapshot.png)
+### List
+
+It shows the list of snapshots.
+
+![9_snapshot](img/9_snapshot.png)
+
+### Take Snapshot
+
+![9_take_snapshot](img/9_take_snapshot.png)
+
+### Details
+
+Click on `Details` option in snapshot list view to see details of snapshot.
+
+![9_snapshot_details](img/9_snapshot_details.png)
+
+You can restore objects by clicking on `RESTORE` button.
+
+![9_snapshot_restore](img/9_snapshot_restore.png)
+
+You can export data by clicking on `EXPORT` button.
+
+### Scheduled tasks
+
+This is used to schedule task which periodically take snapshot.
+
+![9_snapshot_scheduled_list](img/9_snapshot_scheduled_list.png)
+
+Create schedule task using `ADD SCHEDULE` button.
+
+![9_snapshot_scheduled_add](img/9_snapshot_scheduled_add.png)
 
 ## Settings
 
