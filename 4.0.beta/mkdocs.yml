@@ -21,7 +21,7 @@ pages:
 - 'Configuration' : 'configuration.md'
 - 'Admin console' :  'admin-gui.md'   
 - Plugins:
-    - 'GUI' : 'plugin/gui.md'
+    - 'Gluu OAuth PEP' : 'plugin/gluu-oauth-pep.md'
     - 'API' :  'plugin/api.md'
 - Logs : 'logs/index.md'
 - 'FAQ' : 'faq.md'

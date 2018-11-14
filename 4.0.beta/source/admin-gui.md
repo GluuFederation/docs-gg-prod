@@ -1,6 +1,6 @@
 # Admin GUI Portal - Konga Guide
 
-## Dashboard
+## DASHBOARD
 The Dashboard section is divided into subsections which show application configuration details. 
 
 In the Global Info you can see oxd and client details used by Konga. If you want to check the version of the currently used oxd server or the address of the Gluu Server, all the necessary information is provided here. OXD Id Client, Id of OXD Id, Setup client OXD Id, Client Id and Client Secret are the credentials created during the Gluu Gateway installation and setup. 
@@ -15,7 +15,7 @@ The remaining subsections of Requests, Connections and Timers show real-time met
 
 ![dashboard](img/1_dashboard.png)
 
-## Info
+## INFO
 
 The Info section shows generic details about the Kong node.
 ![info](img/2_info.png)
@@ -140,7 +140,7 @@ This section is used to view the list of added Plugins and add a new Plugin.
 
   ![4_5_route_eligible_consumer](img/4_5_route_eligible_consumer.png)
 
-## Consumers
+## CONSUMERS
 
 The Consumer object represents a consumer - or a user - of a Service. You can either rely on Kong as the primary datastore, or you can map the consumer list with your database to keep consistency between Kong and your existing primary datastore.
 
@@ -189,7 +189,7 @@ Click on `+ CREATE CLIENT` button to create OP client. It will create client wit
 | **Client Id**(optional) |Use any existing OP Client's client_id. If you leave it blank, OXD server will create new client in your OP server.|
 | **Client Secret**(optional) |Use any existing OP Client's client_secret. If you leave it blank, OXD server will create new client in your OP server.|
 
-## Plugins
+## PLUGINS
 
 A Plugin entity represents a plugin configuration that will be executed during the HTTP request/response lifecycle. It is how you can add functionalities to Services that run behind Kong, like Authentication or Rate Limiting for example.
 
@@ -206,7 +206,7 @@ Add Plugins by using the `+ ADD GLOBAL PLUGINS` button.
 
 ![5_plugins_add](img/5_plugins_add.png)
 
-## Upstreams
+## UPSTREAMS
 
 The upstream object represents a virtual hostname and can be used to loadbalance incoming requests over multiple services (targets). So for example an upstream named service.v1.xyz for a Service object whose host is service.v1.xyz. Requests for this Service would be proxied to the targets defined within the upstream.
 
@@ -224,7 +224,7 @@ The `Targets` section is for manage targets. A target is an ip address/hostname 
 
 ![6_upstream_targets](img/6_upstream_targets.png)
 
-## CERTIFICATE
+## CERTIFICATES
 
 A Certificate object represents a public certificate/private key pair for an SSL certificate. These objects are used by Kong to handle SSL/TLS termination for encrypted requests. Certificates are optionally associated with SNI objects to tie a cert/key pair to one or more hostnames.
 
@@ -234,7 +234,7 @@ Add Certificates by using the `+ CREATE CERTIFICATE` button.
 
 ![cert_add](img/7_cert_add.png)
 
-## Connections
+## CONNECTIONS
 
 Create connections to Kong nodes and select the one to use by clicking on the respective star icon.
 
@@ -244,7 +244,7 @@ Add Connections by using the `+ NEW CONNECTION` button.
 
 ![conn_add](img/8_conn_add.png)
 
-## Snapshots
+## SNAPSHOTS
 
 Take snapshots of currently active nodes.
 All SERVICEs, ROUTEs, Plugins, Consumers, Upstreams and Targets will be saved and available for later import.
@@ -281,7 +281,7 @@ Create schedule task using `ADD SCHEDULE` button.
 
 ![9_snapshot_scheduled_add](img/9_snapshot_scheduled_add.png)
 
-## Settings
+## SETTINGS
 
 You can set dashboard refresh interval and logout session timeout in settings section.
 
