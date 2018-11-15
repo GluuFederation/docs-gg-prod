@@ -242,3 +242,181 @@ $ curl -X POST \
   }
 }'
 ```
+
+### Parameters
+
+Here is a list of all the parameters which can be used in this plugin's configuration.
+
+| field | Default | Description |
+|-------|---------|-------------|
+|**op_url**||The URL of you OP server. Example: https://op.server.com|
+|**oxd_url**||The URL of you OXD server. Example: https://oxd.server.com|
+|**oxd_id**||It is used to introspect the token.|
+|**client_id**|| It is used to get protection access token to access introspect API. If you enter oxd id, you also need to enter client id and client secret of existing oxd client.|
+|**client_secret**||It is used to get protection access token to access introspect API. If you enter oxd id, you also need to enter client id and client secret of existing oxd client.|
+|**oauth_scope_expression**||It is used to add scope security on OAuth scope token.|
+|**ignore_scope**| false |It will not check any token scope during authentication time.|
+|**deny_by_default**| true |This functionality is for the path which is not protected by OAuth scope expression. If it is true then deny unprotected path otherwise allow.|
+|**anonymous**||An optional string (consumer uuid) value to use as an “anonymous” consumer if authentication fails. If empty (default), the request will fail with an authentication failure 4xx. Please note that this value must refer to the Consumer id attribute which is internal to Kong, and not its custom_id.|
+|**hide_credentials**|false|An optional boolean value telling the plugin to show or hide the credential from the upstream service. If true, the plugin will strip the credential from the request (i.e. the Authorization header) before proxying it.|
+
+#### OAuth Scope Expression
+
+OAuth Scope Expression is a JSON expression, security for OAuth scopes. It checks the scope (from token introspection) of the token with the configured OAuth JSON expression.
+
+!!! Note
+    You can enable and disable the OAuth scope expression by setting `ignore_scope`.
+
+Let's say you have an API which you would like to protect:
+
+```
+[
+  {
+    "path": "/images",
+    "conditions": [
+      {
+        "httpMethods": [
+          "GET"
+        ],
+        "scope_expression": {
+          "rule": {
+            "and": [
+              {
+                "var": 0
+              },
+              {
+                "or": [
+                  {
+                    "var": 1
+                  },
+                  {
+                    "var": 2
+                  }
+                ]
+              }
+            ]
+          },
+          "data": [
+            "openid",
+            "email",
+            "clientinfo"
+          ]
+        }
+      }
+    ]
+  }
+]
+```
+
+![13_oauth_scope_expression](../img/13_oauth_scope_expression.png)
+
+In the runtime, it matches the scope expression with token scopes. The inner expression is executed first. It takes the scopes from the expression one by one and matches them with the requested scope. If it exists, `true` is returned. If not, it is `false`.
+
+**Example.1**: Let's assume a token with the `["clientinfo"]` scope only.
+
+The values of `data` will convert into boolean values. if token scope match with expression scope, then return `true` otherwise `false`.
+
+```
+["openid","email","clientinfo"] --> [false, false, true]
+```
+
+You can check the result using [http://jsonlogic.com](http://jsonlogic.com/play.html).
+
+![13_oauth_scope_check_1](../img/13_oauth_scope_check_1.png)
+
+The result is `false`, so the request is not allowed.
+
+**Example.2**: Let's assume a token with `["openid", "clientinfo"]` scopes.
+
+The data values is
+
+```
+["openid","email","clientinfo"] --> [true, false, true]
+```
+
+![13_oauth_scope_check_2](../img/13_oauth_scope_check_2.png)
+
+The result is `true`, so the request is allowed.
+
+#### Dynamic resource protection
+
+If you want to protect a dynamic resource with UMA or OAuth scopes, you can do this by securing the parent path. For example, if you want to secure both `/folder` and `/folder/[id]`, you only need to secure `/folder` with a chosen scope. The protection of the parent will be applied to its children, unless different protection is explicitly defined.
+
+Use cases for different resource security:
+
+- Rule1 for path GET /root                  `{scope: a and b}`
+
+- Rule2 for path GET /root/folder1          `{scope: c}`
+
+- Rule3 for path GET /root/folder1/folder2  `{scope: d}`
+
+```
+GET /root                                  --> Apply Rule1
+GET /root/1                                --> Apply Rule1
+GET /root/one                              --> Apply Rule1
+GET /root/one/two                          --> Apply Rule1
+GET /root/two?id=df4edfdf                  --> Apply Rule1
+
+GET /root/folder1                          --> Apply Rule2
+GET /root/folder1/1                        --> Apply Rule2
+GET /root/folder1?id=dfdf454gtfg           --> Apply Rule2
+GET /root/folder1/one/two                  --> Apply Rule2
+GET /root/folder1/one/two/treww?id=w4354f  --> Apply Rule2
+
+GET /root/folder1/folder2/1                --> Apply Rule3
+GET /root/folder1/folder2/one/two          --> Apply Rule3
+GET /root/folder1/folder2/dsd545df         --> Apply Rule3
+GET /root/folder1/folder2/one?id=fdfdf     --> Apply Rule3
+```
+
+## Usage
+
+### Create Client
+
+Create a client using [Create client consumer section](../admin-gui/#create-client). You can use OXD register site API to create client.
+
+### Create Consumer
+
+You need to associate a client credential to an existing Consumer object. To create a Consumer use [Consumer section](../admin-gui/#consumers).
+
+Create consumer using Kong Admin API.
+
+```
+$ curl -X POST \
+    http://localhost:8001/consumers \
+    -H 'Content-Type: application/json' \
+    -d '{
+  	"username": "<kong_consumer_name>",
+  	"custom_id": "<gluu_client_id>"
+  }'
+```
+
+### Security & Access Proxy
+
+You need to pass OAuth token in authorization header to access proxy upstream API. You can generate the OAuth token using OP Client credentials by requesting to OXD `/get-client-token` API.
+
+Example for access kong proxy using OAuth token:
+
+```
+curl -X GET \
+  http://localhost:8000/{path matching a configured Route} \
+  -H 'Authorization: Bearer <oauth_token>' \
+```
+
+!!! Note
+    Kong provides the 8443 port for https by default, but during the setup script installation, we change it to 443.
+
+## Upstream Headers
+
+When a client has been authenticated, the plugin will append some headers to the request before proxying it to the upstream service, so that you can identify the consumer and the end user in your code:
+
+1. **X-Consumer-ID**, the ID of the Consumer on Kong
+2. **X-Consumer-Custom-ID**, the custom_id of the Consumer (if set)
+3. **X-Consumer-Username**, the username of the Consumer (if set)
+4. **X-Authenticated-Scope**, the comma-separated list of scopes that the end user has authenticated, if available (only if the consumer is not an 'anonymous' consumer)
+5. **X-OAuth-Client-ID**, the authenticated client id, if oauth_mode is enabled (only if the consumer is not an 'anonymous' consumer)
+6. **X-OAuth-Expiration**, the token expiration time, integer timestamp, measured in the number of seconds since January 1, 1970 UTC, indicating when this token will expire, as defined in JWT RFC7519. It is only returned in oauth_mode (only if the consumer is not an 'anonymous' consumer)
+7. **X-Anonymous-Consumer**, will be set to true when authentication fails, and the 'anonymous' consumer is set instead.
+
+You can use this information on your side to implement additional logic. You can use the X-Consumer-ID value to query the Kong Admin API and retrieve more information about the Consumer.
+
