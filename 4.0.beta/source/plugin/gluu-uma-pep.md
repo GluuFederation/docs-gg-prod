@@ -1,6 +1,6 @@
-# Gluu OAuth PEP
+# Gluu UMA PEP
 
-It is used to add Client authentication with OAuth scope security. This plugin enables the use of an external OpenID Provider for OAuth2 client authentication. It needs to connect to Gluu's `oxd` service, which is an OAuth2 client middleware service.
+It is used to add Client authentication with UMA scope security. This plugin enables the use of an external OpenID Provider for OAuth2 client authentication. It needs to connect to Gluu's `oxd` service, which is an OAuth2 client middleware service.
 
 You can configure plugin on Service, Route and Global.
 
@@ -32,12 +32,12 @@ $ curl -X POST \
 
 ##### 2.1 Configure plugin using GG UI
 
-Use the [Manage Service](../admin-gui/#332-add-plugin) section in GG UI to enable the Gluu OAuth PEP plugin. In the security category, there is a Gluu OAuth PEP box. Click on the **+ icon** to enable the plugin.
+Use the [Manage Service](../admin-gui/#332-add-plugin) section in GG UI to enable the Gluu UMA PEP plugin. In the security category, there is a Gluu UMA PEP box. Click on the **+ icon** to enable the plugin.
 
-![11_path_oauth_service](../img/11_path_oauth_service.png)
+![11_path_uma_service](../img/11_path_uma_service.png)
 
 After clicking on **+ icon**, you will see the below form.
-![11_path_add_oauth_service](../img/11_path_add_oauth_service.png)
+![11_path_add_uma_service](../img/11_path_add_uma_service.png)
 
 ##### 2.2 Configure plugin using Kong Admin API
 
@@ -46,14 +46,14 @@ $ curl -X POST \
   http://localhost:8001/plugins \
   -H 'Content-Type: application/json' \
   -d '{
-  "name": "gluu-oauth-pep",
+  "name": "gluu-uma-pep",
   "config": {
     "oxd_url": "<your_oxd_server_url>",
     "op_url": "<your_op_server_url>",
     "oxd_id": "<oxd_id>",
     "client_id": "<client_id>",
     "client_secret": "<client_secret>",
-    "oauth_scope_expression": [
+    "uma_scope_expression": [
       {
         "path": "/posts",
         "conditions": [
@@ -122,12 +122,12 @@ $ curl -X POST \
 
 ##### 2.1 Configure plugin using GG UI
 
-Use the [Manage Service](../admin-gui/#332-add-plugin) section in GG UI to enable the Gluu OAuth PEP plugin. In the security category, there is a Gluu OAuth PEP box. Click on the **+ icon** to enable the plugin.
+Use the [Manage Service](../admin-gui/#332-add-plugin) section in GG UI to enable the Gluu UMA PEP plugin. In the security category, there is a Gluu UMA PEP box. Click on the **+ icon** to enable the plugin.
 
-![11_path_oauth_service](../img/12_path_oauth_route.png)
+![11_path_uma_service](../img/12_path_uma_route.png)
 
 After clicking on **+ icon**, you will see the below form.
-![11_path_add_oauth_service](../img/12_path_add_oauth_route.png)
+![11_path_add_uma_service](../img/12_path_add_uma_route.png)
 
 ##### 2.2 Configure plugin using Kong Admin API
 
@@ -136,14 +136,14 @@ $ curl -X POST \
   http://localhost:8001/plugins \
   -H 'Content-Type: application/json' \
   -d '{
-  "name": "gluu-oauth-pep",
+  "name": "gluu-uma-pep",
   "config": {
     "oxd_url": "<your_oxd_server_url>",
     "op_url": "<your_op_server_url>",
     "oxd_id": "<oxd_id>",
     "client_id": "<client_id>",
     "client_secret": "<client_secret>",
-    "oauth_scope_expression": [
+    "uma_scope_expression": [
       {
         "path": "/posts",
         "conditions": [
@@ -187,12 +187,12 @@ If you enable plugin globally, it will apply for all the services and routes.
 
 ##### 1.1 Configure plugin using GG UI
 
-Use the [Plugin section](../admin-gui/#add-plugin) in GG UI to enable the Gluu OAuth PEP plugin. In the security category, there is a Gluu OAuth PEP box. Click on the **+ icon** to enable the plugin.
+Use the [Plugin section](../admin-gui/#add-plugin) in GG UI to enable the Gluu UMA PEP plugin. In the security category, there is a Gluu UMA PEP box. Click on the **+ icon** to enable the plugin.
 
 ![5_plugins_add](../img/5_plugins_add.png)
 
 After clicking on **+ icon**, you will see the below form.
-![11_path_add_oauth_service](../img/12_path_add_oauth_route.png)
+![11_path_add_uma_service](../img/12_path_add_uma_route.png)
 
 ##### 1.2 Configure plugin using Kong Admin API
 
@@ -201,14 +201,14 @@ $ curl -X POST \
   http://localhost:8001/plugins \
   -H 'Content-Type: application/json' \
   -d '{
-  "name": "gluu-oauth-pep",
+  "name": "gluu-uma-pep",
   "config": {
     "oxd_url": "<your_oxd_server_url>",
     "op_url": "<your_op_server_url>",
     "oxd_id": "<oxd_id>",
     "client_id": "<client_id>",
     "client_secret": "<client_secret>",
-    "oauth_scope_expression": [
+    "uma_scope_expression": [
       {
         "path": "/posts",
         "conditions": [
@@ -254,22 +254,21 @@ Here is a list of all the parameters which can be used in this plugin's configur
 |**oxd_id**||It is used to introspect the token.|
 |**client_id**|| It is used to get protection access token to access introspect API. If you enter oxd id, you also need to enter client id and client secret of existing oxd client.|
 |**client_secret**||It is used to get protection access token to access introspect API. If you enter oxd id, you also need to enter client id and client secret of existing oxd client.|
-|**oauth_scope_expression**||It is used to add scope security on OAuth scope token.|
+|**uma_scope_expression**||It is used to add scope security on UMA scope token.|
 |**ignore_scope**| false |It will not check any token scope during authentication time.|
-|**deny_by_default**| true |This functionality is for the path which is not protected by OAuth scope expression. If it is true then deny unprotected path otherwise allow.|
+|**deny_by_default**| true |This functionality is for the path which is not protected by UMA scope expression. If it is true then deny unprotected path otherwise allow.|
 |**anonymous**||An optional string (consumer uuid) value to use as an “anonymous” consumer if authentication fails. If empty (default), the request will fail with an authentication failure 4xx. Please note that this value must refer to the Consumer id attribute which is internal to Kong, and not its custom_id.|
 |**hide_credentials**|false|An optional boolean value telling the plugin to show or hide the credential from the upstream service. If true, the plugin will strip the credential from the request (i.e. the Authorization header) before proxying it.|
 
+!!! Note
+    GG UI provide facility to create client and register resources using OXD. If you are configuring plugin only using Kong Admin API then you need to create client and register resource using OXD APIs and pass same UMA Expression and client credential to Gluu-UMA-PEP plugin.
+
+#### UMA Scope Expression
+
+UMA Scope Expression is a JSON expression, Used to register the resources in resource server. [More Details](https://gluu.org/docs/ce/3.1.4/api-guide/uma-api/#uma-permission-registration-api)
 
 !!! Note
-    GG UI provide facility to create dynamic client. if you are configuring plugin only using Kong Admin API then you need to create client usign OXD API and then pass same client credential to Gluu-OAuth-PEP plugin.
-
-#### OAuth Scope Expression
-
-OAuth Scope Expression is a JSON expression, security for OAuth scopes. It checks the scope (from token introspection) of the token with the configured OAuth JSON expression.
-
-!!! Note
-    You can enable and disable the OAuth scope expression by setting `ignore_scope`.
+    You can enable and disable the UMA scope expression by setting `ignore_scope` in edit mode.
 
 Let's say you have an API which you would like to protect:
 
@@ -301,9 +300,9 @@ Let's say you have an API which you would like to protect:
             ]
           },
           "data": [
-            "openid",
-            "email",
-            "clientinfo"
+            "admin",
+            "employee",
+            "ouside"
           ]
         }
       }
@@ -312,35 +311,9 @@ Let's say you have an API which you would like to protect:
 ]
 ```
 
-![13_oauth_scope_expression](../img/13_oauth_scope_expression.png)
+![13_uma_scope_expression](../img/13_uma_scope_expression.png)
 
-At the runtime, it matches the scope expression with token scopes. The inner expression is executed first. It takes the scopes from the expression one by one and matches them with the requested scope. If it exists, `true` is returned. If not, it is `false`.
-
-**Example.1**: Let's assume a token with the `["clientinfo"]` scope only.
-
-The values of `data` will convert into boolean values. if token scope match with expression scope, then return `true` otherwise `false`.
-
-```
-["openid","email","clientinfo"] --> [false, false, true]
-```
-
-You can check the result using [http://jsonlogic.com](http://jsonlogic.com/play.html).
-
-![13_oauth_scope_check_1](../img/13_oauth_scope_check_1.png)
-
-The result is `false`, so the request is not allowed.
-
-**Example.2**: Let's assume a token with `["openid", "clientinfo"]` scopes.
-
-The data values is
-
-```
-["openid","email","clientinfo"] --> [true, false, true]
-```
-
-![13_oauth_scope_check_2](../img/13_oauth_scope_check_2.png)
-
-The result is `true`, so the request is allowed.
+At the runtime, it request to RS with RPT token and check the permission for requested resources.
 
 #### Dynamic resource protection
 
@@ -397,14 +370,14 @@ $ curl -X POST \
 
 ### Security & Access Proxy
 
-You need to pass OAuth token in authorization header to access proxy upstream API. You can generate the OAuth token using OP Client credentials by requesting to OXD `/get-client-token` API.
+You need to pass UMA RPT token in authorization header to access proxy upstream API. You can generate the UMA RPT token using OP Client credentials by requesting to OXD APIs.
 
-Example for access kong proxy using OAuth token:
+Example for access kong proxy using UMA token:
 
 ```
 curl -X GET \
   http://localhost:8000/{path matching a configured Route} \
-  -H 'Authorization: Bearer <oauth_token>' \
+  -H 'Authorization: Bearer <uma_rpt_token>' \
 ```
 
 !!! Note
@@ -418,7 +391,7 @@ When a client has been authenticated, the plugin will append some headers to the
 2. **X-Consumer-Custom-ID**, the custom_id of the Consumer (if set)
 3. **X-Consumer-Username**, the username of the Consumer (if set)
 4. **X-Authenticated-Scope**, the comma-separated list of scopes that the end user has authenticated, if available (only if the consumer is not an 'anonymous' consumer)
-5. **X-OAuth-Client-ID**, the authenticated client id, if oauth_mode is enabled (only if the consumer is not an 'anonymous' consumer)
+5. **X-OAuth-Client-ID**, the authenticated client id (only if the consumer is not an 'anonymous' consumer)
 6. **X-OAuth-Expiration**, the token expiration time, integer timestamp, measured in the number of seconds since January 1, 1970 UTC, indicating when this token will expire, as defined in JWT RFC7519. It is only returned in oauth_mode (only if the consumer is not an 'anonymous' consumer)
 7. **X-Anonymous-Consumer**, will be set to true when authentication fails, and the 'anonymous' consumer is set instead.
 
