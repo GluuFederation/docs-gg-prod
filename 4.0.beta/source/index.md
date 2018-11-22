@@ -14,7 +14,7 @@ Gluu Gateway adds the following functionality to the Kong API Gateway:
 - Backup, restore and migrate Kong instances using snapshots.    
 
 ## Access Control
-Gluu Gateway enables API access management via OAuth PEP and UMA PEP(policy enforcement point). 
+Gluu Gateway enables API access management via Gluu OAuth PEP and UMA PEP(policy enforcement point) plugin.
 
 ### OAuth PEP
 OAuth PEP is client security which authenticate OAuth token and token scope security.

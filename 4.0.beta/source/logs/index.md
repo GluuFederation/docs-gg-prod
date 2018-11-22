@@ -5,4 +5,3 @@ Gluu Gateway logs can be found at:
 | Admin Console(Konga) | `/var/log/konga.log` |
 | Kong | `/usr/local/kong/logs` |
 | oxd | `/var/log/oxd-server/oxd-server.log` |
-| oxd-https-extension | `/var/log/oxd-https.log` |
