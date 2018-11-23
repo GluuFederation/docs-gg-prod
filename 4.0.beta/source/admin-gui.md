@@ -283,6 +283,7 @@ Create schedule task using `ADD SCHEDULE` button.
 
 ## SETTINGS
 
-You can set dashboard refresh interval and logout session timeout in settings section.
+You can set dashboard refresh interval, logout session timeout and login restriction in settings section.
 
 ![settings](img/10_settings.png)
+

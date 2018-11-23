@@ -9,7 +9,7 @@ Gluu Gateway adds the following functionality to the Kong API Gateway:
 
 - Leverage Gluu's OAuth 2.0 authorization server for central client authentication.
 - Control access to APIs using OAuth and UMA scopes.
-- GUI to manage Kong API, Consumer and Plugin objects.
+- GUI to manage Kong Service, Route, Consumer and Plugin objects.
 - API Dashboard to configure and monitor the health of your servers.
 - Backup, restore and migrate Kong instances using snapshots.    
 
