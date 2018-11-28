@@ -1,9 +1,9 @@
 # Admin GUI Portal - Konga Guide
 
-## DASHBOARD
-The Dashboard section is divided into subsections which show application configuration details. 
+## Dashboard
+The Dashboard section is divided into subsections that show application configuration details. 
 
-In the Global Info you can see oxd and client details used by Konga. If you want to check the version of the currently used oxd server or the address of the Gluu Server, all the necessary information is provided here. OXD Id Client, Id of OXD Id, Setup client OXD Id, Client Id and Client Secret are the credentials created during the Gluu Gateway installation and setup. 
+In the Global Info you can see oxd and client details used by Konga. If you want to check the version of the currently used oxd Server or the address of the Gluu Server, all the necessary information is provided here. oxd ID Client, ID of oxd ID, Setup client oxd ID, Client ID and Client Secret are the credentials created during the Gluu Gateway installation and setup. 
 
 By default, two oxd clients are created during the installation and setup of the Gluu Gateway. You can always check their activity and billing status by clicking the green button in the Pricing subsection, which will take you to the oxd ecommerce platform. The Pricing table also provides more information on the oxd usage and billing.
 
@@ -15,14 +15,14 @@ The remaining subsections of Requests, Connections and Timers show real-time met
 
 ![dashboard](img/1_dashboard.png)
 
-## INFO
+## Info
 
 The Info section shows generic details about the Kong node.
 ![info](img/2_info.png)
 
-## SERVICEs
+## Services
 
-### 1. Service List
+### Service List
 
 Service entities, as the name implies, are abstractions of each of your own upstream services. Examples of Services would be a data transformation microservice, a billing API, etc. [More details](https://docs.konghq.com).   
     
@@ -30,94 +30,94 @@ Service entities, as the name implies, are abstractions of each of your own upst
 
 | Tools | Details |
 |---|-----|
-| **+ ADD NEW SERVICE** | This button is used to add new service.|
-| **Gluu Security** | This column only shows the added gluu plugins.|
-| **Edit Button** | This button is used to edit service, configure route and configure plugins of selected service. You can click on **service name** to edit service.|
-| **Delete Button** | This button is used to delete selected service. |
+| **+ ADD NEW SERVICE** | This button is used to add a new service.|
+| **Gluu Security** | This column only shows the added Gluu plugins.|
+| **Edit Button** | This button is used to edit a service, configure route and configure plugins of the selected service. You can click on **service name** to edit the service.|
+| **Delete Button** | This button is used to delete the selected service. |
    
-### 2. Add Service
+### Add Service
 
 Add your Service using the `+ ADD NEW SERVICE` button.
 
 ![3_2_add_service](img/3_2_add_service.png)
 
-### 3. Manage Service
+### Manage Service
 
 You can edit a Service and manage its plugins by clicking on the pencil icon on the Service list. There are four sections.
 
-#### 3.1 Service Details
+#### Service Details
 This section is used to view and edit your Service.
 
 ![3_3_service_details](img/3_3_service_details.png)
 
-#### 3.2 Routes
-This section is used to manage route within selected service.
+#### Routes
+This section is used to manage the route within selected service.
 
 ![3_4_service_route](img/3_4_service_route.png)
 
 | Tools | Details |
 |---|-----|
-| **+ ADD ROUTE** | This button is used to add new route.|
-| **Edit Button** | This button is used to edit route, configure route and configure plugins of selected service.|
-| **Delete Button** | This button is used to delete selected route. |
+| **+ ADD ROUTE** | This button is used to add a new route.|
+| **Edit Button** | This button is used to edit a route, configure a route and configure plugins of the selected service.|
+| **Delete Button** | This button is used to delete the selected route. |
 
-#### 3.3 Plugins
+#### Plugins
 This section is used to view the list of added Plugins and add a new Plugin.
 
-##### 3.3.1 Plugin list
+##### Plugin list
   
   ![3_5_service_plugins](img/3_5_service_plugins.png)
 
   | Tools | Details |
   |---|-----|
-  | **+ ADD PLUGIN** | This button is used to add plugin.|
-  | **Edit Plugin** | Click on plugin name to edit plugin configurations.|
+  | **+ ADD PLUGIN** | This button is used to add a plugin.|
+  | **Edit Plugin** | Click on a plugin's name to edit its configuration.|
   | **Delete Button** | This button is used to delete selected route. |
   | **ON/OFF Switch** |If you want to switch a plugin on/off, just use the toggle bar.|
 
-##### 3.3.2 Add Plugin
+##### Add Plugin
 
-  Add a Plugin by clicking the plus icon next to a plugin’s name.
+  Add a Plugin by clicking the `+` icon next to the plugin’s name.
   
   ![3_6_add_plugins](img/3_6_add_plugins.png)
 
-#### 3.4 Eligible consumers
+#### Eligible consumers
 
-  This section is for ACL kong plugin which Restrict access to an API by whitelisting or blacklisting consumers using arbitrary ACL group names. It shows the list of consumers which is configure with ACL Groups.
+  This section is for the ACL Kong plugin, which restricts access to an API by whitelisting or blacklisting consumers using arbitrary ACL group names. It shows the list of consumers which are configured with ACL groups.
 
   ![3_7_eligible_consumers](img/3_7_eligible_consumers.png)
 
-## ROUTEs
+## Routes
 
-### 1. Route List
+### Route List
 
-The Route entities defines rules to match client requests. Each Route is associated with a Service, and a Service may have multiple Routes associated to it. Every request matching a given Route will be proxied to its associated Service. [More details](https://docs.konghq.com).
+The Route entities define rules to match client requests. Each Route is associated with a Service, and a Service may have multiple Routes associated with it. Every request matching a given Route will be proxied to its associated Service. [More details](https://docs.konghq.com).
 
 ![4_1_route_list](img/4_1_route_list.png)
 
 | Tools | Details |
 |---|-----|
-| **Gluu Security** | This column only shows the added gluu plugins.|
-| **Edit Button** | This button is used to edit route and configure plugins of selected route. You can click on **ROUTE ID** to edit route.|
-| **Delete Button** | This button is used to delete selected route. |
+| **Gluu Security** | This column only shows the added Gluu plugins.|
+| **Edit Button** | This button is used to edit a Route and configure its plugins. You can click on **ROUTE ID** to edit the Route.|
+| **Delete Button** | This button is used to delete the selected Route. |
 
-### 2. Add Route
+### Add Route
 
-[Use Service section to add new route](#32-routes).
+[Use Service section to add new route](#routes).
 
-### 3. Manage Route
+### Manage Route
 
 You can edit a Route and manage its plugins by clicking on the pencil icon on the Route list. There are three sections.
 
-#### 3.1 Route Details
+#### Route Details
 This section is used to view and edit your Route.
 
 ![4_2_route_details](img/4_2_route_details.png)
 
-#### 3.2 Plugins
+#### Plugins
 This section is used to view the list of added Plugins and add a new Plugin.
 
-##### 3.2.1 Plugin list
+##### Plugin list
 
   ![4_3_route_plugin](img/4_3_route_plugin.png)
 
@@ -128,13 +128,13 @@ This section is used to view the list of added Plugins and add a new Plugin.
   | **Delete Button** | This button is used to delete selected route. |
   | **ON/OFF Switch** |If you want to switch a plugin on/off, just use the toggle bar.|
 
-##### 3.2.2 Add Plugin
+##### Add Plugin
 
   Add a Plugin by clicking the plus icon next to a plugin’s name.
 
   ![4_4_add_plugins](img/3_6_add_plugins.png)
 
-#### 3.3 Eligible consumers
+#### Eligible consumers
 
   This section is for ACL kong plugin which Restrict access to an API by whitelisting or blacklisting consumers using arbitrary ACL group names. It shows the list of consumers which is configure with ACL Groups.
 
@@ -159,19 +159,19 @@ Add Consumers by using the `+ CREATE CONSUMER` button.
 
 Click on **Consumer Name** of consumer to manage consumer. You can edit, manage ACLs plugin group and add plugins in manage consumer.
 
-#### 1. Details
+#### Details
 
 You can see and edit the selected consumer details.
 
 ![4_edit_consumer](img/4_edit_consumer.png)
 
-#### 2. Groups
+#### Groups
 
 You can create a group for ACL plugin. which whitelist and blacklist consumer according to ACL plugin configuration.
 
 ![4_consumer_groups](img/4_consumer_groups.png)
 
-#### 3. Plugins
+#### Plugins
 
 Some plugins provide facility to configure plugin with specific consumer. You can use this section to configure plugin for selected consumer. It will add plugin as global plugin which will apply for every service and route.
 
