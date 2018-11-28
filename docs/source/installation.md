@@ -11,7 +11,7 @@ The installation is a three-part process:
 
 ## Required Third Party repositories
 
-!!! Note 
+!!! Important 
     Always run the following commands as root.
 
 ### Ubuntu 14
@@ -178,7 +178,7 @@ curl -sL https://rpm.nodesource.com/setup_8.x | sudo -E bash -
 
 After acknowledging that the use of the Gluu Gateway is under the MIT license, you will be prompted to answer several questions. Just hit Enter to accept the default values, which are specified in square brackets.
 
-!!! Warning 
+!!! Important 
     When you are prompted to provide a two-letter value, make sure you follow the instructions. A mistake may result in the lack of certificates.
 
 | **Question** | **Explanation** |
@@ -192,10 +192,10 @@ After acknowledging that the use of the Gluu Gateway is under the MIT license, y
 | **Email address** | Used to generate web X.509 certificates |
 | **Password** | If you already have a database password for user `postgres`, enter it here. Otherwise, enter a new password. |
 | **OP hostname** | The hostname of the Gluu Server that will be used for OAuth 2.0 client credentials and access management. **Example**: op-server.com |
-| **oxd https url** | Make sure the oxd-https-extension is running. |
-| **Would you like to generate client_id/client_secret for konga?** | Register an OpenID Client for Konga, or enter existing client credentials manually. By default, the client expiration is set to 24 hours; make sure to [extend this expiration date](https://gluu.org/docs/oxd/3.1.3/faq/#how-can-i-avoid-client-expiration). Without this step, after 24 hours you will no longer be able to log in to the Gluu Gateway. If you enter existing client details, make sure your client in Redirect Login URIs and Post Logout Redirect URIs field, you have the value `https://localhost:1338`. |
-| **oxd_id** | Used to manually set the oxd id. |
-| **client_id** | Used to manually set the client id. |
+| **oxd https URL** | Make sure the oxd-https-extension is running. |
+| **Would you like to generate client_id/client_secret for Konga?** | Register an OpenID Client for Konga, or enter existing client credentials manually. By default, the client expiration is set to 24 hours; make sure to [extend this expiration date](https://gluu.org/docs/oxd/faq/#how-can-i-avoid-client-expiration). Without this step, after 24 hours you will no longer be able to log in to the Gluu Gateway. If you enter existing client details, make sure your client in Redirect Login URIs and Post Logout Redirect URIs field, you have the value `https://localhost:1338`. |
+| **oxd_id** | Used to manually set the oxd ID. |
+| **client_id** | Used to manually set the client ID. |
 | **client_secret** | Used to manually set the client secret. |
 
 ## Finish the setup
@@ -204,13 +204,10 @@ After acknowledging that the use of the Gluu Gateway is under the MIT license, y
  Gluu Gateway configuration successful!!! https://localhost:1338
 ```
 
-If you see the above message, it means the installation was successful. To log in to
-the Gluu Gateway admin portal, create an SSH tunnel on port 1338 from your
-workstation to the Gluu Gateway server, and point your browser at
-`https://localhost:1338`. Use the login and password which you also use to access the Gluu Server.
+If you see the above message, it means the installation was successful. To log in to the Gluu Gateway admin portal, create an SSH tunnel on port 1338 from your workstation to the Gluu Gateway server, and point your browser at `https://localhost:1338`. Use the login and password that you also use to access the Gluu Server.
 
 !!! Note
-    If you do not want ssh tunnel connection. See [FAQ](./faq.md#how-can-i-change-the-listening-address-and-port) for global access configuration.
+    If you do not want an SSH tunnel connection. See [FAQ](./faq.md#how-can-i-change-the-listening-address-and-port) for global access configuration.
     
 !!! Warning
     By default, the Gluu Gateway Client expiration date is set for one day during the installation process. To change it, follow    [these instructions](https://gluu.org/docs/oxd/3.1.4/faq/#how-can-i-avoid-client-expiration). Without this step, after 24 hours you will no longer be able to log in to the Gluu Gateway. 
@@ -233,16 +230,15 @@ When a Gluu Gateway upgrade is available, follow these steps:
  # cd /opt/gluu-gateway/setup
  # python setup-gluu-gateway.py
 ```
-!!! Warning 
-    During the setup, choose to enter the existing client credentials manually if you want to continue using them. If you want to start a fresh, choose to generate client credentials again. By doing so, you might lose your previously created Services or Consumers.
+!!! Important 
+    During setup, choose to enter the existing client credentials manually if you want to continue using them. If you want to start fresh, choose to generate client credentials again. By doing so, you might lose your previously created Services or Consumers.
     
 * [Finish](#finish-the-setup) the setup
 
 ## Removal
 
-!!! Note 
+!!! Important 
     Always run the following commands as root. To avoid errors, run them in the order given below.
-
 
 Use `apt` to remove the gluu-gateway package.
 ```
