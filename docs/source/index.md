@@ -14,29 +14,29 @@ Gluu Gateway adds the following functionality to the Kong API Gateway:
 - Backup, restore and migrate Kong instances using snapshots.    
 
 ## Access Control
-Gluu Gateway enables API access management via Gluu OAuth PEP and UMA PEP(policy enforcement point) plugin.
+Gluu Gateway enables API access management via Gluu OAuth PEP (policy enforcement point) and UMA PEP plugins.
 
 ### OAuth PEP
-OAuth PEP is client security which authenticate OAuth token and token scope security.
+The OAuth PEP plugin provides client security by authenticating OAuth token and token scope security.
 
-![](img/diagram-oauth-mode.jpg)
+![OAuth PEP diagram](img/diagram-oauth-mode.jpg)
 
 ### UMA PEP
-UMA PEP is client security which authenticate RPT token and UMA scope security.
+The UMA PEP plugin provides client security by authenticating RPT token and UMA scope security.
 
-![](img/diagram-uma-mode.jpg)
+![UMA PEP diagram](img/diagram-uma-mode.jpg)
 
 ## Components
 
 Gluu Gateway makes use of the following software components:
 
-- [Kong v0.14](https://getkong.org): An open source API Gateway and Micro services Management Layer, delivering high performance and reliability.
+- [Kong v0.14](https://getkong.org): An open source API Gateway and Microservices Management Layer, delivering high performance and reliability.
 
-- [Gluu Konga Admin GUI](https://github.com/GluuFederation/gluu-gateway/tree/master/konga): A web administration portal, based on [Konga](https://github.com/pantsel/konga) GUI, to manage your Gluu Gateway.
+- [Gluu Konga Admin GUI](https://github.com/GluuFederation/gluu-gateway/tree/master/konga): A web administration portal, based on the [Konga](https://github.com/pantsel/konga) GUI, to manage your Gluu Gateway.
 
-- [Gluu Gateway plugins](https://github.com/GluuFederation/gluu-gateway): Use Gluu Server for central client management and to control access to upstream APIs using OAuth 2.0 and UMA 2.0.
+- [Gluu Gateway plugins](https://github.com/GluuFederation/gluu-gateway): Plugins that leverage the Gluu Server for central client management and to control access to upstream APIs using OAuth 2.0 and UMA 2.0.
 
-- [oxd-Server v4.0.Beta](https://oxd.gluu.org): An OpenID Connect and UMA middleware service used to enable client credential management and cryptographic validation against an OAuth 2.0 Authorization Server, like the Gluu Server.
+- [oxd-Server v4.0.Beta](https://oxd.gluu.org): An OpenID Connect and UMA middleware service used to enable client credential management and cryptographic validation against the Gluu Server.
 
 - Others: The following runtime environment is required by the Gluu Gateway package: 
     - OpenJDK v8
