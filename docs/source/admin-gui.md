@@ -188,6 +188,7 @@ Click on `+ CREATE CLIENT` button to create OP client. It will create client wit
 | **Client Name**(required) |Use to create client with name.|
 | **Client Id**(optional) |Use any existing OP Client's client_id. If you leave it blank, OXD server will create new client in your OP server.|
 | **Client Secret**(optional) |Use any existing OP Client's client_secret. If you leave it blank, OXD server will create new client in your OP server.|
+| **Access Token as JWT**(optional) |It will create client with `Access Token as JWT:true`. It is used to return access token as JWT. Gluu OAuth PEP plugin support access token as JWT.|
 
 ## PLUGINS
 
