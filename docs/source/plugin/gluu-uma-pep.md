@@ -106,7 +106,7 @@ Use [Manage Service Section](../admin-gui/#32-routes) to add route using GG UI.
 
 ```
 $ curl -X POST \
-    http://192.168.200.16:8001/routes \
+    http://localhost:8001/routes \
     -H 'Content-Type: application/json' \
     -d '{
     "hosts": [
