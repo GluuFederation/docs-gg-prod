@@ -14,6 +14,8 @@ The installation is a three-part process:
 !!! Important 
     Always run the following commands as root.
 
+<!---
+
 ### Ubuntu 14
 * Add the Gluu repo:
 ```
@@ -30,7 +32,7 @@ The installation is a three-part process:
 # curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
 ```
 
-<!--- 
+--->
 
 ### Ubuntu 16
 * Add the Gluu repo:
@@ -47,6 +49,8 @@ The installation is a three-part process:
 ```
 # curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
 ```
+
+<!---
 
 ### Debian 8
 * Add the Gluu repo:
@@ -148,7 +152,7 @@ curl -sL https://rpm.nodesource.com/setup_8.x | sudo -E bash -
 
 ## Install the gluu-gateway package
 
-### Ubuntu 14
+### Ubuntu 16
 
 ```
  # apt update
@@ -176,7 +180,7 @@ curl -sL https://rpm.nodesource.com/setup_8.x | sudo -E bash -
  # python setup-gluu-gateway.py
 ```
 
-After acknowledging that the use of the Gluu Gateway is under the MIT license, you will be prompted to answer several questions. Just hit Enter to accept the default values, which are specified in square brackets.
+After acknowledging that the use of the Gluu Stepped-Up Support License, you will be prompted to answer several questions. Just hit Enter to accept the default values, which are specified in square brackets.
 
 !!! Important 
     When you are prompted to provide a two-letter value, make sure you follow the instructions. A mistake may result in the lack of certificates.
@@ -193,7 +197,7 @@ After acknowledging that the use of the Gluu Gateway is under the MIT license, y
 | **Password** | If you already have a database password for user `postgres`, enter it here. Otherwise, enter a new password. |
 | **OP hostname** | The hostname of the Gluu Server that will be used for OAuth 2.0 client credentials and access management. **Example**: op-server.com |
 | **oxd https URL** | Make sure the oxd-https-extension is running. |
-| **Would you like to generate client_id/client_secret for Konga?** | Register an OpenID Client for Konga, or enter existing client credentials manually. By default, the client expiration is set to 24 hours; make sure to [extend this expiration date](https://gluu.org/docs/oxd/faq/#how-can-i-avoid-client-expiration). Without this step, after 24 hours you will no longer be able to log in to the Gluu Gateway. If you enter existing client details, make sure your client in Redirect Login URIs and Post Logout Redirect URIs field, you have the value `https://localhost:1338`. |
+| **Would you like to generate client_id/client_secret for Konga?** | Register an OpenID Client for Konga, or enter existing client credentials manually. By default, the client expiration is set to 24 hours; make sure to [extend this expiration date](https://gluu.org/docs/oxd/3.1.4/faq/#client-expires-how-can-i-avoid-it). Without this step, after 24 hours you will no longer be able to log in to the Gluu Gateway. If you enter existing client details, make sure your client in Redirect Login URIs and Post Logout Redirect URIs field, you have the value `https://localhost:1338`. |
 | **oxd_id** | Used to manually set the oxd ID. |
 | **client_id** | Used to manually set the client ID. |
 | **client_secret** | Used to manually set the client secret. |
@@ -210,7 +214,7 @@ If you see the above message, it means the installation was successful. To log i
     If you do not want an SSH tunnel connection. See [FAQ](./faq.md#how-can-i-change-the-listening-address-and-port) for global access configuration.
     
 !!! Warning
-    By default, the Gluu Gateway Client expiration date is set for one day during the installation process. To change it, follow    [these instructions](https://gluu.org/docs/oxd/3.1.4/faq/#how-can-i-avoid-client-expiration). Without this step, after 24 hours you will no longer be able to log in to the Gluu Gateway. 
+    By default, the Gluu Gateway Client expiration date is set for one day during the installation process. To change it, follow    [these instructions](https://gluu.org/docs/oxd/3.1.4/faq/#client-expires-how-can-i-avoid-it). Without this step, after 24 hours you will no longer be able to log in to the Gluu Gateway.
 
 ## Upgrade
 

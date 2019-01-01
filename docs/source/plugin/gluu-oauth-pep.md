@@ -4,8 +4,8 @@ It is used to add Client authentication with OAuth scope security. This plugin e
 
 It will support two tokens.
 
-   1. **Default Access Token**: plugin will authenticate it using introspection
-   2. **Access Token as JWT**: plugin will authenticate it using JWT verify.
+   1. **Default Access Token**: Plugin will authenticate it using introspection.
+   2. **Access Token as JWT**: Plugin will authenticate it using JWT verify. Currently plugin supports only 3 Algorithm **RS256**, **RS384** and **RS512**.
 
 ## Configuration
 

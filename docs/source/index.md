@@ -9,10 +9,11 @@ Gluu Gateway adds the following functionality to the Kong API Gateway:
 
 - Leverage Gluu's OAuth 2.0 authorization server for central client authentication.
 - Control access to APIs using OAuth and UMA scopes.
-- Count client authnetication metrics
+- Access Token as JWT feature.
+- Expose client authnetication and grant metrics.
 - GUI to manage Kong Service, Route, Consumer and Plugin objects.
 - API Dashboard to configure and monitor the health of your servers.
-- Backup, restore and migrate Kong instances using snapshots.    
+- Backup, restore and migrate Kong instances using snapshots.
 
 ## Access Control
 Gluu Gateway enables API access management via Gluu OAuth PEP (policy enforcement point) and UMA PEP plugins.
@@ -54,8 +55,9 @@ Use the following links to get started:
 1. [Configuration](./configuration.md)
 1. [Admin GUI](./admin-gui.md)
 1. Plugins
-    1. [Admin GUI](./plugin/gui.md)
-    2. [Admin API](./plugin/api.md)
+    1. [Gluu OAuth PEP](./plugin/gluu-oauth-pep.md)
+    2. [Gluu UMA PEP](./plugin/gluu-uma-pep.md)
+    3. [Gluu Metrics](./plugin/gluu-metrics.md)
 1. [FAQ](./faq.md)
 
 ## Licenses
@@ -66,5 +68,5 @@ Gluu Gateway leverages software written by Gluu and incorporated from other proj
 |-----------|---------|
 | Kong API Gateway | [Apache2]( http://www.apache.org/licenses/LICENSE-2.0) |
 | Konga GUI | [MIT License](http://opensource.org/licenses/MIT) |
-| Gluu Gateway plugins | [MIT License](http://opensource.org/licenses/MIT) |
 | oxd-Server | [Apache2]( http://www.apache.org/licenses/LICENSE-2.0) |
+| Gluu Gateway | [Gluu Stepped-Up Support License](https://github.com/GluuFederation/gluu-gateway/blob/master/LICENSE) |

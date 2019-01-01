@@ -3,9 +3,9 @@
 ## Dashboard
 The Dashboard section is divided into subsections that show application configuration details. 
 
-In the Global Info you can see oxd and client details used by Konga. If you want to check the version of the currently used oxd Server or the address of the Gluu Server, all the necessary information is provided here. oxd ID Client, ID of oxd ID, Setup client oxd ID, Client ID and Client Secret are the credentials created during the Gluu Gateway installation and setup. 
+In the Global Info you can see oxd and client details used by Konga. If you want to check the version of the currently used oxd Server or the address of the Gluu Server, all the necessary information is provided here. ID of oxd ID, Client ID and Client Secret are the credentials created during the Gluu Gateway installation and setup.
 
-By default, two oxd clients are created during the installation and setup of the Gluu Gateway. You can always check their activity and billing status by clicking the green button in the Pricing subsection, which will take you to the oxd ecommerce platform. The Pricing table also provides more information on the oxd usage and billing.
+By default, one oxd clients are created during the installation and setup of the Gluu Gateway.
 
 The Gateway and Database Info show information on the gateway itself and the used postgres database, respectively. 
 
@@ -189,6 +189,8 @@ Click on `+ CREATE CLIENT` button to create OP client. It will create client wit
 | **Client Id**(optional) |Use any existing OP Client's client_id. If you leave it blank, OXD server will create new client in your OP server.|
 | **Client Secret**(optional) |Use any existing OP Client's client_secret. If you leave it blank, OXD server will create new client in your OP server.|
 | **Access Token as JWT**(optional) |It will create client with `Access Token as JWT:true`. It is used to return access token as JWT. Gluu OAuth PEP plugin support access token as JWT.|
+| **RPT as JWT**(optional) |It will create client with `RPT as JWT:true`. It is used to return access token(RPT) as JWT. Gluu UMA PEP support access token(RPT) as JWT.|
+| **Token signing algorithm**(optional) |It is used to set default token signing algorithm for client. It is used for both tokens OAuth access token and UMA RPT token. Currently plugins supports only 3 Algorithm **RS256**, **RS384** and **RS512**.|
 
 ## PLUGINS
 

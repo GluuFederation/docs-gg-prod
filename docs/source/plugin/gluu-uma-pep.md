@@ -2,6 +2,11 @@
 
 It is used to add Client authentication with UMA scope security. This plugin enables the use of an external OpenID Provider for OAuth2 client authentication. It needs to connect to Gluu's `oxd` service, which is an OAuth2 client middleware service.
 
+It will support two tokens.
+
+   1. **Default Access Token**: Plugin will authenticate it using introspection.
+   2. **Access Token as JWT**: Plugin will authenticate it using JWT verify. Currently plugin supports only 3 Algorithm **RS256**, **RS384** and **RS512**.
+
 ## Configuration
 
 You can configure plugin on **Service**, **Route** and **Global**. There are several possibilities for plugin configuration with services and routes. [More Details](https://docs.konghq.com/0.14.x/admin-api/#precedence).
