@@ -11,13 +11,17 @@ It will support two tokens.
 
 You can configure plugin on **Service**, **Route** and **Global**. There are several possibilities for plugin configuration with services and routes. [More Details](https://docs.konghq.com/0.14.x/admin-api/#precedence).
 
+!!! Important
+    During plugin configuration, **GG UI** provide facility to create new OP Client when you set **oxd id blank**. But if you are using **Kong Admin API** then you need to use existing client credentials.
+
+
 ### Enable plugin on Service
 
 #### 1. Add Service
 
 ##### 1.1 Add Service using GG UI
 
-Use [Service section](../admin-gui/#2-add-service) to add service using GG UI.
+Use [Service section](../admin-gui/#add-service) to add service using GG UI.
 
 ![3_service_list](../img/3_1_service_list.png)
 
@@ -103,7 +107,7 @@ $ curl -X POST \
 
 ##### 1.1 Add Route using GG UI
 
-Use [Manage Service Section](../admin-gui/#32-routes) to add route using GG UI.
+Use [Manage Service Section](../admin-gui/#routes) to add route using GG UI.
 
 ![3_4_service_route](../img/3_4_service_route.png)
 
@@ -122,6 +126,9 @@ $ curl -X POST \
     }
   }'
 ```
+
+!!! Information
+    What to put in hosts? It is one technique to request to proxy. There are several possibilities. Take a look on [Proxt reference](https://docs.konghq.com/0.14.x/proxy/) Kong Documents.
 
 #### 2. Configure Plugin
 
@@ -393,12 +400,11 @@ curl -X GET \
 When a client has been authenticated, the plugin will append some headers to the request before proxying it to the upstream service, so that you can identify the consumer and the end user in your code:
 
 1. **X-Consumer-ID**, the ID of the Consumer on Kong
-2. **X-Consumer-Custom-ID**, the custom_id of the Consumer (if set)
-3. **X-Consumer-Username**, the username of the Consumer (if set)
-4. **X-Authenticated-Scope**, the comma-separated list of scopes that the end user has authenticated, if available (only if the consumer is not an 'anonymous' consumer)
-5. **X-OAuth-Client-ID**, the authenticated client id (only if the consumer is not an 'anonymous' consumer)
-6. **X-OAuth-Expiration**, the token expiration time, integer timestamp, measured in the number of seconds since January 1, 1970 UTC, indicating when this token will expire, as defined in JWT RFC7519. It is only returned in oauth_mode (only if the consumer is not an 'anonymous' consumer)
-7. **X-Anonymous-Consumer**, will be set to true when authentication fails, and the 'anonymous' consumer is set instead.
+1. **X-Consumer-Custom-ID**, the custom_id of the Consumer (if set)
+1. **X-Consumer-Username**, the username of the Consumer (if set)
+1. **X-OAuth-Client-ID**, the authenticated client id (only if the consumer is not an 'anonymous' consumer)
+1. **X-OAuth-Expiration**, the token expiration time, integer timestamp, measured in the number of seconds since January 1, 1970 UTC, indicating when this token will expire, as defined in JWT RFC7519. It is only returned in oauth_mode (only if the consumer is not an 'anonymous' consumer)
+1. **X-Anonymous-Consumer**, will be set to true when authentication fails, and the 'anonymous' consumer is set instead.
 
 You can use this information on your side to implement additional logic. You can use the X-Consumer-ID value to query the Kong Admin API and retrieve more information about the Consumer.
 

@@ -1,10 +1,6 @@
 # Gluu Metrics
 
-Expose metrics in Prometheus exposition format, which can be scrapped by a Prometheus Server. It expose below some metrics
-
-1. UMA and OAuth Client Authentication and Grant
-2. UMA Permission Ticket
-3. Endpoint and methods
+Expose metrics in Prometheus exposition format, which can be scrapped by a Prometheus Server.
 
 ## Configuration
 

@@ -11,13 +11,16 @@ It will support two tokens.
 
 You can configure plugin on **Service**, **Route** and **Global**. There are several possibilities for plugin configuration with services and routes. [More Details](https://docs.konghq.com/0.14.x/admin-api/#precedence).
 
+!!! Important
+    During plugin configuration, **GG UI** provide facility to create new OP Client when you set **oxd id blank**. But if you are using **Kong Admin API** then you need to use existing client credentials.
+
 ### Enable plugin on Service
 
 #### 1. Add Service
 
 ##### 1.1 Add Service using GG UI
 
-Use [Service section](../admin-gui/#2-add-service) to add service using GG UI.
+Use [Service section](../admin-gui/#add-service) to add service using GG UI.
 
 ![3_service_list](../img/3_1_service_list.png)
 
@@ -122,6 +125,9 @@ $ curl -X POST \
     }
   }'
 ```
+
+!!! Information
+    What to put in hosts? It is one technique to request to proxy. There are several possibilities. Take a look on [Proxt reference](https://docs.konghq.com/0.14.x/proxy/) Kong Documents.
 
 #### 2. Configure Plugin
 

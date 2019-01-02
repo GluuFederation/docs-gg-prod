@@ -25,5 +25,6 @@ pages:
     - 'Gluu OAuth PEP' : 'plugin/gluu-oauth-pep.md'
     - 'Gluu UMA PEP' :  'plugin/gluu-uma-pep.md'
     - 'Gluu Metrics' :  'plugin/gluu-metrics.md'
+- 'UMA Demo': 'uma-demo.md'
 - Logs : 'logs/index.md'
 - 'FAQ' : 'faq.md'
