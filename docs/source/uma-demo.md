@@ -176,10 +176,56 @@ From this call you will get access token (RPT).
 
 Demo is prepared as python CGI script. You need to put it in some CGI enabled web server. Script is divided into 3 parts:
 
-* index.py - main script
+* index.py - Main script
 * helper.py - REST calls and HTML template
-* config.py - custom configuration
+* config.py - Custom configuration
 
-By default, UMA without claim gathering flow is executed.
+Take demo from [Gluu-Gateway repository](https://github.com/GluuFederation/gluu-gateway/tree/version_4.0.0/gg-demo).
+
+By default, **UMA without claim gathering flow is executed.**
 
 If you want to execute UMA with claims gathering flow, add `claim=true` parameter in your url.
+
+#### Deploy
+
+Since we are going to write a python cgi script for simplicity, we first need to get a working web server to act as the Relying Party (RP). Apache will be installed on the host rp.server.com. I am using Ubuntu 16.04 LTS for this purpose. First install apache web server:
+
+```
+# apt-get update
+# apt-get install apache2
+# ln -s /etc/apache2/mods-available/cgi.load /etc/apache2/mods-enabled/
+```
+
+We will use Python's requests module to interact with oxd's REST API:
+
+```
+# apt-get install python-requests
+```
+
+Put all 3 files in `/usr/lib/cgi-bin` and give them 755 permission.
+
+```
+# chmod 755 index.py helper.py config.py
+```
+
+If you set configuration as above then you can request to
+
+1. With claim gathering flow: `<your-server.com>/cgi-bin/index.py?claim=true`
+2. Without claim gathering flow: `<your-server.com>/cgi-bin/index.py`
+
+#### Configuration
+
+Use `config.py` file for add your configuration
+
+| Properties | Description |
+|------------|-------------|
+|gg_admin_url|Gluu Gateway kong admin URL|
+|gg_proxy_url|Gluu Gateway kong proxy URL|
+|oxd_host|OXD server URL|
+|ce_url|CE OP Server URL|
+|api_path|your api path which you register during plugin configuration|
+|host_with_claims|Kong Router object's host which you configure for claim gathering flow. As per above configuration, its value is `gathering.example.com`.|
+|host_without_claims|Kong Router object's host which you configure for without claim gathering flow. As per above configuration, its value is `non-gathering.example.com`.|
+|client_oxd_id, client_id, client_secret|Consumer OP Client credentials|
+|claims_redirect_url|Claims redirect URL. As per above configuration, it is `<your-server.com>/cgi-bin/index.py`.|
+
