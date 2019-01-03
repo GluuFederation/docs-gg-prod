@@ -1,2 +1,6 @@
 # docs-gg-prod
-Production documentation repo for the Gluu Gateway application. 
+Gluu Gateway production documentation repo.
+
+To see the rendered documentation see:
+
+[https://gluu.org/docs/gg](https://gluu.org/docs/gg)

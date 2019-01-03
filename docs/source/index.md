@@ -2,29 +2,30 @@
 
 ## Overview
 
-Gluu Gateway is an API Gateway that leverages the open source [Gluu Server](https://gluu.org/) for central client management and access control, and inherits core gateway functionality from the open source [Kong API Gateway](https://konghq.com/kong-community-edition/). 
+Gluu Gateway is a distribution of several open source components, integrated and supported together. It is published under the [GLUU-STEPPED-UP](https://raw.githubusercontent.com/GluuFederation/gluu-gateway/master/LICENSE) license. You must have an active and compliant support contract to use the software in production.
 
 ## Features
-Gluu Gateway adds the following functionality to the Kong API Gateway:
 
-- Leverage Gluu's OAuth 2.0 authorization server for central client authentication.
-- Control access to APIs using OAuth and UMA scopes.
-- Access Token as JWT feature.
-- Expose client authnetication and grant metrics.
-- GUI to manage Kong Service, Route, Consumer and Plugin objects.
-- API Dashboard to configure and monitor the health of your servers.
-- Backup, restore and migrate Kong instances using snapshots.
+The goal of Gluu Gateway is to enable your organization to restrict access to API's by requiring clients to present a valid access token issued by an OAuth or UMA Authorization Server, typically a Gluu Server. Gluu Gateway is built on top of Kong Community Edition because of the strong ecosystem of plugins which enable rate limiting, logging and many other capabilities. They key features of Gluu Gateway are to:
+
+- Introspect bearer access tokens
+- Validate the signature of JWT access tokens
+- Control access to APIs by requiring either OAuth and UMA scopes
+- Provide a GUI to simplify administration
+- Collect and report on OAuth and UMA specific metrics
+- Simplify installation, administration, scaling and update of the platform
 
 ## Access Control
-Gluu Gateway enables API access management via Gluu OAuth PEP (policy enforcement point) and UMA PEP plugins.
 
-### OAuth PEP
-The OAuth PEP plugin provides client security by authenticating OAuth token and token scope security.
+The Gluu Gateway functions as a policy enforcement point ("PEP"), relying on an external policy decision point ("PDP") for policy evaluation. The PEP has two primary jobs: (1) make sure the token is active; (2) make sure the token has the correct scopes to call the endpoint it is requesting.
+
+Gluu Gateway supports both OAuth and UMA tokens. While mechanically the same, scopes have different meanings in OAuth and UMA. UMA scopes represent centralized policy evaluation. For example, in the Gluu Server, administrators can map scopes to policies, expressed as UMA RPT Authorization interception scripts. Normally, OAuth scopes represent a user's authorization, although how scopes are granted is ultimately up to the Authorization Server that issues it.
+
+In the Gluu Gateway, a `client_id` is associated with a "Consumer" in Kong. This is useful where access control is restricted to certain clients. All other forms of client authentication are disabled in the Gluu Gateway Admin GUI--we just want to use an OAuth Authorization Server like the Gluu Server for client authentication. The Gluu Server plugins can verify the `client_id` for which an token was issued by looking at the JSON equivalent (either the JWT or the introspection response).
+
+This may sound obvious, but an API that uses OAuth for security can only be called by OAuth clients. And an API that uses UMA for security can only be called by an UMA client. See the diagrams below if you prefer a visualization:
 
 ![OAuth PEP diagram](img/diagram-oauth-mode.jpg)
-
-### UMA PEP
-The UMA PEP plugin provides client security by authenticating RPT token and UMA scope security.
 
 ![UMA PEP diagram](img/diagram-uma-mode.jpg)
 
@@ -38,16 +39,16 @@ Gluu Gateway makes use of the following software components:
 
 - [Gluu Gateway plugins](https://github.com/GluuFederation/gluu-gateway): Plugins that leverage the Gluu Server for central client management and to control access to upstream APIs using OAuth 2.0 and UMA 2.0.
 
-- [oxd-Server v4.0.Beta](https://oxd.gluu.org): An OpenID Connect and UMA middleware service used to enable client credential management and cryptographic validation against the Gluu Server.
+- [oxd-Server v4.0.Beta](https://oxd.gluu.org):  Gluu's client middleware server for OpenID, OAuth, and UMA client communication.
 
-- Others: The following runtime environment is required by the Gluu Gateway package: 
+- Others: The following runtime environment is required by the Gluu Gateway package:
     - OpenJDK v8
     - Python v2.x
     - Postgres v10
     - Node v8.9.4
     - NPM v5.6.0'
-    
-## Get Started
+
+## Getting Started
 
 Use the following links to get started:  
 
@@ -59,14 +60,3 @@ Use the following links to get started:
     2. [Gluu UMA PEP](./plugin/gluu-uma-pep.md)
     3. [Gluu Metrics](./plugin/gluu-metrics.md)
 1. [FAQ](./faq.md)
-
-## Licenses
-
-Gluu Gateway leverages software written by Gluu and incorporated from other projects. The license for each software component is listed below.
-
-| Component | License |
-|-----------|---------|
-| Kong API Gateway | [Apache2]( http://www.apache.org/licenses/LICENSE-2.0) |
-| Konga GUI | [MIT License](http://opensource.org/licenses/MIT) |
-| oxd-Server | [Apache2]( http://www.apache.org/licenses/LICENSE-2.0) |
-| Gluu Gateway | [Gluu Stepped-Up Support License](https://github.com/GluuFederation/gluu-gateway/blob/master/LICENSE) |
