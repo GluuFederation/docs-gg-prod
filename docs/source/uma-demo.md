@@ -109,15 +109,19 @@ From this call you will get access token (RPT).
 
 #### Prerequisites
 
-* UMA scope with Authorization Policy
-![uma_scope](img/15_uma_scope.png)
-
 * Enabled UMA RPT Polices & UMA Claims Gathering
-![uma_rpt_policy](img/15_uma_rpt_policy.png)
-![uma_claim_gatering_policy](img/15_uma_claim_gatering_policy.png)
+
+    There is one **uma_rpt_policy**. During authorization, it checks County=US and City=NY. If you want to change value then you can update this script or you can add your own new script. For more details take a look on [Gluu CE Documentation](https://gluu.org/docs/ce/admin-guide/uma/#uma-rpt-authorization-policies).
+    ![uma_rpt_policy](img/15_uma_rpt_policy.png)
+    ![uma_claim_gatering_policy](img/15_uma_claim_gatering_policy.png)
+
+* UMA scope with Authorization Policy
+
+    ![uma_scope](img/15_uma_scope.png)
 
 * Update consumer_op_client with `claim_redirect_uris` in CE. Add your CGI script URL.
-![config_claim_url](img/15_config_claim_url.png)
+
+    ![config_claim_url](img/15_config_claim_url.png)
 
 #### Authentication
 
@@ -151,7 +155,9 @@ From this call you get Consumer access token.
 
 From this call you get need_info ticket and claims gathering url(redirect_user). You have to add your claims redirect uri as a url query parameter. You may need to add your claims redirect url to your client configuration in CE.
 
-Next step is to request claim gatering url in browser and add country and city data, if all claim is ok then CE will redirect you to claim redirect uri with **new permission ticket**.
+Next step is to request claim gatering url in browser and add country and city data, As per default **uma_rpt_policy**, you need to enter `US` in Country and `NY` in City. If you change values in script then enter changed values.
+
+If all claim is ok then CE will redirect you to claim redirect uri with **new permission ticket**.
 
 * Get RPT token with permission ticket
 
