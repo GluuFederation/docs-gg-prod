@@ -21,6 +21,27 @@ The Gluu Gateway service is used to manage all components, including: the Admin 
      /opt/gluu-gateway/konga/config/local.js
     ```
 
+    |Property|Description|
+    |--------|-----------|
+    |kong_admin_url|Used to set Kong admin URL|
+    |connections|Used to set Postgres DB configuration for Admin GUI|
+    |models|Used to set the Database model|
+    |session|Session secret is automatically generated when your new app is created. It uses Connect's cookie parser to normalize configuration differences between Express and Socket.io and hooks into Sails' middleware interpreter to allow you to access and auto-save to `req.session` with Socket.io the same way you would with Express.|
+    |ssl|Used to set ssl cert for GUI Application. Which provide facility to start application on https|
+    |port|Used to set application port|
+    |environment|Used to ser project environment. Konga and Gluu Gateway service start application with production environment.|
+    |log|Used to set the log level|
+    |oxdWeb|Used to set OXD Server URL|
+    |opHost|Used to set your OP server URL|
+    |oxdId|Used to set the OXD OP client oxd_id which is used for login in GG GUI|
+    |clientId|Used to set the OP Client's client id which is used for login in GG GUI|
+    |clientSecret|Used to set the OP Client's client secret which is used for login in GG GUI|
+    |oxdVersion|Used to set OXD server version|
+    |ggVersion|It shows the Gluu Gateway version|
+    |explicitHost|Used to define Gluu gateway GUI host explicitly|
+
+    GUI is in `sailsjs-v0.12` node js framework. For more detail configuration take a look on [sailjs documentation](https://0.12.sailsjs.com/documentation/reference/configuration).
+
 * Manage the Konga service
 
     ```

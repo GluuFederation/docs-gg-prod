@@ -15,6 +15,7 @@ Applications and their ports.
 
 | Port | Description |
 |------|-------------|
+|1338| Gluu Gateway Admin GUI|
 |8001|Kong Admin API|
 |8000|Kong Proxy Endpoint|
 |443|Kong SSL Proxy Endpoint. Kong by default provide 8443 port for SSL proxy but during setup it change into 443.|

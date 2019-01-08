@@ -216,6 +216,18 @@ If you see the above message, it means the installation was successful. To log i
 !!! Warning
     By default, the Gluu Gateway Client expiration date is set for one day during the installation process. To change it, follow    [these instructions](https://gluu.org/docs/oxd/3.1.4/faq/#client-expires-how-can-i-avoid-it). Without this step, after 24 hours you will no longer be able to log in to the Gluu Gateway.
 
+## Applications and their ports.
+
+| Port | Description |
+|------|-------------|
+|1338| Gluu Gateway Admin GUI|
+|8001|Kong Admin API|
+|8000|Kong Proxy Endpoint|
+|443|Kong SSL Proxy Endpoint. Kong by default provide 8443 port for SSL proxy but during setup it change into 443.|
+|8443|OXD Server|
+
+To change port and configurations, you can update the perticular application config file. For details see [Configuration](./configuration) section.
+
 ## Upgrade
 
 When a Gluu Gateway upgrade is available, follow these steps:
