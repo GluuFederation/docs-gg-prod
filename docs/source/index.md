@@ -33,6 +33,8 @@ This may sound obvious, but an API that uses OAuth for security can only be call
 
 Gluu Gateway makes use of the following software components:
 
+- [Gluu Server CE v3.1.5](https://gluu.org/docs/ce/3.1.5): The Gluu Server is a container distribution of free open source software (FOSS) for identity and access management (IAM). SaaS, custom, open source and commercial web and mobile applications can leverage a Gluu Server for user authentication, identity information, and policy management.
+
 - [Kong v0.14](https://getkong.org): An open source API Gateway and Microservices Management Layer, delivering high performance and reliability.
 
 - [Gluu Konga Admin GUI](https://github.com/GluuFederation/gluu-gateway/tree/master/konga): A web administration portal, based on the [Konga](https://github.com/pantsel/konga) GUI, to manage your Gluu Gateway.
@@ -46,7 +48,7 @@ Gluu Gateway makes use of the following software components:
     - Python v2.x
     - Postgres v10
     - Node v8.9.4
-    - NPM v5.6.0'
+    - NPM v5.6.0
 
 ## Getting Started
 
