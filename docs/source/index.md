@@ -2,7 +2,7 @@
 
 ## Overview
 
-Gluu Gateway is a distribution of several open source components, integrated and supported together. It is published under the [GLUU-STEPPED-UP](https://raw.githubusercontent.com/GluuFederation/gluu-gateway/master/LICENSE) license. You must have an active and compliant support contract to use the software in production.
+Gluu Gateway is a distribution of several open source components, integrated and supported together. 
 
 ## Features
 
@@ -62,3 +62,7 @@ Use the following links to get started:
     2. [Gluu UMA PEP](./plugin/gluu-uma-pep.md)
     3. [Gluu Metrics](./plugin/gluu-metrics.md)
 1. [FAQ](./faq.md)
+
+## License  
+
+It is published under the [GLUU-STEPPED-UP](https://raw.githubusercontent.com/GluuFederation/gluu-gateway/master/LICENSE) license. You must have an active and compliant support contract to use the software in production.
