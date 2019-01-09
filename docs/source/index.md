@@ -2,7 +2,7 @@
 
 ## Overview
 
-Gluu Gateway is a distribution of several open source components, integrated and supported together. 
+Gluu Gateway is a distribution of several open source components, integrated and supported together, to enable API access management. 
 
 ## Features
 
