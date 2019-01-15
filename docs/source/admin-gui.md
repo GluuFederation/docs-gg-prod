@@ -290,3 +290,15 @@ You can set dashboard refresh interval, logout session timeout and login restric
 
 ![settings](img/10_settings.png)
 
+### General settings
+
+|Setting|Description|
+|-------|-----------|
+|Dashboard refresh interval|The interval in milliseconds at which the Dashboard data will refresh. Default is 5000 miliseconds.|
+|Logout session timeout|The interval in minutes at which you will be logged out after idle time. Default is 5000 minute.|
+
+### Login restrictions
+
+|Setting|Description|
+|-------|-----------|
+|Allow only admin user to login.|If enabled, only OP Users with **admin** role(permission) is allowed to log in to Gluu Gateway UI. Follow [CE Docs](https://gluu.org/docs/ce/user-management/user-registration/#adding-attributes-to-registration) to add role in user.|
