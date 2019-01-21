@@ -12,10 +12,10 @@ Gluu Gateway adds support for the following use cases and functionalities:
 
 - Introspect bearer access tokens
 - Validate the signature of JWT access tokens
-- Control access to APIs by requiring either OAuth and UMA scopes
-- Provide a GUI to simplify administration
-- Collect and report on OAuth and UMA specific metrics
-- Simplify installation, administration, scaling and update of the platform
+- Control access to APIs by requiring OAuth or UMA scopes
+- Collect and report OAuth and UMA usage metrics
+- Simplify installation, administration, and scaling of the platform
+- A GUI to simplify ongoing administration
 
 ## Access Control
 
