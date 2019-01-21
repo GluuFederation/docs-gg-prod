@@ -76,4 +76,4 @@ Use the following links to get started:
 
 ## License  
 
-It is published under the [GLUU-STEPPED-UP](https://raw.githubusercontent.com/GluuFederation/gluu-gateway/master/LICENSE) license. You must have an active and compliant support contract to use the software in production.
+Gluu Gateway is available under the [GLUU-STEPPED-UP license](https://raw.githubusercontent.com/GluuFederation/gluu-gateway/master/LICENSE). 
