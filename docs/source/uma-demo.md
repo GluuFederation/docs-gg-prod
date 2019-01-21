@@ -9,9 +9,14 @@
 
 ### 3. RS Configuration
 
-RS configuration can be done either via REST calls or via Gluu Gateway web interface. You can configure plugin on **Service**, **Route** and **Global**. There are several possibilities for plugin configuration with services and routes. [More Details](https://docs.konghq.com/0.14.x/admin-api/#precedence). Take a look on [docs](https://gluu.org/docs/gg/plugin/gluu-uma-pep/) for configuration detail description.
+!!! Note
+    RS configuration can be done either via REST calls or via the Gluu Gateway web interface. 
 
-Applications and their ports.
+Configure plugin on **Service**, **Route** and **Global**. 
+
+There are several possibilities for plugin configuration with services and routes. More information is available in the [Kong docs](https://docs.konghq.com/0.14.x/admin-api/#precedence), and configuration detail descriptions are available in the [Gluu Gateway docs](https://gluu.org/docs/gg/plugin/gluu-uma-pep/).
+
+Applications and their ports:
 
 | Port | Description |
 |------|-------------|
