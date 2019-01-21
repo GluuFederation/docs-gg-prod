@@ -32,7 +32,9 @@ Gluu Gateway supports both OAuth and UMA tokens. While mechanically the same, sc
 
 In Gluu Gateway, a `client_id` is associated with a "Consumer" in Kong. This is useful where access control is restricted to certain clients. All other forms of client authentication are disabled in the Gluu Gateway Admin GUI -- we just want to use an OAuth Authorization Server like the Gluu Server for client authentication. The Gluu Server plugins verify the `client_id` for which a token was issued by looking at the JSON equivalent (either the JWT or the introspection response).
 
-This may seem obvious, but just to make it clear: an API that uses OAuth for security can only be called by OAuth clients. And an API that uses UMA for security can only be called by an UMA client. See the diagrams below if you prefer a visualization:
+This may seem obvious, but to be clear: an API that uses OAuth for security can only be called by OAuth clients. And an API that uses UMA for security can only be called by an UMA client. 
+
+See the diagrams below if you prefer a visualization:
 
 ![OAuth PEP diagram](img/diagram-oauth-mode.jpg)
 
