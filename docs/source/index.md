@@ -2,11 +2,13 @@
 
 ## Overview
 
-Gluu Gateway is a distribution of several open source components, integrated and supported together, to enable OAuth-based API access management. 
+Gluu Gateway enables organizations to restrict access to API's by requiring OAuth clients to present valid access tokens issued by an OAuth or UMA Authorization Server (AS), typically a [Gluu Server](https://gluu.org/docs/ce).
+
+Gluu Gateway is built on top of the [Kong API gateway](https://konghq.com/kong/) and leverages the strong ecosystem of Kong plugins to enable rate limiting, logging, and many other capabilities. 
 
 ## Features
 
-The goal of Gluu Gateway is to enable your organization to restrict access to API's by requiring clients to present a valid access token issued by an OAuth or UMA Authorization Server, typically a Gluu Server. Gluu Gateway is built on top of Kong Community Edition because of the strong ecosystem of plugins which enable rate limiting, logging and many other capabilities. They key features of Gluu Gateway are to:
+Gluu Gateway adds support for the following use cases and functionalities:
 
 - Introspect bearer access tokens
 - Validate the signature of JWT access tokens
@@ -17,13 +19,22 @@ The goal of Gluu Gateway is to enable your organization to restrict access to AP
 
 ## Access Control
 
-The Gluu Gateway functions as a policy enforcement point ("PEP"), relying on an external policy decision point ("PDP") for policy evaluation. The PEP has two primary jobs: (1) make sure the token is active; (2) make sure the token has the correct scopes to call the endpoint it is requesting.
+Gluu Gateway functions as a policy enforcement point ("PEP"), relying on an external policy decision point ("PDP") for policy evaluation. 
 
-Gluu Gateway supports both OAuth and UMA tokens. While mechanically the same, scopes have different meanings in OAuth and UMA. UMA scopes represent centralized policy evaluation. For example, in the Gluu Server, administrators can map scopes to policies, expressed as UMA RPT Authorization interception scripts. Normally, OAuth scopes represent a user's authorization, although how scopes are granted is ultimately up to the Authorization Server that issues it.
+The PEP has two primary jobs: 
 
-In the Gluu Gateway, a `client_id` is associated with a "Consumer" in Kong. This is useful where access control is restricted to certain clients. All other forms of client authentication are disabled in the Gluu Gateway Admin GUI--we just want to use an OAuth Authorization Server like the Gluu Server for client authentication. The Gluu Server plugins can verify the `client_id` for which an token was issued by looking at the JSON equivalent (either the JWT or the introspection response).
+1. Make sure the token is active; 
+2. Make sure the token has the correct scopes to call the endpoint it is requesting.
 
-This may sound obvious, but an API that uses OAuth for security can only be called by OAuth clients. And an API that uses UMA for security can only be called by an UMA client. See the diagrams below if you prefer a visualization:
+Gluu Gateway supports both OAuth and UMA tokens. While mechanically the same, scopes have different meanings in OAuth and UMA: 
+
+- UMA scopes represent centralized policy evaluation. For example, in the Gluu Server, administrators can map scopes to policies, expressed as UMA RPT Authorization interception scripts. 
+
+- OAuth scopes normally represent a user's authorization, for example authorization to access a user's calendar. However, how scopes are granted is ultimately up to the Authorization Server that issues it.
+
+In Gluu Gateway, a `client_id` is associated with a "Consumer" in Kong. This is useful where access control is restricted to certain clients. All other forms of client authentication are disabled in the Gluu Gateway Admin GUI -- we just want to use an OAuth Authorization Server like the Gluu Server for client authentication. The Gluu Server plugins verify the `client_id` for which a token was issued by looking at the JSON equivalent (either the JWT or the introspection response).
+
+This may seem obvious, but just to make it clear: an API that uses OAuth for security can only be called by OAuth clients. And an API that uses UMA for security can only be called by an UMA client. See the diagrams below if you prefer a visualization:
 
 ![OAuth PEP diagram](img/diagram-oauth-mode.jpg)
 
