@@ -1,13 +1,14 @@
 # Gluu Gateway UMA demo app
 
-### 1. Parties
+
+## Parties
 
 ![UMA Overview](img/15_gg-demo-overview-diagram-uma.png)
 
-### 2. Flow
+## Flow
 ![Flow chart](img/15_uma_flow.png)
 
-### 3. RS Configuration
+## RS Configuration
 
 !!! Note
     RS configuration can be done either via REST calls or via the Gluu Gateway web interface. 
@@ -26,13 +27,13 @@ Applications and their ports:
 |443|Kong SSL Proxy Endpoint. Kong by default provide 8443 port for SSL proxy but during setup it change into 443.|
 |8443|OXD Server|
 
-In demo, we are configuring plugin for service. Follow below step to configure plugin on service.
+In the following demo, we are configuring plugin for service. Follow the steps below. 
 
-#### Step.1 [Add Service](/plugin/gluu-uma-pep/#1-add-service)
+### Step.1 [Add Service](/plugin/gluu-uma-pep/#1-add-service)
 
-You need to register your upstream api in service. For more details take a look on details in [Gluu UMA PEP service](/plugin/gluu-uma-pep/#1-add-service) section.
+Register your upstream API in service. For more details see the [Gluu UMA PEP service docs](/plugin/gluu-uma-pep/#1-add-service).
 
-For Demo, you need to add two different service with different name and URL. let's take some live API just for demo. `https://jsonplaceholder.typicode.com`.
+For the Demo, you need to add two different service with different name and URL. let's take some live API just for demo. `https://jsonplaceholder.typicode.com`.
 
 - Service(claim-gatering)
     - `name: claim-gatering`
@@ -44,7 +45,7 @@ For Demo, you need to add two different service with different name and URL. let
     - `URL: https://jsonplaceholder.typicode.com`
     - let's call it **none_claim_service**
 
-#### Step.2 [Add Route](/plugin/gluu-uma-pep/#1-add-route)
+### Step.2 [Add Route](/plugin/gluu-uma-pep/#1-add-route)
 
 For proxy you need to add route in service. For more details take a look on details in [Gluu UMA PEP route](/plugin/gluu-uma-pep/#1-add-route) section.
 
@@ -54,7 +55,7 @@ For proxy you need to add route in service. For more details take a look on deta
 - Route2:
     - Add second route in **none_claim_service** with hosts `non-gathering.example.com`
 
-#### Step.3 [Configure Plugin on Service](/plugin/gluu-uma-pep/#2-configure-plugin)
+### Step.3 [Configure Plugin on Service](/plugin/gluu-uma-pep/#2-configure-plugin)
 
 Configure Gluu-UMA-PEP with UMA scope and resources.
 
@@ -64,13 +65,13 @@ Configure Gluu-UMA-PEP with UMA scope and resources.
 - Resource registration for **none_claim_service**.
 ![claim_gatering](img/15_non_claim_gatering_uma_expression.png)
 
-### 4. [UMA client registration](/plugin/gluu-uma-pep/#usage)
+## [UMA client registration](/plugin/gluu-uma-pep/#usage)
 
 In this step, you can create OP Client using GG UI or you can use OXD server API for client registration. Take a look at [UMA client registration](/plugin/gluu-uma-pep/#usage) section for more details.
 
 Then you need to use OP Client's client_id for Kong Consumer registration. let's call this OP client as **consumer_op_client**.
 
-### 5. Call UMA protected API without claim gatering
+## Call UMA protected API without claim gatering
 
 You may need to take care from CE side for UMA Grant access when there is no policy in scope. `umaGrantAccessIfNoPolicies` flag in CE oxAuth json configuration is used to allow grant when there is no policy.
 
@@ -111,9 +112,9 @@ From this call you will get access token (RPT).
       --Header "Host: non-gathering.example.com"
 ```
 
-### 6. UMA flow with claims gathering
+## UMA flow with claims gathering
 
-#### Prerequisites
+### Prerequisites
 
 * Enabled UMA RPT Polices & UMA Claims Gathering
 
@@ -129,7 +130,7 @@ From this call you will get access token (RPT).
 
     ![config_claim_url](img/15_config_claim_url.png)
 
-#### Authentication
+### Authentication
 
 * Get resource ticket
 
@@ -184,7 +185,7 @@ From this call you will get access token (RPT).
       --Header "Host: gathering.example.com"
 ```
 
-### 7. Demo
+## Demo
 
 Demo is prepared as python CGI script. You need to put it in some CGI enabled web server. Script is divided into 3 parts:
 
@@ -198,7 +199,7 @@ By default, **UMA without claim gathering flow is executed.**
 
 If you want to execute UMA with claims gathering flow, add `claim=true` parameter in your url.
 
-#### Deploy
+### Deploy
 
 Since we are going to write a python cgi script for simplicity, we first need to get a working web server to act as the Relying Party (RP). Apache will be installed on the host rp.server.com. I am using Ubuntu 16.04 LTS for this purpose. First install apache web server:
 
@@ -225,7 +226,7 @@ If you set configuration as above then you can request to
 1. With claim gathering flow: `<your-server.com>/cgi-bin/index.py?claim=true`
 2. Without claim gathering flow: `<your-server.com>/cgi-bin/index.py`
 
-#### Configuration
+### Configuration
 
 Use `config.py` file for add your configuration
 
