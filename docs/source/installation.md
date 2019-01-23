@@ -9,6 +9,15 @@ The installation is a three-part process:
 !!! Note
     Before proceeding with Gluu Gateway installation, you should have a [Gluu Server](https://gluu.org/docs/ce) installed and operational. You will be asked to input the hostname of your Gluu Server while running the Gluu Gateway setup script. 
 
+## Minimum Requirements
+
+The Gluu gateway needs to be deployed on a server or VM with the following minimum requirements.
+
+|CPU Unit|RAM|Disk Space|Processor Type|
+|--------|---|----------|--------------|
+|1|1 GB|10 GB|64 Bit|
+
+
 ## Required Third Party repositories
 
 !!! Important 
