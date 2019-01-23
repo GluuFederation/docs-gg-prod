@@ -2,7 +2,7 @@
 
 ## Overview
 
-Gluu Gateway enables organizations to restrict access to API's by requiring OAuth clients to present valid access tokens issued by an OAuth or UMA Authorization Server (AS), typically a [Gluu Server](https://gluu.org/docs/ce).
+Gluu Gateway enables organizations to restrict access to APIs by requiring OAuth clients to present valid access tokens issued by an OAuth or UMA Authorization Server (AS), typically a [Gluu Server](https://gluu.org/docs/ce).
 
 Gluu Gateway is built on top of the [Kong API gateway](https://konghq.com/kong/) and leverages the strong ecosystem of Kong plugins to enable rate limiting, logging, and many other capabilities. 
 
@@ -22,7 +22,7 @@ Gluu Gateway adds support for the following use cases and functionalities:
 Gluu Gateway functions as a policy enforcement point ("PEP"), relying on an external policy decision point ("PDP") for policy evaluation. The PEP has two primary jobs: 
 
 1. Make sure the token is active; 
-2. Make sure the token has the correct scopes to call the endpoint it is requesting.
+1. Make sure the token has the correct scopes to call the endpoint it is requesting.
 
 Gluu Gateway supports both OAuth and UMA tokens. While mechanically the same, scopes have different meanings in OAuth and UMA: 
 
@@ -52,7 +52,7 @@ Gluu Gateway makes use of the following software components:
 
 - [Gluu Gateway plugins](https://github.com/GluuFederation/gluu-gateway): Plugins that leverage the Gluu Server for central client management and to control access to upstream APIs using OAuth 2.0 and UMA 2.0.
 
-- [oxd-Server v4.0.Beta](https://oxd.gluu.org):  Gluu's client middleware server for OpenID, OAuth, and UMA client communication.
+- [oxd-Server v4.0.Beta](https://oxd.gluu.org): Gluu's client middleware server for OpenID, OAuth, and UMA client communication.
 
 - Others: The following runtime environment is required by the Gluu Gateway package:
     - OpenJDK v8
