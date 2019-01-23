@@ -1,21 +1,21 @@
 # Installation
 
-The installation is a three-part process:
+To install Gluu Gateway, follow these steps:
 
 1. [Add the required third party repositories](#required-third-party-repositories)
 2. [Install the `gluu-gateway` package](#install-the-gluu-gateway-package)
 3. [Run `setup-gluu-gateway.py`](#run-the-setup-script)
 
 !!! Note
-    Before proceeding with Gluu Gateway installation, you should have a [Gluu Server](https://gluu.org/docs/ce) installed and operational. You will be asked to input the hostname of your Gluu Server while running the Gluu Gateway setup script. 
+    Before installing Gluu Gateway, you should have a [Gluu Server](https://gluu.org/docs/ce) installed and operational. You will be asked to input the hostname of your Gluu Server while running the Gluu Gateway setup script. 
 
 ## Minimum Requirements
 
-The Gluu gateway needs to be deployed on a server or VM with the following minimum requirements.
+Gluu Gateway needs to be deployed on a server or VM with the following minimum requirements:
 
-|CPU Unit|RAM|Disk Space|Processor Type|
-|--------|---|----------|--------------|
-|1|2 GB|10 GB|64 Bit|
+|CPU Unit|RAM |Disk Space|Processor Type|
+|--------|--- |----------|--------------|
+|1       |2 GB|10 GB     |64 Bit|
 
 
 ## Required Third Party repositories
@@ -31,7 +31,7 @@ The Gluu gateway needs to be deployed on a server or VM with the following minim
 # echo "deb https://repo.gluu.org/ubuntu/ trusty main" > /etc/apt/sources.list.d/gluu-repo.list
 # curl https://repo.gluu.org/ubuntu/gluu-apt.key | apt-key add -
 ```
-* Add the Postgresql-10 repo:
+* Add the PostgreSQL 10 repo:
 ```
 # echo "deb http://apt.postgresql.org/pub/repos/apt/ trusty-pgdg main" > /etc/apt/sources.list.d/psql.list
 # wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
@@ -49,7 +49,7 @@ The Gluu gateway needs to be deployed on a server or VM with the following minim
 # echo "deb https://repo.gluu.org/ubuntu/ xenial-devel main" > /etc/apt/sources.list.d/gluu-repo.list
 # curl https://repo.gluu.org/ubuntu/gluu-apt.key | apt-key add -
 ```
-* Add the Postgresql-10 repo:
+* Add the PostgreSQL 10 repo:
 ```
 # echo "deb http://apt.postgresql.org/pub/repos/apt/ xenial-pgdg main" > /etc/apt/sources.list.d/psql.list
 # wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
@@ -67,7 +67,7 @@ The Gluu gateway needs to be deployed on a server or VM with the following minim
 # echo "deb https://repo.gluu.org/debian/ testing main" > /etc/apt/sources.list.d/gluu-repo.list
 # curl https://repo.gluu.org/debian/gluu-apt.key | apt-key add -
 ```
-* Add the Postgresql-10 repo:
+* Add the PostgreSQL 10 repo:
 ```
 # echo "deb http://apt.postgresql.org/pub/repos/apt/ jessie-pgdg main" > /etc/apt/sources.list.d/psql.list
 # wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
@@ -83,7 +83,7 @@ The Gluu gateway needs to be deployed on a server or VM with the following minim
 # echo "deb https://repo.gluu.org/debian/ stretch-testing main" > /etc/apt/sources.list.d/gluu-repo.list
 # curl https://repo.gluu.org/debian/gluu-apt.key | apt-key add -
 ```
-* Add the Postgresql-10 repo:
+* Add the PostgreSQL 10 repo:
 ```
 # echo "deb http://apt.postgresql.org/pub/repos/apt/ stretch-pgdg main" > /etc/apt/sources.list.d/psql.list
 # wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
@@ -100,7 +100,7 @@ The Gluu gateway needs to be deployed on a server or VM with the following minim
 # wget https://repo.gluu.org/centos/RPM-GPG-KEY-GLUU -O /etc/pki/rpm-gpg/RPM-GPG-KEY-GLUU
 # rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-GLUU
 ```
-* Add the Postgresql-10 repo:
+* Add the PostgreSQL 10 repo:
 ```
 # rpm -Uvh https://yum.postgresql.org/10/redhat/rhel-6-x86_64/pgdg-redhat10-10-2.noarch.rpm
 ```
@@ -116,7 +116,7 @@ curl -sL https://rpm.nodesource.com/setup_8.x | sudo -E bash -
 # wget https://repo.gluu.org/centos/RPM-GPG-KEY-GLUU -O /etc/pki/rpm-gpg/RPM-GPG-KEY-GLUU
 # rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-GLUU
 ```
-* Add the Postgresql-10 repo:
+* Add the PostgreSQL 10 repo:
 ```
 # rpm -Uvh https://yum.postgresql.org/10/redhat/rhel-7-x86_64/pgdg-centos10-10-2.noarch.rpm
 ```
@@ -132,7 +132,7 @@ curl -sL https://rpm.nodesource.com/setup_8.x | sudo -E bash -
 # wget https://repo.gluu.org/rhel/RPM-GPG-KEY-GLUU -O /etc/pki/rpm-gpg/RPM-GPG-KEY-GLUU
 # rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-GLUU
 ```
-* Add the Postgresql-10 repo:
+* Add the PostgreSQL 10 repo:
 ```
 # rpm -Uvh https://yum.postgresql.org/10/redhat/rhel-6-x86_64/pgdg-redhat10-10-2.noarch.rpm
 ```
@@ -148,7 +148,7 @@ curl -sL https://rpm.nodesource.com/setup_8.x | sudo -E bash -
 # wget https://repo.gluu.org/rhel/RPM-GPG-KEY-GLUU -O /etc/pki/rpm-gpg/RPM-GPG-KEY-GLUU
 # rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-GLUU
 ```
-* Add the Postgresql-10 repo:
+* Add the PostgreSQL 10 repo:
 ```
 # rpm -Uvh https://yum.postgresql.org/10/redhat/rhel-7-x86_64/pgdg-centos10-10-2.noarch.rpm
 ```
@@ -159,10 +159,10 @@ curl -sL https://rpm.nodesource.com/setup_8.x | sudo -E bash -
 
 --->
 
-## Install the gluu-gateway package
+## Install the Gluu Gateway package
 
 !!! important
-    Gluu Gateway package installs following required components: postgresql-v10, oxd-server-4.0.beta, NodeJS-v8, kong-community-edition-v0.14.1.
+    The Gluu Gateway package installs the following required components: PostgreSQL v10, oxd Server 4.0.beta, NodeJS v8, Kong Community Edition v0.14.1.
 
 ### Ubuntu 16
 
@@ -192,7 +192,7 @@ curl -sL https://rpm.nodesource.com/setup_8.x | sudo -E bash -
  # python setup-gluu-gateway.py
 ```
 
-After acknowledging that the use of the Gluu Stepped-Up Support License, you will be prompted to answer several questions. Just hit Enter to accept the default values, which are specified in square brackets.
+After acknowledging the Gluu Stepped-Up Support License, you will be prompted to answer several questions. Just hit Enter to accept the default values, which are specified in square brackets.
 
 !!! Important 
     When you are prompted to provide a two-letter value, make sure you follow the instructions. A mistake may result in the lack of certificates.
@@ -208,8 +208,8 @@ After acknowledging that the use of the Gluu Stepped-Up Support License, you wil
 | **Email address** | Used to generate web X.509 certificates |
 | **Password** | If you already have a database password for user `postgres`, enter it here. Otherwise, enter a new password. |
 | **OP hostname** | The hostname of the Gluu Server that will be used for OAuth 2.0 client credentials and access management. **Example**: op-server.com |
-| **oxd https URL** | Make sure the oxd-https-extension is running. |
-| **Would you like to generate client_id/client_secret for Konga?** | Register an OpenID Client for Konga, or enter existing client credentials manually. By default, the client expiration is set to 24 hours; make sure to [extend this expiration date](https://gluu.org/docs/oxd/3.1.4/faq/#client-expires-how-can-i-avoid-it). Without this step, after 24 hours you will no longer be able to log in to the Gluu Gateway. If you enter existing client details, make sure your client in Redirect Login URIs and Post Logout Redirect URIs field, you have the value `https://localhost:1338`. |
+| **oxd server URL** | If oxd is installed on a different hostname than Gluu Gateway, provide its URL. If not, enter the hostname for Gluu Gateway|
+| **Would you like to generate client_id/client_secret for Konga?** | Register an OpenID Client for Konga, or enter existing client credentials manually. By default, the client expiration is set to 24 hours; make sure to [extend this expiration date](https://gluu.org/docs/oxd/faq/#client-expires-how-can-i-avoid-it). Without this step, after 24 hours you will no longer be able to log in to the Gluu Gateway. If you enter existing client details, make sure your client in Redirect Login URIs and Post Logout Redirect URIs field has the value `https://localhost:1338`. |
 | **oxd_id** | Used to manually set the oxd ID. |
 | **client_id** | Used to manually set the client ID. |
 | **client_secret** | Used to manually set the client secret. |
@@ -226,27 +226,27 @@ If you see the above message, it means the installation was successful. To log i
     If you do not want an SSH tunnel connection. See [FAQ](./faq.md#how-can-i-change-the-listening-address-and-port) for global access configuration.
     
 !!! Warning
-    By default, the Gluu Gateway Client expiration date is set for one day during the installation process. To change it, follow    [these instructions](https://gluu.org/docs/oxd/3.1.4/faq/#client-expires-how-can-i-avoid-it). Without this step, after 24 hours you will no longer be able to log in to the Gluu Gateway.
+    By default, the Gluu Gateway Client expiration date is set for one day during the installation process. To change it, follow [these instructions](https://gluu.org/docs/oxd/3.1.4/faq/#client-expires-how-can-i-avoid-it). Without this step, after 24 hours you will no longer be able to log in to the Gluu Gateway.
 
-## Applications and their ports.
+## Applications and their ports
 
 | Port | Description |
 |------|-------------|
 |1338| Gluu Gateway Admin GUI|
 |8001|Kong Admin API|
 |8000|Kong Proxy Endpoint|
-|443|Kong SSL Proxy Endpoint. Kong by default provide 8443 port for SSL proxy but during setup it change into 443.|
-|8443|OXD Server|
+|443|Kong SSL Proxy Endpoint. By default, Kong uses 8443 port for SSL proxy, but during setup it is changed to 443.|
+|8443|oxd Server|
 
-To change port and configurations, you can update the perticular application config file. For details see [Configuration](./configuration) section.
+To change the port and configurations, you can update the specific application's config file. For details, see the [Configuration](./configuration) section.
 
 ## Upgrade
 
 When a Gluu Gateway upgrade is available, follow these steps:
 
-* Go to the Gluu repo:
+* Add the Gluu repo:
 ```
-# echo "deb https://repo.gluu.org/ubuntu/ trusty main" > /etc/apt/sources.list.d/gluu-repo.list
+# echo "deb https://repo.gluu.org/ubuntu/ xenial-devel main" > /etc/apt/sources.list.d/gluu-repo.list
 ```
 * Run:
 ```
@@ -259,31 +259,30 @@ When a Gluu Gateway upgrade is available, follow these steps:
  # python setup-gluu-gateway.py
 ```
 !!! Important 
-    During setup, choose to enter the existing client credentials manually if you want to continue using them. If you want to start fresh, choose to generate client credentials again. By doing so, you might lose your previously created Services or Consumers.
+    During setup, choose to enter the existing client credentials manually if you want to continue using them. If you want to start fresh, choose to generate client credentials again. If you do so, you might lose your previously created Services or Consumers.
     
 * [Finish](#finish-the-setup) the setup
 
 ## Removal
 
 !!! Important 
-    Always run the following commands as root. To avoid errors, run them in the order given below.
+    Always run the following commands as root.
 
-Use `apt` to remove the gluu-gateway package.
-```
-apt-get remove gluu-gateway
-```
+Choose one of the following three options:
 
-If you want to also remove the configuration files (/etc/init.d/gluu-gateway and /opt/gluu-gateway/konga/config), use `purge`.
-```    	
-apt-get purge gluu-gateway
-```
+1. Use `apt` to remove only the gluu-gateway package. Any dependencies installed at the same time, as well as configuration, will remain.
 
-Using the `--auto-remove` parameter will also remove the package dependencies (kong-community-edition, lua-cjson, nodejs, oxd-server, postgresql).
-```
-apt-get remove --auto-remove gluu-gateway
-```
+    ```
+    apt remove gluu-gateway
+    ```
 
+1. If you want to also remove the configuration files (/etc/init.d/gluu-gateway and /opt/gluu-gateway/konga/config), use `purge`.
+    ```    	
+    apt purge gluu-gateway
+    ```
 
-   
- 
-    
+1. Using the `--auto-remove` parameter will also remove the package dependencies (kong-community-edition, lua-cjson, nodejs, oxd-server, postgresql).
+
+    ```
+    apt remove --auto-remove gluu-gateway
+    ```
