@@ -153,7 +153,7 @@ curl -sL https://rpm.nodesource.com/setup_8.x | sudo -E bash -
 ## Install the gluu-gateway package
 
 !!! important
-    Gluu Gateway package is also installed some require component i:e postgresql-v10, oxd-server-4.0.beta, NodeJS-v8, kong-community-edition-v0.14.1.
+    Gluu Gateway package installs following required components: postgresql-v10, oxd-server-4.0.beta, NodeJS-v8, kong-community-edition-v0.14.1.
 
 ### Ubuntu 16
 
