@@ -15,7 +15,7 @@ The Gluu gateway needs to be deployed on a server or VM with the following minim
 
 |CPU Unit|RAM|Disk Space|Processor Type|
 |--------|---|----------|--------------|
-|1|1 GB|10 GB|64 Bit|
+|1|2 GB|10 GB|64 Bit|
 
 
 ## Required Third Party repositories
