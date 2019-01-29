@@ -25,7 +25,10 @@ The Info section shows generic details about the Kong node.
 ### Service List
 
 Service entities, as the name implies, are abstractions of each of your own upstream services. Examples of Services would be a data transformation microservice, a billing API, etc. [More details](https://docs.konghq.com).   
-    
+
+!!! Note
+    The eye icon is used to see the raw json object. Use this when you want object id.
+
 ![3_service_list](img/3_1_service_list.png)
 
 | Tools | Details |
