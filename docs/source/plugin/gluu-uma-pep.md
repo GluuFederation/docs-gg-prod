@@ -14,6 +14,8 @@ You can configure plugin on **Service**, **Route** and **Global**. There are sev
 !!! Important
     During plugin configuration, **GG UI** provide facility to create new OP Client when you set **oxd id blank**. But if you are using **Kong Admin API** then you need to use existing client credentials.
 
+!!! Important
+    konga.log shows the equivalent curl command that is all the request to Kong API and OXD API made by Konga GUI. You can use this curl command for automate the configuration instead of using the web interface.
 
 ### Enable plugin on Service
 
