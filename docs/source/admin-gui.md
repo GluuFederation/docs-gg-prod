@@ -308,7 +308,7 @@ You can set dashboard refresh interval, logout session timeout and login restric
 
 ### Configure Role for User
 
-You need to add `User permission` in user. Click on `User permission`, it will create one text box. Add `admin` role and save user.
+Open `Users` section in your Gluu CE and use `User permission` attribute to add role in user. Click on `User permission`, it will create one text box. Add `admin` role and save user.
 
 ![role](img/16_user_role_permission_add.png)
 
