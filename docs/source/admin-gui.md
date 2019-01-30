@@ -305,3 +305,13 @@ You can set dashboard refresh interval, logout session timeout and login restric
 |Setting|Description|
 |-------|-----------|
 |Allow only admin user to login.|If enabled, only OP Users with **admin** role(permission) is allowed to log in to Gluu Gateway UI. Follow [CE Docs](https://gluu.org/docs/ce/user-management/user-registration/#adding-attributes-to-registration) to add role in user.|
+
+### Configure Role for User
+
+You need to add `User permission` in user. Click on `User permission`, it will create one text box. Add `admin` role and save user.
+
+![role](img/16_user_role_permission_add.png)
+
+Allow `permission` scope.
+
+![Permission](img/16_user_permission_scope.png)
