@@ -26,6 +26,8 @@ The Info section shows generic details about the Kong node.
 
 Service entities, as the name implies, are abstractions of each of your own upstream services. Examples of Services would be a data transformation microservice, a billing API, etc. [More details](https://docs.konghq.com).   
 
+Check Kong [Service configuration](https://docs.konghq.com/0.14.x/proxy/#reminder-how-to-configure-a-service) docs for more details.
+
 !!! Note
     The eye icon is used to see the raw json object. Use this when you want object id.
 
@@ -55,6 +57,8 @@ This section is used to view and edit your Service.
 
 #### Routes
 This section is used to manage the route within selected service.
+
+Check Kong [routes configuration](https://docs.konghq.com/0.14.x/proxy/#routes-and-matching-capabilities) docs for more details.
 
 ![3_4_service_route](img/3_4_service_route.png)
 
@@ -95,6 +99,8 @@ This section is used to view the list of added Plugins and add a new Plugin.
 ### Route List
 
 The Route entities define rules to match client requests. Each Route is associated with a Service, and a Service may have multiple Routes associated with it. Every request matching a given Route will be proxied to its associated Service. [More details](https://docs.konghq.com).
+
+Check Kong [routes configuration](https://docs.konghq.com/0.14.x/proxy/#routes-and-matching-capabilities) docs for more details.
 
 ![4_1_route_list](img/4_1_route_list.png)
 
@@ -216,6 +222,8 @@ Add Plugins by using the `+ ADD GLOBAL PLUGINS` button.
 
 The upstream object represents a virtual hostname and can be used to loadbalance incoming requests over multiple services (targets). So for example an upstream named service.v1.xyz for a Service object whose host is service.v1.xyz. Requests for this Service would be proxied to the targets defined within the upstream.
 
+Check Kong [load balancing](https://docs.konghq.com/0.14.x/loadbalancing/) and [health-check](https://docs.konghq.com/0.14.x/health-checks-circuit-breakers/) docs for more details.
+
 ![6_upstream](img/6_upstream.png)
 
 Add Upstreams by using the `+ CREATE UPSTREAM` button.
@@ -233,6 +241,8 @@ The `Targets` section is for manage targets. A target is an ip address/hostname 
 ## CERTIFICATES
 
 A Certificate object represents a public certificate/private key pair for an SSL certificate. These objects are used by Kong to handle SSL/TLS termination for encrypted requests. Certificates are optionally associated with SNI objects to tie a cert/key pair to one or more hostnames.
+
+Check Kong [ certificate configuration](https://docs.konghq.com/0.14.x/proxy/#configuring-ssl-for-a-route) docs for more details.
 
 ![cert](img/7_cert.png)
 
