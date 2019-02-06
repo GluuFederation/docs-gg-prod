@@ -4,7 +4,7 @@ The metrics plugin gathers statistics for authentication-related events generate
 
 ## Configuration
 
-The plugin can be configured on **Service**, **Route** and **Global**. There are several possibilities for plugin configuration with services and routes. [More details on the Kong docs](https://docs.konghq.com/0.14.x/admin-api/#precedence).
+The plugin can be configured on **Service**, **Route** and **Global**. There are several possibilities for plugin configuration with services and routes. [More details in the Kong docs](https://docs.konghq.com/0.14.x/admin-api/#precedence).
 
 We recommend enabling the plugin Globally so metrics are gathered for all Gluu Gateway services.
 
