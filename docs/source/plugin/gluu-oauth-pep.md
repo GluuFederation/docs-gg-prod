@@ -2,33 +2,32 @@
 
 The OAuth PEP is used to enforce the presence of UMA scopes for access to resources protected by the Gateway. OAuth scopes and policies are defined in an external OAuth Authorization Server (AS) -- in most cases the Gluu Server. The Gateway and AS leverage the oxd OAuth middleware service for communication.
 
-
 The plugin supports two types of tokens: 
 
    1. **Default Access Token**: The plugin will authenticate the token using introspection.
-   2. **Access Token as JWT**: The plugin will authenticate the token using JWT verify. Currently the plugin supports three algorithms:  **RS256**, **RS384** and **RS512**.
+   1. **Access Token as JWT**: The plugin will authenticate the token using JWT to verify. Currently the plugin supports three algorithms:  **RS256**, **RS384** and **RS512**.
 
 ## Configuration
 
-You can configure plugin on **Service**, **Route** and **Global**. There are several possibilities for plugin configuration with services and routes. [More Details](https://docs.konghq.com/0.14.x/admin-api/#precedence).
+Plugins can be configured at the **Service**, **Route** or **Global** level. There are several possibilities for plugin configuration with services and routes. For information on plugin precedence, [read the Kong docs](https://docs.konghq.com/0.14.x/admin-api/#precedence).
 
 !!! Important
-    During plugin configuration, **GG UI** provide facility to create new OP Client when you set **oxd id blank**. But if you are using **Kong Admin API** then you need to use existing client credentials.
+    During plugin configuration, the **GG UI** creates a new OP Client if the **oxd ID** is left blank. However, if configuring with the **Kong Admin API**, existing client credentials must be used.
 
 !!! Important
-    konga.log shows the equivalent curl command that is all the request to Kong API and OXD API made by Konga GUI. You can use this curl command for automate the configuration instead of using the web interface.
+    konga.log also shows the curl commands for all API requests to Kong and oxd made by the Konga GUI. This curl command can be used to automate configuration instead of using the web interface.
 
-### Enable plugin on Service
+### Enable Plugin on Service Level
 
-#### 1. Add Service
+#### Add a Service
 
-##### 1.1 Add Service using GG UI
+##### Add a Service using GG UI
 
-Use [Service section](../admin-gui/#add-service) to add service using GG UI.
+Use [Service section](../admin-gui/#add-service) to add a service using GG UI.
 
 ![3_service_list](../img/3_1_service_list.png)
 
-##### 1.2 Add Service using Kong Admin API
+##### Add a Service using Kong Admin API
 
 ```
 $ curl -X POST \
@@ -40,18 +39,18 @@ $ curl -X POST \
 }'
 ```
 
-#### 2. Configure Plugin
+#### Configure Service Plugin
 
-##### 2.1 Configure plugin using GG UI
+##### Configure Service Plugin using GG UI
 
-Use the [Manage Service](../admin-gui/#332-add-plugin) section in GG UI to enable the Gluu OAuth PEP plugin. In the security category, there is a Gluu OAuth PEP box. Click on the **+ icon** to enable the plugin.
+Use the [Manage Service](../admin-gui/#manage-service) section in the GG UI to enable the Gluu OAuth PEP plugin. In the security category, there is a Gluu OAuth PEP box. Click on the **+** icon to enable the plugin.
 
 ![11_path_oauth_service](../img/11_path_oauth_service.png)
 
-After clicking on **+ icon**, you will see the below form.
+Clicking on the **+** icon will bring up the below form.
 ![11_path_add_oauth_service](../img/11_path_add_oauth_service.png)
 
-##### 2.2 Configure plugin using Kong Admin API
+##### Configure Service Plugin using Kong Admin API
 
 ```
 $ curl -X POST \
@@ -102,19 +101,19 @@ $ curl -X POST \
 ```
 
 !!! Note
-    Kong not allow to proxy only using service object. you must have to add route for this. In short, you need one service to register Upstream API and one route for proxy.
+    Kong does not allow proxying using only a service object--this feature requires a route. At minimum, one service is needed to register an Upstream API and one route is needed for proxying.
 
 ### Enable plugin on Route
 
-#### 1. Add Route
+#### Add a Route
 
-##### 1.1 Add Route using GG UI
+##### Add a Route using GG UI
 
-Use [Manage Service Section](../admin-gui/#32-routes) to add route using GG UI.
+Use [Manage Service Section](../admin-gui/#routes) to add a route using the GG UI.
 
 ![3_4_service_route](../img/3_4_service_route.png)
 
-##### 1.2 Add Route using Kong Admin API
+##### Add a Route using Kong Admin API
 
 ```
 $ curl -X POST \
@@ -131,20 +130,20 @@ $ curl -X POST \
 ```
 
 !!! Information
-    What to put in hosts? It is one technique to request to proxy. There are several possibilities. Take a look on [Proxt reference](https://docs.konghq.com/0.14.x/proxy/) Kong Documents.
+    There are several possibilities for what to put in the `hosts` field. One technique is to send the request to a proxy. See more information and possibilities in the [Proxy reference](https://docs.konghq.com/0.14.x/proxy/) Kong Documents.
 
-#### 2. Configure Plugin
+#### Configure Route Plugin
 
-##### 2.1 Configure plugin using GG UI
+##### Configure Route Plugin using GG UI
 
-Use the [Manage Service](../admin-gui/#332-add-plugin) section in GG UI to enable the Gluu OAuth PEP plugin. In the security category, there is a Gluu OAuth PEP box. Click on the **+ icon** to enable the plugin.
+Use the [Manage Service](../admin-gui/#manage-service) section in the GG UI to enable the Gluu OAuth PEP plugin. In the security category, there is a Gluu OAuth PEP box. Click on the **+** icon to enable the plugin.
 
 ![11_path_oauth_service](../img/12_path_oauth_route.png)
 
-After clicking on **+ icon**, you will see the below form.
+Clicking on the **+** icon will bring up the below form.
 ![11_path_add_oauth_service](../img/12_path_add_oauth_route.png)
 
-##### 2.2 Configure plugin using Kong Admin API
+##### Configure Route Plugin using Kong Admin API
 
 ```
 $ curl -X POST \
@@ -194,22 +193,22 @@ $ curl -X POST \
 }'
 ```
 
-### Enable plugin Globally
+### Enable Plugin Globally
 
-If you enable plugin globally, it will apply for all the services and routes.
+A global plugin will apply for all services and routes.
 
-#### 1. Configure Plugin
+#### Configure Global Plugin
 
-##### 1.1 Configure plugin using GG UI
+##### Configure Global Plugin using GG UI
 
-Use the [Plugin section](../admin-gui/#add-plugin) in GG UI to enable the Gluu OAuth PEP plugin. In the security category, there is a Gluu OAuth PEP box. Click on the **+ icon** to enable the plugin.
+Use the [Plugin section](../admin-gui/#add-plugin) in the GG UI to enable the Gluu OAuth PEP plugin. In the security category, there is a `Gluu OAuth PEP` box. Click on the **+** icon to enable the plugin.
 
 ![5_plugins_add](../img/5_plugins_add.png)
 
-After clicking on **+ icon**, you will see the below form.
+Clicking on the **+** icon will bring up the below form.
 ![11_path_add_oauth_service](../img/12_path_add_oauth_route.png)
 
-##### 1.2 Configure plugin using Kong Admin API
+##### Configure Global Plugin using Kong Admin API
 
 ```
 $ curl -X POST \
@@ -260,33 +259,32 @@ $ curl -X POST \
 
 ### Parameters
 
-Here is a list of all the parameters which can be used in this plugin's configuration.
+The following parameters can be used in this plugin's configuration.
 
 | field | Default | Description |
 |-------|---------|-------------|
-|**op_url**||The URL of you OP server. Example: https://op.server.com|
-|**oxd_url**||The URL of you OXD server. Example: https://oxd.server.com|
-|**oxd_id**||It is used to introspect the token.|
-|**client_id**|| It is used to get protection access token to access introspect API. If you enter oxd id, you also need to enter client id and client secret of existing oxd client.|
-|**client_secret**||It is used to get protection access token to access introspect API. If you enter oxd id, you also need to enter client id and client secret of existing oxd client.|
-|**oauth_scope_expression**||It is used to add scope security on OAuth scope token.|
-|**ignore_scope**| false |It will not check any token scope during authentication time.|
-|**deny_by_default**| true |This functionality is for the path which is not protected by OAuth scope expression. If it is true then deny unprotected path otherwise allow.|
-|**anonymous**||An optional string (consumer uuid) value to use as an “anonymous” consumer if authentication fails. If empty (default), the request will fail with an authentication failure 4xx. Please note that this value must refer to the Consumer id attribute which is internal to Kong, and not its custom_id.|
+|**op_url**||The URL of your OP server. Example: https://op.server.com|
+|**oxd_url**||The URL of your oxd server. Example: https://oxd.server.com|
+|**oxd_id**|| The ID for an existing client, used to introspect the token. If left blank, a new client will be registered dynamically |
+|**client_id**|| An existing client ID, used to get a protection access token to access the introspection API. Required if an existing oxd ID is provided.|
+|**client_secret**|| An existing client secret, used to get protection access token to access the introspection API. Required if an existing oxd ID is provided.|
+|**oauth_scope_expression**|| Used to add scope security on a OAuth scope token.|
+|**ignore_scope**| false | If true, will not check any token scopes while authenticating.|
+|**deny_by_default**| true | For paths not protected by OAuth scope expressions. If true, denies unprotected paths.|
+|**anonymous**||An optional string (consumer UUID) value to use as an “anonymous” consumer if authentication fails. If empty (default), the request will fail with an authentication failure 4xx. This value must refer to the Consumer ID attribute that is internal to Kong, and not its custom_id.|
 |**hide_credentials**|false|An optional boolean value telling the plugin to show or hide the credential from the upstream service. If true, the plugin will strip the credential from the request (i.e. the Authorization header) before proxying it.|
 
-
 !!! Note
-    GG UI provide facility to create dynamic client. if you are configuring plugin only using Kong Admin API then you need to create client usign OXD API and then pass same client credential to Gluu-OAuth-PEP plugin.
+    GG UI can create a dynamic client. However, if the Kong Admin API is used for plugin configuration, it requires an existing client using the oxd API, then passing the client's credentials to the Gluu-OAuth-PEP plugin.
 
 #### OAuth Scope Expression
 
-OAuth Scope Expression is a JSON expression, security for OAuth scopes. It checks the scope (from token introspection) of the token with the configured OAuth JSON expression.
+OAuth Scope Expression is a JSON expression, providing security for OAuth scopes. It checks the scope (from token introspection) of the token with the configured OAuth JSON expression.
 
 !!! Note
-    You can enable and disable the OAuth scope expression by setting `ignore_scope`.
+    Enable and disable the OAuth scope expression by setting `ignore_scope`.
 
-Let's say you have an API which you would like to protect:
+For example, to protect an API:
 
 ```
 [
@@ -329,25 +327,25 @@ Let's say you have an API which you would like to protect:
 
 ![13_oauth_scope_expression](../img/13_oauth_scope_expression.png)
 
-At the runtime, it matches the scope expression with token scopes. The inner expression is executed first. It takes the scopes from the expression one by one and matches them with the requested scope. If it exists, `true` is returned. If not, it is `false`.
+At runtime, the plugin matches the scope expression with token scopes. The inner expression is executed first, matching the scopes from the expression one by one with the requested scope. For each match,`true` is returned. If a check does not match, it returns `false`.
 
-**Example.1**: Let's assume a token with the `["clientinfo"]` scope only.
+**Example 1**: For a token with the `["clientinfo"]` scope only.
 
-The values of `data` will convert into boolean values. if token scope match with expression scope, then return `true` otherwise `false`.
+The values of `data` will convert into Boolean values. If the token scope matches the expression scope, return `true`. If not, return `false`.
 
 ```
 ["openid","email","clientinfo"] --> [false, false, true]
 ```
 
-You can check the result using [http://jsonlogic.com](http://jsonlogic.com/play.html).
+Check the result using [http://jsonlogic.com](http://jsonlogic.com/play.html).
 
 ![13_oauth_scope_check_1](../img/13_oauth_scope_check_1.png)
 
 The result is `false`, so the request is not allowed.
 
-**Example.2**: Let's assume a token with `["openid", "clientinfo"]` scopes.
+**Example 2**: For a token with `["openid", "clientinfo"]` scopes.
 
-The data values is
+The data value is
 
 ```
 ["openid","email","clientinfo"] --> [true, false, true]
@@ -359,9 +357,9 @@ The result is `true`, so the request is allowed.
 
 #### Dynamic resource protection
 
-If you want to protect a dynamic resource with UMA or OAuth scopes, you can do this by securing the parent path. For example, if you want to secure both `/folder` and `/folder/[id]`, you only need to secure `/folder` with a chosen scope. The protection of the parent will be applied to its children, unless different protection is explicitly defined.
+To protect a dynamic resource with UMA or OAuth scopes, secure the parent path. For example, securing `folder` with a chosen scope will secure both `/folder` and `/folder/[id]`. Any protection on the parent will be applied to its children, unless different protection is explicitly defined.
 
-Use cases for different resource security:
+Example use cases for different resource security:
 
 - Rule1 for path GET /root                  `{scope: a and b}`
 
@@ -392,13 +390,13 @@ GET /root/folder1/folder2/one?id=fdfdf     --> Apply Rule3
 
 ### Create Client
 
-Create a client using [Create client consumer section](../admin-gui/#create-client). You can use OXD register-site API to create client.
+Create a client using the [Create client consumer section](../admin-gui/#create-client). Use the oxd `register-site` API to create a client.
 
 ### Create Consumer
 
-You need to associate a client credential to an existing Consumer object. To create a Consumer use [Consumer section](../admin-gui/#consumers).
+A client credential needs to be associated with an existing Consumer object. To create a Consumer, use the [Consumer section](../admin-gui/#consumers).
 
-Create consumer using Kong Admin API.
+Create a consumer using the Kong Admin API:
 
 ```
 $ curl -X POST \
@@ -412,9 +410,9 @@ $ curl -X POST \
 
 ### Security & Access Proxy
 
-You need to pass OAuth token in authorization header to access proxy upstream API. You can generate the OAuth token using OP Client credentials by requesting to OXD `/get-client-token` API.
+To access a proxy upstream API, pass an OAuth token in the authorization header. Generate the OAuth token using OP Client credentials by sending a request to the oxd `/get-client-token` API.
 
-Example for access kong proxy using OAuth token:
+For example, tor access a Kong proxy using an OAuth token:
 
 ```
 curl -X GET \
@@ -423,19 +421,18 @@ curl -X GET \
 ```
 
 !!! Note
-    Kong provides the 8443 port for https by default, but during the setup script installation, we change it to 443.
+    Kong normally provides the 8443 port for https by default, but during the setup script installation, it is changed to 443.
 
 ## Upstream Headers
 
-When a client has been authenticated, the plugin will append some headers to the request before proxying it to the upstream service, so that you can identify the consumer and the end user in your code:
+When a client has been authenticated, the plugin will append some headers to the request before proxying it to the upstream service, to identify the consumer and the end user in the code:
 
 1. **X-Consumer-ID**, the ID of the Consumer on Kong
-2. **X-Consumer-Custom-ID**, the custom_id of the Consumer (if set)
-3. **X-Consumer-Username**, the username of the Consumer (if set)
-4. **X-Authenticated-Scope**, the comma-separated list of scopes that the end user has authenticated, if available (only if the consumer is not an 'anonymous' consumer)
-5. **X-OAuth-Client-ID**, the authenticated client id, if oauth_mode is enabled (only if the consumer is not an 'anonymous' consumer)
-6. **X-OAuth-Expiration**, the token expiration time, integer timestamp, measured in the number of seconds since January 1, 1970 UTC, indicating when this token will expire, as defined in JWT RFC7519. It is only returned in oauth_mode (only if the consumer is not an 'anonymous' consumer)
-7. **X-Anonymous-Consumer**, will be set to true when authentication fails, and the 'anonymous' consumer is set instead.
+1. **X-Consumer-Custom-ID**, the custom_id of the Consumer (if set)
+1. **X-Consumer-Username**, the username of the Consumer (if set)
+1. **X-Authenticated-Scope**, the comma-separated list of scopes that the end user has authenticated, if available (only if the consumer is not an 'anonymous' consumer)
+1. **X-OAuth-Client-ID**, the authenticated client id, if oauth_mode is enabled (only if the consumer is not an 'anonymous' consumer)
+1. **X-OAuth-Expiration**, the token expiration time, integer timestamp, measured in the number of seconds since January 1, 1970 UTC, indicating when this token will expire, as defined in JWT RFC7519. It is only returned in oauth_mode (only if the consumer is not an 'anonymous' consumer)
+1. **X-Anonymous-Consumer**, will be set to true when authentication fails, and the 'anonymous' consumer is set instead.
 
-You can use this information on your side to implement additional logic. You can use the X-Consumer-ID value to query the Kong Admin API and retrieve more information about the Consumer.
-
+This information can be used to implement additional logic. For example, use the X-Consumer-ID value to query the Kong Admin API and retrieve more information about the Consumer.
