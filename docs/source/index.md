@@ -36,9 +36,9 @@ This may seem obvious, but to be clear: an API that uses OAuth for security can 
 
 See the diagrams below if you prefer a visualization:
 
-![OAuth PEP diagram](img/diagram-oauth-mode.jpg)
+![OAuth PEP diagram](img/gluu-oauth-pep.png)
 
-![UMA PEP diagram](img/diagram-uma-mode.jpg)
+![UMA PEP diagram](img/gluu-uma-pep.png)
 
 ## Components
 
