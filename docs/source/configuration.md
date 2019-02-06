@@ -112,7 +112,7 @@ Execute the following sequence of commands:
      # kong start
     ```
 
-## Migrate from development to production server
+## Migrate from Dev to Prod 
 
 - Export **kong** and **konga** database from development server.
 
