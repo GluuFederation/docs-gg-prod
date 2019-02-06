@@ -59,6 +59,8 @@ Gluu Gateway needs to be deployed on a server or VM with the following minimum r
 # curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
 ```
 
+<!---
+
 ### Debian 8
 * Add the Gluu repo:
 ```
@@ -107,6 +109,8 @@ Gluu Gateway needs to be deployed on a server or VM with the following minimum r
 curl -sL https://rpm.nodesource.com/setup_8.x | sudo -E bash -
 ```
 
+--->
+
 ### CentOS 7
 * Add the Gluu repo:
 ```
@@ -123,6 +127,8 @@ curl -sL https://rpm.nodesource.com/setup_8.x | sudo -E bash -
 curl -sL https://rpm.nodesource.com/setup_8.x | sudo -E bash -
 ```
 
+<!---
+
 ### RHEL 6
 * Add the Gluu repo:
 ```
@@ -138,6 +144,8 @@ curl -sL https://rpm.nodesource.com/setup_8.x | sudo -E bash -
 ```
 curl -sL https://rpm.nodesource.com/setup_8.x | sudo -E bash -
 ```
+
+--->
 
 ### RHEL 7
 * Add the Gluu repo:
@@ -161,13 +169,13 @@ curl -sL https://rpm.nodesource.com/setup_8.x | sudo -E bash -
 !!! important
     The Gluu Gateway package installs the following required components: PostgreSQL v10, oxd Server 4.0.beta, NodeJS v8, Kong Community Edition v0.14.1.
 
-### Ubuntu 16, Debian 8, Debian 9
+### Ubuntu 16
 ```
  # apt update
  # apt install gluu-gateway
 ```
 
-### CentOS 6, Centos 7, RHEL 6, RHEL 7
+### Centos 7, RHEL 7
 ```
  # yum clean all
  # yum install gluu-gateway
