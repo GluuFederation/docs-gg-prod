@@ -1,11 +1,12 @@
 # Gluu OAuth PEP
 
-It is used to add Client authentication with OAuth scope security. This plugin enables the use of an external OpenID Provider for OAuth2 client authentication. It needs to connect to Gluu's `oxd` service, which is an OAuth2 client middleware service.
+The OAuth PEP is used to enforce the presence of UMA scopes for access to resources protected by the Gateway. OAuth scopes and policies are defined in an external OAuth Authorization Server (AS) -- in most cases the Gluu Server. The Gateway and AS leverage the oxd OAuth middleware service for communication.
 
-It will support two tokens.
 
-   1. **Default Access Token**: Plugin will authenticate it using introspection.
-   2. **Access Token as JWT**: Plugin will authenticate it using JWT verify. Currently plugin supports only 3 Algorithm **RS256**, **RS384** and **RS512**.
+The plugin supports two types of tokens: 
+
+   1. **Default Access Token**: The plugin will authenticate the token using introspection.
+   2. **Access Token as JWT**: The plugin will authenticate the token using JWT verify. Currently the plugin supports three algorithms:  **RS256**, **RS384** and **RS512**.
 
 ## Configuration
 
