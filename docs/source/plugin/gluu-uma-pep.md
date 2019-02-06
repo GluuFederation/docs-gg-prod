@@ -1,18 +1,18 @@
 # Gluu UMA PEP
 
-It is used to add Client authentication with UMA scope security. This plugin enables the use of an external OpenID Provider for OAuth2 client authentication. It needs to connect to Gluu's `oxd` service, which is an OAuth2 client middleware service.
+The UMA PEP plugin is used to enforce the presence of UMA scopes for access to resources protected by the Gateway. UMA scopes and policies are defined in an external UMA Authorization Server (AS) -- in most cases the Gluu Server. The Gateway and AS leverage the oxd OAuth middleware service for communication. 
 
-It will support two tokens.
+The plugin supports two tokens:  
 
-   1. **Default Access Token**: Plugin will authenticate it using introspection.
-   2. **Access Token as JWT**: Plugin will authenticate it using JWT verify. Currently plugin supports only 3 Algorithm **RS256**, **RS384** and **RS512**.
+   1. **Default Access Token**: The plugin will authenticate the token using introspection.   
+   1. **Access Token as JWT**: The plugin will authenticate the token using JWT verify. Currently three algorithms are supported: **RS256**, **RS384** and **RS512**.
 
 ## Configuration
 
-You can configure plugin on **Service**, **Route** and **Global**. There are several possibilities for plugin configuration with services and routes. [More Details](https://docs.konghq.com/0.14.x/admin-api/#precedence).
+The plugin can be configured on **Service**, **Route** and **Global**. There are several possibilities for plugin configuration with services and routes. [More details in the Kong docs](https://docs.konghq.com/0.14.x/admin-api/#precedence).
 
 !!! Important
-    During plugin configuration, **GG UI** provide facility to create new OP Client when you set **oxd id blank**. But if you are using **Kong Admin API** then you need to use existing client credentials.
+    During plugin configuration, GG UI provide facility to create new OP Client when you set **oxd id blank**. But if you are using **Kong Admin API** then you need to use existing client credentials.
 
 !!! Important
     konga.log shows the equivalent curl command that is all the request to Kong API and OXD API made by Konga GUI. You can use this curl command for automate the configuration instead of using the web interface.
