@@ -15,8 +15,8 @@ The following parameters can be used for plugin configuration:
 |Parameters|Default|Description|
 |-------------|-------|-----------|
 |name||The name of the plugin to use, in this case gluu-metrics.|
-|service_id (optional)||The id of the Service which this plugin will target.|
-|consumer_id (optional)||The id of the Consumer which this plugin will target.|
+|service_id (optional)||The id of the Kong Service Object which this plugin will target.|
+|consumer_id (optional)||The id of the Kong Consumer Object which this plugin will target.|
 |enabled|true|Whether this plugin will be applied.|
 
 ### Using the UI
