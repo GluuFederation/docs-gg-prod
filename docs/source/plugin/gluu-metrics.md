@@ -4,24 +4,32 @@ The metrics plugin gathers statistics for authentication-related events generate
 
 ## Configuration
 
-You can configure plugin on **Service**, **Route** and **Global**. There are several possibilities for plugin configuration with services and routes. [More Details](https://docs.konghq.com/0.14.x/admin-api/#precedence).
+The plugin can be configured on **Service**, **Route** and **Global**. There are several possibilities for plugin configuration with services and routes. [More details on the Kong docs](https://docs.konghq.com/0.14.x/admin-api/#precedence).
 
-### Enable plugin Globally
+We recommend enabling the plugin Globally so metrics are gathered for all Gluu Gateway services.
 
-it will apply for all the services.
+### Parameters
 
-#### 1. Configure Plugin
+The following parameters can be used for plugin configuration:  
 
-##### 1.1 Configure plugin using GG UI
+|Parameters|Default|Description|
+|-------------|-------|-----------|
+|name||The name of the plugin to use, in this case gluu-metrics.|
+|service_id (optional)||The id of the Service which this plugin will target.|
+|consumer_id (optional)||The id of the Consumer which this plugin will target.|
+|enabled|true|Whether this plugin will be applied.|
 
-Use the [Global Plugin Add section](../admin-gui/#add-plugin_2) in GG UI to enable the Gluu Metrics plugin. In the Metrics category, there is a Gluu Metrics box. Click on the **+ icon** to enable the plugin.
+### Using the UI
+
+Navigate to the [Global Plugin Add section](../admin-gui/#add-plugin_2) in the UI to enable the Gluu Metrics plugin. In the Metrics category, there is a Gluu Metrics box. Click the **+** icon to enable the plugin.
 
 ![5_plugins_add](../img/14_metrics_plugin_add.png)
 
-After clicking on **+ icon**, you will see the below form.
+After clicking **+**, the following form will be presented:
+
 ![11_path_add_uma_service](../img/14_gluu_metrics_add_globally.png)
 
-##### 1.2 Configure plugin using Kong Admin API
+### Using the API
 
 ```
 $ curl -X POST \
@@ -32,36 +40,29 @@ $ curl -X POST \
 }'
 ```
 
-### Parameters
-
-Here is a list of all the parameters which can be used in this plugin's configuration.
-
-|Parameters|Default|Description|
-|-------------|-------|-----------|
-|name||The name of the plugin to use, in this case gluu-metrics.|
-|service_id(optional)||The id of the Service which this plugin will target.|
-|consumer_id(optional)||The id of the Consumer which this plugin will target.|
-|enabled|true|Whether this plugin will be applied.|
-
 ## Metrics Endpoint
 
-Metrics are available on the Admin API at the `http://localhost:8001/gluu-metrics` endpoint.
+Metrics are available via the following Admin API endpoint: `http://<kong_hostname>:8001/gluu-metrics` 
 
-## Available metrics
+### Available metrics
 
-1. **gluu_endpoint_method**: Endpoint call per service in Kong
+- **gluu_endpoint_method**: Counts how many times an endpoint is called per method. 
 
-2. **gluu_oauth_client_authenticated**: Client(Consumer) OAuth authenticated per service in Kong
+- **gluu_oauth_client_authenticated**: Counts how many times an OAuth client is authenticated by the OAUTH-PEP plugin per service.
 
-3. **gluu_oauth_client_granted**: Client(Consumer) OAuth granted per service in Kong
+- **gluu_oauth_client_granted**: Client (Consumer) OAuth granted per service in Kong
 
-4. **gluu_uma_client_authenticated**: Client(Consumer) UMA authenticated per service in Kong
+- **gluu_uma_client_authenticated**: Client (Consumer) UMA authenticated per service in Kong
 
-5. **gluu_uma_client_granted**: Client(Consumer) UMA granted per service in Kong
+- **gluu_uma_client_granted**: Client (Consumer) UMA granted per service in Kong
 
-6. **gluu_uma_ticket**: UMA Permission Ticket getting per services in Kong
+- **gluu_uma_ticket**: UMA Permission Ticket getting per services in Kong
 
-Example of metrics expose by `/gluu-metrics` endpoint.
+
+### Example metrics  
+
+The following is an example of metrics available via the endpoint `/gluu-metrics`: 
+
 ```
 # HELP gluu_endpoint_method Endpoint call per service in Kong
 # TYPE gluu_endpoint_method counter
@@ -101,14 +102,14 @@ gluu_uma_ticket{service="none-claim-gatering"} 1
 
 Metrics exported by the plugin can be graphed in Grafana using a drop in dashboard: [Gluu-Metrics-Grafana.json](https://github.com/GluuFederation/gluu-gateway/blob/version_4.0.0/setup/templates/Gluu-Metrics-Grafana.json).
 
-1. Install **Grafana v5.4.2**
-2. Add Datasource
+1. Install **Grafana v5.4.2**     
+1. Add Datasource     
     - Start grafana service
-    - Open in browser(Default port 3000. http://localhost:3000)
+    - Open in browser (Default port 3000. http://localhost:3000)
     - Configuration > Data sources > Add data source > Prometheus
     - Add prometheus server URL
     ![5_plugins_add](../img/14_grafana_datasource.png)
-3. Import JSON: [Gluu-Metrics-Grafana.json](https://github.com/GluuFederation/gluu-gateway/blob/version_4.0.0/setup/templates/Gluu-Metrics-Grafana.json)
+1. Import JSON: [Gluu-Metrics-Grafana.json](https://github.com/GluuFederation/gluu-gateway/blob/version_4.0.0/setup/templates/Gluu-Metrics-Grafana.json)     
     - Go to home pade
     - Click on `New dashboard` on top left corner.
     - Click on `import dashboard`
@@ -116,14 +117,14 @@ Metrics exported by the plugin can be graphed in Grafana using a drop in dashboa
 
 ## Prometheus server configuration
 
-The Gluu-Metrics plugin exposes metrics at `gluu-metrics` endpoint. You need to config prometheus server to listen this endpoint.
+Simply configure a Prometheus server to listen to the metrics endpoint `gluu-metrics`
 
-1. Install **prometheus server v2.6.0**
-2. Add our endpoint in prometheus.yml in **scrape_configs** section.
+1. Install **prometheus server v2.6.0**      
+1. Add our endpoint in prometheus.yml in **scrape_configs** section.      
    ```
      - job_name: gluu
        metrics_path: /gluu-metrics
        static_configs:
        - targets: [your-kong-host-server.com:8001]
    ```
-3. Restart prometheus server.
+1. Restart prometheus server.       
