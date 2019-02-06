@@ -25,7 +25,7 @@ Navigate to the [Global Plugin Add section](../admin-gui/#add-plugin_2) in the U
 
 ![5_plugins_add](../img/14_metrics_plugin_add.png)
 
-After clicking **+**, the following form will be presented:
+After clicking **+**, the following form will be presented where a Consumer ID can be added:
 
 ![11_path_add_uma_service](../img/14_gluu_metrics_add_globally.png)
 
