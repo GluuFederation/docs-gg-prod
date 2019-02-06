@@ -111,3 +111,47 @@ Execute the following sequence of commands:
     ```
      # kong start
     ```
+
+## Migrate from development to production server
+
+- Export **kong** and **konga** database from development server.
+
+```
+ $ pg_dump --dbname=postgresql://postgres:admin@localhost:5432/konga > konga.sql
+ $ pg_dump --dbname=postgresql://postgres:admin@localhost:5432/konga > kong.sql
+```
+
+- [Install](./installation) and [Setup](./installation/#run-the-setup-script) GG on your production server.
+
+- Stop OXD server on production server and take OXD db files from your development server from path `/opt/oxd-server/data/` and replace files in production server and Start OXD server `service oxd-server-4.0.beta start`.
+
+- Stop services `service kong stop` and `service konga stop`. Make sure services are stopped.
+
+- Drop `konga` and `kong` database on production server.
+
+```
+ $ sudo -iu postgres /bin/bash -c 'psql -c "Drop database konga"'
+ $ sudo -iu postgres /bin/bash -c 'psql -c "Drop database kong"'
+```
+
+- Create database with name `konga` and `kong`.
+
+```
+ $ sudo -iu postgres /bin/bash -c 'psql -c "Create database konga"'
+ $ sudo -iu postgres /bin/bash -c 'psql -c "Create database kong"'
+```
+
+- Import above sql file in production server.
+
+```
+ $ sudo -iu postgres /bin/bash -c "psql konga < absolute_path/konga.sql"
+ $ sudo -iu postgres /bin/bash -c "psql kong < absolute_path/kong.sql"
+```
+
+- Start services `service kong start` and `service konga stop`. You need to use same Gluu CE in production which your are using in development case otherwise you need to configure plugin in production again with new client credentails.
+
+!!! Info
+    `absolute_path` is full path of your file. For Example: your file is in home folder then the path is `/home/konga.sql`.
+
+!!! Note
+    You may skip some step as per your requirments.
