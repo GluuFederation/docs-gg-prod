@@ -48,15 +48,15 @@ Metrics are available via the following Admin API endpoint: `http://<kong_hostna
 
 - **gluu_endpoint_method**: Counts how many times an endpoint is called per method. 
 
-- **gluu_oauth_client_authenticated**: Counts how many times an OAuth client is authenticated by the OAUTH-PEP plugin per service.
+- **gluu_oauth_client_authenticated**: Counts how many times an client(consumer) is authenticated by the OAUTH-PEP plugin per service.
 
-- **gluu_oauth_client_granted**: Client (Consumer) OAuth granted per service in Kong
+- **gluu_oauth_client_granted**: Counts how many times an client(consumer) is granted(passing by scope expression) by the OAUTH-PEP plugin per service.
 
-- **gluu_uma_client_authenticated**: Client (Consumer) UMA authenticated per service in Kong
+- **gluu_uma_client_authenticated**: Counts how many times an client(consumer) is authenticated by the UMA-PEP plugin per service.
 
-- **gluu_uma_client_granted**: Client (Consumer) UMA granted per service in Kong
+- **gluu_uma_client_granted**: Counts how many times an client(consumer) is granted(passing by scope expression) by the UMA-PEP plugin per service.
 
-- **gluu_uma_ticket**: UMA Permission Ticket getting per services in Kong
+- **gluu_uma_ticket**: Count how many times UMA Permission Ticket issued by user for resources. This will count ticket only in UMA-PEP case.
 
 
 ### Example metrics  
