@@ -404,8 +404,8 @@ When a client has been authenticated, the plugin will append some headers to the
 1. **X-Consumer-ID**, the ID of the Consumer on Kong
 1. **X-Consumer-Custom-ID**, the custom_id of the Consumer (if set)
 1. **X-Consumer-Username**, the username of the Consumer (if set)
-1. **X-UMA-Client-ID**, the authenticated client ID (only if the consumer is not an 'anonymous' consumer)
-1. **X-UMA-Expiration**, the token expiration time, integer timestamp, measured in the number of seconds since January 1, 1970 UTC, indicating when this token will expire, as defined in JWT RFC7519. It is only returned if the consumer is not set to 'anonymous'.
+1. **X-OAUTH-Client-ID**, the authenticated client ID (only if the consumer is not an 'anonymous' consumer)
+1. **X-RPT-Expiration**, the token expiration time, integer timestamp, measured in the number of seconds since January 1, 1970 UTC, indicating when this token will expire, as defined in JWT RFC7519. It is only returned if the consumer is not set to 'anonymous'.
 1. **X-Anonymous-Consumer**, will be set to true when authentication fails, and the 'anonymous' consumer is set instead.
 
 This information can be used to implement additional logic. For example, use the X-Consumer-ID value to query the Kong Admin API and retrieve more information about the Consumer.
