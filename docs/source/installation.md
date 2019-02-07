@@ -106,7 +106,7 @@ Gluu Gateway needs to be deployed on a server or VM with the following minimum r
 ```
 * Add the Node repo:
 ```
-curl -sL https://rpm.nodesource.com/setup_8.x | sudo -E bash -
+# curl -sL https://rpm.nodesource.com/setup_8.x | sudo -E bash -
 ```
 
 --->
@@ -124,7 +124,7 @@ curl -sL https://rpm.nodesource.com/setup_8.x | sudo -E bash -
 ```
 * Add the Node repo:
 ```
-curl -sL https://rpm.nodesource.com/setup_8.x | sudo -E bash -
+# curl -sL https://rpm.nodesource.com/setup_8.x | sudo -E bash -
 ```
 
 <!---
@@ -142,7 +142,7 @@ curl -sL https://rpm.nodesource.com/setup_8.x | sudo -E bash -
 ```
 * Add the Node repo:
 ```
-curl -sL https://rpm.nodesource.com/setup_8.x | sudo -E bash -
+# curl -sL https://rpm.nodesource.com/setup_8.x | sudo -E bash -
 ```
 
 --->
@@ -160,7 +160,7 @@ curl -sL https://rpm.nodesource.com/setup_8.x | sudo -E bash -
 ```
 * Add the Node repo:
 ```
-curl -sL https://rpm.nodesource.com/setup_8.x | sudo -E bash -
+# curl -sL https://rpm.nodesource.com/setup_8.x | sudo -E bash -
 ```
 
 
@@ -269,16 +269,16 @@ Choose one of the following three options:
 1. Use `apt-get` to remove only the gluu-gateway package. Any dependencies installed at the same time, as well as configuration, will remain.
 
     ```
-    apt-get remove gluu-gateway
+    # apt-get remove gluu-gateway
     ```
 
 1. If you want to also remove the configuration files (/etc/init.d/gluu-gateway and /opt/gluu-gateway/konga/config), use `purge`.
     ```    	
-    apt-get purge gluu-gateway
+    # apt-get purge gluu-gateway
     ```
 
 1. Using the `--auto-remove` parameter will also remove the package dependencies (kong-community-edition, lua-cjson, nodejs, oxd-server, postgresql).
 
     ```
-    apt-get remove --auto-remove gluu-gateway
+    # apt-get remove --auto-remove gluu-gateway
     ```
