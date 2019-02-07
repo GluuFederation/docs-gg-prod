@@ -50,11 +50,11 @@ Metrics are available via the following Admin API endpoint: `http://<kong_hostna
 
 - **gluu_oauth_client_authenticated**: Counts how many times a client (consumer) is authenticated by the OAUTH-PEP plugin per service.
 
-- **gluu_oauth_client_granted**: Counts how many times a client (consumer) is granted access (passing by scope expression) by the OAUTH-PEP plugin per service.
+- **gluu_oauth_client_granted**: Counts how many times a client (consumer) is granted access (authorize by OAUTH Scope Expression) by the OAUTH-PEP plugin per service.
 
 - **gluu_uma_client_authenticated**: Counts how many times an client (consumer) is authenticated by the UMA-PEP plugin per service.
 
-- **gluu_uma_client_granted**: Counts how many times a client (consumer) is granted access (passing by scope expression) by the UMA-PEP plugin per service.
+- **gluu_uma_client_granted**: Counts how many times a client (consumer) is granted access (authorized by UMA Scope and Policies) by the UMA-PEP plugin per service.
 
 - **gluu_uma_ticket**: Counts how many times UMA Permission Ticket has been issued by user for access to resources. This will count ticket only in UMA-PEP case.
 
