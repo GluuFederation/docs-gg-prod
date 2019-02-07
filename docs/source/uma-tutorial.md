@@ -1,5 +1,8 @@
-# Gluu Gateway UMA demo app
+# Gluu Gateway UMA Tutorial app
 
+## Overview
+
+The tutorial for [UMA grant security](https://docs.kantarainitiative.org/uma/wg/rec-oauth-uma-grant-2.0.html) with GLUU-UMA-PEP plugin and Gluu CE. There are two different way to apply UMA security, **with Claim-Gatering-flow(need_info)** and **without Claim-Gatering-flow**. It explain you how to configure Gluu-UMA-PEP plugin with Kong and configure policy in Gluu CE. The [demo](https://github.com/GluuFederation/gluu-gateway/tree/version_4.0.0/gg-demo) is in **Python CGI** script which you can deploy on any CGI enabled server.
 
 ## Parties
 
