@@ -1,5 +1,5 @@
 # Gluu OAuth PEP
-
+## Overview
 The OAuth PEP is used to enforce the presence of UMA scopes for access to resources protected by the Gateway. OAuth scopes and policies are defined in an external OAuth Authorization Server (AS) -- in most cases the Gluu Server. The Gateway and AS leverage the oxd OAuth middleware service for communication.
 
 The plugin supports two types of tokens: 
