@@ -1,5 +1,5 @@
 # Gluu UMA PEP
-
+## Overview
 The UMA PEP plugin is used to enforce the presence of UMA scopes for access to resources protected by the Gateway. UMA scopes and policies are defined in an external UMA Authorization Server (AS) -- in most cases the Gluu Server. The Gateway and AS leverage the oxd UMA middleware service for communication. 
 
 The plugin supports two tokens:  
@@ -19,15 +19,13 @@ Plugins can be configured at the **Service**, **Route** or **Global** level. The
 
 ### Enable Plugin on the Service Level
 
-#### Add a Service
-
-##### Add a Service using GG UI
+#### Add a Service using GG UI
 
 Use the [Service section](../admin-gui/#add-service) of the GG UI doc to add a service using GG UI.
 
 ![3_service_list](../img/3_1_service_list.png)
 
-##### Add a Service using Kong Admin API
+#### Add a Service using Kong Admin API
 
 ```
 $ curl -X POST \
@@ -39,9 +37,7 @@ $ curl -X POST \
 }'
 ```
 
-#### Configure a Service Plugin
-
-##### Configure a Service Plugin using GG UI
+#### Configure a Service Plugin using GG UI
 
 Use the [Manage Service](../admin-gui/manage-service) section in GG UI to enable the Gluu UMA PEP plugin. In the security category, there is a Gluu UMA PEP box. Click on the **+** icon to enable the plugin.
 
@@ -50,7 +46,7 @@ Use the [Manage Service](../admin-gui/manage-service) section in GG UI to enable
 Clicking on the **+** icon will bring up the below form.
 ![11_path_add_uma_service](../img/11_path_add_uma_service.png)
 
-##### Configure a Service Plugin using Kong Admin API
+#### Configure a Service Plugin using Kong Admin API
 
 ```
 $ curl -X POST \
@@ -105,15 +101,13 @@ $ curl -X POST \
 
 ### Enable a Plugin on the Route Level
 
-#### Add a Route
-
-##### Add a Route using GG UI
+#### Add a Route using GG UI
 
 Use [Manage Service Section](../admin-gui/#routes) to add route using GG UI.
 
 ![3_4_service_route](../img/3_4_service_route.png)
 
-##### 1.2 Add Route using Kong Admin API
+#### Add Route using Kong Admin API
 
 ```
 $ curl -X POST \
@@ -132,9 +126,7 @@ $ curl -X POST \
 !!! Information
     There are several possibilities for what to put in the `hosts` field. One technique is to send the request to a proxy. See more information and possibilities in the [Proxy reference](https://docs.konghq.com/0.14.x/proxy/) Kong Documents.
 
-#### Configure a Route Plugin
-
-##### Configure a Route Plugin using GG UI
+#### Configure a Route Plugin using GG UI
 
 Use the [Manage Service](../admin-gui/#manage-service) section in the GG UI to enable the Gluu UMA PEP plugin. In the security category, there is a Gluu UMA PEP box. Click on the **+** icon to enable the plugin.
 
@@ -143,7 +135,7 @@ Use the [Manage Service](../admin-gui/#manage-service) section in the GG UI to e
 Clicking on the **+** icon will bring up the below form.
 ![11_path_add_uma_service](../img/12_path_add_uma_route.png)
 
-##### Configure plugin using Kong Admin API
+#### Configure plugin using Kong Admin API
 
 ```
 $ curl -X POST \
@@ -197,9 +189,7 @@ $ curl -X POST \
 
 A global plugin will apply to all services and routes.
 
-#### Configure a Global Plugin
-
-##### Configure a Global Plugin using GG UI
+#### Configure a Global Plugin using GG UI
 
 Use the [Plugin section](../admin-gui/#add-plugin) in the GG UI to enable the Gluu UMA PEP plugin. In the security category, there is a Gluu UMA PEP box. Click on the **+** icon to enable the plugin.
 
@@ -208,7 +198,7 @@ Use the [Plugin section](../admin-gui/#add-plugin) in the GG UI to enable the Gl
 Clicking on the **+** icon will bring up the below form.
 ![11_path_add_uma_service](../img/12_path_add_uma_route.png)
 
-##### Configure a Global Plugin using Kong Admin API
+#### Configure a Global Plugin using Kong Admin API
 
 ```
 $ curl -X POST \
