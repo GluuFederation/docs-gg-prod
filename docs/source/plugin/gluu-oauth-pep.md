@@ -431,7 +431,7 @@ When a client has been authenticated, the plugin will append some headers to the
 1. **X-Consumer-Custom-ID**, the custom_id of the Consumer (if set)
 1. **X-Consumer-Username**, the username of the Consumer (if set)
 1. **X-Authenticated-Scope**, the comma-separated list of scopes that the end user has authenticated, if available (only if the consumer is not an 'anonymous' consumer)
-1. **X-OAuth-Client-ID**, the authenticated client ID, if oauth_mode is enabled (only if the consumer is not an 'anonymous' consumer)
+1. **X-OAuth-Client-ID**, the authenticated client ID (only if the consumer is not an 'anonymous' consumer)
 1. **X-OAuth-Expiration**, the token expiration time, integer timestamp, measured in the number of seconds since January 1, 1970 UTC, indicating when this token will expire, as defined in JWT RFC7519. It is only returned if the consumer is not set to 'anonymous'.
 1. **X-Anonymous-Consumer**, will be set to true when authentication fails, and the 'anonymous' consumer is set instead.
 
