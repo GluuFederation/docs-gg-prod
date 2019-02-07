@@ -236,6 +236,8 @@ If you see the above message, it means the installation was successful. To log i
 
 To change the port and configurations, you can update the specific application's config file. For details, see the [Configuration](./configuration) section.
 
+<!---
+
 ## Upgrade
 
 When a Gluu Gateway upgrade is available, follow these steps:
@@ -258,6 +260,8 @@ When a Gluu Gateway upgrade is available, follow these steps:
     During setup, choose to enter the existing client credentials manually if you want to continue using them. If you want to start fresh, choose to generate client credentials again. If you do so, you might lose your previously created Services or Consumers.
     
 * [Finish](#finish-the-setup) the setup
+
+--->
 
 ## Removal
 
