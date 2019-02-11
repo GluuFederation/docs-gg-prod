@@ -3,13 +3,13 @@
 ## Dashboard
 The Dashboard section is divided into subsections that show application configuration details. 
 
-In the **Global Info**, you can see oxd and the client details used by Konga. Check the version of the currently-used oxd Server or the address of the Gluu Server in this section. The `oxd ID`, `Client ID` and `Client Secret` are the credentials for the client created by default during Gluu Gateway installation and setup.
+**Global Info** shows oxd and the client details used by Konga. Check the version of the currently-used oxd Server or the address of the Gluu Server in this section. The `oxd ID`, `Client ID` and `Client Secret` are the credentials for the client created by default during Gluu Gateway installation and setup.
 
 The **Gateway** and **Database Info** sections show details about the Gateway itself and the included Postgres database, respectively. 
 
-The **Plugins** section displays all the plugins supported by the Gluu Gateway. When inactive, a plugin is shown as gray. If you add a plugin to an API/Consumer or set a global one, its name will turn green on the dashboard.
+The **Plugins** section displays all the plugins supported by the Gluu Gateway. When inactive, a plugin is shown as gray. When plugin is added to an API/Consumer or globally, its name will turn green on the dashboard.
 
-The remaining subsections of Requests, Connections and Timers show real-time metrics on the Gluu Gateway health.  
+The remaining subsections, **Requests**, **Connections** and **Timers** show real-time metrics for Gluu Gateway's health.  
 
 ![dashboard](img/1_dashboard.png)
 
@@ -23,34 +23,34 @@ The Info section shows generic details about the Kong node.
 
 ### Service List
 
-Service entities, as the name implies, are abstractions of each of your own upstream services. Examples of Services would be a data transformation microservice, a billing API, etc.
+Service entities are abstractions of each upstream service. Some examples of Services would be a data transformation microservice, a billing API, etc.
 
 Check the Kong [Service configuration](https://docs.konghq.com/0.14.x/proxy/#reminder-how-to-configure-a-service) docs for more details.
 
 ![3_service_list](img/3_1_service_list.png)
 
 !!! Note
-    The eye icon is used to see the raw JSON object. Use this when you want the object ID.
+    The eye icon is used to see raw JSON objects. Use this to see the object ID, if needed.
 
 | Tools | Details |
 |---    |-----    |
 | **+ ADD NEW SERVICE** | This button is used to add a new service.|
 | **Gluu Security** | This column only shows the added Gluu plugins.|
-| **Edit Button** | This button is used to edit a service, and configure routes and plugins for the selected service. You can click on **service name** to edit the service.|
+| **Edit Button** | This button is used to edit a service, and configure routes and plugins for the selected service. Click on **service name** to edit the service.|
 | **Delete Button** | This button is used to delete the selected service. |
    
 ### Add Service
 
-Add your Service using the `+ ADD NEW SERVICE` button.
+Add a Service using the `+ ADD NEW SERVICE` button.
 
 ![3_2_add_service](img/3_2_add_service.png)
 
 ### Manage Service
 
-You can edit a Service and manage its plugins by clicking on the pencil icon on the Service list. There are four sections:
+Edit a Service and manage its plugins by clicking on the pencil icon on the Service list. There are four sections:
 
 #### Service Details
-This section is used to view and edit your Service.
+This section is used to view and edit a Service.
 
 ![3_3_service_details](img/3_3_service_details.png)
 
@@ -80,7 +80,7 @@ This section is used to add and view plugins.
   | **+ ADD PLUGIN** | This button is used to add a plugin.|
   | **Edit Plugin** | Click on a plugin's name to edit its configuration.|
   | **Delete Button** | This button is used to delete a selected route. |
-  | **ON/OFF Switch** | If you want to switch a plugin on/off, use the toggle bar.|
+  | **ON/OFF Switch** | Toggle a plugin on/off.|
 
 ##### Add Service Plugin
 
@@ -90,7 +90,7 @@ This section is used to add and view plugins.
 
 #### Eligible Consumers for Service
 
-  This section is for the ACL Kong plugin, which restricts access to an API by whitelisting or blacklisting consumers using arbitrary ACL group names. It shows the list of consumers that are configured with ACL groups.
+This section is for the ACL Kong plugin, which restricts access to an API by whitelisting or blacklisting consumers using arbitrary ACL group names. It shows the list of consumers that are configured with ACL groups.
 
   ![3_7_eligible_consumers](img/3_7_eligible_consumers.png)
 
@@ -107,19 +107,19 @@ Check Kong [routes configuration](https://docs.konghq.com/0.14.x/proxy/#routes-a
 | Tools | Details |
 |---|-----|
 | **Gluu Security** | This column only shows the added Gluu plugins.|
-| **Edit Button** | This button is used to edit a Route and configure its plugins. You can click on **ROUTE ID** to edit the Route.|
+| **Edit Button** | This button is used to edit a Route and configure its plugins. Click on **ROUTE ID** to edit the Route.|
 | **Delete Button** | This button is used to delete the selected Route. |
 
 ### Add Route
 
-[Use Service section to add new route](#routes).
+[Use the Service section to add new route](#service-routes).
 
 ### Manage Route
 
-You can edit a Route and manage its plugins by clicking on the pencil icon on the Route list. There are three sections:
+Edit a Route and manage its plugins by clicking on the pencil icon on the Route list. There are three sections:
 
 #### Route Details
-This section is used to view and edit your Route.
+This section is used to view and edit a Route.
 
 ![4_2_route_details](img/4_2_route_details.png)
 
@@ -135,11 +135,11 @@ This section is used to view the list of added Plugins and add a new Plugin.
   | **+ ADD PLUGIN** | This button is used to add plugin.|
   | **Edit Plugin** | Click on plugin name to edit plugin configurations.|
   | **Delete Button** | This button is used to delete selected route. |
-  | **ON/OFF Switch** |If you want to switch a plugin on/off, just use the toggle bar.|
+  | **ON/OFF Switch** | Toggle a plugin on/off.|
 
 ##### Add Route Plugin
 
-  Add a Plugin by clicking the plus icon next to a plugin’s name.
+  Add a Plugin by clicking the `+` icon next to a plugin’s name.
 
   ![4_4_add_plugins](img/3_6_add_plugins.png)
 
@@ -151,7 +151,7 @@ This section is used to view the list of added Plugins and add a new Plugin.
 
 ## Consumers
 
-The Consumer object represents a consumer - or a user - of a Service. You can either rely on Kong as the primary datastore, or you can map the consumer list with your database to keep consistency between Kong and your existing primary datastore.
+The Consumer object represents a consumer - or a user - of a Service. Either rely on Kong as the primary datastore, or map the consumer list with a database to keep consistency between Kong and the existing primary datastore.
 
 ![consumers](img/4_consumers.png)
 
@@ -166,23 +166,23 @@ Add Consumers by using the `+ CREATE CONSUMER` button.
 
 ### Manage Consumer
 
-Click on the **Consumer Name** to manage a consumer. You can edit, manage ACL plugin groups and add plugins.
+Click on the **Consumer Name** to manage a consumer. Edit and manage ACL plugin groups and add plugins here.
 
 #### Consumer Details
 
-You can see and edit the selected consumer details.
+View and edit the selected consumer details here.
 
 ![4_edit_consumer](img/4_edit_consumer.png)
 
 #### Groups
 
-You can create a group for ACL plugins to whitelist and blacklist consumers according to ACL plugin configuration.
+Create a group for ACL plugins to whitelist and blacklist consumers according to ACL plugin configuration.
 
 ![4_consumer_groups](img/4_consumer_groups.png)
 
 #### Consumer Plugins
 
-Some plugins can be configured for each specific consumer. This section will add the plugin globally, which will apply for every service and route.
+Some plugins can be configured for each specific consumer. This section will also add the plugin globally, which will apply for every service and route.
 
 ![4_consumer_plugin](img/4_consumer_plugin.png)
 
@@ -195,18 +195,18 @@ Click on the `+ CREATE CLIENT` button to create OP client. It will create a clie
 | Fields | Details |
 |---|-----|
 | **Client Name**(required) | Name for newly-created client.|
-| **Client Id**(optional) | Use any existing OP Client's client_id. If you leave it blank, the oxd server will create a new client in your OP server.|
-| **Client Secret**(optional) | Use any existing OP Client's client_secret. If you leave it blank, the oxd server will create a new client in your OP server.|
+| **Client Id**(optional) | Use any existing OP Client's client_id. If left blank, the oxd server will create a new client in the OP server.|
+| **Client Secret**(optional) | Use any existing OP Client's client_secret. If left blank, the oxd server will create a new client in the OP server.|
 | **Access Token as JWT**(optional) | It will create client with `Access Token as JWT:true`, It is used to return the access token as a JWT. The Gluu OAuth PEP plugin supports JWT access tokens.|
 | **RPT as JWT**(optional) |It will create client with `RPT as JWT:true`. It is used to return access token(RPT) as JWT. The Gluu UMA PEP plugin supports JWT RPT access tokens.|
 | **Token signing algorithm**(optional) | The default token signing algorithm for the client. It is used for both OAuth access tokens and UMA RPT tokens. Currently, plugins only support 3 algorithms: **RS256**, **RS384** and **RS512**.|
 
 ## Plugins
 
-A plugin entity represents a plugin configuration that will be executed during the HTTP request/response lifecycle. It is how you can add functionality to services that run behind Kong, such as Authentication or Rate Limiting.
+A plugin entity represents a plugin configuration that will be executed during the HTTP request/response lifecycle. Plugins add functionality to services that run behind Kong, such as Authentication or Rate Limiting.
 
-Plugins added in this section of the Gluu Gateway will be applied to all services and routes. If you need to add plugins to a specific service or route, you can do it in the [services](#services) or [routes](#routes) section.
-If you need to add plugins to a specific consumer, you can do it in the respective [consumer page](#consumers).
+Plugins added in this section of the Gluu Gateway will be applied to all services and routes. To add plugins to a specific service or route, do so in the [services](#service-plugins) or [routes](#routes-plugins) section.
+If you need to add plugins to a specific consumer, do so in the respective [consumer page](#consumer-plugins).
 
 ### Plugin List
 
@@ -230,11 +230,11 @@ Add Upstreams by using the `+ CREATE UPSTREAM` button.
 
 ![6_upstream_add](img/6_upstream_add.png)
 
-You can modify the details of your Upstream by clicking the `DETAILS` button next to its name.
+You can modify the details of an Upstream by clicking the `DETAILS` button next to its name.
 
 ![6_upstream_details](img/6_upstream_details.png)
 
-The `Targets` section is for manage targets. A target is an IP address/hostname with a port that identifies an instance of a backend service. Every upstream can have many targets, and the targets can be dynamically added. Changes are implemented on the fly.
+The `Targets` section is for managing targets. A target is an IP address/hostname with a port that identifies an instance of a backend service. Every upstream can have many targets, and the targets can be dynamically added. Changes are implemented on the fly.
 
 ![6_upstream_targets](img/6_upstream_targets.png)
 
@@ -281,11 +281,11 @@ Click on the `Details` option in snapshot list view to see more information abou
 
 ![9_snapshot_details](img/9_snapshot_details.png)
 
-You can restore objects by clicking on the `RESTORE` button.
+Restore objects by clicking on the `RESTORE` button.
 
 ![9_snapshot_restore](img/9_snapshot_restore.png)
 
-You can export data by clicking on the `EXPORT` button.
+Export data by clicking on the `EXPORT` button.
 
 ### Scheduled tasks
 
@@ -299,7 +299,7 @@ Create a scheduled task using the `ADD SCHEDULE` button.
 
 ## Settings
 
-You can set the dashboard refresh interval, logout session timeout and login restrictions in the settings section.
+Set the dashboard refresh interval, logout session timeout and login restrictions in the settings section.
 
 ![settings](img/10_settings.png)
 
@@ -308,7 +308,7 @@ You can set the dashboard refresh interval, logout session timeout and login res
 |Setting|Description|
 |-------|-----------|
 |Dashboard refresh interval|The interval in milliseconds at which the Dashboard data will refresh. Default is 5000 milliseconds.|
-|Logout session timeout|The interval in minutes at which you will be logged out after idle time. Default is 5000 minutes.|
+|Logout session timeout|The interval in minutes a user will be logged out after idle time. Default is 5000 minutes.|
 
 ### Login restrictions
 
@@ -318,7 +318,7 @@ You can set the dashboard refresh interval, logout session timeout and login res
 
 ### Configure Role for User
 
-Open the `Users` section in your Gluu Server and use the `User Permission` attribute to add a role to the user. Click on `User Permission`, it will create a text box. Add the `admin` role and save the user.
+Open the `Users` section in the Gluu Server and use the `User Permission` attribute to add a role to the user. Click on `User Permission`, it will create a text box. Add the `admin` role and save the user.
 
 ![role](img/16_user_role_permission_add.png)
 
