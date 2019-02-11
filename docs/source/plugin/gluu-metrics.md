@@ -21,7 +21,7 @@ The following parameters can be used for plugin configuration:
 
 ### Using the UI
 
-Navigate to the [Global Plugin Add section](../admin-gui/#add-plugin_2) in the UI to enable the Gluu Metrics plugin. In the Metrics category, there is a Gluu Metrics box. Click the **+** icon to enable the plugin.
+Navigate to the [Add Global Plugin section](../admin-gui/#add-plugin) in the UI to enable the Gluu Metrics plugin. In the Metrics category, there is a Gluu Metrics box. Click the **+** icon to enable the plugin.
 
 ![5_plugins_add](../img/14_metrics_plugin_add.png)
 
@@ -52,11 +52,11 @@ Metrics are available via the following Admin API endpoint: `http://<kong_hostna
 
 - **gluu_oauth_client_granted**: Counts how many times a client (consumer) is granted access (authorize by OAUTH Scope Expression) by the OAUTH-PEP plugin per service.
 
-- **gluu_uma_client_authenticated**: Counts how many times an client (consumer) is authenticated by the UMA-PEP plugin per service.
+- **gluu_uma_client_authenticated**: Counts how many times a client (consumer) is authenticated by the UMA-PEP plugin per service.
 
 - **gluu_uma_client_granted**: Counts how many times a client (consumer) is granted access (authorized by UMA Scope and Policies) by the UMA-PEP plugin per service.
 
-- **gluu_uma_ticket**: Counts how many times UMA Permission Ticket has been issued by user for access to resources. This will count ticket only in UMA-PEP case.
+- **gluu_uma_ticket**: Counts how many times an UMA Permission Ticket has been issued by the user for access to resources. This will only count tickets for UMA-PEP.
 
 
 ### Example metrics  
@@ -100,15 +100,15 @@ gluu_uma_ticket{service="none-claim-gatering"} 1
 
 ## Prometheus Server Configuration
 
-Simply configure a Prometheus server to listen to the metrics endpoint `gluu-metrics`
+Configure a Prometheus server to listen to the metrics endpoint `gluu-metrics`
 
 1. Install **prometheus server v2.6.0**      
-1. Add our endpoint in prometheus.yml, in the **scrape_configs** section:      
+1. Add the `/gluu-metrics` endpoint in prometheus.yml, in the **scrape_configs** section:      
    ```
      - job_name: gluu
        metrics_path: /gluu-metrics
        static_configs:
-       - targets: [your-kong-host-server.com:8001]
+       - targets: [<kong_hostname>:8001]
    ```
 1. Restart the Prometheus server.   
 
@@ -119,7 +119,7 @@ Metrics exported by the plugin can be graphed in Grafana using a drop-in dashboa
 1. Install **Grafana v5.4.2**     
 1. Add Datasource     
     - Start the grafana service
-    - Open in browser (Default port 3000. http://localhost:3000)
+    - Open in browser (Default port 3000. <kong_hostname>:3000)
     - Configuration > Data sources > Add data source > Prometheus
     - Add the Prometheus server URL
     ![5_plugins_add](../img/14_grafana_datasource.png)
