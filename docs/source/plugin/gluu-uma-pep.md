@@ -29,7 +29,7 @@ Use the [Service section](../admin-gui/#add-service) of the GG UI doc to add a s
 
 ```
 $ curl -X POST \
-  http://localhost:8001/services \
+  http://<kong_hostname>:8001/services \
   -H 'Content-Type: application/json' \
   -d '{
   "name": "<service_name>",
@@ -50,7 +50,7 @@ Clicking on the **+** icon will bring up the below form.
 
 ```
 $ curl -X POST \
-  http://localhost:8001/plugins \
+  http://<kong_hostname>:8001/plugins \
   -H 'Content-Type: application/json' \
   -d '{
   "name": "gluu-uma-pep",
@@ -103,7 +103,7 @@ $ curl -X POST \
 
 #### Add Route using GG UI
 
-Use [Manage Service Section](../admin-gui/#routes) to add route using GG UI.
+Use [Manage Service Section](../admin-gui/#service-routes) to add a route using GG UI.
 
 ![3_4_service_route](../img/3_4_service_route.png)
 
@@ -111,7 +111,7 @@ Use [Manage Service Section](../admin-gui/#routes) to add route using GG UI.
 
 ```
 $ curl -X POST \
-    http://localhost:8001/routes \
+    http://<kong_hostname>:8001/routes \
     -H 'Content-Type: application/json' \
     -d '{
     "hosts": [
@@ -139,7 +139,7 @@ Clicking on the **+** icon will bring up the below form.
 
 ```
 $ curl -X POST \
-  http://localhost:8001/plugins \
+  http://<kong_hostname>:8001/plugins \
   -H 'Content-Type: application/json' \
   -d '{
   "name": "gluu-uma-pep",
@@ -202,7 +202,7 @@ Clicking on the **+** icon will bring up the below form.
 
 ```
 $ curl -X POST \
-  http://localhost:8001/plugins \
+  http://<kong_hostname>:8001/plugins \
   -H 'Content-Type: application/json' \
   -d '{
   "name": "gluu-uma-pep",
@@ -364,7 +364,7 @@ Create a consumer using the Kong Admin API.
 
 ```
 $ curl -X POST \
-    http://localhost:8001/consumers \
+    http://<kong_hostname>:8001/consumers \
     -H 'Content-Type: application/json' \
     -d '{
   	"username": "<kong_consumer_name>",
@@ -380,7 +380,7 @@ For example, to access a Kong proxy using an UMA token:
 
 ```
 curl -X GET \
-  http://localhost:8000/{path matching a configured Route} \
+  http://<kong_hostname>:8000/{path matching a configured Route} \
   -H 'Authorization: Bearer <uma_rpt_token>' \
 ```
 
