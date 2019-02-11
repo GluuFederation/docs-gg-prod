@@ -25,7 +25,7 @@ The Info section shows generic details about the Kong node.
 
 ### Service List
 
-Service entities, as the name implies, are abstractions of each of your own upstream services. Examples of Services would be a data transformation microservice, a billing API, etc. See [more details](https://docs.konghq.com) on Kong's website.   
+Service entities, as the name implies, are abstractions of each of your own upstream services. Examples of Services would be a data transformation microservice, a billing API, etc.
 
 Check the Kong [Service configuration](https://docs.konghq.com/0.14.x/proxy/#reminder-how-to-configure-a-service) docs for more details.
 
@@ -100,7 +100,7 @@ This section is used to add and view plugins.
 
 ### Route List
 
-The Route entities define rules to match client requests. Each Route is associated with a Service, and a Service may have multiple Routes associated with it. Every request matching a given Route will be proxied to its associated Service. [More details](https://docs.konghq.com).
+The Route entities define rules to match client requests. Each Route is associated with a Service, and a Service may have multiple Routes associated with it. Every request matching a given Route will be proxied to its associated Service.
 
 Check Kong [routes configuration](https://docs.konghq.com/0.14.x/proxy/#routes-and-matching-capabilities) docs for more details.
 
