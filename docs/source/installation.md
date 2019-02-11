@@ -167,7 +167,7 @@ Gluu Gateway needs to be deployed on a server or VM with the following minimum r
 ## Install the Gluu Gateway package
 
 !!! important
-    The Gluu Gateway package installs the following required components: PostgreSQL v10, oxd Server 4.0.beta, NodeJS v8, Kong Community Edition v0.14.1.
+    The Gluu Gateway package installs the following required components: PostgreSQL v10, oxd Server 4.0, NodeJS v8, Kong Community Edition v0.14.1.
 
 ### Ubuntu 16
 ```
@@ -222,7 +222,7 @@ If you see the above message, it means the installation was successful. To log i
     If you do not want an SSH tunnel connection. See [FAQ](./faq.md#how-can-i-change-the-listening-address-and-port) for global access configuration.
     
 !!! Warning
-    By default, the Gluu Gateway Client expiration date is set for one day during the installation process. To change it, follow [these instructions](https://gluu.org/docs/oxd/3.1.4/faq/#client-expires-how-can-i-avoid-it). Without this step, after 24 hours you will no longer be able to log in to the Gluu Gateway.
+    By default, the Gluu Gateway Client expiration date is set for one day during the installation process. To change it, follow [these instructions](https://gluu.org/docs/oxd/faq/#client-expires-how-can-i-avoid-it). Without this step, after 24 hours you will no longer be able to log in to the Gluu Gateway.
 
 ## Applications and their ports
 
