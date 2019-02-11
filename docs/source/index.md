@@ -1,4 +1,4 @@
-# Gluu Gateway 4.0.Beta
+# Gluu Gateway 1.0
 
 ## Overview
 
