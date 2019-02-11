@@ -7,7 +7,7 @@ To install Gluu Gateway, follow these steps:
 3. [Run `setup-gluu-gateway.py`](#run-the-setup-script)
 
 !!! Note
-    Before installing Gluu Gateway, you should have a [Gluu Server](https://gluu.org/docs/ce) installed and operational. You will be asked to input the hostname of your Gluu Server while running the Gluu Gateway setup script. 
+    Before installing Gluu Gateway, be sure to have a [Gluu Server](https://gluu.org/docs/ce) installed and operational. The Gluu Gateway setup script requires an existing Gluu Server's hostname be provided. 
 
 ## Minimum Requirements
 
@@ -191,7 +191,7 @@ Gluu Gateway needs to be deployed on a server or VM with the following minimum r
 After acknowledging the Gluu Stepped-Up Support License, you will be prompted to answer several questions. Just hit Enter to accept the default values, which are specified in square brackets.
 
 !!! Important 
-    When you are prompted to provide a two-letter value, make sure you follow the instructions. A mistake may result in the lack of certificates.
+    When prompted to provide a two-letter value, make sure to follow the instructions. A mistake may result in the lack of certificates.
 
 | **Question** | **Explanation** |
 |----------|-------------|
