@@ -33,7 +33,7 @@ After clicking **+**, the following form will be presented where a Consumer ID c
 
 ```
 $ curl -X POST \
-  http://localhost:8001/plugins \
+  http://<kong_hostname>:8001/plugins \
   -H 'Content-Type: application/json' \
   -d '{
   "name": "gluu-metrics"
@@ -108,7 +108,7 @@ Configure a Prometheus server to listen to the metrics endpoint `gluu-metrics`
      - job_name: gluu
        metrics_path: /gluu-metrics
        static_configs:
-       - targets: [<kong_hostname>:8001]
+       - targets: [http://<kong_hostname>:8001]
    ```
 1. Restart the Prometheus server.   
 
@@ -119,7 +119,7 @@ Metrics exported by the plugin can be graphed in Grafana using a drop-in dashboa
 1. Install **Grafana v5.4.2**     
 1. Add Datasource     
     - Start the grafana service
-    - Open in browser (Default port 3000. <kong_hostname>:3000)
+    - Open in browser (Default port 3000. http://<kong_hostname>:3000)
     - Configuration > Data sources > Add data source > Prometheus
     - Add the Prometheus server URL
     ![5_plugins_add](../img/14_grafana_datasource.png)
