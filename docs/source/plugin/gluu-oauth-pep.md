@@ -17,7 +17,7 @@ Plugins can be configured at the **Service**, **Route** or **Global** level. The
 !!! Important
     konga.log also shows the curl commands for all API requests to Kong and oxd made by the Konga GUI. This curl command can be used to automate configuration instead of using the web interface.
 
-### Enable Plugin on the Service Level
+### Service Level
 
 #### Add a Service
 
@@ -103,7 +103,7 @@ $ curl -X POST \
 !!! Note
     Kong does not allow proxying using only a service object--this feature requires a route. At minimum, one service is needed to register an Upstream API and one route is needed for proxying.
 
-### Enable a Plugin on the Route Level
+### Route Level
 
 #### Add a Route
 
@@ -193,7 +193,7 @@ $ curl -X POST \
 }'
 ```
 
-### Enable a Global Plugin
+### Global Plugin
 
 A global plugin will apply to all services and routes.
 
