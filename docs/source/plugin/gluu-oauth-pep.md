@@ -29,7 +29,7 @@ Use the [Service section](../admin-gui/#add-service) of the GG UI doc to add a s
 
 ```
 $ curl -X POST \
-  <kong_host>:8001/services \
+  http://<kong_hostname>:8001/services \
   -H 'Content-Type: application/json' \
   -d '{
   "name": "<service_name>",
@@ -50,7 +50,7 @@ Clicking on the **+** icon will bring up the below form.
 
 ```
 $ curl -X POST \
-  <kong_host>:8001/plugins \
+  http://<kong_hostname>:8001/plugins \
   -H 'Content-Type: application/json' \
   -d '{
   "name": "gluu-oauth-pep",
@@ -111,7 +111,7 @@ Use the [Manage Service Section](../admin-gui/#service-routes) to add a route us
 
 ```
 $ curl -X POST \
-    <kong_host>:8001/routes \
+    http://<kong_hostname>:8001/routes \
     -H 'Content-Type: application/json' \
     -d '{
     "hosts": [
@@ -140,7 +140,7 @@ Clicking on the **+** icon will bring up the below form.
 
 ```
 $ curl -X POST \
-  <kong_host>:8001/plugins \
+  http://<kong_hostname>:8001/plugins \
   -H 'Content-Type: application/json' \
   -d '{
   "name": "gluu-oauth-pep",
@@ -203,7 +203,7 @@ Clicking on the **+** icon will bring up the below form.
 
 ```
 $ curl -X POST \
-  <kong_host>:8001/plugins \
+  http://<kong_hostname>:8001/plugins \
   -H 'Content-Type: application/json' \
   -d '{
   "name": "gluu-oauth-pep",
@@ -391,7 +391,7 @@ Create a consumer using the Kong Admin API:
 
 ```
 $ curl -X POST \
-    http://localhost:8001/consumers \
+    http://<kong_hostname>:8001/consumers \
     -H 'Content-Type: application/json' \
     -d '{
   	"username": "<kong_consumer_name>",
@@ -407,7 +407,7 @@ For example, to access a Kong proxy using an OAuth token:
 
 ```
 curl -X GET \
-  http://localhost:8000/{path matching a configured Route} \
+  http://<kong_hostname>:8000/{path matching a configured Route} \
   -H 'Authorization: Bearer <oauth_token>' \
 ```
 
