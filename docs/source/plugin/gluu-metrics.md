@@ -98,33 +98,33 @@ gluu_uma_client_granted{consumer="@!19CF.B296.532F.83E2!0001!25C1.E1E4!0008!B9EF
 gluu_uma_ticket{service="none-claim-gatering"} 1
 ```
 
-## Grafana configuration
-
-Metrics exported by the plugin can be graphed in Grafana using a drop in dashboard: [Gluu-Metrics-Grafana.json](https://github.com/GluuFederation/gluu-gateway/blob/version_4.0.0/setup/templates/Gluu-Metrics-Grafana.json).
-
-1. Install **Grafana v5.4.2**     
-1. Add Datasource     
-    - Start grafana service
-    - Open in browser (Default port 3000. http://localhost:3000)
-    - Configuration > Data sources > Add data source > Prometheus
-    - Add prometheus server URL
-    ![5_plugins_add](../img/14_grafana_datasource.png)
-1. Import JSON: [Gluu-Metrics-Grafana.json](https://github.com/GluuFederation/gluu-gateway/blob/version_4.0.0/setup/templates/Gluu-Metrics-Grafana.json)     
-    - Go to home pade
-    - Click on `New dashboard` on top left corner.
-    - Click on `import dashboard`
-    - Upload .json file
-
-## Prometheus server configuration
+## Prometheus Server Configuration
 
 Simply configure a Prometheus server to listen to the metrics endpoint `gluu-metrics`
 
 1. Install **prometheus server v2.6.0**      
-1. Add our endpoint in prometheus.yml in **scrape_configs** section.      
+1. Add our endpoint in prometheus.yml, in the **scrape_configs** section:      
    ```
      - job_name: gluu
        metrics_path: /gluu-metrics
        static_configs:
        - targets: [your-kong-host-server.com:8001]
    ```
-1. Restart prometheus server.       
+1. Restart the Prometheus server.   
+
+## Grafana Configuration
+
+Metrics exported by the plugin can be graphed in Grafana using a drop-in dashboard: [Gluu-Metrics-Grafana.json](https://github.com/GluuFederation/gluu-gateway/blob/version_1.0/setup/templates/Gluu-Metrics-Grafana.json).
+
+1. Install **Grafana v5.4.2**     
+1. Add Datasource     
+    - Start the grafana service
+    - Open in browser (Default port 3000. http://localhost:3000)
+    - Configuration > Data sources > Add data source > Prometheus
+    - Add the Prometheus server URL
+    ![5_plugins_add](../img/14_grafana_datasource.png)
+1. Import JSON: [Gluu-Metrics-Grafana.json](https://github.com/GluuFederation/gluu-gateway/blob/version_1.0/setup/templates/Gluu-Metrics-Grafana.json)     
+    - Go to the home page
+    - Click on `New dashboard` on top left corner.
+    - Click on `import dashboard`
+    - Upload .json file
