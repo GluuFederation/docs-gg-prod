@@ -48,11 +48,11 @@ Gluu Gateway makes use of the following software components:
 
 - [Kong v0.14](https://getkong.org): An open source API Gateway and Microservices Management Layer, delivering high performance and reliability.
 
-- [Gluu Konga Admin GUI](https://github.com/GluuFederation/gluu-gateway/tree/master/konga): A web administration portal, based on the [Konga](https://github.com/pantsel/konga) GUI, to manage your Gluu Gateway.
+- [Gluu Konga Admin GUI](https://github.com/GluuFederation/gluu-gateway/tree/version_1.0/konga): A web administration portal, based on the [Konga](https://github.com/pantsel/konga) GUI, to manage your Gluu Gateway.
 
 - [Gluu Gateway plugins](https://github.com/GluuFederation/gluu-gateway): Plugins that leverage the Gluu Server for central client management and to control access to upstream APIs using OAuth 2.0 and UMA 2.0.
 
-- [oxd-Server v4.0.Beta](https://oxd.gluu.org): Gluu's client middleware server for OpenID, OAuth, and UMA client communication.
+- [oxd-Server v4.0](https://oxd.gluu.org): Gluu's client middleware server for OpenID, OAuth, and UMA client communication.
 
 - Others: The following runtime environment is required by the Gluu Gateway package:
     - OpenJDK v8
