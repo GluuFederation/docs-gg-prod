@@ -29,7 +29,7 @@ Use the [Service section](../admin-gui/#add-service) of the GG UI doc to add a s
 
 ```
 $ curl -X POST \
-  http://localhost:8001/services \
+  <kong_host>:8001/services \
   -H 'Content-Type: application/json' \
   -d '{
   "name": "<service_name>",
@@ -50,7 +50,7 @@ Clicking on the **+** icon will bring up the below form.
 
 ```
 $ curl -X POST \
-  http://localhost:8001/plugins \
+  <kong_host>:8001/plugins \
   -H 'Content-Type: application/json' \
   -d '{
   "name": "gluu-oauth-pep",
@@ -103,7 +103,7 @@ $ curl -X POST \
 
 #### Add a Route using GG UI
 
-Use [Manage Service Section](../admin-gui/#routes) to add a route using the GG UI.
+Use the [Manage Service Section](../admin-gui/#service-routes) to add a route using the GG UI.
 
 ![3_4_service_route](../img/3_4_service_route.png)
 
@@ -111,7 +111,7 @@ Use [Manage Service Section](../admin-gui/#routes) to add a route using the GG U
 
 ```
 $ curl -X POST \
-    http://localhost:8001/routes \
+    <kong_host>:8001/routes \
     -H 'Content-Type: application/json' \
     -d '{
     "hosts": [
@@ -140,7 +140,7 @@ Clicking on the **+** icon will bring up the below form.
 
 ```
 $ curl -X POST \
-  http://localhost:8001/plugins \
+  <kong_host>:8001/plugins \
   -H 'Content-Type: application/json' \
   -d '{
   "name": "gluu-oauth-pep",
@@ -192,7 +192,7 @@ A global plugin will apply to all services and routes.
 
 #### Configure a Global Plugin using GG UI
 
-Use the [Plugin section](../admin-gui/#add-plugin_2) in the GG UI to enable the Gluu OAuth PEP plugin. In the security category, there is a `Gluu OAuth PEP` box. Click on the **+** icon to enable the plugin.
+Use the [Plugin section](../admin-gui/#add-plugin) in the GG UI to enable the Gluu OAuth PEP plugin. In the security category, there is a `Gluu OAuth PEP` box. Click on the **+** icon to enable the plugin.
 
 ![5_plugins_add](../img/5_plugins_add.png)
 
@@ -203,7 +203,7 @@ Clicking on the **+** icon will bring up the below form.
 
 ```
 $ curl -X POST \
-  http://localhost:8001/plugins \
+  <kong_host>:8001/plugins \
   -H 'Content-Type: application/json' \
   -d '{
   "name": "gluu-oauth-pep",
