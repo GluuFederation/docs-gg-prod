@@ -70,7 +70,7 @@ The Gluu Gateway service is used to manage all components, including: the Admin 
 
 ## OXD
 
-Refer to the [oxd docs](https://gluu.org/docs/oxd/4.0.beta) for more information on the topics below. 
+Refer to the [oxd docs](https://gluu.org/docs/oxd/) for more information on the topics below. 
 
 * Configure the oxd Server
 
@@ -123,7 +123,7 @@ Execute the following sequence of commands:
 
 - [Install](./installation) and [Setup](./installation/#run-the-setup-script) GG on your production server.
 
-- Stop OXD server on production server and take OXD db files from your development server from path `/opt/oxd-server/data/` and replace files in production server and Start OXD server `service oxd-server-4.0.beta start`.
+- Stop OXD server on production server and take OXD db files from your development server from path `/opt/oxd-server/data/` and replace files in production server and Start OXD server `service oxd-server start`.
 
 - Stop services `service kong stop` and `service konga stop`. Make sure services are stopped.
 
