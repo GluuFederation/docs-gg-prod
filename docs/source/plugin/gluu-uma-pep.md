@@ -39,7 +39,7 @@ $ curl -X POST \
 
 #### Configure Service Plugin using GG UI
 
-Use the [Manage Service](../admin-gui/manage-service) section in GG UI to enable the Gluu UMA PEP plugin. In the security category, there is a Gluu UMA PEP box. Click on the **+** icon to enable the plugin.
+Use the [Manage Service](../admin-gui/#manage-service) section in GG UI to enable the Gluu UMA PEP plugin. In the security category, there is a Gluu UMA PEP box. Click on the **+** icon to enable the plugin.
 
 ![11_path_uma_service](../img/11_path_uma_service.png)
 
@@ -128,12 +128,12 @@ $ curl -X POST \
 
 #### Configure Route Plugin using GG UI
 
-Use the [Manage Service](../admin-gui/#manage-service) section in the GG UI to enable the Gluu UMA PEP plugin. In the security category, there is a Gluu UMA PEP box. Click on the **+** icon to enable the plugin.
+Use the [Manage Route](../admin-gui/#manage-route) section in the GG UI to enable the Gluu UMA PEP plugin. In the security category, there is a Gluu UMA PEP box. Click on the **+** icon to enable the plugin.
 
-![11_path_uma_service](../img/12_path_uma_route.png)
+![12_path_uma_route](../img/12_path_uma_route.png)
 
 Clicking on the **+** icon will bring up the below form.
-![11_path_add_uma_service](../img/12_path_add_uma_route.png)
+![12_path_add_uma_route](../img/12_path_add_uma_route.png)
 
 #### Configure Route Plugin using Kong Admin API
 

@@ -136,12 +136,12 @@ $ curl -X POST \
 
 ##### Configure a Route Plugin using GG UI
 
-Use the [Manage Service](../admin-gui/#manage-service) section in the GG UI to enable the Gluu OAuth PEP plugin. In the security category, there is a Gluu OAuth PEP box. Click on the **+** icon to enable the plugin.
+Use the [Manage Route](../admin-gui/#manage-route) section in the GG UI to enable the Gluu OAuth PEP plugin. In the security category, there is a Gluu OAuth PEP box. Click on the **+** icon to enable the plugin.
 
-![11_path_oauth_service](../img/12_path_oauth_route.png)
+![12_path_oauth_route](../img/12_path_oauth_route.png)
 
 Clicking on the **+** icon will bring up the below form.
-![11_path_add_oauth_service](../img/12_path_add_oauth_route.png)
+![12_path_add_oauth_route](../img/12_path_add_oauth_route.png)
 
 ##### Configure Route Plugin using Kong Admin API
 
@@ -201,7 +201,7 @@ A global plugin will apply to all services and routes.
 
 ##### Configure a Global Plugin using GG UI
 
-Use the [Plugin section](../admin-gui/#add-plugin) in the GG UI to enable the Gluu OAuth PEP plugin. In the security category, there is a `Gluu OAuth PEP` box. Click on the **+** icon to enable the plugin.
+Use the [Plugin section](../admin-gui/#add-plugin_2) in the GG UI to enable the Gluu OAuth PEP plugin. In the security category, there is a `Gluu OAuth PEP` box. Click on the **+** icon to enable the plugin.
 
 ![5_plugins_add](../img/5_plugins_add.png)
 
