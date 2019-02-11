@@ -1,12 +1,12 @@
 site_name: Gluu Gateway Docs
-site_description: Documentation for Gluu Gateway 4.0.beta
+site_description: Documentation for Gluu Gateway
 site_favicon: 'favicon.ico'
 copyright: Copyright &copy; 2019, Gluu, Inc.
 docs_dir: source
-repo_url: https://github.com/GluuFederation/docs-gg-prod/tree/4.0.beta/docs
+repo_url: https://github.com/GluuFederation/docs-gg-prod/tree/1.0/docs
 theme_dir: theme/material
 extra:
-    version: '4.0.beta'
+    version: '1.0'
     logo: 'gluu.png'
 markdown_extensions:
 - admonition
