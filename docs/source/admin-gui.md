@@ -3,13 +3,11 @@
 ## Dashboard
 The Dashboard section is divided into subsections that show application configuration details. 
 
-In the Global Info, you can see oxd and the client details used by Konga. If you want to check the version of the currently-used oxd Server or the address of the Gluu Server, all the necessary information is provided here. The `oxd ID`, `Client ID` and `Client Secret` are the credentials created during the Gluu Gateway installation and setup.
+In the **Global Info**, you can see oxd and the client details used by Konga. Check the version of the currently-used oxd Server or the address of the Gluu Server in this section. The `oxd ID`, `Client ID` and `Client Secret` are the credentials for the client created by default during Gluu Gateway installation and setup.
 
-By default, one oxd client is created during the installation and setup of the Gluu Gateway.
+The **Gateway** and **Database Info** sections show details about the Gateway itself and the included Postgres database, respectively. 
 
-The Gateway and Database Info show information on the Gateway itself and the used Postgres database, respectively. 
-
-The Plugins section displays all the plugins supported by the Gluu Gateway. When inactive, a plugin is shown as gray. If you add a plugin to an API/Consumer or set a global one, its name will turn green on the dashboard.
+The **Plugins** section displays all the plugins supported by the Gluu Gateway. When inactive, a plugin is shown as gray. If you add a plugin to an API/Consumer or set a global one, its name will turn green on the dashboard.
 
 The remaining subsections of Requests, Connections and Timers show real-time metrics on the Gluu Gateway health.  
 
@@ -56,7 +54,7 @@ This section is used to view and edit your Service.
 
 ![3_3_service_details](img/3_3_service_details.png)
 
-#### Routes
+#### Service Routes
 This section is used to manage the routes within the selected service.
 
 Check Kong [routes configuration](https://docs.konghq.com/0.14.x/proxy/#routes-and-matching-capabilities) docs for more details.
@@ -69,11 +67,11 @@ Check Kong [routes configuration](https://docs.konghq.com/0.14.x/proxy/#routes-a
 | **Edit Button** | This button is used to edit a route, configure a route and configure plugins of the selected service.|
 | **Delete Button** | This button is used to delete the selected route. |
 
-#### Plugins
+#### Service Plugins
 
 This section is used to add and view plugins.
 
-##### Plugin list
+##### Service Plugin List
   
   ![3_5_service_plugins](img/3_5_service_plugins.png)
 
@@ -84,13 +82,13 @@ This section is used to add and view plugins.
   | **Delete Button** | This button is used to delete a selected route. |
   | **ON/OFF Switch** | If you want to switch a plugin on/off, use the toggle bar.|
 
-##### Add Plugin
+##### Add Service Plugin
 
   Add a Plugin by clicking the `+` icon next to the plugin’s name.
   
   ![3_6_add_plugins](img/3_6_add_plugins.png)
 
-#### Eligible consumers
+#### Eligible Consumers for Service
 
   This section is for the ACL Kong plugin, which restricts access to an API by whitelisting or blacklisting consumers using arbitrary ACL group names. It shows the list of consumers that are configured with ACL groups.
 
@@ -125,10 +123,10 @@ This section is used to view and edit your Route.
 
 ![4_2_route_details](img/4_2_route_details.png)
 
-#### Plugins
+#### Route Plugins
 This section is used to view the list of added Plugins and add a new Plugin.
 
-##### Plugin list
+##### Route Plugin List
 
   ![4_3_route_plugin](img/4_3_route_plugin.png)
 
@@ -139,13 +137,13 @@ This section is used to view the list of added Plugins and add a new Plugin.
   | **Delete Button** | This button is used to delete selected route. |
   | **ON/OFF Switch** |If you want to switch a plugin on/off, just use the toggle bar.|
 
-##### Add Plugin
+##### Add Route Plugin
 
   Add a Plugin by clicking the plus icon next to a plugin’s name.
 
   ![4_4_add_plugins](img/3_6_add_plugins.png)
 
-#### Eligible consumers
+#### Eligible Consumers for Route
 
   This section is for the ACL Kong plugin, which restricts access to an API by whitelisting or blacklisting consumers using arbitrary ACL group names. It shows the list of consumers that are configured with ACL Groups.
 
@@ -170,7 +168,7 @@ Add Consumers by using the `+ CREATE CONSUMER` button.
 
 Click on the **Consumer Name** to manage a consumer. You can edit, manage ACL plugin groups and add plugins.
 
-#### Details
+#### Consumer Details
 
 You can see and edit the selected consumer details.
 
@@ -182,7 +180,7 @@ You can create a group for ACL plugins to whitelist and blacklist consumers acco
 
 ![4_consumer_groups](img/4_consumer_groups.png)
 
-#### Plugins
+#### Consumer Plugins
 
 Some plugins can be configured for each specific consumer. This section will add the plugin globally, which will apply for every service and route.
 
@@ -210,7 +208,7 @@ A plugin entity represents a plugin configuration that will be executed during t
 Plugins added in this section of the Gluu Gateway will be applied to all services and routes. If you need to add plugins to a specific service or route, you can do it in the [services](#services) or [routes](#routes) section.
 If you need to add plugins to a specific consumer, you can do it in the respective [consumer page](#consumers).
 
-### Plugin list
+### Plugin List
 
 ![5_plugins](img/5_plugins.png)
 
@@ -262,7 +260,7 @@ Add Connections by using the `+ NEW CONNECTION` button.
 
 ![conn_add](img/8_conn_add.png)
 
-## SNAPSHOTS
+## Snapshots
 
 Take snapshots of currently active nodes.
 All services, routes, plugins, consumers, upstreams and targets will be saved and available for later import.
@@ -277,7 +275,7 @@ It shows the list of snapshots.
 
 ![9_take_snapshot](img/9_take_snapshot.png)
 
-### Details
+### Snapshot Details
 
 Click on the `Details` option in snapshot list view to see more information about the snapshot.
 
