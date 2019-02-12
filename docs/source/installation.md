@@ -156,7 +156,7 @@ Gluu Gateway needs to be deployed on a server or VM with the following minimum r
 ```
 * Add the PostgreSQL 10 repo:
 ```
-# rpm -Uvh https://yum.postgresql.org/10/redhat/rhel-7-x86_64/pgdg-centos10-10-2.noarch.rpm
+# rpm -Uvh https://yum.postgresql.org/10/redhat/rhel-7-x86_64/pgdg-redhat10-10-2.noarch.rpm
 ```
 * Add the Node repo:
 ```
