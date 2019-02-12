@@ -26,19 +26,21 @@ Gluu Gateway functions as a policy enforcement point ("PEP"), relying on an exte
 
 Gluu Gateway supports both OAuth and UMA tokens. While mechanically the same, scopes have different meanings in OAuth and UMA: 
 
-- UMA scopes represent centralized policy evaluation. For example, in the Gluu Server, administrators can map scopes to policies, expressed as UMA RPT Authorization interception scripts. 
+### Using UMA
+UMA scopes represent centralized policy evaluation. For example, in the Gluu Server, administrators can map scopes to policies, expressed as UMA RPT Authorization interception scripts. 
 
-- OAuth scopes normally represent a user's authorization, for example authorization to access a user's calendar. However, how scopes are granted is ultimately up to the Authorization Server that issues it.
+![UMA PEP diagram](img/gluu-uma-pep.png)
 
-In Gluu Gateway, a `client_id` is associated with a "Consumer" in Kong. This is useful where access control is restricted to certain clients. All other forms of client authentication are disabled in the Gluu Gateway Admin GUI -- we just want to use an OAuth Authorization Server like the Gluu Server for client authentication. The Gluu Server plugins verify the `client_id` for which a token was issued by looking at the JSON equivalent (either the JWT or the introspection response).
-
-This may seem obvious, but to be clear: an API that uses OAuth for security can only be called by OAuth clients. And an API that uses UMA for security can only be called by an UMA client. 
-
-See the diagrams below if you prefer a visualization:
+### Using OAuth
+OAuth scopes normally represent a user's authorization, for example authorization to access a user's calendar. However, how scopes are granted is ultimately up to the Authorization Server that issues it.
 
 ![OAuth PEP diagram](img/gluu-oauth-pep.png)
 
-![UMA PEP diagram](img/gluu-uma-pep.png)
+!!! Note 
+    An API that uses OAuth for security can only be called by OAuth clients. And an API that uses UMA for security can only be called by an UMA client. 
+
+### Clients
+In Gluu Gateway, a `client_id` is associated with a "Consumer" in Kong. This is useful where access control is restricted to certain clients. All other forms of client authentication are disabled in the Gluu Gateway Admin GUI -- we just want to use an OAuth Authorization Server like the Gluu Server for client authentication. The Gluu Server plugins verify the `client_id` for which a token was issued by looking at the JSON equivalent (either the JWT or the introspection response).
 
 ## Components
 
