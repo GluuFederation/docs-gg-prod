@@ -15,7 +15,7 @@ Below are a few use cases and functionalities supported by Gluu Gateway:
 - Introspect bearer access tokens
 - Validate the signature of JWT access tokens
 - A GUI to simplify ongoing administration
-- Support for Kong plugins to enable rate limiting, logging, and many other capabilities.
+- Support for Kong plugins to enable rate limiting, logging, and many other capabilities  
 
 ## Access Control
 
