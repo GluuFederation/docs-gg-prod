@@ -68,7 +68,7 @@ The Gluu Gateway service is used to manage all components, including: the Admin 
      # kong [restart|stop|restart|status]
     ```
 
-## OXD
+## oxd
 
 Refer to the [oxd docs](https://gluu.org/docs/oxd/) for more information on the topics below. 
 
