@@ -10,11 +10,10 @@ Gluu Gateway is built on top of the [Kong API gateway](https://konghq.com/kong/)
 
 Below are a few use cases and functionalities supported by Gluu Gateway:
 
-- Introspect bearer access tokens
-- Validate the signature of JWT access tokens
 - Control access to APIs by requiring OAuth or UMA scopes
 - Collect and report OAuth and UMA usage metrics
-- Simplify installation, administration, and scaling of the platform
+- Introspect bearer access tokens
+- Validate the signature of JWT access tokens
 - A GUI to simplify ongoing administration
 - Support for Kong plugins to enable rate limiting, logging, and many other capabilities.
 
