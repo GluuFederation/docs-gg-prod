@@ -27,7 +27,7 @@ The Gluu Gateway service is used to manage all components, including: the Admin 
     |connections|Used to set Postgres DB configuration for Admin GUI|
     |models|Used to set the Database model|
     |session|Session secret is automatically generated when your new app is created. It uses Connect's cookie parser to normalize configuration differences between Express and Socket.io and hooks into Sails' middleware interpreter to allow you to access and auto-save to `req.session` with Socket.io the same way you would with Express.|
-    |ssl|Used to set ssl cert for GUI Application. Which provide facility to start application on https|
+    |ssl|Used to set SSL certificates for the GUI Application. This enables application to use https|
     |port|Used to set application port|
     |environment|Used to set project environment. Konga and Gluu Gateway service start application with production environment.|
     |log|Used to set the log level|
