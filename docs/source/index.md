@@ -44,9 +44,7 @@ In Gluu Gateway, a `client_id` is associated with a "Consumer" in Kong. This is 
 
 ## Components
 
-Gluu Gateway makes use of the following software components:
-
-- [Gluu Server CE v3.1.5](https://gluu.org/docs/ce/3.1.5): The Gluu Server is a container distribution of free open source software (FOSS) for identity and access management (IAM). SaaS, custom, open source and commercial web and mobile applications can leverage a Gluu Server for user authentication, identity information, and policy management.
+Gluu Gateway bundles the following software components:
 
 - [Kong v0.14](https://getkong.org): An open source API Gateway and Microservices Management Layer, delivering high performance and reliability.
 
@@ -62,6 +60,14 @@ Gluu Gateway makes use of the following software components:
     - Postgres v10
     - Node v8.9.4
     - NPM v5.6.0
+    
+## Pre-requirements
+
+Gluu Gateway requires the Gluu Server OAuth 2.0 Authorization Server (AS) to issue OAuth clients, perform client authentication, and  make policy decisions. 
+
+Gluu Gateway is compatible with the following versions of Gluu:
+
+- Gluu Server [CE 3.1.5](https://gluu.org/docs/ce/3.1.5)
 
 ## Getting Started
 
