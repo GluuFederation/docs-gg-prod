@@ -63,7 +63,7 @@ Gluu Gateway bundles the following software components:
     
 ## Pre-requirements
 
-Gluu Gateway requires the Gluu Server OAuth 2.0 Authorization Server (AS) to issue OAuth clients, perform client authentication, and  make policy decisions. 
+Gluu Gateway requires the Gluu Server OAuth 2.0 Authorization Server (AS) to issue OAuth clients and scopes, and perform client authentication. 
 
 Gluu Gateway is compatible with the following versions of Gluu:
 
