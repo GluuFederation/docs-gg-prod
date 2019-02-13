@@ -19,10 +19,10 @@ Below are a few use cases and functionalities supported by Gluu Gateway:
 
 ## Access Control
 
-Gluu Gateway functions as a policy enforcement point ("PEP"), relying on an external policy decision point ("PDP") for policy evaluation. The PEP has two primary jobs: 
+Gluu Gateway functions as a policy enforcement point ("PEP"), relying on an external policy decision point ("PDP")--in most cases, the Gluu Server--for policy evaluation. Gluu Gateway has two primary jobs: 
 
-1. Make sure the token is active; 
-1. Make sure the token has the correct scopes to call the endpoint it is requesting.
+1. Make sure a token is active; 
+1. Make sure a token has the correct scopes to call the endpoint it is requesting.
 
 Gluu Gateway supports both OAuth and UMA tokens. While mechanically the same, scopes have different meanings in OAuth and UMA: 
 
