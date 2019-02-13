@@ -46,7 +46,7 @@ Gluu Gateway needs to be deployed on a server or VM with the following minimum r
 ### Ubuntu 16
 * Add the Gluu repo:
 ```
-# echo "deb https://repo.gluu.org/ubuntu/ xenial-devel main" > /etc/apt/sources.list.d/gluu-repo.list
+# echo "deb https://repo.gluu.org/ubuntu/ xenial main" > /etc/apt/sources.list.d/gluu-repo.list
 # curl https://repo.gluu.org/ubuntu/gluu-apt.key | apt-key add -
 ```
 * Add the PostgreSQL 10 repo:
@@ -114,7 +114,7 @@ Gluu Gateway needs to be deployed on a server or VM with the following minimum r
 ### CentOS 7
 * Add the Gluu repo:
 ```
-# wget https://repo.gluu.org/centos/Gluu-centos-7-testing.repo -O /etc/yum.repos.d/Gluu.repo
+# wget https://repo.gluu.org/centos/Gluu-centos7.repo -O /etc/yum.repos.d/Gluu.repo
 # wget https://repo.gluu.org/centos/RPM-GPG-KEY-GLUU -O /etc/pki/rpm-gpg/RPM-GPG-KEY-GLUU
 # rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-GLUU
 ```
@@ -150,7 +150,7 @@ Gluu Gateway needs to be deployed on a server or VM with the following minimum r
 ### RHEL 7
 * Add the Gluu repo:
 ```
-# wget https://repo.gluu.org/rhel/Gluu-rhel-7-testing.repo -O /etc/yum.repos.d/Gluu.repo
+# wget https://repo.gluu.org/rhel/Gluu-rhel7.repo -O /etc/yum.repos.d/Gluu.repo
 # wget https://repo.gluu.org/rhel/RPM-GPG-KEY-GLUU -O /etc/pki/rpm-gpg/RPM-GPG-KEY-GLUU
 # rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-GLUU
 ```
