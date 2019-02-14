@@ -27,7 +27,7 @@ Gluu Gateway functions as a policy enforcement point ("PEP"), relying on an exte
 Gluu Gateway supports both OAuth and UMA tokens. While mechanically the same, scopes have different meanings in OAuth and UMA: 
 
 ### UMA scopes
-UMA scopes represent centralized policy evaluation. For example, in the Gluu Server, administrators can map UMA scopes to policies, expressed as UMA RPT Authorization interception scripts. 
+UMA scopes represent centralized policy evaluation. For example, in the Gluu Server, administrators can map UMA scopes to policies, expressed as [UMA RPT Authorization interception scripts](https://gluu.org/docs/ce/admin-guide/custom-script/#uma-2-rpt-authorization-policies). 
 
 ![UMA PEP diagram](img/gluu-uma-pep.png)
 
