@@ -8,7 +8,7 @@ Gluu Gateway is built on top of the [Kong API gateway](https://konghq.com/kong/)
 
 ## Features
 
-Below are a few use cases and functionalities supported by Gluu Gateway:
+Primary use cases and functionalities supported by Gluu Gateway include:
 
 - Control access to APIs by requiring OAuth or UMA scopes
 - Collect and report OAuth and UMA usage metrics
