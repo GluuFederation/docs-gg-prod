@@ -84,4 +84,4 @@ Use the following links to get started:
 
 ## License  
 
-Gluu Gateway is available under the [GLUU-STEPPED-UP license](https://raw.githubusercontent.com/GluuFederation/gluu-gateway/master/LICENSE). 
+Gluu Gateway is available under the [GLUU SUPPORT license](https://raw.githubusercontent.com/GluuFederation/gluu-gateway/master/LICENSE). 
