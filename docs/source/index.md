@@ -26,18 +26,18 @@ Gluu Gateway functions as a policy enforcement point ("PEP"), relying on an exte
 
 Gluu Gateway supports both OAuth and UMA tokens. While mechanically the same, scopes have different meanings in OAuth and UMA: 
 
-### Using UMA
-UMA scopes represent centralized policy evaluation. For example, in the Gluu Server, administrators can map scopes to policies, expressed as UMA RPT Authorization interception scripts. 
+### UMA scopes
+UMA scopes represent centralized policy evaluation. For example, in the Gluu Server, administrators can map UMA scopes to policies, expressed as UMA RPT Authorization interception scripts. 
 
 ![UMA PEP diagram](img/gluu-uma-pep.png)
 
-### Using OAuth
-OAuth scopes normally represent a user's authorization, for example authorization to access a user's calendar. However, how scopes are granted is ultimately up to the Authorization Server that issues it.
+### OAuth scopes
+OAuth scopes normally represent a user's authorization, for example authorization to access a user's calendar. How scopes are granted is ultimately up to the Authorization Server that issues it.
 
 ![OAuth PEP diagram](img/gluu-oauth-pep.png)
 
 !!! Note 
-    An API that uses OAuth for security can only be called by OAuth clients. And an API that uses UMA for security can only be called by an UMA client. 
+    An API that uses OAuth for security can only be called by OAuth clients, and likewise, an API that uses UMA for security can only be called by an UMA client. 
 
 ### Clients
 In Gluu Gateway, a `client_id` is associated with a "Consumer" in Kong. This is useful where access control is restricted to certain clients. All other forms of client authentication are disabled in the Gluu Gateway Admin GUI -- we just want to use an OAuth Authorization Server like the Gluu Server for client authentication. The Gluu Server plugins verify the `client_id` for which a token was issued by looking at the JSON equivalent (either the JWT or the introspection response).
@@ -63,7 +63,7 @@ Gluu Gateway bundles the following software components:
     
 ## Pre-requirements
 
-Gluu Gateway requires the Gluu Server OAuth 2.0 Authorization Server (AS) to issue OAuth clients and scopes, and perform client authentication. 
+Gluu Gateway requires an OAuth 2.0 Authorization Server (AS), typically the Gluu Server, to issue OAuth clients and scopes, and perform client authentication. 
 
 Gluu Gateway is compatible with the following versions of Gluu:
 
