@@ -46,7 +46,7 @@ In Gluu Gateway, a `client_id` is associated with a "Consumer" in Kong. This is 
 
 Gluu Gateway bundles the following software components:
 
-- [Kong v0.14](https://getkong.org): An open source API Gateway and Microservices Management Layer, delivering high performance and reliability.
+- [Kong CE v0.14](https://getkong.org): An open source API Gateway and Microservices Management Layer, delivering high performance and reliability.
 
 - [Gluu Konga Admin GUI](https://github.com/GluuFederation/gluu-gateway/tree/version_1.0/konga): A web administration portal, based on the [Konga](https://github.com/pantsel/konga) GUI, to manage your Gluu Gateway.
 
