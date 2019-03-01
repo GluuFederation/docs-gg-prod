@@ -4,7 +4,7 @@
 
 Gluu Gateway enables organizations to restrict access to APIs by requiring OAuth clients to present valid access tokens issued by an OAuth or UMA Authorization Server (AS), typically a [Gluu Server](https://gluu.org/docs/ce).
 
-Gluu Gateway is built on top of the [Kong Community Edition (CE) API gateway](https://konghq.com/kong/) and leverages the strong ecosystem of Kong plugins to enable rate limiting, logging, and many other capabilities. 
+Gluu Gateway is built on top of the [Kong Community Edition (CE) API gateway](https://konghq.com/community/) and leverages the strong ecosystem of Kong plugins to enable rate limiting, logging, and many other capabilities. 
 
 ## Features
 
@@ -46,7 +46,7 @@ In Gluu Gateway, a `client_id` is associated with a "Consumer" in Kong. This is 
 
 Gluu Gateway bundles the following software components:
 
-- [Kong CE v0.14](https://getkong.org): An open source API Gateway and Microservices Management Layer, delivering high performance and reliability.
+- [Kong CE v0.14](https://konghq.com/community/): An open source API Gateway and Microservices Management Layer, delivering high performance and reliability.
 
 - [Gluu Konga Admin GUI](https://github.com/GluuFederation/gluu-gateway/tree/version_1.0/konga): A web administration portal, based on the [Konga](https://github.com/pantsel/konga) GUI, to manage your Gluu Gateway.
 
