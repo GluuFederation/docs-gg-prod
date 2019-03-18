@@ -18,6 +18,7 @@ pages:
 # - Release Notes: 'release-notes/index.md'
 # - Whats new in 3.x: '3.x-intro.md'
 # - Whats new in 3.1.x: '3.1.x-intro.md'      
+- 'Components' : 'components.md'
 - 'Installation' : 'installation.md'
 - 'Configuration' : 'configuration.md'
 - 'Admin console' :  'admin-gui.md'   
