@@ -5,7 +5,7 @@ docs_dir: source
 repo_name: GluuFederation/docs-gg-prod
 repo_url: https://github.com/GluuFederation/docs-gg-prod
 theme:
-    name: material
+    name: `material`
 extra:
     version: '1.0'
     logo: 'gluu.png'
