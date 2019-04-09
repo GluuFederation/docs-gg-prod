@@ -1,20 +1,19 @@
 site_name: Gluu Gateway Docs
 site_description: Documentation for Gluu Gateway
+site_favicon: 'favicon.ico
 copyright: Copyright &copy; 2019, Gluu, Inc.
 docs_dir: source
-repo_name: GluuFederation/docs-gg-prod
-repo_url: https://github.com/GluuFederation/docs-gg-prod
-theme:
-    name: 'material'
-    logo: 'gluu.png'
+repo_url: https://github.com/GluuFederation/docs-gg-prod/tree/1.0/docs
+theme_dir: theme/material
 extra:
     version: '1.0'
+    logo: 'gluu.png'
 markdown_extensions:
 - admonition
 - toc:
      permalink: '#'
 - pymdownx.superfences
-nav:
+pages:
 - Home: 'index.md'
 # - Release Notes: 'release-notes/index.md'
 # - Whats new in 3.x: '3.x-intro.md'
@@ -28,5 +27,5 @@ nav:
     - 'Gluu UMA PEP' :  'plugin/gluu-uma-pep.md'
     - 'Gluu Metrics' :  'plugin/gluu-metrics.md'
 - 'UMA Tutorial': 'uma-tutorial.md'
-- Logs : 'logs/index.md'
+- 'Logs' : 'logs/index.md'
 - 'FAQ' : 'faq.md'
