@@ -1,5 +1,6 @@
 # Components
 
+## Gluu Gateway
 Gluu Gateway bundles the following software components:
 
 - [Kong CE v0.14](https://konghq.com/community/): An open source API Gateway and Microservices Management Layer, delivering high performance and reliability.
@@ -17,7 +18,7 @@ Gluu Gateway bundles the following software components:
     - Node v8.9.4
     - NPM v5.6.0
 
-## Pre-requirements
+## Gluu Server pre-requirements
 
 Gluu Gateway requires an OAuth 2.0 Authorization Server (AS), typically the Gluu Server, to issue OAuth clients and scopes, and perform client authentication.
 
