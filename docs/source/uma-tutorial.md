@@ -2,7 +2,7 @@
 
 ## Overview
 
-This tutorial covers [UMA grant security](https://docs.kantarainitiative.org/uma/wg/rec-oauth-uma-grant-2.0.html) using the GLUU-UMA-PEP plugin and the Gluu Server. There are two different ways to apply UMA security, **with Claim-Gathering-flow** and **without Claim-Gathering-flow**. The [demo](https://github.com/GluuFederation/gluu-gateway/tree/version_1.0/gg-demo) is a **Python CGI** script that can be deployed on any CGI-enabled server.
+This tutorial covers [UMA grant security](https://docs.kantarainitiative.org/uma/wg/rec-oauth-uma-grant-2.0.html) using the GLUU-UMA-PEP plugin and the Gluu Server. There are two different ways to apply UMA security, **with Claim-Gathering-flow** and **without Claim-Gathering-flow**. The [demo](https://github.com/GluuFederation/gluu-gateway/tree/version_1.0.1/gg-demo) is a **Python CGI** script that can be deployed on any CGI-enabled server.
 
 ## Parties
 
@@ -195,7 +195,7 @@ The Demo is a Python CGI script. You need to put it in a CGI-enabled web server.
 * helper.py - REST calls and HTML template
 * config.py - Custom configuration
 
-Download the Demo from the [Gluu-Gateway repository](https://github.com/GluuFederation/gluu-gateway/tree/version_1.0/gg-demo).
+Download the Demo from the [Gluu-Gateway repository](https://github.com/GluuFederation/gluu-gateway/tree/version_1.0.1/gg-demo).
 
 By default, the **UMA without claim gathering flow** is executed.
 
