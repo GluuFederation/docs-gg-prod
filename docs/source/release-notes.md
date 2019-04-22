@@ -1,24 +1,22 @@
 ## Gluu Gateway 1.0.1
 
-Here is small fixes in GG sub component i.e. OXD Web Application, all other functionality is same as GG 1.0.
+Minor fixes in the oxd Web Application, a subcomponent of Gluu Gateway (GG).
 
 ### Fixes 
-- Fixed problem in OXD about `key_from_script` and added introspection interceptions Custom script supports.
-- Updated GG Admin GUI login as OXD userinfo response it updated.
+- [oxd #292](https://github.com/GluuFederation/oxd/issues/292) Fixed oxd `key_from_script` issue and added support for the introspection custom interception script.
+- [#303](https://github.com/GluuFederation/gluu-gateway/issues/303) Updated GG Admin GUI login to work with changes to oxd userinfo response.
 
 ### Changes
-- OXD comes with GG as package not as dependency. After installation you can get OXD package from `/tmp` directory. 
-- OXD install and configure using GG setup script.
+- [#311](https://github.com/GluuFederation/gluu-gateway/issues/311) The GG setup script now installs and configures oxd.
+- oxd now comes with GG as a package rather than a dependency. After installation, the oxd package is located in the `/tmp` directory. 
 
 ## Gluu Gateway 1.0 
 
-This is first Gluu Gateway release with Gluu 3 plugins and Admin GUI for Plugins configuration.
+API Gateway leveraging the Gluu Server for central client management and access control using OAuth and UMA scopes.
 
-There are 3 plugins:
+Gluu Gateway includes three plugins:
 1. Gluu-OAuth-PEP
 1. Gluu-UMA-PEP
 1. Gluu-Metrics
 
-It comes with [Kong](https://konghq.com/) proxy and OXD Web Application(OpenID Middleware server) as dependencies.
-
-Please check [docs](https://gluu.org/docs/gg) for all other features and security facilities.   
+It also comes with the [Kong](https://konghq.com/) proxy and the [oxd Web Application](https://gluu.org/docs/oxd) as dependencies.
