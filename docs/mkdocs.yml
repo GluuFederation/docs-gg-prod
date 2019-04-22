@@ -1,30 +1,26 @@
 # Project Information
 site_name: Gluu Gateway 1.0 Docs
 site_description: Documentation for Gluu Gateway
-site_favicon: 'favicon.ico'
 
 # Copyright
 copyright: Copyright &copy; 2019, Gluu, Inc.
 
 # Repository
 docs_dir: source
-repo_url: https://github.com/GluuFederation/docs-gg-prod/tree/1.0/docs
-#repo_url: https://github.com/GluuFederation/docs-gg-prod/
-#edit_uri: edit/1.0/docs/source
-#repo_name: GluuFederation/docs-casa-prod
+repo_url: https://github.com/GluuFederation/docs-gg-prod/
+edit_uri: edit/1.0/docs/source
+repo_name: GluuFederation/docs-casa-prod
 
 # Configuration
-theme_dir: theme/material
 extra:
     version: '1.0'
-    logo: 'gluu.png'
-#theme:
-#    name: material
-#    palette:
-#        primary: 'green'
-#        accent: 'green'
-#    logo: 'gluu.jpg'
-#    favicon: 'favicon.ico'
+theme:
+    name: material
+    palette:
+        primary: 'green'
+        accent: 'green'
+    logo: 'gluu.jpg'
+    favicon: 'favicon.ico'
 
 # Extensions
 markdown_extensions:
@@ -34,13 +30,12 @@ markdown_extensions:
 - pymdownx.superfences
 - codehilite
 
-# Navigation Menu
-#nav:
-#- 'Versions':
-#    - '1.0': 'https://gluu.org/docs/gg/1.0/'
-#    - ' ': 'https://gluu.org'
-#    - ' ': 'https://gluu.org'
-pages:
+ Navigation Menu
+nav:
+- 'Versions':
+    - '1.0': 'https://gluu.org/docs/gg/1.0/'
+    - ' ': 'https://gluu.org'
+    - ' ': 'https://gluu.org'
 - Home: 'index.md'
 - Release Notes: 'release-notes.md'
 # - Whats new in 3.x: '3.x-intro.md'
