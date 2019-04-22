@@ -28,6 +28,7 @@ markdown_extensions:
 - toc:
      permalink: '#'
 - pymdownx.superfences
+- codehilite
 
 # Navigation Menu
 nav:
