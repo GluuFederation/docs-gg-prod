@@ -9,7 +9,7 @@ copyright: Copyright &copy; 2019, Gluu, Inc.
 docs_dir: source
 repo_url: https://github.com/GluuFederation/docs-gg-prod/
 edit_uri: edit/1.0/docs/source
-repo_name: GluuFederation/docs-casa-prod
+repo_name: GluuFederation/docs-gg-prod
 
 # Configuration
 extra:
