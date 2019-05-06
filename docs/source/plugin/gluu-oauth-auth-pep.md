@@ -52,7 +52,11 @@ Use the [Manage Service](../admin-gui/#manage-service) section in the GG UI to e
 ![11_path_oauth_service](../img/11_path_oauth_service.png)
 
 Clicking on the **+** icon will bring up the below form.
-![11_path_add_oauth_service](../img/11_path_add_oauth_service.png)
+
+!!! important
+    If you don't wanna add `gluu-oauth-pep` plugin then disable button which is on the top.
+
+![11_path_add_oauth_service](../img/11_oauth_service.png)
 
 #### Configure a Service Plugin using Kong Admin API
 
@@ -91,6 +95,7 @@ $ curl -X POST \
     "oxd_id": "<oxd_id>",
     "client_id": "<client_id>",
     "client_secret": "<client_secret>",
+    "deny_by_default": <false|true>,
     "oauth_scope_expression": [
       {
         "path": "/posts",
@@ -119,12 +124,10 @@ $ curl -X POST \
         ]
       }
     ],
-    "deny_by_default": <false|true>,
   },
   "service_id": "<kong_service_object_id>"
 }'
 ```
-
 
 !!! Note
     Kong does not allow proxying using only a service object--this feature requires a route. At minimum, one service is needed to register an Upstream API and one route is needed for proxying.
@@ -163,10 +166,33 @@ Use the [Manage Route](../admin-gui/#manage-route) section in the GG UI to enabl
 ![12_path_oauth_route](../img/12_path_oauth_route.png)
 
 Clicking on the **+** icon will bring up the below form.
-![12_path_add_oauth_route](../img/12_path_add_oauth_route.png)
+![11_path_add_oauth_service](../img/11_oauth_service.png)
 
 
 #### Configure Route Plugin using Kong Admin API
+
+Configuration for `gluu-oauth-auth`
+
+```
+$ curl -X POST \
+  http://<kong_hostname>:8001/plugins \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "name": "gluu-oauth-auth",
+  "config": {
+    "oxd_url": "<your_oxd_server_url>",
+    "op_url": "<your_op_server_url>",
+    "oxd_id": "<oxd_id>",
+    "client_id": "<client_id>",
+    "client_secret": "<client_secret>",
+    "hide_credentials": <false|true>,
+    "anonymous: "<anonymous_consumer_id>"
+  },
+  "route_id": "<kong_route_object_id>"
+}'
+```
+
+Configuration for `gluu-oauth-pep`
 
 ```
 $ curl -X POST \
@@ -180,6 +206,7 @@ $ curl -X POST \
     "oxd_id": "<oxd_id>",
     "client_id": "<client_id>",
     "client_secret": "<client_secret>",
+    "deny_by_default": <false|true>,
     "oauth_scope_expression": [
       {
         "path": "/posts",
@@ -208,9 +235,6 @@ $ curl -X POST \
         ]
       }
     ],
-    "ignore_scope": <false|true>,
-    "deny_by_default": <false|true>,
-    "hide_credentials": <false|true>
   },
   "route_id": "<kong_route_object_id>"
 }'
@@ -227,9 +251,31 @@ Use the [Plugin section](../admin-gui/#add-plugin) in the GG UI to enable the Gl
 ![5_plugins_add](../img/5_plugins_add.png)
 
 Clicking on the **+** icon will bring up the below form.
-![11_path_add_oauth_service](../img/12_path_add_oauth_route.png)
+![11_path_add_oauth_service](../img/11_oauth_service.png)
 
 #### Configure a Global Plugin using Kong Admin API
+
+Configuration for `gluu-oauth-auth`
+
+```
+$ curl -X POST \
+  http://<kong_hostname>:8001/plugins \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "name": "gluu-oauth-auth",
+  "config": {
+    "oxd_url": "<your_oxd_server_url>",
+    "op_url": "<your_op_server_url>",
+    "oxd_id": "<oxd_id>",
+    "client_id": "<client_id>",
+    "client_secret": "<client_secret>",
+    "hide_credentials": <false|true>,
+    "anonymous: "<anonymous_consumer_id>"
+  },
+}'
+```
+
+Configuration for `gluu-oauth-pep`
 
 ```
 $ curl -X POST \
@@ -243,6 +289,7 @@ $ curl -X POST \
     "oxd_id": "<oxd_id>",
     "client_id": "<client_id>",
     "client_secret": "<client_secret>",
+    "deny_by_default": <false|true>,
     "oauth_scope_expression": [
       {
         "path": "/posts",
@@ -271,16 +318,27 @@ $ curl -X POST \
         ]
       }
     ],
-    "ignore_scope": <false|true>,
-    "deny_by_default": <false|true>,
-    "hide_credentials": <false|true>
-  }
+  },
 }'
 ```
 
 ### Parameters
 
 The following parameters can be used in this plugin's configuration.
+
+1. Gluu-OAuth-Auth
+
+| field | Default | Description |
+|-------|---------|-------------|
+|**op_url**||The URL of your OP server. Example: https://op.server.com|
+|**oxd_url**||The URL of your oxd server. Example: https://oxd.server.com|
+|**oxd_id**|| The ID for an existing client, used to introspect the token. If left blank, a new client will be registered dynamically |
+|**client_id**|| An existing client ID, used to get a protection access token to access the introspection API. Required if an existing oxd ID is provided.|
+|**client_secret**|| An existing client secret, used to get protection access token to access the introspection API. Required if an existing oxd ID is provided.|
+|**anonymous**||An optional string (consumer UUID) value to use as an “anonymous” consumer if authentication fails. If empty (default), the request will fail with an authentication failure 4xx. This value must refer to the Consumer ID attribute that is internal to Kong, and not its custom_id.|
+|**hide_credentials**|false|An optional boolean value telling the plugin to show or hide the credential from the upstream service. If true, the plugin will strip the credential from the request (i.e. the Authorization header) before proxying it.|
+
+2. Gluu-OAuth-PEP
 
 | field | Default | Description |
 |-------|---------|-------------|
@@ -290,10 +348,7 @@ The following parameters can be used in this plugin's configuration.
 |**client_id**|| An existing client ID, used to get a protection access token to access the introspection API. Required if an existing oxd ID is provided.|
 |**client_secret**|| An existing client secret, used to get protection access token to access the introspection API. Required if an existing oxd ID is provided.|
 |**oauth_scope_expression**|| Used to add scope security on an OAuth scope token.|
-|**ignore_scope**| false | If true, will not check any token scopes while authenticating.|
 |**deny_by_default**| true | For paths not protected by OAuth scope expressions. If true, denies unprotected paths.|
-|**anonymous**||An optional string (consumer UUID) value to use as an “anonymous” consumer if authentication fails. If empty (default), the request will fail with an authentication failure 4xx. This value must refer to the Consumer ID attribute that is internal to Kong, and not its custom_id.|
-|**hide_credentials**|false|An optional boolean value telling the plugin to show or hide the credential from the upstream service. If true, the plugin will strip the credential from the request (i.e. the Authorization header) before proxying it.|
 
 !!! Note
     GG UI can create a dynamic client. However, if the Kong Admin API is used for plugin configuration, it requires an existing client using the oxd API, then passing the client's credentials to the Gluu-OAuth-PEP plugin.
