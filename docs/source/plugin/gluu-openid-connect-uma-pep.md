@@ -1,105 +1,18 @@
 # Gluu OpenID Connect and UMA
 ## Overview
-The UMA PEP plugin is used to enforce the presence of UMA scopes for access to resources protected by the Gateway. UMA scopes and policies are defined in an external UMA Authorization Server (AS) -- in most cases the Gluu Server. The Gateway and AS leverage the oxd UMA middleware service for communication. 
+The Gluu OpenID Connect Authorization code flow and UMA PEP security. The UMA PEP is used to enforce the presence of UMA scopes for access to resources protected by the Gateway. You can optionally configure UMA PEP with OpenID Connect plugin also you can configure UMA-PEP to add claim gathering security. 
 
-The plugin supports two tokens:  
+There are two plugins for OAuth security.
 
-   1. **Default Access Token**: The plugin will authenticate the token using introspection.   
-   1. **Access Token as JWT**: The plugin will authenticate the token using JWT verify. Currently three algorithms are supported: **RS256**, **RS384** and **RS512**.
+   1. **gluu-openid-connect**: Authenticate user using OpenID Connect authorization code flow. The plugin priority is `997`.
+   1. **gluu-uma-pep**: Authorization by UMA scopes. The plugin priority is `995`. `obtain_rpt` and `redirect_claim_gathering_url`, you need to set this two properties for integrate UMA-PEP plugin with OpenID Connect plugin
 
 ## Configuration
 
-Plugins can be configured at the **Service**, **Route** or **Global** level. There are several possibilities for plugin configuration with services and routes. For information on plugin precedence, [read the Kong docs](https://docs.konghq.com/0.14.x/admin-api/#precedence).
-
-!!! Important
-    During plugin configuration, the **GG UI** creates a new OP Client if the **oxd ID** is left blank. However, if configuring with the **Kong Admin API**, existing client credentials must be used.
+We recommend enabling the plugin on Route Object because plugin needs correct redirect_uri, post_logout_uri and claim_gathering_uri for authorization code flow.
 
 !!! Important
     konga.log also shows the curl commands for all API requests to Kong and oxd made by the Konga GUI. This curl command can be used to automate configuration instead of using the web interface.
-
-### Service Level
-
-#### Add Service using GG UI
-
-Use the [Service section](../admin-gui/#add-service) of the GG UI doc to add a service using GG UI.
-
-![3_service_list](../img/3_1_service_list.png)
-
-#### Add Service using Kong Admin API
-
-```
-$ curl -X POST \
-  http://<kong_hostname>:8001/services \
-  -H 'Content-Type: application/json' \
-  -d '{
-  "name": "<service_name>",
-  "url": "http://upstream-api-url.com"
-}'
-```
-
-#### Configure Service Plugin using GG UI
-
-Use the [Manage Service](../admin-gui/#manage-service) section in GG UI to enable the Gluu UMA PEP plugin. In the security category, there is a Gluu UMA PEP box. Click on the **+** icon to enable the plugin.
-
-![11_path_uma_service](../img/11_path_uma_service.png)
-
-Clicking on the **+** icon will bring up the below form.
-![11_path_add_uma_service](../img/11_path_add_uma_service.png)
-
-#### Configure Service Plugin using Kong Admin API
-
-```
-$ curl -X POST \
-  http://<kong_hostname>:8001/plugins \
-  -H 'Content-Type: application/json' \
-  -d '{
-  "name": "gluu-uma-pep",
-  "config": {
-    "oxd_url": "<your_oxd_server_url>",
-    "op_url": "<your_op_server_url>",
-    "oxd_id": "<oxd_id>",
-    "client_id": "<client_id>",
-    "client_secret": "<client_secret>",
-    "uma_scope_expression": [
-      {
-        "path": "/posts",
-        "conditions": [
-          {
-            "httpMethods": [
-              "GET"
-            ],
-            "scope_expression": {
-              "rule": {
-                "and": [
-                  {
-                    "var": 0
-                  },
-                  {
-                    "var": 1
-                  }
-                ]
-              },
-              "data": [
-                "admin",
-                "employee"
-              ]
-            }
-          }
-        ]
-      }
-    ],
-    "ignore_scope": <false|true>,
-    "deny_by_default": <false|true>,
-    "hide_credentials": <false|true>
-  },
-  "service_id": "<kong_service_object_id>"
-}'
-```
-
-!!! Note
-    Kong does not allow proxying using only a service object--this feature requires a route. At minimum, one service is needed to register an Upstream API and one route is needed for proxying.
-
-### Route Level
 
 #### Add Route using GG UI
 
@@ -133,72 +46,49 @@ Use the [Manage Route](../admin-gui/#manage-route) section in the GG UI to enabl
 ![12_path_uma_route](../img/12_path_uma_route.png)
 
 Clicking on the **+** icon will bring up the below form.
-![12_path_add_uma_route](../img/12_path_add_uma_route.png)
+![oidc1](../img/oidc1.png)
+![oidc2](../img/oidc2.png)
+![oidc3](../img/oidc3.png)
+![oidc4](../img/oidc4.png)
 
 #### Configure Route Plugin using Kong Admin API
+
+Configuration for `gluu-openid-connect` plugin
 
 ```
 $ curl -X POST \
   http://<kong_hostname>:8001/plugins \
   -H 'Content-Type: application/json' \
   -d '{
-  "name": "gluu-uma-pep",
+  "name": "gluu-openid-connect",
   "config": {
     "oxd_url": "<your_oxd_server_url>",
     "op_url": "<your_op_server_url>",
     "oxd_id": "<oxd_id>",
     "client_id": "<client_id>",
     "client_secret": "<client_secret>",
-    "uma_scope_expression": [
-      {
-        "path": "/posts",
-        "conditions": [
-          {
-            "httpMethods": [
-              "GET"
-            ],
-            "scope_expression": {
-              "rule": {
-                "and": [
-                  {
-                    "var": 0
-                  },
-                  {
-                    "var": 1
-                  }
-                ]
-              },
-              "data": [
-                "admin",
-                "employee"
-              ]
-            }
-          }
-        ]
-      }
+    "authorization_redirect_path": "/callback",
+    "post_logout_redirect_path_or_url": "/logout_redirect_uri",
+    "logout_path": "/logout",
+    "required_acrs": [
+      "auth_ldap_server",
+      "u2f",
+      "otp"
     ],
-    "ignore_scope": <false|true>,
-    "deny_by_default": <false|true>,
-    "hide_credentials": <false|true>
+    "requested_scopes": [
+      "openid",
+      "oxd",
+      "email",
+      "profile"
+    ],
+    "max_id_token_auth_age": 3600,
+    "max_id_token_age": 3600
   },
   "route_id": "<kong_route_object_id>"
 }'
 ```
 
-### Global Plugin
-
-A global plugin will apply to all services and routes.
-
-#### Configure Global Plugin using GG UI
-
-Use the [Plugin section](../admin-gui/#add-plugin) in the GG UI to enable the Gluu UMA PEP plugin. In the security category, there is a Gluu UMA PEP box. Click on the **+** icon to enable the plugin.
-
-![5_plugins_add](../img/5_plugins_add.png)
-
-Clicking on the **+** icon will bring up the below form.
-![11_path_add_uma_service](../img/12_path_add_uma_route.png)
-
-#### Configure Global Plugin using Kong Admin API
+Configuration for `gluu-uma-pep` plugin
 
 ```
 $ curl -X POST \
@@ -212,6 +102,10 @@ $ curl -X POST \
     "oxd_id": "<oxd_id>",
     "client_id": "<client_id>",
     "client_secret": "<client_secret>",
+    "obtain_rpt": true,
+    "redirect_claim_gathering_url": true,
+    "deny_by_default": false,
+    "require_id_token": true,
     "uma_scope_expression": [
       {
         "path": "/posts",
@@ -240,12 +134,11 @@ $ curl -X POST \
         ]
       }
     ],
-    "ignore_scope": <false|true>,
-    "deny_by_default": <false|true>,
-    "hide_credentials": <false|true>
-  }
+  },
+  "route_id": "<kong_route_object_id>"
 }'
 ```
+
 
 ### Parameters
 
