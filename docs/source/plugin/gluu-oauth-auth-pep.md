@@ -1,6 +1,14 @@
-# Gluu OAuth PEP
+# Gluu OAuth Auth and PEP
 ## Overview
-The OAuth PEP is used to enforce the presence of OAuth scopes for access to resources protected by the Gateway. OAuth scopes are defined in an external OAuth Authorization Server (AS) -- in most cases the Gluu Server. The Gateway and AS leverage the oxd OAuth middleware service for communication.
+The OAuth Auth and PEP is used for client authentication and to enforce the presence of OAuth scopes for access to resources protected by the Gateway. OAuth scopes are defined in an external OAuth Authorization Server (AS) -- in most cases the Gluu Server. The Gateway and AS leverage the oxd OAuth middleware service for communication.
+
+There are two plugins for OAuth security.
+
+   1. **gluu-oauth-auth**: Authenticate client by OAuth Token. The plugin priority is `999`.
+   1. **gluu-oauth-pep**: Authorization by OAuth token scopes. The plugin priority is `996`.
+
+!!! Note
+    The higher the priority, the sooner your plugin’s phases will be executed in regard to other plugins’ phases 
 
 The plugin supports two types of tokens: 
 
@@ -48,6 +56,29 @@ Clicking on the **+** icon will bring up the below form.
 
 #### Configure a Service Plugin using Kong Admin API
 
+Configuration for `gluu-oauth-auth`
+
+```
+$ curl -X POST \
+  http://<kong_hostname>:8001/plugins \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "name": "gluu-oauth-auth",
+  "config": {
+    "oxd_url": "<your_oxd_server_url>",
+    "op_url": "<your_op_server_url>",
+    "oxd_id": "<oxd_id>",
+    "client_id": "<client_id>",
+    "client_secret": "<client_secret>",
+    "hide_credentials": <false|true>,
+    "anonymous: "<anonymous_consumer_id>"
+  },
+  "service_id": "<kong_service_object_id>"
+}'
+```
+
+Configuration for `gluu-oauth-pep`
+
 ```
 $ curl -X POST \
   http://<kong_hostname>:8001/plugins \
@@ -88,13 +119,12 @@ $ curl -X POST \
         ]
       }
     ],
-    "ignore_scope": <false|true>,
     "deny_by_default": <false|true>,
-    "hide_credentials": <false|true>
   },
   "service_id": "<kong_service_object_id>"
 }'
 ```
+
 
 !!! Note
     Kong does not allow proxying using only a service object--this feature requires a route. At minimum, one service is needed to register an Upstream API and one route is needed for proxying.

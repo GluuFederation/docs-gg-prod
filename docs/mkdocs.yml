@@ -44,8 +44,9 @@ nav:
 - 'Configuration' : 'configuration.md'
 - 'Admin console' :  'admin-gui.md'   
 - Plugins:
-    - 'Gluu OAuth PEP' : 'plugin/gluu-oauth-pep.md'
-    - 'Gluu UMA PEP' :  'plugin/gluu-uma-pep.md'
+    - 'Gluu OpenID Connect and UMA' : 'plugin/gluu-openid-connect-uma-pep.md'
+    - 'Gluu OAuth Auth and PEP' : 'plugin/gluu-oauth-auth-pep.md'
+    - 'Gluu UMA Auth and PEP' :  'plugin/gluu-uma-auth-pep.md'
     - 'Gluu Metrics' :  'plugin/gluu-metrics.md'
 - 'UMA Tutorial': 'uma-tutorial.md'
 - 'Logs' : 'logs/index.md'
