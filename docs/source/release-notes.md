@@ -17,25 +17,26 @@ The Gluu Server is an API Gateway leveraging the Gluu Server for central client 
 Please visit the [Gluu Gateway Documentation Page](http://www.gluu.org/docs/gg) for the complete 
 documentation and administrative guide.   
  
-## Gluu Gateway 2.0.1
+## Gluu Gateway 2.0
 
-Includes minor fixes in the oxd Web Application, a subcomponent of Gluu Gateway (GG).  
+There are major changes in GG 2.0. We de-couple plugins and separate it in two categories, authentication and authorization. Also we provide one new plugin that is `gluu-openid-connect` for OpenID Connect authorization code flow. Now there is 5 plugins.
 
-### Fixes 
-- [oxd #292](https://github.com/GluuFederation/oxd/issues/292) Fixed oxd `key_from_script` issue and added support for the introspection custom interception script.  
-- [#303](https://github.com/GluuFederation/gluu-gateway/issues/303) Updated GG Admin GUI login to work with changes to oxd userinfo response.  
+| Plugin | Description | Priority |
+|--------|-------------|----------|
+|**gluu-oauth-auth**| Authenticate client by OAuth Token|999|
+|**gluu-oauth-pep**| Authorization by OAuth token scopes|996|
+|**gluu-uma-auth**| Authenticate client by RPT|998|
+|**gluu-uma-pep**| Authorization by UMA Scope security|995|
+|**gluu-openid-connect**| Authenticate client by code flow|997|
+|**gluu-metics**| Metrics about client authentication, authorization and others|14|
+
+!!! Note
+    The higher the priority, the sooner your plugin’s phases will be executed in regard to other plugins’ phases 
 
 ### Changes
-- [#311](https://github.com/GluuFederation/gluu-gateway/issues/311) The GG setup script now installs and configures oxd.  
-- oxd now comes with GG as a package rather than a dependency. After installation, the oxd package is located in the `/tmp` directory. 
+- [#297](https://github.com/GluuFederation/gluu-gateway/issues/297): Decouple existing gluu-uma-pep. Now there are two separate plugins 1. gluu-uma-auth 2. gluu-uma-pep.
+- [#298](https://github.com/GluuFederation/gluu-gateway/issues/298): Decouple existing gluu-oauth-pep. Now there are two separate plugins 1. gluu-oauth-auth 2. gluu-oauth-pep.
 
-## Gluu Gateway 2.0 
-
-API Gateway leveraging the Gluu Server for central client management and access control using OAuth and UMA scopes.  
-
-Gluu Gateway includes three plugins:  
-1. Gluu-OAuth-PEP  
-1. Gluu-UMA-PEP  
-1. Gluu-Metrics  
- 
-It also comes with the [Kong](https://konghq.com/) proxy and the [oxd Web Application](https://gluu.org/docs/oxd) as dependencies.  
+### Features
+- [#283](https://github.com/GluuFederation/gluu-gateway/issues/283): New `gluu-openid-connect` plugin with UMA claim gathering support 
+- [#296](https://github.com/GluuFederation/gluu-gateway/issues/296): Admin GUI for plugins configuration

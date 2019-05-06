@@ -2,14 +2,15 @@
 
 ## Overview
 
-Gluu Gateway enables organizations to restrict access to APIs by requiring OAuth clients to present valid access tokens issued by an OAuth or UMA Authorization Server (AS), typically a [Gluu Server](https://gluu.org/docs/ce).
+Gluu Gateway enables organizations to restrict access to APIs by requiring OAuth clients to present valid access tokens issued by an OAuth or UMA Authorization Server (AS), typically a [Gluu Server](https://gluu.org/docs/ce) and OpenID Connect Authorization code flow security.
 
-Gluu Gateway is built on top of the [Kong Community Edition (CE) API gateway](https://konghq.com/community/) and leverages the strong ecosystem of Kong plugins to enable rate limiting, logging, and many other capabilities. 
+Gluu Gateway is built on top of the [Kong Community Edition (CE) v0.14 API gateway](https://konghq.com/community/) and leverages the strong ecosystem of Kong plugins to enable rate limiting, logging, and many other capabilities. 
 
 ## Features
 
 Primary use cases and functionalities supported by Gluu Gateway include:
 
+- OpenID Connect authorization code flow security with UMA scopes and UMA Claim gathering flow.
 - Control access to APIs by requiring OAuth or UMA scopes
 - Collect and report OAuth and UMA usage metrics
 - Introspect bearer access tokens
@@ -26,15 +27,18 @@ Gluu Gateway functions as a policy enforcement point ("PEP"), relying on an exte
 
 Gluu Gateway supports both UMA and OAuth tokens. While mechanically the same, scopes have different meanings in UMA and OAuth: 
 
-### UMA scopes
+### UMA Authentication and scopes security
 UMA scopes represent centralized policy evaluation. For example, in the Gluu Server, administrators can map UMA scopes to policies, expressed as [UMA RPT Authorization interception scripts](https://gluu.org/docs/ce/admin-guide/custom-script/#uma-2-rpt-authorization-policies). 
 
 ![UMA PEP diagram](img/gluu-uma-pep.png)
 
-### OAuth scopes
+### OAuth Authentication and scopes security
 OAuth scopes normally represent a user's authorization, for example authorization to access a user's calendar. How scopes are granted is ultimately up to the Authorization Server that issues it.
 
 ![OAuth PEP diagram](img/gluu-oauth-pep.png)
+
+### OIDC and UMA with Claim gathering flow
+The great combination of Gluu OpenID Connect Authorization code flow and UMA with claim gathering security. The UMA PEP is used to enforce the presence of UMA scopes for access to resources protected by the Gateway.
 
 !!! Note 
     An API that uses OAuth for security can only be called by OAuth clients, and likewise, an API that uses UMA for security can only be called by an UMA client. 
@@ -50,9 +54,10 @@ Use the following links to get started:
 1. [Configuration](./configuration.md)
 1. [Admin GUI](./admin-gui.md)
 1. Plugins
-    1. [Gluu OAuth PEP](./plugin/gluu-oauth-pep.md)
-    2. [Gluu UMA PEP](./plugin/gluu-uma-pep.md)
-    3. [Gluu Metrics](./plugin/gluu-metrics.md)
+    1. [Gluu OAuth Auth and PEP](./plugin/gluu-oauth-auth-pep.md)
+    1. [Gluu UMA Auth and PEP](./plugin/gluu-uma-auth-pep.md)
+    1. [Gluu OpenID Connect and UMA PEP](./plugin/gluu-openid-connect-uma-pep.md)
+    1. [Gluu Metrics](./plugin/gluu-metrics.md)
 1. [FAQ](./faq.md)
 
 ## License  
