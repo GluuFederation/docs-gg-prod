@@ -43,11 +43,13 @@ $ curl -X POST \
 
 Use the [Manage Route](../admin-gui/#manage-route) section in the GG UI to enable the Gluu UMA PEP plugin. In the security category, there is a Gluu UMA PEP box. Click on the **+** icon to enable the plugin.
 
-![12_path_uma_route](../img/12_path_uma_route.png)
+![12_oidc-plugin-add](../img/12_oidc-plugin-add.png)
 
 Clicking on the **+** icon will bring up the below form.
 ![oidc1](../img/oidc1.png)
 ![oidc2](../img/oidc2.png)
+
+If you do not want to configure UMA-PEP then you just need to disable it using the button which is just beside of heading "UMA PEP Security Expression". You can see in below screenshot.
 ![oidc3](../img/oidc3.png)
 ![oidc4](../img/oidc4.png)
 
@@ -104,6 +106,7 @@ $ curl -X POST \
     "client_secret": "<client_secret>",
     "obtain_rpt": true,
     "redirect_claim_gathering_url": true,
+    "claims_redirect_path": "/claims_callback",
     "deny_by_default": false,
     "require_id_token": true,
     "uma_scope_expression": [
@@ -144,6 +147,25 @@ $ curl -X POST \
 
 Here is a list of all the parameters which can be used in this plugin's configuration.
 
+#### gluu-openid-connect 
+
+| field | Default | Description |
+|-------|---------|-------------|
+|**op_url**||The URL of your OP server. Example: https://op.server.com|
+|**oxd_url**||The URL of your oxd server. Example: https://oxd.server.com|
+|**oxd_id**|| The ID for an existing client, used to introspect the token. If left blank, a new client will be registered dynamically |
+|**client_id**|| An existing client ID, used to get a protection access token to access the introspection API. Required if an existing oxd ID is provided.|
+|**client_secret**|| An existing client secret, used to get protection access token to access the introspection API. Required if an existing oxd ID is provided.|
+|**authorization_redirect_path**|| Redirect URL for your OP Client. You just need to set path here like `/callback` but you need to register OP Client with full URL like `https://kong.proxy.com/callback`. GG UI creates OP client for you and also register the gluu-openid-connect plugin.|
+|**logout_path**|| Use this endpoint to request logout. Example: `/logout`|
+|**post_logout_redirect_path_or_url**||Post logout redirect URL for your OP Client. You can set here internal kong proxy path(example: `/post_logout`) or you can set any external url also|
+|**requested_scopes**||Scopes: ['email', 'openid', 'profile']|
+|**required_acrs**||ARCS: ['u2f', 'otp', 'basic']|
+|**max_id_token_age**||Maximum age of `id token` in seconds |
+|**max_id_token_auth_age**||Maximum authentication age of `id_token` in seconds |
+
+#### gluu-uma-pep 
+
 | field | Default | Description |
 |-------|---------|-------------|
 |**op_url**||The URL of your OP server. Example: https://op.server.com|
@@ -154,18 +176,18 @@ Here is a list of all the parameters which can be used in this plugin's configur
 |**uma_scope_expression**|| Used to add scope security on an UMA scope token.|
 |**ignore_scope**| false | If true, will not check any token scopes while authenticating.|
 |**deny_by_default**| true | For paths not protected by UMA scope expressions. If true, denies unprotected paths.|
-|**anonymous**||An optional string (consumer UUID) value to use as an “anonymous” consumer if authentication fails. If empty (default), the request will fail with an authentication failure 4xx. This value must refer to the Consumer ID attribute that is internal to Kong, and not its custom_id.|
-|**hide_credentials**|false|An optional boolean value telling the plugin to show or hide the credential from the upstream service. If true, the plugin will strip the credential from the request (i.e. the Authorization header) before proxying it.|
+|**require_id_token**|false| This is for Push Claim token. if it is true then it will use id_token for push claim token for getting RPT|
+|**obtain_rpt**|false|It is used to get RPT when you configure `gluu-openid-connect` plugin with `gluu-uma-pep`|
+|**claims_redirect_path**||Claims redirect URL in claim gathering flow for your OP Client. You just need to set path here like `/claim-callback` but you need to register OP Client with full URL like `https://kong.proxy.com/claim-callback`. GG UI creates OP client for you and also configure the `gluu-openid-connect` and `gluu-uma-pep` plugin.|
+|**redirect_claim_gathering_url**|false|It used to tell plugin that if `need_info` response comes in claim gathering situation then redirect it for claim gathering.|
+
 
 !!! Note
-    GG UI can create a dynamic client. However, if the Kong Admin API is used for plugin configuration, it requires an existing client using the oxd API, then passing the client's credentials to the Gluu-UMA-PEP plugin.
+    GG UI can create a dynamic client. However, if the Kong Admin API is used for plugin configuration, it requires an existing client using the oxd API, then passing the client's credentials to the Gluu-OpenID-Connect and Gluu-UMA-PEP plugin.
 
 #### UMA Scope Expression
 
 The UMA Scope Expression is a JSON expression, used to register the resources in a resource server. See more details in the [Gluu Server docs](https://gluu.org/docs/ce/api-guide/uma-api/#uma-permission-registration-api).
-
-!!! Note
-    Enable and disable the UMA scope expression by setting `ignore_scope` to `true`.
 
 For example, to protect an API:
 
@@ -214,68 +236,43 @@ At runtime, the plugin sends a request to the RS with an RPT token and checks th
 
 #### Dynamic Resource Protection
 
-To protect a dynamic resource with UMA or OAuth scopes, secure the parent path. For example, securing `folder` with a chosen scope will secure both `/folder` and `/folder/[id]`. Any protection on the parent will be applied to its children, unless different protection is explicitly defined.
+There are 3 elements to make more dynamic path registration and protection:
 
-Example use cases for different resource security rules:
+- ? match any one path element
+- ?? match zero or more path elements
+- {regexp} - match single path element against PCRE
 
-- Rule1 for path GET /root                  `{scope: a and b}`
+The priority for the elements are:
 
-- Rule2 for path GET /root/folder1          `{scope: c}`
+1. Exact match
+1. Regexp match
+1. ?
+1. ??
 
-- Rule3 for path GET /root/folder1/folder2  `{scope: d}`
+!!! Note
+    slash(/) is required before multiple wildcards placeholder.
+    
+Examples: 
 
-```
-GET /root                                  --> Apply Rule1
-GET /root/1                                --> Apply Rule1
-GET /root/one                              --> Apply Rule1
-GET /root/one/two                          --> Apply Rule1
-GET /root/two?id=df4edfdf                  --> Apply Rule1
+Assume that below all path is register in one plugin
 
-GET /root/folder1                          --> Apply Rule2
-GET /root/folder1/1                        --> Apply Rule2
-GET /root/folder1?id=dfdf454gtfg           --> Apply Rule2
-GET /root/folder1/one/two                  --> Apply Rule2
-GET /root/folder1/one/two/treww?id=w4354f  --> Apply Rule2
+| Register Path | Allow path | Deny path |
+|---------------|------------|-----------|
+| `/folder/file.ext` | <ul><li>/folder/file.ext</li></ul> | <ul><li>/folder/file</li></ul> |
+| `/folder/?/file` | <ul><li>/folder/123/file</li> <li>/folder/xxx/file</li></ul> | |
+| `/path/??` | <ul><li>/path/</li> <li>/path/xxx</li> <li>/path/xxx/yyy/file</li></ul> | <ul><li>/path - Need slash at last</li></ul> |
+| `/path/??/image.jpg` | <ul><li>/path/one/two/image.jpg</li> <li>/path/image.jpg</li></ul> | |
+| `/path/?/image.jpg` | <ul><li>/path/xxx/image.jpg - ? has higher priority than ??</li></ul> | |
+| `/path/{abc|xyz}/image.jpg` | <ul><li>/path/abc/image.jpg</li> <li>/path/xyz/image.jpg</li></ul> | |
+| `/users/?/{todos|photos}` | <ul><li>/users/123/todos</li> <li>/users/xxx/photos</li></ul> | |
+| `/users/?/{todos|photos}/?` | <ul><li>/users/123/todos/</li> <li>/users/123/todos/321</li> <li>/users/123/photos/321</li></ul> | |
 
-GET /root/folder1/folder2/1                --> Apply Rule3
-GET /root/folder1/folder2/one/two          --> Apply Rule3
-GET /root/folder1/folder2/dsd545df         --> Apply Rule3
-GET /root/folder1/folder2/one?id=fdfdf     --> Apply Rule3
-```
 
 ## Usage
 
-### Create Client
-
-Create a client using [create client consumer section](../admin-gui/#create-client). Use the oxd `register-site` API to create a client.
-
-### Create Consumer
-
-A client credential needs to be associated with an existing Consumer object. To create a Consumer, use the [Consumer section](../admin-gui/#consumers).
-
-Create a consumer using the Kong Admin API.
-
-```
-$ curl -X POST \
-    http://<kong_hostname>:8001/consumers \
-    -H 'Content-Type: application/json' \
-    -d '{
-  	"username": "<kong_consumer_name>",
-  	"custom_id": "<gluu_client_id>"
-  }'
-```
-
 ### Security & Access Proxy
 
-To access a proxy upstream API, pass an UMA RPT token in the authorization header. Generate the UMA RPT token using OP Client credentials by sending a request to the oxd APIs.
-
-For example, to access a Kong proxy using an UMA token:
-
-```
-curl -X GET \
-  http://<kong_hostname>:8000/{path matching a configured Route} \
-  -H 'Authorization: Bearer <uma_rpt_token>' \
-```
+After configuration just hit your proxy endpoint in browser.
 
 !!! Note
     Kong normally provides the 8443 port for https by default, but during the setup script installation, it is changed to 443.
@@ -284,12 +281,8 @@ curl -X GET \
 
 When a client has been authenticated, the plugin will append some headers to the request before proxying it to the upstream service to identify the consumer and the end user in the code:
 
-1. **X-Consumer-ID**, the ID of the Consumer on Kong
-1. **X-Consumer-Custom-ID**, the custom_id of the Consumer (if set)
-1. **X-Consumer-Username**, the username of the Consumer (if set)
-1. **X-OAUTH-Client-ID**, the authenticated client ID (only if the consumer is not an 'anonymous' consumer)
-1. **X-RPT-Expiration**, the token expiration time, integer timestamp, measured in the number of seconds since January 1, 1970 UTC, indicating when this token will expire, as defined in JWT RFC7519. It is only returned if the consumer is not set to 'anonymous'.
-1. **X-Anonymous-Consumer**, will be set to true when authentication fails, and the 'anonymous' consumer is set instead.
+1. **X-OpenId-Connect-idtoken**, Base64 encoded ID Token JSON.
+1. **X-OpenId-Connect-userinfo**, Base64 encoded Userinfo JSON.
 
-This information can be used to implement additional logic. For example, use the X-Consumer-ID value to query the Kong Admin API and retrieve more information about the Consumer.
+
 
