@@ -56,7 +56,7 @@ Clicking on the **+** icon will bring up the below form.
 !!! important
     If you don't wanna add `gluu-oauth-pep` plugin then disable button which is on the top.
 
-![11_path_add_oauth_service](../img/11_oauth_service.png)
+![11_path_add_oauth_service](../img/11_add_oauth_pep_form.png)
 
 #### Configure a Service Plugin using Kong Admin API
 
@@ -166,7 +166,7 @@ Use the [Manage Route](../admin-gui/#manage-route) section in the GG UI to enabl
 ![12_path_oauth_route](../img/12_path_oauth_route.png)
 
 Clicking on the **+** icon will bring up the below form.
-![11_path_add_oauth_service](../img/11_oauth_service.png)
+![11_path_add_oauth_service](../img/11_add_oauth_pep_form.png)
 
 
 #### Configure Route Plugin using Kong Admin API
@@ -251,7 +251,7 @@ Use the [Plugin section](../admin-gui/#add-plugin) in the GG UI to enable the Gl
 ![5_plugins_add](../img/5_plugins_add.png)
 
 Clicking on the **+** icon will bring up the below form.
-![11_path_add_oauth_service](../img/11_oauth_service.png)
+![11_path_add_oauth_service](../img/11_add_oauth_pep_form.png)
 
 #### Configure a Global Plugin using Kong Admin API
 
@@ -349,6 +349,7 @@ The following parameters can be used in this plugin's configuration.
 |**client_secret**|| An existing client secret, used to get protection access token to access the introspection API. Required if an existing oxd ID is provided.|
 |**oauth_scope_expression**|| Used to add scope security on an OAuth scope token.|
 |**deny_by_default**| true | For paths not protected by OAuth scope expressions. If true, denies unprotected paths.|
+|**method_path_tree**||It is for plugin internal use. We use it for tree level matching for dynamic paths which registered in `uma_scope_expression`|
 
 !!! Note
     GG UI can create a dynamic client. However, if the Kong Admin API is used for plugin configuration, it requires an existing client using the oxd API, then passing the client's credentials to the Gluu-OAuth-PEP plugin.
@@ -433,34 +434,36 @@ The result is `true`, so the request is allowed.
 
 #### Dynamic Resource Protection
 
-To protect a dynamic resource with UMA or OAuth scopes, secure the parent path. For example, securing `folder` with a chosen scope will secure both `/folder` and `/folder/[id]`. Any protection on the parent will be applied to its children, unless different protection is explicitly defined.
+There are 3 elements to make more dynamic path registration and protection:
 
-Example use cases for different resource security rules:
+- ? match any one path element
+- ?? match zero or more path elements
+- {regexp} - match single path element against PCRE
 
-- Rule1 for path GET /root                  `{scope: a and b}`
+The priority for the elements are:
 
-- Rule2 for path GET /root/folder1          `{scope: c}`
+1. Exact match
+1. Regexp match
+1. ?
+1. ??
 
-- Rule3 for path GET /root/folder1/folder2  `{scope: d}`
+!!! Note
+    slash(/) is required before multiple wildcards placeholder.
+    
+Examples: 
 
-```
-GET /root                                  --> Apply Rule1
-GET /root/1                                --> Apply Rule1
-GET /root/one                              --> Apply Rule1
-GET /root/one/two                          --> Apply Rule1
-GET /root/two?id=df4edfdf                  --> Apply Rule1
+Assume that below all path is register in one plugin
 
-GET /root/folder1                          --> Apply Rule2
-GET /root/folder1/1                        --> Apply Rule2
-GET /root/folder1?id=dfdf454gtfg           --> Apply Rule2
-GET /root/folder1/one/two                  --> Apply Rule2
-GET /root/folder1/one/two/treww?id=w4354f  --> Apply Rule2
-
-GET /root/folder1/folder2/1                --> Apply Rule3
-GET /root/folder1/folder2/one/two          --> Apply Rule3
-GET /root/folder1/folder2/dsd545df         --> Apply Rule3
-GET /root/folder1/folder2/one?id=fdfdf     --> Apply Rule3
-```
+| Register Path | Allow path | Deny path |
+|---------------|------------|-----------|
+| `/folder/file.ext` | <ul><li>/folder/file.ext</li></ul> | <ul><li>/folder/file</li></ul> |
+| `/folder/?/file` | <ul><li>/folder/123/file</li> <li>/folder/xxx/file</li></ul> | |
+| `/path/??` | <ul><li>/path/</li> <li>/path/xxx</li> <li>/path/xxx/yyy/file</li></ul> | <ul><li>/path - Need slash at last</li></ul> |
+| `/path/??/image.jpg` | <ul><li>/path/one/two/image.jpg</li> <li>/path/image.jpg</li></ul> | |
+| `/path/?/image.jpg` | <ul><li>/path/xxx/image.jpg - ? has higher priority than ??</li></ul> | |
+| `/path/{abc|xyz}/image.jpg` | <ul><li>/path/abc/image.jpg</li> <li>/path/xyz/image.jpg</li></ul> | |
+| `/users/?/{todos|photos}` | <ul><li>/users/123/todos</li> <li>/users/xxx/photos</li></ul> | |
+| `/users/?/{todos|photos}/?` | <ul><li>/users/123/todos/</li> <li>/users/123/todos/321</li> <li>/users/123/photos/321</li></ul> | |
 
 ## Usage
 
