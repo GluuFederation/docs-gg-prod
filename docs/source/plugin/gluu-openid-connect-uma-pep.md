@@ -147,7 +147,7 @@ $ curl -X POST \
 
 Here is a list of all the parameters which can be used in this plugin's configuration.
 
-#### gluu-openid-connect 
+#### Gluu-OpenID-Connect
 
 | field | Default | Description |
 |-------|---------|-------------|
@@ -164,7 +164,7 @@ Here is a list of all the parameters which can be used in this plugin's configur
 |**max_id_token_age**||Maximum age of `id token` in seconds |
 |**max_id_token_auth_age**||Maximum authentication age of `id_token` in seconds |
 
-#### gluu-uma-pep 
+#### Gluu-UMA-PEP 
 
 | field | Default | Description |
 |-------|---------|-------------|
@@ -174,7 +174,6 @@ Here is a list of all the parameters which can be used in this plugin's configur
 |**client_id**|| An existing client ID, used to get a protection access token to access the introspection API. Required if an existing oxd ID is provided.|
 |**client_secret**|| An existing client secret, used to get protection access token to access the introspection API. Required if an existing oxd ID is provided.|
 |**uma_scope_expression**|| Used to add scope security on an UMA scope token.|
-|**ignore_scope**| false | If true, will not check any token scopes while authenticating.|
 |**deny_by_default**| true | For paths not protected by UMA scope expressions. If true, denies unprotected paths.|
 |**require_id_token**|false| This is for Push Claim token. if it is true then it will use id_token for push claim token for getting RPT|
 |**obtain_rpt**|false|It is used to get RPT when you configure `gluu-openid-connect` plugin with `gluu-uma-pep`|

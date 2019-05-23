@@ -1,6 +1,6 @@
-# Gluu OAuth Auth and PEP
+# Gluu OAuth Auth and OAuth PEP
 ## Overview
-The OAuth Auth and PEP is used for client authentication and to enforce the presence of OAuth scopes for access to resources protected by the Gateway. OAuth scopes are defined in an external OAuth Authorization Server (AS) -- in most cases the Gluu Server. The Gateway and AS leverage the oxd OAuth middleware service for communication.
+The OAuth Auth and OAuth PEP is used for client authentication and to enforce the presence of OAuth scopes for access to resources protected by the Gateway. OAuth scopes are defined in an external OAuth Authorization Server (AS) -- in most cases the Gluu Server. The Gateway and AS leverage the oxd OAuth middleware service for communication.
 
 There are two plugins for OAuth security.
 

@@ -1,6 +1,11 @@
-# Gluu UMA PEP
+# Gluu UMA Auth and UMA PEP
 ## Overview
-The UMA PEP plugin is used to enforce the presence of UMA scopes for access to resources protected by the Gateway. UMA scopes and policies are defined in an external UMA Authorization Server (AS) -- in most cases the Gluu Server. The Gateway and AS leverage the oxd UMA middleware service for communication. 
+The UMA Auth and UMA PEP is used client authentication and to enforce the presence of UMA scopes for access to resources protected by the Gateway. UMA scopes and policies are defined in an external UMA Authorization Server (AS) -- in most cases the Gluu Server. The Gateway and AS leverage the oxd UMA middleware service for communication. 
+
+There are two plugins for OAuth security.
+
+   1. **gluu-uma-auth**: Authenticate client by UMA RPT Token. The plugin priority is `998`.
+   1. **gluu-uma-pep**: Authorization by UMA Scope security. The plugin priority is `995`.
 
 The plugin supports two tokens:  
 
@@ -44,9 +49,36 @@ Use the [Manage Service](../admin-gui/#manage-service) section in GG UI to enabl
 ![11_path_uma_service](../img/11_path_uma_service.png)
 
 Clicking on the **+** icon will bring up the below form.
-![11_path_add_uma_service](../img/11_path_add_uma_service.png)
+
+!!! Important
+    You need to set the `Anonymous` consumer because it is used to by pass gluu-uma-auth authentication and help to get the ticket from gluu-uma-pep. In below form use `+` button front on anonymous field to add and configure consumer. You just need to copy consumer id and past it to anonymous field.
+
+![11_path_add_uma_service](../img/uma-auth-pep-form.png)
 
 #### Configure Service Plugin using Kong Admin API
+
+Configuration for `gluu-uma-auth`
+
+```
+$ curl -X POST \
+  http://<kong_hostname>:8001/plugins \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "name": "gluu-uma-auth",
+  "config": {
+    "oxd_url": "<your_oxd_server_url>",
+    "op_url": "<your_op_server_url>",
+    "oxd_id": "<oxd_id>",
+    "client_id": "<client_id>",
+    "client_secret": "<client_secret>",
+    "hide_credentials": <false|true>,
+    "anonymous": "<anonymous_consumer_id>"
+  },
+  "service_id": "<kong_service_object_id>"
+}'
+```
+
+Configuration for `gluu-uma-pep`
 
 ```
 $ curl -X POST \
@@ -67,34 +99,19 @@ $ curl -X POST \
           {
             "httpMethods": [
               "GET"
-            ],
-            "scope_expression": {
-              "rule": {
-                "and": [
-                  {
-                    "var": 0
-                  },
-                  {
-                    "var": 1
-                  }
-                ]
-              },
-              "data": [
-                "admin",
-                "employee"
-              ]
-            }
+            ]
           }
         ]
       }
     ],
-    "ignore_scope": <false|true>,
-    "deny_by_default": <false|true>,
-    "hide_credentials": <false|true>
+    "deny_by_default": <false|true>
   },
   "service_id": "<kong_service_object_id>"
 }'
 ```
+
+!!! Note
+    Plugin don't need `scope_expression` inside `conditions` because rule and expression is check and register at AS side. 
 
 !!! Note
     Kong does not allow proxying using only a service object--this feature requires a route. At minimum, one service is needed to register an Upstream API and one route is needed for proxying.
@@ -133,9 +150,32 @@ Use the [Manage Route](../admin-gui/#manage-route) section in the GG UI to enabl
 ![12_path_uma_route](../img/12_path_uma_route.png)
 
 Clicking on the **+** icon will bring up the below form.
-![12_path_add_uma_route](../img/12_path_add_uma_route.png)
+![12_path_add_uma_route](../img/uma-auth-pep-form.png)
 
 #### Configure Route Plugin using Kong Admin API
+
+Configuration for `gluu-uma-auth`
+
+```
+$ curl -X POST \
+  http://<kong_hostname>:8001/plugins \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "name": "gluu-uma-auth",
+  "config": {
+    "oxd_url": "<your_oxd_server_url>",
+    "op_url": "<your_op_server_url>",
+    "oxd_id": "<oxd_id>",
+    "client_id": "<client_id>",
+    "client_secret": "<client_secret>",
+    "hide_credentials": <false|true>,
+    "anonymous": "<anonymous_consumer_id>"
+  },
+  "route_id": "<kong_service_object_id>"
+}'
+```
+
+Configuration for `gluu-uma-pep`
 
 ```
 $ curl -X POST \
@@ -156,32 +196,14 @@ $ curl -X POST \
           {
             "httpMethods": [
               "GET"
-            ],
-            "scope_expression": {
-              "rule": {
-                "and": [
-                  {
-                    "var": 0
-                  },
-                  {
-                    "var": 1
-                  }
-                ]
-              },
-              "data": [
-                "admin",
-                "employee"
-              ]
-            }
+            ]
           }
         ]
       }
     ],
-    "ignore_scope": <false|true>,
-    "deny_by_default": <false|true>,
-    "hide_credentials": <false|true>
+    "deny_by_default": <false|true>
   },
-  "route_id": "<kong_route_object_id>"
+  "route_id": "<kong_service_object_id>"
 }'
 ```
 
@@ -193,12 +215,32 @@ A global plugin will apply to all services and routes.
 
 Use the [Plugin section](../admin-gui/#add-plugin) in the GG UI to enable the Gluu UMA PEP plugin. In the security category, there is a Gluu UMA PEP box. Click on the **+** icon to enable the plugin.
 
-![5_plugins_add](../img/5_plugins_add.png)
+![5_plugins_add](../img/5_uma_plugins_add.png)
 
 Clicking on the **+** icon will bring up the below form.
-![11_path_add_uma_service](../img/12_path_add_uma_route.png)
+![11_path_add_uma_service](../img/uma-auth-pep-form.png)
 
 #### Configure Global Plugin using Kong Admin API
+
+```
+$ curl -X POST \
+  http://<kong_hostname>:8001/plugins \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "name": "gluu-uma-auth",
+  "config": {
+    "oxd_url": "<your_oxd_server_url>",
+    "op_url": "<your_op_server_url>",
+    "oxd_id": "<oxd_id>",
+    "client_id": "<client_id>",
+    "client_secret": "<client_secret>",
+    "hide_credentials": <false|true>,
+    "anonymous": "<anonymous_consumer_id>"
+  }
+}'
+```
+
+Configuration for `gluu-uma-pep`
 
 ```
 $ curl -X POST \
@@ -219,30 +261,12 @@ $ curl -X POST \
           {
             "httpMethods": [
               "GET"
-            ],
-            "scope_expression": {
-              "rule": {
-                "and": [
-                  {
-                    "var": 0
-                  },
-                  {
-                    "var": 1
-                  }
-                ]
-              },
-              "data": [
-                "admin",
-                "employee"
-              ]
-            }
+            ]
           }
         ]
       }
     ],
-    "ignore_scope": <false|true>,
-    "deny_by_default": <false|true>,
-    "hide_credentials": <false|true>
+    "deny_by_default": <false|true>
   }
 }'
 ```
@@ -250,6 +274,20 @@ $ curl -X POST \
 ### Parameters
 
 Here is a list of all the parameters which can be used in this plugin's configuration.
+
+#### Gluu-UMA-Auth
+
+| field | Default | Description |
+|-------|---------|-------------|
+|**op_url**||The URL of your OP server. Example: https://op.server.com|
+|**oxd_url**||The URL of your oxd server. Example: https://oxd.server.com|
+|**oxd_id**|| The ID for an existing client, used to introspect the token. If left blank, a new client will be registered dynamically |
+|**client_id**|| An existing client ID, used to get a protection access token to access the introspection API. Required if an existing oxd ID is provided.|
+|**client_secret**|| An existing client secret, used to get protection access token to access the introspection API. Required if an existing oxd ID is provided.|
+|**anonymous**||An required string (consumer Id) value to use as an “anonymous” consumer if authentication fails. You need to set the Anonymous consumer because it is used to by pass gluu-uma-auth authentication and help to get the ticket from gluu-uma-pep. |
+|**hide_credentials**|false|An optional boolean value telling the plugin to show or hide the credential from the upstream service. If true, the plugin will strip the credential from the request (i.e. the Authorization header) before proxying it.|
+
+#### Gluu-UMA-PEP 
 
 | field | Default | Description |
 |-------|---------|-------------|
@@ -259,10 +297,13 @@ Here is a list of all the parameters which can be used in this plugin's configur
 |**client_id**|| An existing client ID, used to get a protection access token to access the introspection API. Required if an existing oxd ID is provided.|
 |**client_secret**|| An existing client secret, used to get protection access token to access the introspection API. Required if an existing oxd ID is provided.|
 |**uma_scope_expression**|| Used to add scope security on an UMA scope token.|
-|**ignore_scope**| false | If true, will not check any token scopes while authenticating.|
 |**deny_by_default**| true | For paths not protected by UMA scope expressions. If true, denies unprotected paths.|
-|**anonymous**||An optional string (consumer UUID) value to use as an “anonymous” consumer if authentication fails. If empty (default), the request will fail with an authentication failure 4xx. This value must refer to the Consumer ID attribute that is internal to Kong, and not its custom_id.|
-|**hide_credentials**|false|An optional boolean value telling the plugin to show or hide the credential from the upstream service. If true, the plugin will strip the credential from the request (i.e. the Authorization header) before proxying it.|
+|**require_id_token**|false|It use when you configure `gluu-openid-connect` plugin. This is for Push Claim token. if it is true then it will use id_token for push claim token for getting RPT|
+|**obtain_rpt**|false|It is used to get RPT when you configure `gluu-openid-connect` plugin with `gluu-uma-pep`|
+|**claims_redirect_path**||It use when you configure `gluu-openid-connect` plugin. Claims redirect URL in claim gathering flow for your OP Client. You just need to set path here like `/claim-callback` but you need to register OP Client with full URL like `https://kong.proxy.com/claim-callback`. GG UI creates OP client for you and also configure the `gluu-openid-connect` and `gluu-uma-pep` plugin.|
+|**redirect_claim_gathering_url**|false|It use when you configure `gluu-openid-connect` plugin. It used to tell plugin that if `need_info` response comes in claim gathering situation then redirect it for claim gathering.|
+|**method_path_tree**||It is for plugin internal use. We use it for tree level matching for dynamic paths which registered in `uma_scope_expression`| 
+
 
 !!! Note
     GG UI can create a dynamic client. However, if the Kong Admin API is used for plugin configuration, it requires an existing client using the oxd API, then passing the client's credentials to the Gluu-UMA-PEP plugin.
@@ -270,9 +311,6 @@ Here is a list of all the parameters which can be used in this plugin's configur
 #### UMA Scope Expression
 
 The UMA Scope Expression is a JSON expression, used to register the resources in a resource server. See more details in the [Gluu Server docs](https://gluu.org/docs/ce/api-guide/uma-api/#uma-permission-registration-api).
-
-!!! Note
-    Enable and disable the UMA scope expression by setting `ignore_scope` to `true`.
 
 For example, to protect an API:
 
@@ -321,34 +359,37 @@ At runtime, the plugin sends a request to the RS with an RPT token and checks th
 
 #### Dynamic Resource Protection
 
-To protect a dynamic resource with UMA or OAuth scopes, secure the parent path. For example, securing `folder` with a chosen scope will secure both `/folder` and `/folder/[id]`. Any protection on the parent will be applied to its children, unless different protection is explicitly defined.
+There are 3 elements to make more dynamic path registration and protection:
 
-Example use cases for different resource security rules:
+- ? match any one path element
+- ?? match zero or more path elements
+- {regexp} - match single path element against PCRE
 
-- Rule1 for path GET /root                  `{scope: a and b}`
+The priority for the elements are:
 
-- Rule2 for path GET /root/folder1          `{scope: c}`
+1. Exact match
+1. Regexp match
+1. ?
+1. ??
 
-- Rule3 for path GET /root/folder1/folder2  `{scope: d}`
+!!! Note
+    slash(/) is required before multiple wildcards placeholder.
+    
+Examples: 
 
-```
-GET /root                                  --> Apply Rule1
-GET /root/1                                --> Apply Rule1
-GET /root/one                              --> Apply Rule1
-GET /root/one/two                          --> Apply Rule1
-GET /root/two?id=df4edfdf                  --> Apply Rule1
+Assume that below all path is register in one plugin
 
-GET /root/folder1                          --> Apply Rule2
-GET /root/folder1/1                        --> Apply Rule2
-GET /root/folder1?id=dfdf454gtfg           --> Apply Rule2
-GET /root/folder1/one/two                  --> Apply Rule2
-GET /root/folder1/one/two/treww?id=w4354f  --> Apply Rule2
+| Register Path | Allow path | Deny path |
+|---------------|------------|-----------|
+| `/folder/file.ext` | <ul><li>/folder/file.ext</li></ul> | <ul><li>/folder/file</li></ul> |
+| `/folder/?/file` | <ul><li>/folder/123/file</li> <li>/folder/xxx/file</li></ul> | |
+| `/path/??` | <ul><li>/path/</li> <li>/path/xxx</li> <li>/path/xxx/yyy/file</li></ul> | <ul><li>/path - Need slash at last</li></ul> |
+| `/path/??/image.jpg` | <ul><li>/path/one/two/image.jpg</li> <li>/path/image.jpg</li></ul> | |
+| `/path/?/image.jpg` | <ul><li>/path/xxx/image.jpg - ? has higher priority than ??</li></ul> | |
+| `/path/{abc|xyz}/image.jpg` | <ul><li>/path/abc/image.jpg</li> <li>/path/xyz/image.jpg</li></ul> | |
+| `/users/?/{todos|photos}` | <ul><li>/users/123/todos</li> <li>/users/xxx/photos</li></ul> | |
+| `/users/?/{todos|photos}/?` | <ul><li>/users/123/todos/</li> <li>/users/123/todos/321</li> <li>/users/123/photos/321</li></ul> | |
 
-GET /root/folder1/folder2/1                --> Apply Rule3
-GET /root/folder1/folder2/one/two          --> Apply Rule3
-GET /root/folder1/folder2/dsd545df         --> Apply Rule3
-GET /root/folder1/folder2/one?id=fdfdf     --> Apply Rule3
-```
 
 ## Usage
 
