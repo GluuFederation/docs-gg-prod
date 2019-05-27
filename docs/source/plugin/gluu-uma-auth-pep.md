@@ -57,6 +57,9 @@ Clicking on the **+** icon will bring up the below form.
 
 #### Configure Service Plugin using Kong Admin API
 
+!!! Note
+    Use [OXD API](https://gluu.org/docs/oxd/4.0/) for [client registration](https://gluu.org/docs/oxd/4.0/api/#register-site) and [UMA resource registration](https://gluu.org/docs/oxd/4.0/api/#uma-rs-protect-resources).
+
 Configuration for `gluu-uma-auth`
 
 ```
@@ -154,6 +157,9 @@ Clicking on the **+** icon will bring up the below form.
 
 #### Configure Route Plugin using Kong Admin API
 
+!!! Note
+    Use [OXD API](https://gluu.org/docs/oxd/4.0/) for [client registration](https://gluu.org/docs/oxd/4.0/api/#register-site) and [UMA resource registration](https://gluu.org/docs/oxd/4.0/api/#uma-rs-protect-resources).
+
 Configuration for `gluu-uma-auth`
 
 ```
@@ -221,6 +227,11 @@ Clicking on the **+** icon will bring up the below form.
 ![11_path_add_uma_service](../img/uma-auth-pep-form.png)
 
 #### Configure Global Plugin using Kong Admin API
+
+!!! Note
+    Use [OXD API](https://gluu.org/docs/oxd/4.0/) for [client registration](https://gluu.org/docs/oxd/4.0/api/#register-site) and [UMA resource registration](https://gluu.org/docs/oxd/4.0/api/#uma-rs-protect-resources).
+
+Configuration for `gluu-uma-auth`
 
 ```
 $ curl -X POST \

@@ -55,6 +55,9 @@ If you do not want to configure UMA-PEP then you just need to disable it using t
 
 #### Configure Route Plugin using Kong Admin API
 
+!!! Note
+    Use [OXD API](https://gluu.org/docs/oxd/4.0/) for [client registration](https://gluu.org/docs/oxd/4.0/api/#register-site) and [UMA resource registration](https://gluu.org/docs/oxd/4.0/api/#uma-rs-protect-resources).
+
 Configuration for `gluu-openid-connect` plugin
 
 ```

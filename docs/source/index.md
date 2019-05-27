@@ -2,7 +2,7 @@
 
 ## Overview
 
-Gluu Gateway enables organizations to restrict access to APIs by requiring OAuth clients to present valid access tokens issued by an OAuth or UMA Authorization Server (AS), typically a [Gluu Server](https://gluu.org/docs/ce) and OpenID Connect Authorization code flow security.
+Gluu Gateway enables organizations to restrict access to APIs by requiring OAuth clients to present valid access tokens issued by an OAuth or UMA Authorization Server (AS), typically a [Gluu Server](https://gluu.org/docs/ce) and restrict access to Web Application by  OpenID Connect security.
 
 Gluu Gateway is built on top of the [Kong Community Edition (CE) v0.14 API gateway](https://konghq.com/community/) and leverages the strong ecosystem of Kong plugins to enable rate limiting, logging, and many other capabilities. 
 
@@ -10,7 +10,7 @@ Gluu Gateway is built on top of the [Kong Community Edition (CE) v0.14 API gatew
 
 Primary use cases and functionalities supported by Gluu Gateway include:
 
-- OpenID Connect authorization code flow security with UMA scopes and UMA Claim gathering flow.
+- Control access to Web application by OpenID Connect with UMA scopes and UMA Claim gathering security.
 - Control access to APIs by requiring OAuth or UMA scopes
 - Collect and report OAuth and UMA usage metrics
 - Introspect bearer access tokens
@@ -37,8 +37,8 @@ OAuth scopes normally represent a user's authorization, for example authorizatio
 
 ![OAuth PEP diagram](img/gluu-oauth-pep.png)
 
-### OIDC and UMA with Claim gathering flow
-The great combination of Gluu OpenID Connect Authorization code flow and UMA with claim gathering security. The UMA PEP is used to enforce the presence of UMA scopes for access to resources protected by the Gateway.
+### OIDC and UMA with Claim gathering Security
+The combination of Gluu OpenID Connect and UMA with Claim gathering security. OIDC is used to restric access to web application and the UMA is used to enforce the presence of UMA scopes for access to resources protected by the Gateway.
 
 !!! Note 
     An API that uses OAuth for security can only be called by OAuth clients, and likewise, an API that uses UMA for security can only be called by an UMA client. 

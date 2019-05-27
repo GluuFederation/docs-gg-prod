@@ -60,6 +60,9 @@ Clicking on the **+** icon will bring up the below form.
 
 #### Configure a Service Plugin using Kong Admin API
 
+!!! Note
+    Use [OXD API](https://gluu.org/docs/oxd/4.0/) for [client registration](https://gluu.org/docs/oxd/4.0/api/#register-site).
+
 Configuration for `gluu-oauth-auth`
 
 ```
@@ -171,6 +174,9 @@ Clicking on the **+** icon will bring up the below form.
 
 #### Configure Route Plugin using Kong Admin API
 
+!!! Note
+    Use [OXD API](https://gluu.org/docs/oxd/4.0/) for [client registration](https://gluu.org/docs/oxd/4.0/api/#register-site).
+
 Configuration for `gluu-oauth-auth`
 
 ```
@@ -254,6 +260,9 @@ Clicking on the **+** icon will bring up the below form.
 ![11_path_add_oauth_service](../img/11_add_oauth_pep_form.png)
 
 #### Configure a Global Plugin using Kong Admin API
+
+!!! Note
+    Use [OXD API](https://gluu.org/docs/oxd/4.0/) for [client registration](https://gluu.org/docs/oxd/4.0/api/#register-site).
 
 Configuration for `gluu-oauth-auth`
 
