@@ -2,7 +2,7 @@
 
 ## Overview
 
-This tutorial covers [UMA grant security](https://docs.kantarainitiative.org/uma/wg/rec-oauth-uma-grant-2.0.html) using the GLUU-UMA-PEP plugin and the Gluu Server. There are two different ways to apply UMA security, **with Claim-Gathering-flow** and **without Claim-Gathering-flow**. The [demo](https://github.com/GluuFederation/gluu-gateway/tree/version_2.0/gg-demo) is a **Python CGI** script that can be deployed on any CGI-enabled server.
+This tutorial covers [UMA grant security](https://docs.kantarainitiative.org/uma/wg/rec-oauth-uma-grant-2.0.html) using the GLUU-UMA-Auth and GLUU-UMA-PEP plugin and the Gluu CE. There are two different ways to apply UMA security, **with Claim-Gathering-flow** and **without Claim-Gathering-flow**. The [demo](https://github.com/GluuFederation/gluu-gateway/tree/version_2.0/gg-demo) is a **Python CGI** script that can be deployed on any CGI-enabled server.
 
 ## Parties
 
@@ -18,7 +18,7 @@ This tutorial covers [UMA grant security](https://docs.kantarainitiative.org/uma
 
 Configure plugin on **Service**, **Route** and **Global**. 
 
-There are several possibilities for plugin configuration with services and routes. More information is available in the [Kong docs](https://docs.konghq.com/0.14.x/admin-api/#precedence), and configuration detail descriptions are available in the [Gluu Gateway docs](https://gluu.org/docs/gg/plugin/gluu-uma-pep/).
+There are several possibilities for plugin configuration with services and routes. More information is available in the [Kong docs](https://docs.konghq.com/0.14.x/admin-api/#precedence), and configuration detail descriptions are available in the [Gluu Gateway docs](/plugin/gluu-uma-auth-pep).
 
 Applications and their ports:
 
@@ -34,7 +34,7 @@ The following tutorial demonstrates plugin configuration for a Service. Follow t
 
 ### Add Service
 
-Register your upstream API as a Service. For more details, see the [Gluu UMA PEP service docs](/plugin/gluu-uma-pep/#add-service-using-gg-ui).
+Register your upstream API as a Service. For more details, see the [Gluu UMA Auth and UMA PEP service docs](/plugin/gluu-uma-auth-pep/#service-level).
 
 For this demo, you'll need to add two different services with different names. You can use this live test API, `https://jsonplaceholder.typicode.com`.
 
@@ -50,7 +50,7 @@ For this demo, you'll need to add two different services with different names. Y
 
 ### Add Route
 
-For a proxy, you need to add a Route to the Service. For more details, see the [Gluu UMA PEP route docs](/plugin/gluu-uma-pep/#add-route-using-gg-ui).
+For a proxy, you need to add a Route to the Service. For more details, see the [Gluu UMA Auth and UMA PEP route docs](/plugin/gluu-uma-auth-pep/#route-level).
 
 - Route1
     - Add the first route in **claim_service** with `gathering.example.com` as the host.
@@ -60,7 +60,7 @@ For a proxy, you need to add a Route to the Service. For more details, see the [
 
 ### Configure Plugin on Service
 
-Configure Gluu-UMA-PEP with UMA scopes and resources. See more details in the [Service Plugin docs](/plugin/gluu-uma-pep/#configure-service-plugin-using-gg-ui).
+Configure Gluu-UMA-Auth and Gluu-UMA-PEP with UMA scopes and resources. See more details in the [Service Plugin docs](/plugin/gluu-uma-auth-pep/#configure-service-plugin-using-gg-ui).
 
 - Resource registration for **claim_service**.
 ![claim_gathering](img/15_claim_gatering_uma_expression.png)

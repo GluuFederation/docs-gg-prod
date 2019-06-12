@@ -296,7 +296,7 @@ Here is a list of all the parameters which can be used in this plugin's configur
 |**client_id**|| An existing client ID, used to get a protection access token to access the introspection API. Required if an existing oxd ID is provided.|
 |**client_secret**|| An existing client secret, used to get protection access token to access the introspection API. Required if an existing oxd ID is provided.|
 |**anonymous**||An required string (consumer Id) value to use as an “anonymous” consumer if authentication fails. You need to set the Anonymous consumer because it is used to by pass gluu-uma-auth authentication and help to get the ticket from gluu-uma-pep. |
-|**hide_credentials**|false|An optional boolean value telling the plugin to show or hide the credential from the upstream service. If true, the plugin will strip the credential from the request (i.e. the Authorization header) before proxying it.|
+|**pass_credentials**|pass|It allows 3 values. `pass`, `hide` and `phantom_token`. Used to operate the authorization header from the upstream service as per configuration. In `phantom_token` case, plugin will replace bearer token with new generated JWT(with introspection result) token, so for outside there is bearer token and JWT for internal use.|
 
 #### Gluu-UMA-PEP 
 

@@ -24,4 +24,4 @@ Gluu Gateway requires an OAuth 2.0 Authorization Server (AS), typically the Gluu
 
 Gluu Gateway is compatible with the following versions of Gluu:
 
-- Gluu Server [CE 3.1.6](https://gluu.org/docs/ce/3.1.6), [CE 3.1.5]((https://gluu.org/docs/ce/3.1.5) 
+- Gluu Server [CE 3.1.6](https://gluu.org/docs/ce/3.1.6), [CE 3.1.5](https://gluu.org/docs/ce/3.1.5) 
