@@ -23,26 +23,6 @@ Gluu Gateway needs to be deployed on a server or VM with the following minimum r
 !!! Important 
     Always run the following commands as root.
 
-<!---
-
-### Ubuntu 14
-* Add the Gluu repo:
-```
-# echo "deb https://repo.gluu.org/ubuntu/ trusty main" > /etc/apt/sources.list.d/gluu-repo.list
-# curl https://repo.gluu.org/ubuntu/gluu-apt.key | apt-key add -
-```
-* Add the PostgreSQL 10 repo:
-```
-# echo "deb http://apt.postgresql.org/pub/repos/apt/ trusty-pgdg main" > /etc/apt/sources.list.d/psql.list
-# wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
-```
-* Add the Node repo:
-```
-# curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
-```
-
---->
-
 ### Ubuntu 16
 * Add the Gluu repo:
 ```
@@ -217,6 +197,10 @@ After acknowledging the Gluu Stepped-Up Support License, you will be prompted to
 ```
 
 If you see the above message, it means the installation was successful. To log in to the Gluu Gateway admin portal, create an SSH tunnel on port 1338 from your workstation to the Gluu Gateway server, and point your browser at `https://localhost:1338`. Use the login and password that you also use to access the Gluu Server.
+
+!!! Important
+    If you get any error in setup then check the logs in log file `/opt/gluu-gateway/setup/gluu-gateway-setup.log` and `/opt/gluu-gateway/setup/gluu-gateway-setup_error.log`
+    
 
 !!! Note
     If you do not want an SSH tunnel connection. See [FAQ](./faq.md#how-can-i-change-the-listening-address-and-port) for global access configuration.

@@ -6,7 +6,7 @@ This tutorial covers [UMA grant security](https://docs.kantarainitiative.org/uma
 
 ## Parties
 
-![UMA Overview](img/15_gg-demo-overview-diagram-uma.png)
+![UMA Overview](img/15_uma-tutorial-flow-parties.png)
 
 ## Flow
 ![Flow chart](img/15_uma_flow.png)
