@@ -9,7 +9,7 @@ Gluu Gateway bundles the following software components:
 
 - [Gluu Gateway plugins](https://github.com/GluuFederation/gluu-gateway): Plugins that leverage the Gluu Server for central client management and to control access to upstream APIs using OAuth 2.0 and UMA 2.0.
 
-- [oxd-Server v4.0](https://www.gluu.org/docs/oxd/4.0): Middleware server for OpenID, OAuth, and UMA client communication with an associated OAuth2 Authorization Server, typically an instance of the Gluu Server (details [below](#gluu-server-pre-requirements)). 
+- [oxd-Server v4.0](https://www.gluu.org/docs/oxd/4.0): Middleware server for OpenID, OAuth, and UMA client communication with an associated OAuth Authorization Server, typically an instance of the Gluu Server (details [below](#gluu-server-pre-requirements)).
 
 - Others: The following runtime environment is required by the Gluu Gateway package:
     - OpenJDK v8
@@ -24,4 +24,4 @@ Gluu Gateway requires an OAuth 2.0 Authorization Server (AS), typically the Gluu
 
 Gluu Gateway is compatible with the following versions of Gluu:
 
-- Gluu Server [CE 3.1.6](https://gluu.org/docs/ce/3.1.6), [CE 3.1.5](https://gluu.org/docs/ce/3.1.5) 
+- Gluu Server [CE 3.1.6](https://gluu.org/docs/ce/3.1.6), [CE 3.1.5](https://gluu.org/docs/ce/3.1.5), [CE 4.0.0](.)

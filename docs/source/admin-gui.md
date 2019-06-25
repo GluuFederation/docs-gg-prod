@@ -1,11 +1,11 @@
 # Admin GUI Portal - Konga Guide
 
 ## Dashboard
-The Dashboard section is divided into subsections that show application configuration details. 
+The Dashboard section shows application configuration details.
 
-**Global Info** shows oxd and the client details used by Konga. Check the version of the currently-used oxd Server or the address of the Gluu Server in this section. The `oxd ID`, `Client ID` and `Client Secret` are the credentials for the client created by default during Gluu Gateway installation and setup.
+**Global Info** shows the oxd and client details used by Konga. You can verify the version of the oxd server or the hostname of the Gluu Server in this section. The `oxd ID`, `Client ID` and `Client Secret` are the credentials for the Konga client created by default during the Gluu Gateway installation and setup.
 
-The **Gateway** and **Database Info** sections show details about the Gateway itself and the included Postgres database, respectively. 
+The **Gateway** and **Database Info** sections show details about the Gateway itself and the included Postgres database.
 
 The **Plugins** section displays all the plugins supported by the Gluu Gateway. When inactive, a plugin is shown as gray. When plugin is added to an API/Consumer or globally, its name will turn green on the dashboard.
 
@@ -23,9 +23,9 @@ The Info section shows generic details about the Kong node.
 
 ### Service List
 
-Service entities are abstractions of each upstream service. Some examples of Services would be a data transformation microservice, a billing API, etc.
+Service entities are abstractions of each upstream service. A billing API is an example of a service.
 
-Check the Kong [Service configuration](https://docs.konghq.com/0.14.x/proxy/#reminder-how-to-configure-a-service) docs for more details.
+See Kong's [Service configuration](https://docs.konghq.com/0.14.x/proxy/#reminder-how-to-configure-a-service) documentation for more details.
 
 ![3_service_list](img/3_1_service_list.png)
 
@@ -38,7 +38,7 @@ Check the Kong [Service configuration](https://docs.konghq.com/0.14.x/proxy/#rem
 | **Gluu Security** | This column only shows the added Gluu plugins.|
 | **Edit Button** | This button is used to edit a service, and configure routes and plugins for the selected service. Click on **service name** to edit the service.|
 | **Delete Button** | This button is used to delete the selected service. |
-   
+
 ### Add Service
 
 Add a Service using the `+ ADD NEW SERVICE` button.
@@ -72,7 +72,7 @@ Check Kong [routes configuration](https://docs.konghq.com/0.14.x/proxy/#routes-a
 This section is used to add and view plugins.
 
 ##### Service Plugin List
-  
+
   ![3_5_service_plugins](img/3_5_service_plugins.png)
 
   | Tools | Details |
@@ -85,7 +85,7 @@ This section is used to add and view plugins.
 ##### Add Service Plugin
 
   Add a Plugin by clicking the `+` icon next to the plugin’s name.
-  
+
   ![3_6_add_plugins](img/3_6_add_plugins.png)
 
 #### Eligible Consumers for Service
