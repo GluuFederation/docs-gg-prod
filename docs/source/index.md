@@ -1,4 +1,4 @@
-# Gluu Gateway 2.0.x
+# Gluu Gateway 4.0.x
 
 ## Overview
 

@@ -114,7 +114,7 @@ Configure a Prometheus server to listen to the metrics endpoint `gluu-metrics`
 
 ## Grafana Configuration
 
-Metrics exported by the plugin can be graphed in Grafana using a drop-in dashboard: [Gluu-Metrics-Grafana.json](https://github.com/GluuFederation/gluu-gateway/blob/version_2.0/setup/templates/Gluu-Metrics-Grafana.json).
+Metrics exported by the plugin can be graphed in Grafana using a drop-in dashboard: [Gluu-Metrics-Grafana.json](https://github.com/GluuFederation/gluu-gateway/blob/version_4.0/setup/templates/Gluu-Metrics-Grafana.json).
 
 1. Install **Grafana v5.4.2**     
 1. Add Datasource     
@@ -123,7 +123,7 @@ Metrics exported by the plugin can be graphed in Grafana using a drop-in dashboa
     - Configuration > Data sources > Add data source > Prometheus
     - Add the Prometheus server URL
     ![5_plugins_add](../img/14_grafana_datasource.png)
-1. Import JSON: [Gluu-Metrics-Grafana.json](https://github.com/GluuFederation/gluu-gateway/blob/version_2.0/setup/templates/Gluu-Metrics-Grafana.json)     
+1. Import JSON: [Gluu-Metrics-Grafana.json](https://github.com/GluuFederation/gluu-gateway/blob/version_4.0/setup/templates/Gluu-Metrics-Grafana.json)     
     - Go to the home page
     - Click on `New dashboard` on top left corner.
     - Click on `import dashboard`
