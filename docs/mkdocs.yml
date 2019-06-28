@@ -48,6 +48,7 @@ nav:
     - 'Gluu OpenID Connect and UMA PEP' : 'plugin/gluu-openid-connect-uma-pep.md'
     - 'Gluu OAuth Auth and OAuth PEP' : 'plugin/gluu-oauth-auth-pep.md'
     - 'Gluu UMA Auth and UMA PEP' :  'plugin/gluu-uma-auth-pep.md'
+    - 'Gluu OPA PEP': 'plugin/gluu-opa-pep.md'
     - 'Gluu Metrics' :  'plugin/gluu-metrics.md'
 - 'UMA Tutorial': 'uma-tutorial.md'
 - 'Logs' : 'logs/index.md'
