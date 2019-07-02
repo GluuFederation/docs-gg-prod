@@ -19,6 +19,7 @@ Primary use cases and functionalities supported by Gluu Gateway include:
 - Validate the signature of JWT access tokens
 - Provide a web GUI to simplify ongoing administration
 - Support Kong plugins to enable rate limiting, logging, and many other capabilities  
+- Provides a plugin for [Open Policy Agent](https://www.openpolicyagent.org/)
 
 ## Access Control
 

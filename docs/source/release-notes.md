@@ -42,5 +42,5 @@ There are major changes in GG 4.0. We de-couple plugins and separate it in two c
 ### Features
 - [#283](https://github.com/GluuFederation/gluu-gateway/issues/283): New `gluu-openid-connect` plugin with UMA claim gathering support 
 - [#296](https://github.com/GluuFederation/gluu-gateway/issues/296): Admin GUI for plugins configuration
-- [#320](https://github.com/GluuFederation/gluu-gateway/issues/320) : Make new OPA plugin
+- [#320](https://github.com/GluuFederation/gluu-gateway/issues/320) : Make new Open Policy Agent plugin
 - [#317](https://github.com/GluuFederation/gluu-gateway/issues/317) : Support Phantom Token Flow
