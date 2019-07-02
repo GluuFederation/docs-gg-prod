@@ -163,6 +163,9 @@ Gluu Gateway needs to be deployed on a server or VM with the following minimum r
 
 ## Run the setup script
 
+!!! Important 
+    Before start setup, stop your all services which run on ports 443, 8443, 1338, 8000 and 8001. 
+
 ```
  # cd /opt/gluu-gateway/setup
  # python setup-gluu-gateway.py

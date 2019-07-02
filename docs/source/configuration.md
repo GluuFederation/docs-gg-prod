@@ -75,7 +75,7 @@ Refer to the [oxd docs](https://gluu.org/docs/oxd/4.0) for more information on t
 * Configure the oxd Server
 
     ```
-     /etc/oxd/oxd-server/oxd-conf.json
+     /opt/oxd-server/conf/oxd-server.yml
     ```
 
 * Manage the oxd Server service
