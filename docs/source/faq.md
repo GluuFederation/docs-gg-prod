@@ -5,6 +5,9 @@
 ### Where should Gluu Gateway be used?
 Gluu Gateway should be used in every API gateway where you need advanced security measures using OAuth 2.0 and User-Managed Access (UMA) 2.0 Grant.
 
+### How to get more idea about Services and Routes configuration in Kong?
+Please check the [Kong 0.14 docs about proxy configuration](https://docs.konghq.com/0.14.x/proxy).
+
 ### How can I investigate Gluu Gateway problems?
 Gluu Gateway uses Gluu Server and oxd. That means any potential issue on these servers can influence the work of Gluu Gateway.
 
