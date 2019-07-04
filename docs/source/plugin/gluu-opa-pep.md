@@ -1,14 +1,15 @@
 # Gluu OPA PEP
 ## Overview
 
-**`gluu-opa-pep`** authorization plugin which interact with the [Open Policy Agent](https://www.openpolicyagent.org/). It is execute after the gluu authentication plugins i.e. `gluu-openid-connect` and `gluu-opa-pep`. After authentication, data will be pass to `gluu-opa-pep` plugin and `gluu-opa-pep` plugin will call the OPA authorization endpoint. You need to configure the endpoint in `gluu-opa-pep` plugin. Plugin priority is `996`.
+**`gluu-opa-pep`** authorization plugin which interacts with the [Open Policy Agent](https://www.openpolicyagent.org/). It is executed after the Gluu authentication plugins i.e. `gluu-openid-connect` and `gluu-opa-pep`. After client authentication, data is passed to the `gluu-opa-pep` plugin which calls the OPA authorization endpoint (specified in the configuration). The plugin priority is `996`.
 
-!!! important
-    You can configured only one PEP plugin for authentication plugin. If you configured `gluu-uma-pep` or `gluu-oauth-pep` then GG not allow you to configure `gluu-opa-pep`.
+!!! Important
+    You can configured only one PEP plugin. If you have already configured `gluu-uma-pep` or `gluu-oauth-pep` then GG will not allow you to configure `gluu-opa-pep`.
 
-### The data which pass to OPA Policy endpoint after authentication: 
+### What is passed to the OPA Policy endpoint? 
 
-Json Sample
+Below is a sample:
+
 ```json
 {
   "input": {
@@ -23,11 +24,11 @@ Json Sample
 }
 ```
 
-**`request_token_data`** data is depend on which authentication plugin you configured.
+**`request_token_data`** data is dependent on which authentication plugin you configured.
 
 - `gluu-openid-connect` case : 
   
-     Below is the example of data when authentication plugin is `gluu-openid-connect`. You will get `id_token` detail in `request_token_data` property and User info in the `userinfo` property.
+     Below is an example of a request for authorization while using the `gluu-openid-connect` plugin. The `id_token`  is found isn the `request_token_data` property and Userinfo is in the `userinfo` property.
    ```json
    {
      "input": {
