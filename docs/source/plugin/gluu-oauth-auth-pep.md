@@ -337,31 +337,35 @@ The following parameters can be used in this plugin's configuration.
 
 1. Gluu-OAuth-Auth
 
-| field | Default | Description |
-|-------|---------|-------------|
-|**op_url**||The URL of your OP server. Example: https://op.server.com|
-|**oxd_url**||The URL of your oxd server. Example: https://oxd.server.com|
-|**oxd_id**|| The ID for an existing client, used to introspect the token. If left blank, a new client will be registered dynamically |
-|**client_id**|| An existing client ID, used to get a protection access token to access the introspection API. Required if an existing oxd ID is provided.|
-|**client_secret**|| An existing client secret, used to get protection access token to access the introspection API. Required if an existing oxd ID is provided.|
-|**anonymous**||An optional string (consumer UUID) value to use as an “anonymous” consumer if authentication fails. If empty (default), the request will fail with an authentication failure 4xx. This value must refer to the Consumer ID attribute that is internal to Kong, and not its custom_id.|
-|**pass_credentials**|pass|It allows to 3 values. `pass`, `hide` and `phantom_token`. Used to operate the authorization header from the upstream service as per configuration. In `phantom_token` case, plugin will replace bearer token with new generated JWT(with introspection result) token, so for outside there is bearer token and JWT for internal use.|
+     | field | Default | Description |
+     |-------|---------|-------------|
+     |**op_url**||The URL of your OP server. Example: https://op.server.com|
+     |**oxd_url**||The URL of your oxd server. Example: https://oxd.server.com|
+     |**oxd_id**|| The ID for an existing client, used to introspect the token. If left blank, a new client will be registered dynamically |
+     |**client_id**|| An existing client ID, used to get a protection access token to access the introspection API. Required if an existing oxd ID is provided.|
+     |**client_secret**|| An existing client secret, used to get protection access token to access the introspection API. Required if an existing oxd ID is provided.|
+     |**anonymous**||An optional string (consumer UUID) value to use as an “anonymous” consumer if authentication fails. If empty (default), the request will fail with an authentication failure 4xx. This value must refer to the Consumer ID attribute that is internal to Kong, and not its custom_id.|
+     |**pass_credentials**|pass|It allows to 3 values. `pass`, `hide` and `phantom_token`. Used to operate the authorization header from the upstream service as per configuration. In `phantom_token` case, plugin will replace bearer token with new generated JWT(with introspection result) token, so for outside there is bearer token and JWT for internal use.|
 
 2. Gluu-OAuth-PEP
 
-| field | Default | Description |
-|-------|---------|-------------|
-|**op_url**||The URL of your OP server. Example: https://op.server.com|
-|**oxd_url**||The URL of your oxd server. Example: https://oxd.server.com|
-|**oxd_id**|| The ID for an existing client, used to introspect the token. If left blank, a new client will be registered dynamically |
-|**client_id**|| An existing client ID, used to get a protection access token to access the introspection API. Required if an existing oxd ID is provided.|
-|**client_secret**|| An existing client secret, used to get protection access token to access the introspection API. Required if an existing oxd ID is provided.|
-|**oauth_scope_expression**|| Used to add scope security on an OAuth scope token.|
-|**deny_by_default**| true | For paths not protected by OAuth scope expressions. If true, denies unprotected paths.|
-|**method_path_tree**||It is for plugin internal use. We use it for tree level matching for dynamic paths which registered in `uma_scope_expression`|
+     | field | Default | Description |
+     |-------|---------|-------------|
+     |**op_url**||The URL of your OP server. Example: https://op.server.com|
+     |**oxd_url**||The URL of your oxd server. Example: https://oxd.server.com|
+     |**oxd_id**|| The ID for an existing client, used to introspect the token. If left blank, a new client will be registered dynamically |
+     |**client_id**|| An existing client ID, used to get a protection access token to access the introspection API. Required if an existing oxd ID is provided.|
+     |**client_secret**|| An existing client secret, used to get protection access token to access the introspection API. Required if an existing oxd ID is provided.|
+     |**oauth_scope_expression**|| Used to add scope security on an OAuth scope token.|
+     |**deny_by_default**| true | For paths not protected by OAuth scope expressions. If true, denies unprotected paths.|
+     |**method_path_tree**||It is for plugin internal use. We use it for tree level matching for dynamic paths which registered in `uma_scope_expression`|
 
 !!! Note
     GG UI can create a dynamic client. However, if the Kong Admin API is used for plugin configuration, it requires an existing client using the oxd API, then passing the client's credentials to the Gluu-OAuth-PEP plugin.
+
+#### Phantom Token
+
+In some cases there is requirement that bearer token for outside of the network and JWT token for the internal network. Check [here](../common-features/#phantom-token) for more details.
 
 #### OAuth Scope Expression
 
@@ -443,46 +447,17 @@ The result is `true`, so the request is allowed.
 
 #### Dynamic Resource Protection
 
-There are 3 elements to make more dynamic path registration and protection:
-
-- ? match any one path element
-- ?? match zero or more path elements
-- {regexp} - match single path element against PCRE
-
-The priority for the elements are:
-
-1. Exact match
-1. Regexp match
-1. ?
-1. ??
-
-!!! Note
-    slash(/) is required before multiple wildcards placeholder.
-    
-Examples: 
-
-Assume that below all path is register in one plugin
-
-| Register Path | Allow path | Deny path |
-|---------------|------------|-----------|
-| `/folder/file.ext` | <ul><li>/folder/file.ext</li></ul> | <ul><li>/folder/file</li></ul> |
-| `/folder/?/file` | <ul><li>/folder/123/file</li> <li>/folder/xxx/file</li></ul> | |
-| `/path/??` | <ul><li>/path/</li> <li>/path/xxx</li> <li>/path/xxx/yyy/file</li></ul> | <ul><li>/path - Need slash at last</li></ul> |
-| `/path/??/image.jpg` | <ul><li>/path/one/two/image.jpg</li> <li>/path/image.jpg</li></ul> | |
-| `/path/?/image.jpg` | <ul><li>/path/xxx/image.jpg - ? has higher priority than ??</li></ul> | |
-| `/path/{abc|xyz}/image.jpg` | <ul><li>/path/abc/image.jpg</li> <li>/path/xyz/image.jpg</li></ul> | |
-| `/users/?/{todos|photos}` | <ul><li>/users/123/todos</li> <li>/users/xxx/photos</li></ul> | |
-| `/users/?/{todos|photos}/?` | <ul><li>/users/123/todos/</li> <li>/users/123/todos/321</li> <li>/users/123/photos/321</li></ul> | |
+There are 3 elements to make more dynamic path registration and protection. Check [here](../common-features/#dynamic-resource-protection) for more details.
 
 ## Usage
 
 ### Create Client
 
-Create a client using the [create client consumer section](../admin-gui/#create-client). Use the oxd `register-site` API to create a client.
+Create a client using the [create client consumer section](../../admin-gui/#create-client). Use the oxd `register-site` API to create a client.
 
 ### Create Consumer
 
-A client credential needs to be associated with an existing Consumer object. To create a Consumer, use the [Consumer section](../admin-gui/#consumers).
+A client credential needs to be associated with an existing Consumer object. To create a Consumer, use the [Consumer section](../../admin-gui/#consumers).
 
 Create a consumer using the Kong Admin API:
 

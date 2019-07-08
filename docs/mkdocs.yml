@@ -50,6 +50,7 @@ nav:
     - 'Gluu UMA Auth and UMA PEP' :  'plugin/gluu-uma-auth-pep.md'
     - 'Gluu OPA PEP': 'plugin/gluu-opa-pep.md'
     - 'Gluu Metrics' :  'plugin/gluu-metrics.md'
+    - 'Common Features': 'plugin/common-features.md'
 - 'UMA Tutorial': 'uma-tutorial.md'
 - 'Logs' : 'logs/index.md'
 - 'FAQ' : 'faq.md'

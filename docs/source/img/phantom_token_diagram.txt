@@ -1,0 +1,11 @@
+title Phantom Token Sequence
+
+Client-Consumer->Kong+Plugin: Request Authorization: Bearer [access-token]
+note over Kong+Plugin
+introspect and client authentication
+end note
+note over Kong+Plugin
+generate new JWT token with introspect result
+end note
+Kong+Plugin->Upsteam: Request Authorization: Bearer [New JWT Token]
+
