@@ -60,6 +60,9 @@ Clicking on the **+** icon will bring up the below form.
 !!! Note
     Use [OXD API](https://gluu.org/docs/oxd/4.0/) for [client registration](https://gluu.org/docs/oxd/4.0/api/#register-site) and [UMA resource registration](https://gluu.org/docs/oxd/4.0/api/#uma-rs-protect-resources).
 
+!!! Important
+    [GG UI API for UMA client and resource registration](#gg-ui-api-for-uma-client-and-resource-registration)
+
 Configuration for `gluu-uma-auth`
 
 ```
@@ -114,9 +117,6 @@ $ curl -X POST \
 ```
 
 !!! Note
-    Plugin don't need `scope_expression` inside `conditions` because rule and expression is check and register at AS side. 
-
-!!! Note
     Kong does not allow proxying using only a service object--this feature requires a route. At minimum, one service is needed to register an Upstream API and one route is needed for proxying.
 
 ### Route Level
@@ -159,6 +159,9 @@ Clicking on the **+** icon will bring up the below form.
 
 !!! Note
     Use [OXD API](https://gluu.org/docs/oxd/4.0/) for [client registration](https://gluu.org/docs/oxd/4.0/api/#register-site) and [UMA resource registration](https://gluu.org/docs/oxd/4.0/api/#uma-rs-protect-resources).
+
+!!! Important
+    [GG UI API for UMA client and resource registration](#gg-ui-api-for-uma-client-and-resource-registration)
 
 Configuration for `gluu-uma-auth`
 
@@ -230,6 +233,10 @@ Clicking on the **+** icon will bring up the below form.
 
 !!! Note
     Use [OXD API](https://gluu.org/docs/oxd/4.0/) for [client registration](https://gluu.org/docs/oxd/4.0/api/#register-site) and [UMA resource registration](https://gluu.org/docs/oxd/4.0/api/#uma-rs-protect-resources).
+
+!!! Important
+    [GG UI API for UMA client and resource registration](#gg-ui-api-for-uma-client-and-resource-registration)
+
 
 Configuration for `gluu-uma-auth`
 
@@ -318,6 +325,95 @@ Here is a list of all the parameters which can be used in this plugin's configur
 
 !!! Note
     GG UI can create a dynamic client. However, if the Kong Admin API is used for plugin configuration, it requires an existing client using the oxd API, then passing the client's credentials to the Gluu-UMA-PEP plugin.
+
+### GG UI API for UMA client and resource registration
+
+If you are doing automate the configuration plugin using API and then after you want to see UMA plugin configuration in UI then it will not reflect. During UMA plugin configuration by GG UI, it is storing `scope_expression` in GG UI(Konga) DB because it is not really use for UMA-PEP plugin, Plugin don't need `scope_expression` inside `conditions` because rule and expression is check and register at AS side and you already registered it using [UMA Resource registration](https://gluu.org/docs/oxd/4.0/api/#uma-rs-protect-resources) OXD API. At UI side, it is use only for update the UMA resources. 
+
+So, you need to call `https://localhost:<konga_port>/api/clients/uma` GG UI(Konga) API also which will create client and register resources for you, which returns oxd_id, client_id and client_secret. Use this credential to create a `gluu-uma-pep` plugin.
+
+Use below curl request for Konga API, you need to pass your `scope_expression` here because it registers the UMA resource in OP using OXD APIs.
+
+Example:
+
+```
+curl -X POST \
+  https://localhost:<konga_port>/api/clients/uma \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "uma_scope_expression": [                    --> your full uma_scope_expression
+        {
+            "path": "/posts/??",
+            "conditions": [
+                {
+                    "httpMethods": [
+                        "GET"
+                    ],
+                    "scope_expression": {            --> recommended
+                        "rule": {
+                            "and": [
+                                {
+                                    "var": 0
+                                }
+                            ]
+                        },
+                        "data": [
+                            "admin"
+                        ]
+                    }
+                }
+            ]
+        }
+    ],
+    "client_name": "gluu-uma-client",
+    "op_host": "<https://<you_op_host.com>",
+    "oxd_url": "https://localhost:<your_oxd_server_port>"
+}'
+```
+
+For an update, use the same API with `PUT` HTTP request with `oxd_id`, `client_id`, and `client_secret` to see updated resources in GG UI also.
+
+```
+curl -X PUT \
+  https://localhost:<konga_port>/api/clients/uma \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "oxd_id": "<oxd_id>",
+    "client_id": "<client_id>",
+    "client_secret": "<client_secret>",
+    "uma_scope_expression": [                    --> your full uma_scope_expression
+        {
+            "path": "/posts/??",
+            "conditions": [
+                {
+                    "httpMethods": [
+                        "GET"
+                    ],
+                    "scope_expression": {            --> recommended
+                        "rule": {
+                            "and": [
+                                {
+                                    "var": 0
+                                }
+                            ]
+                        },
+                        "data": [
+                            "admin"
+                        ]
+                    }
+                }
+            ]
+        }
+    ],
+    "client_name": "gluu-uma-client",
+    "op_host": "<https://<you_op_host.com>",
+    "oxd_url": "https://localhost:<your_oxd_server_port>"
+}'
+```
+
+!!! Note
+    Kong does not allow proxying using only a service object--this feature requires a route. At minimum, one service is needed to register an Upstream API and one route is needed for proxying.
+
 
 #### Phantom Token
 
