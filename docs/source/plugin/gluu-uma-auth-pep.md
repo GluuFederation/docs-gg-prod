@@ -328,7 +328,7 @@ Here is a list of all the parameters which can be used in this plugin's configur
 
 ### GG UI API for UMA client and resource registration
 
-If you are doing automate the configuration plugin using API and then after you want to see UMA plugin configuration in UI then it will not reflect. During UMA plugin configuration by GG UI, it is storing `scope_expression` in GG UI(Konga) DB because it is not really use for UMA-PEP plugin, Plugin don't need `scope_expression` inside `conditions` because rule and expression is check and register at AS side and you already registered it using [UMA Resource registration](https://gluu.org/docs/oxd/4.0/api/#uma-rs-protect-resources) OXD API. At UI side, it is use only for update the UMA resources. 
+This API is used to register the OP Client and UMA resources using OXD API and also store the `uma_scope_expression` with the `scope_expression` in GG UI DB(Konga DB). `scope_expression` is optional for the `gluu-uma-pep` plugin because security check operation performs at the AS Server side, not really need to store in the plugin configuration. GG UI uses this full expression to, later on, update the UMA Resources. So you need to use this API if you are doing automated setup and configure GG using API and later on want to update using GG UI, otherwise, GG UI will not allow you to update UMA-PEP plugin. 
 
 So, you need to call `https://localhost:<konga_port>/api/clients/uma` GG UI(Konga) API also which will create client and register resources for you, which returns oxd_id, client_id and client_secret. Use this credential to create a `gluu-uma-pep` plugin.
 
