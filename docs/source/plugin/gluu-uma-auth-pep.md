@@ -321,14 +321,7 @@ Here is a list of all the parameters which can be used in this plugin's configur
 
 #### Phantom Token
 
-In some cases there is requirement that bearer token for outside of the network and JWT token for the internal network.
-
-![phantom_token](../img/phantom_token.png)
- 
-To configure phantom token feature, you just need to set `pass_credentials='phantom_token'` in plugin configuration. 
-
-!!! Important
-    Set `access_token_as_jwt: false` and `rpt_as_jwt: false` in [client registration](../../admin-gui/#consumers), otherwise client by default returns you access token as JWT. 
+In some cases there is requirement that bearer token for outside of the network and JWT token for the internal network. Check [here](../common-features/#phantom-token) for more details.
 
 #### UMA Scope Expression
 
