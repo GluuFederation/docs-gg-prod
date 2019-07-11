@@ -19,7 +19,7 @@ documentation and administrative guide.
  
 ## Gluu Gateway 4.0
 
-There are major changes in GG 4.0. We de-couple plugins and separate it in two categories, authentication and authorization. Also we provide two new plugins that is `gluu-openid-connect` and `gluu-opa-pep`. Now there is 5 plugins.
+There are major changes in GG 4.0. We de-couple plugins and separate it in two categories, authentication and authorization. Also we provide two new plugins that is `gluu-openid-connect` and `gluu-opa-pep`. Now there is 7 plugins.
 
 | Plugin | Description | Priority |
 |--------|-------------|----------|
@@ -37,10 +37,10 @@ There are major changes in GG 4.0. We de-couple plugins and separate it in two c
 ### Changes
 - [#297](https://github.com/GluuFederation/gluu-gateway/issues/297): Decouple existing gluu-uma-pep. Now there are two separate plugins 1. gluu-uma-auth 2. gluu-uma-pep.
 - [#298](https://github.com/GluuFederation/gluu-gateway/issues/298): Decouple existing gluu-oauth-pep. Now there are two separate plugins 1. gluu-oauth-auth 2. gluu-oauth-pep.
-- [#328](https://github.com/GluuFederation/gluu-gateway/issues/328) : Collect metrics issues (Collects more metrics)
+- [#328](https://github.com/GluuFederation/gluu-gateway/issues/328) : Collect more metrics about all plugins
 
 ### Features
 - [#283](https://github.com/GluuFederation/gluu-gateway/issues/283): New `gluu-openid-connect` plugin with UMA claim gathering support 
 - [#296](https://github.com/GluuFederation/gluu-gateway/issues/296): Admin GUI for plugins configuration
-- [#320](https://github.com/GluuFederation/gluu-gateway/issues/320) : Make new Open Policy Agent plugin
+- [#320](https://github.com/GluuFederation/gluu-gateway/issues/320) : Make new Open Policy Agent plugin `gluu-opa-pep`
 - [#317](https://github.com/GluuFederation/gluu-gateway/issues/317) : Support Phantom Token Flow

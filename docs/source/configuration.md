@@ -39,6 +39,7 @@ The Gluu Gateway service is used to manage all components, including: the Admin 
     |oxdVersion|Used to set oxd server version|
     |ggVersion|It shows the Gluu Gateway version|
     |explicitHost|Used to define Gluu gateway GUI host explicitly. It by default listens to localhost only for security. You can set it with global IP to access GUI globally.|
+    |postgresVersion| Postgres DB Version |
 
     GUI is in `sailsjs-v0.12` node js framework. For more detail configuration take a look on [sailjs documentation](https://0.12.sailsjs.com/documentation/reference/configuration).
 

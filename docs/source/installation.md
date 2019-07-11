@@ -166,6 +166,15 @@ Gluu Gateway needs to be deployed on a server or VM with the following minimum r
 !!! Important 
     Before start setup, stop your all services which run on ports 443, 8443, 1338, 8000 and 8001. 
 
+!!! Note
+    During setup, we are register your metrics endpoint at Gluu license server. GG configure below some things.
+      
+      - Kong Service object with `name: gluu-org-metrics-service` and url `url: http://localhost:8001`
+      - Kong Route object with `methods: GET`, `paths: /gluu-metrics`, `strip_path: false` and `service: above_service_id`.
+      - Kong IP Restriction plugin so that this endpoint only accessible to Gluu license server.
+      - Configure Gluu `gluu-metrics` plugin globally.
+      - Register customer at Gluu license server `license.gluu.org`. 
+
 ```
  # cd /opt/gluu-gateway/setup
  # python setup-gluu-gateway.py
@@ -176,22 +185,24 @@ After acknowledging the Gluu Stepped-Up Support License, you will be prompted to
 !!! Important 
     When prompted to provide a two-letter value, make sure to follow the instructions. A mistake may result in the lack of certificates.
 
+
 | **Question** | **Explanation** |
 |----------|-------------|
 | **Enter IP Address** | IP Address of your API gateway  |
-| **Enter Kong hostname** | Internet-facing FQDN to generate certificates and metadata. Do not use an IP address or localhost. |
+| **Enter Hostname** | Internet-facing FQDN to generate certificates and metadata. Do not use an IP address or localhost. |
 | **Enter two-letter Country Code** | Used to generate web X.509 certificates |
 | **Enter two-letter State Code** | Used to generate web X.509 certificates |
 | **Enter your City or locality** | Used to generate web X.509 certificates |
 | **Enter Organization name** | Used to generate web X.509 certificates |
-| **Email address** | Used to generate web X.509 certificates |
-| **Password** | If you already have a database password for user `postgres`, enter it here. Otherwise, enter a new password. |
-| **OP hostname** | The hostname of the Gluu Server that will be used for OAuth 2.0 client credentials and access management. **Example**: op-server.com |
-| **oxd server URL** | If oxd is installed on a different hostname than Gluu Gateway, provide its URL. If not, enter the hostname for Gluu Gateway|
-| **Would you like to generate client_id/client_secret for Konga?** | Register an OpenID Client for Konga, or enter existing client credentials manually. By default, the client expiration is set to 24 hours; make sure to [extend this expiration date](https://www.gluu.org/docs/oxd/4.0/faq/#client-expires-how-can-i-avoid-it). Without this step, after 24 hours you will no longer be able to log in to the Gluu Gateway. If you enter existing client details, make sure your client in Redirect Login URIs and Post Logout Redirect URIs field has the value `https://localhost:1338`. |
-| **oxd_id** | Used to manually set the oxd ID. |
-| **client_id** | Used to manually set the client ID. |
-| **client_secret** | Used to manually set the client secret. |
+| **Enter Email Address** | Used to generate web X.509 certificates |
+| **Password** | If you already have a postgres database password for user `postgres`, enter it here. Otherwise, enter a new password. |
+| **OP Server Host** | The hostname of the Gluu Server that will be used for OAuth 2.0 client credentials and access management. **Example**: your-op.server.com |
+| **Install OXD Server?** | If you choose Y(yes) then it will install fresh oxd server in your machine. If you choose N(No) then it will ask you next question `Enter your existing OXD server URL`, where you need to enter your existing oxd server URL. | 
+| **OXD Server URL** | If oxd is installed on a different hostname than Gluu Gateway, provide its URL. If not, enter the hostname for Gluu Gateway|
+| **Generate client credentials to call oxd-server API's?** | Register an OpenID Client for Konga, or enter existing client credentials manually. Take care about yuor Client at your OP server side; make sure to [extend this expiration date](https://www.gluu.org/docs/oxd/4.0/faq/#client-expires-how-can-i-avoid-it). If you enter existing client details, make sure your client in Redirect Login URIs and Post Logout Redirect URIs field has the value `https://localhost:1338`. |
+| **OXD Id** | Used to manually set the oxd ID. |
+| **Client Id** | Used to manually set the client ID. |
+| **Client Secret** | Used to manually set the client secret. |
 
 ## Finish the setup
 
@@ -206,11 +217,8 @@ If you see the above message, it means the installation was successful. To log i
     
 
 !!! Note
-    If you do not want an SSH tunnel connection. See [FAQ](./faq.md#how-can-i-change-the-listening-address-and-port) for global access configuration.
+    If you do not want an SSH tunnel connection. See [FAQ](./faq.md#how-can-i-change-the-listening-address-and-port) for global access configuration. After this settings, you also need to update the OP clients redirect url and post logout url using oxd [update-site]() api.
     
-!!! Warning
-    By default, the Gluu Gateway Client expiration date is set for one day during the installation process. To change it, follow [these instructions](https://gluu.org/docs/oxd/4.0/faq/#client-expires-how-can-i-avoid-it). Without this step, after 24 hours you will no longer be able to log in to the Gluu Gateway.
-
 ## Applications and their ports
 
 | Port | Description |
