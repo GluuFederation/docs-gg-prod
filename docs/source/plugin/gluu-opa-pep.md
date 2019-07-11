@@ -1,7 +1,7 @@
 # Gluu OPA PEP
 ## Overview
 
-**`gluu-opa-pep`** authorization plugin which interacts with the [Open Policy Agent](https://www.openpolicyagent.org/). It is executed after the Gluu authentication plugins i.e. `gluu-openid-connect` and `gluu-opa-pep`. After client authentication, data is passed to the `gluu-opa-pep` plugin which calls the OPA authorization endpoint (specified in the configuration). The plugin priority is `996`.
+**`gluu-opa-pep`** authorization plugin which interacts with the [Open Policy Agent](https://www.openpolicyagent.org/). It is executed after the Gluu authentication plugins i.e. `gluu-openid-connect` and `gluu-oauth-auth`. After client authentication, data is passed to the `gluu-opa-pep` plugin which calls the OPA authorization endpoint (specified in the configuration). The plugin priority is `996`.
 
 !!! Important
     You can configured only one PEP plugin. If you have already configured `gluu-uma-pep` or `gluu-oauth-pep` then GG will not allow you to configure `gluu-opa-pep`.
@@ -73,9 +73,9 @@ Below is a sample:
    }
    ```
 
-- `gluu-opa-pep` case: 
+- `gluu-oauth-auth` case: 
 
-     Below is the example of data when authentication plugin is `gluu-opa-pep`. You will get `token introspection` detail in `request_token_data` property.
+     Below is the example of data when authentication plugin is `gluu-oauth-auth`. You will get `token introspection` detail in `request_token_data` property.
    ```json
    {
      "input": {
@@ -159,9 +159,6 @@ Use the [Manage Service](../admin-gui/#manage-service) section in the GG UI to e
 ![11_path_oauth_service](../img/17_opa_service_add.png)
 
 Clicking on the **+** icon will bring up the below form.
-
-!!! important
-    If you don't wanna add `gluu-oauth-pep` plugin then disable button which is on the top.
 
 ![11_path_add_oauth_service](../img/17_opa_form.png)
 

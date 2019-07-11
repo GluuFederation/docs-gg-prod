@@ -188,7 +188,7 @@ Some plugins can be configured for each specific consumer. This section will als
 
 ### Create Client
 
-Click on the `+ CREATE CLIENT` button to create OP client. It will create a client with `openid` and `oxd` scopes and with the `client_credentials` grant type.
+Click on the `+ CREATE CLIENT` button to create OP client. It will create a client with the `client_credentials` grant type. It creates a client using OXD `register-site` API, so you can use direct OXD API also.
 
 ![4_consumer_client](img/4_consumer_client.png)
 
@@ -200,6 +200,7 @@ Click on the `+ CREATE CLIENT` button to create OP client. It will create a clie
 | **Access Token as JWT**(optional) | It will create client with `Access Token as JWT:true`, It is used to return the access token as a JWT. The Gluu OAuth PEP plugin supports JWT access tokens.|
 | **RPT as JWT**(optional) |It will create client with `RPT as JWT:true`. It is used to return access token(RPT) as JWT. The Gluu UMA PEP plugin supports JWT RPT access tokens.|
 | **Token signing algorithm**(optional) | The default token signing algorithm for the client. It is used for both OAuth access tokens and UMA RPT tokens. Currently, plugins only support 3 algorithms: **RS256**, **RS384** and **RS512**.|
+| **Scope**|The scope for the OP Client. `uma_protection` is required in UMA(gluu-uma-auth plugin) authentication case. Note: Press Enter to accept a value.|
 
 ## Plugins
 
