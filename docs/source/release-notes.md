@@ -38,6 +38,7 @@ There are major changes in GG 4.0. We de-couple plugins and separate it in two c
 - [#297](https://github.com/GluuFederation/gluu-gateway/issues/297): Decouple existing gluu-uma-pep. Now there are two separate plugins 1. gluu-uma-auth 2. gluu-uma-pep.
 - [#298](https://github.com/GluuFederation/gluu-gateway/issues/298): Decouple existing gluu-oauth-pep. Now there are two separate plugins 1. gluu-oauth-auth 2. gluu-oauth-pep.
 - [#328](https://github.com/GluuFederation/gluu-gateway/issues/328) : Collect more metrics about all plugins
+- [#336](https://github.com/GluuFederation/gluu-gateway/issues/336) : GG UI: Remove extra API for plugin config
 
 ### Features
 - [#283](https://github.com/GluuFederation/gluu-gateway/issues/283): New `gluu-openid-connect` plugin with UMA claim gathering support 
