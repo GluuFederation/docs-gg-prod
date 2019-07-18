@@ -2,17 +2,17 @@
 
 ## Overview
 
-Gluu Gateway enables organizations to restrict access to APIs and websites by requiring valid access tokens issued by an OAuth or UMA Authorization Server (AS).
+Gluu Gateway (GG) enables access management for APIs and websites by requiring valid access tokens issued by the [Gluu Server](https://gluu.org/) OAuth or UMA Authorization Server (AS), or the [Open Policy Agent](https://www.openpolicyagent.org) Policy Decision Point (PDP) 
 
-Gluu Gateway is built on top of the [Kong Community Edition (CE) v0.14 API gateway](https://konghq.com/community/) and leverages the strong ecosystem of Kong plugins to enable rate limiting, logging, and many other capabilities.
+Gluu Gateway inherits its core API gateway functionality from [Kong CE v0.14](https://konghq.com/community/), and leverages the strong ecosystem of Kong plugins to enable rate limiting, logging, and many other capabilities.
 
 ## Features
 
 Primary use cases and functionalities supported by Gluu Gateway include:
 
 - Control access to APIs by requiring OAuth or UMA scopes
-- Control access to API's by delegating the decision to an Open Policy Agent server
-- Proxy websites, acting as an OpenID Connect Relying Party
+- Control access to API's by delegating the decision to an Open Policy Agent server (PDP)
+- Proxy websites, acting as an OpenID Connect Relying Party (RP)
 - Control access to websites by requiring a valid UMA token
 - Collect and report OAuth and UMA usage metrics
 - Introspect bearer access tokens
