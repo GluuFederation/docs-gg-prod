@@ -1,5 +1,5 @@
 # Project Information
-site_name: Gluu Gateway 4.0 Docs
+site_name: Gluu Gateway 4.0 Beta Docs
 site_description: Documentation for Gluu Gateway
 
 # Copyright
@@ -13,7 +13,7 @@ repo_name: GluuFederation/docs-gg-prod
 
 # Configuration
 extra:
-    version: '4.0'
+    version: '4.0 Beta'
 theme:
     name: material
     custom_dir: theme
@@ -34,7 +34,7 @@ markdown_extensions:
 # Navigation Menu
 nav:
 - 'Versions':
-    - '4.0': 'https://gluu.org/docs/gg/4.0/'
+    - '4.0 Beta': 'https://gluu.org/docs/gg/4.0/'
     - '1.0': 'https://gluu.org/docs/gg/1.0/'
 - ' ': 'https://gluu.org'
 - ' ': 'https://gluu.org'
