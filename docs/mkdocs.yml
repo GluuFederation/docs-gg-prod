@@ -16,7 +16,6 @@ extra:
     version: '4.0 Beta'
 theme:
     name: material
-    custom_dir: theme
     palette:
         primary: 'green'
         accent: 'green'
