@@ -32,14 +32,17 @@ A description of our plugins follows:
 |**gluu-uma-pep**| Authorization by UMA Scope security|
 |**gluu-metics**| Metrics about client authentication, authorization and others|
 
+### New Features
+- [#283](https://github.com/GluuFederation/gluu-gateway/issues/283): New `gluu-openid-connect` plugin with UMA claim gathering support 
+- [#320](https://github.com/GluuFederation/gluu-gateway/issues/320) : Make new Open Policy Agent plugin `gluu-opa-pep`
+- [#317](https://github.com/GluuFederation/gluu-gateway/issues/317) : Support Phantom Token Flow
+- [#324](https://github.com/GluuFederation/gluu-gateway/issues/324) : GG UI - Add OPA plugin configuration in GG Admin Console
+- [#322](https://github.com/GluuFederation/gluu-gateway/issues/322) : GG UI - Update UI for phantom token configuration
+- [#296](https://github.com/GluuFederation/gluu-gateway/issues/296) : GG UI - OpenID Connect plugin configuration
+
 ### Changes
 - [#297](https://github.com/GluuFederation/gluu-gateway/issues/297): Decouple existing gluu-uma-pep. Now there are two separate plugins 1. gluu-uma-auth 2. gluu-uma-pep.
 - [#298](https://github.com/GluuFederation/gluu-gateway/issues/298): Decouple existing gluu-oauth-pep. Now there are two separate plugins 1. gluu-oauth-auth 2. gluu-oauth-pep.
 - [#328](https://github.com/GluuFederation/gluu-gateway/issues/328) : Collect more metrics about all plugins
 - [#336](https://github.com/GluuFederation/gluu-gateway/issues/336) : GG UI: Remove extra API for plugin config
-
-### New Features
-- [#283](https://github.com/GluuFederation/gluu-gateway/issues/283): New `gluu-openid-connect` plugin with UMA claim gathering support 
-- [#296](https://github.com/GluuFederation/gluu-gateway/issues/296): Admin GUI for plugins configuration
-- [#320](https://github.com/GluuFederation/gluu-gateway/issues/320) : Make new Open Policy Agent plugin `gluu-opa-pep`
-- [#317](https://github.com/GluuFederation/gluu-gateway/issues/317) : Support Phantom Token Flow
+- [#325](https://github.com/GluuFederation/gluu-gateway/issues/325) : License enforment and calculate transactions
