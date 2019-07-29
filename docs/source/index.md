@@ -65,10 +65,11 @@ Use the following links to get started:
 1. [Configuration](./configuration.md)
 1. [Admin GUI](./admin-gui.md)
 1. Plugins
-    1. [Gluu OAuth Auth and PEP](./plugin/gluu-oauth-auth-pep.md)
-    1. [Gluu UMA Auth and PEP](./plugin/gluu-uma-auth-pep.md)
-    1. [Gluu OpenID Connect and UMA PEP](./plugin/gluu-openid-connect-uma-pep.md)
-    1. [Gluu Metrics](./plugin/gluu-metrics.md)
+    1. [OAuth Auth and PEP](./plugin/gluu-oauth-auth-pep.md)
+    1. [UMA Auth and PEP](./plugin/gluu-uma-auth-pep.md)
+    1. [OpenID Connect and UMA PEP](./plugin/gluu-openid-connect-uma-pep.md)
+    1. [Open Policy Agent (OPA) PEP](./plugin/gluu-opa-pep.md)
+    1. [Metrics](./plugin/gluu-metrics.md)
 1. [FAQ](./faq.md)
 
 ## License  
