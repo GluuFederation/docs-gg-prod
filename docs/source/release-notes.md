@@ -45,4 +45,4 @@ A description of our plugins follows:
 - [#298](https://github.com/GluuFederation/gluu-gateway/issues/298): Decouple existing gluu-oauth-pep. Now there are two separate plugins 1. gluu-oauth-auth 2. gluu-oauth-pep.
 - [#328](https://github.com/GluuFederation/gluu-gateway/issues/328) : Collect more metrics about all plugins
 - [#336](https://github.com/GluuFederation/gluu-gateway/issues/336) : GG UI: Remove extra API for plugin config
-- [#325](https://github.com/GluuFederation/gluu-gateway/issues/325) : License enforment and calculate transactions
+- [#325](https://github.com/GluuFederation/gluu-gateway/issues/325) : Usage and metrics tracking
