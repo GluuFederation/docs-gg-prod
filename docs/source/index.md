@@ -1,9 +1,5 @@
 # Gluu Gateway 4.0.x
 
-!!! Attention
-    GG 4.0 is currently in open Beta. Questions and feedback can be directed to [Gluu support](https://support.gluu.org). View [known issues](https://github.com/GluuFederation/gluu-gateway/milestone/6). 
-
-
 ## Overview
 
 Gluu Gateway (GG) enables access management for APIs and websites by requiring valid access tokens issued by the [Gluu Server](https://gluu.org/) OAuth or UMA Authorization Server (AS), or the [Open Policy Agent](https://www.openpolicyagent.org) Policy Decision Point (PDP).
