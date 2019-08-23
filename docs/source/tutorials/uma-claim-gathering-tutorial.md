@@ -1,0 +1,242 @@
+# Gluu Gateway UMA Claim Gathering Tutorial
+
+## Overview
+
+This tutorial is **implementing a user consent workflow post authentication and authorization with** [**UMA Claim Gathering Flow**](https://docs.kantarainitiative.org/uma/wg/rec-oauth-uma-grant-4.0.html) using the [GLUU-UMA-Auth](../plugin/gluu-uma-auth-pep.md) and [GLUU-UMA-PEP](../plugin/gluu-uma-auth-pep.md) plugins. The [demo](https://github.com/GluuFederation/gluu-gateway/tree/version_4.0/gg-demo) is a **Python CGI** script that can be deployed on any CGI-enabled server.
+
+## Parties
+
+![UMA Overview](../img/15_uma-tutorial-flow-parties.png)
+
+## Flow
+![Flow chart](../img/15_uma_flow.png)
+
+## OpneID Connect Provider
+   
+For the Authorization Server(OpenID Connect Provider), we are using here the **Gluu Server CE 4.0**. Install the Gluu Server by following [these](https://gluu.org/docs/ce/4.0/installation-guide/install-ubuntu/) instructions.
+
+## Gluu Gateway
+
+Install **Gluu Gateway 4.0** by following [these](../installation.md) instructions.
+
+!!! Note
+    The GG UI is only available on localhost. Since it is on a remote machine, we need SSH port forwarding to reach the GG UI. Plugin configuration can be done either via REST calls or via the Gluu Gateway web interface.  
+
+Applications and their ports:
+
+| Port | Description |
+|------|-------------|
+|1338| Gluu Gateway Admin GUI|
+|8001|Kong Admin API|
+|8000|Kong Proxy Endpoint|
+|443|Kong SSL Proxy Endpoint. Kong by default provide 8443 port for SSL proxy but during setup it change into 443.|
+|8443|OXD Server| 
+
+### Add Service
+
+Register your upstream API as a Service. For more details, see the [Gluu UMA Auth and UMA PEP service docs](/plugin/gluu-uma-auth-pep/#service-level).
+
+We are using `https://jsonplaceholder.typicode.com` as a Upstream API, it is your application which you wanna add user authentication and authorization.
+
+Follow these step to add Service using GG UI
+ 
+- Click SERVICES on the left panel
+- Click on **+ ADD NEW SERVICE** button
+- Fill in the following boxes:
+    - **Name:** claim-gathering
+    - **URL:** https://jsonplaceholder.typicode.com
+
+![uma-cg-tutorial-1](../img/uma-cg-tutorial-1.png)
+
+### Add Route
+
+Follow these steps to add route:
+
+- Click **claim-gathering** on the services
+
+- Click Routes
+
+- Click the + ADD ROUTE button
+
+- Fill in the following boxes:
+     - Hosts: gathering.example.com, `Tip: Press Enter to accept value`
+  
+![uma-cg-tutorial-2](../img/uma-cg-tutorial-2.png)
+
+### Configure Plugin on Service
+
+Configure Gluu-UMA-Auth and Gluu-UMA-PEP with UMA scopes and resources. See more details in the [Service Plugin docs](/plugin/gluu-uma-auth-pep/#configure-service-plugin-using-gg-ui).
+
+- Resource registration for **claim-gathering** service. Add `/posts/??` path, `http methods` and `claim_gathering` scope.
+![claim_gathering](../img/15_claim_gatering_uma_expression.png)
+
+### Add Consumer with OP Client
+
+OP Client is used to correlate an access token with a Kong consumer. You must create a OP client before you can register it here as a way to identify a consumer.
+
+Follow these steps to make a **new OP Client** and **consumer** using GG UI:
+
+- Click CONSUMERS on the left panel
+- Click on **+ CREATE CLIENT** button
+- Add `name` and submit the form
+![uma-cg-tutorial-3.png](../img/uma-cg-tutorial-3.png)
+- It will create client in your OP Server and show you all the client details. You need to copy all the details. let's call it **consumer_op_client** so it will help you in next steps.
+![uma-cg-tutorial-4.png](../img/uma-cg-tutorial-4.png)
+- Click on **+ CREATE CLIENT** button and add `client_id` in the `Gluu Client Id`.
+![uma-cg-tutorial-5.png](../img/uma-cg-tutorial-5.png)
+
+## Authorization Server and Configuration
+   
+For UMA with Claims Gathering, you need to configure below settings. Login into Gluu Admin(oxTrust) UI and follow the below steps.
+
+1. Enable UMA RPT Polices & UMA Claims Gathering
+
+     There is one **uma_rpt_policy** included in the script. During authorization, it checks County=US and City=NY. If you want to change the value, then you can update this script or add your own new script. For more details, take a look at [Gluu CE Documentation](https://gluu.org/docs/ce/admin-guide/uma/#uma-rpt-authorization-policies).
+     ![uma_rpt_policy](../img/15_uma_rpt_policy.png)
+     ![uma_claim_gatering_policy](../img/15_uma_claim_gatering_policy.png)
+
+2. UMA scope with Authorization Policy
+
+     ![uma_scope](../img/15_uma_scope.png)
+     
+3. For this step you need to use OXD. Update the consumer_op_client with `claim_redirect_uris` using OXD `update-site` command.
+
+     ```
+     curl -X POST https://gg.example.com:8443/update-site
+           --Header "Authorization: Bearer <ACCESS_TOKEN>"
+           --Header "Content-Type: application/json"
+           --data '{"oxd_id": "<CONSUMER_OP_CLIENT_OXD_ID>","claims_redirect_uri":"<your_claims_redirect_uri>"}'
+     ```
+    
+     If your cgi script is in `/usr/lib/cgi-bin/index.py` folder then your **claims_redirect_uri** will be `<your_cgi_server_url>/cgi-bin/index.py`. it will update your OP Client.
+     ![15_config_claim_url](../img/15_config_claim_url.png)
+    
+## User Authentication and authorization requests (Requesting party)
+
+The Demo is a Python CGI script. You need to put it in a CGI-enabled web server. The script is divided into 3 parts:
+
+* index.py - Main script
+* helper.py - REST calls and HTML template
+* config.py - Custom configuration
+
+Download the Demo from the [Gluu-Gateway repository](https://github.com/GluuFederation/gluu-gateway/tree/version_4.0/gg-demo).
+
+### Deploy
+
+Since we are going to write a Python CGI script for simplicity, we first need to get a working web server to act as the Relying Party (RP). Install Apache on the host rp.server.com. This tutorial is using Ubuntu 16.04 LTS. First, install the Apache web server:
+
+```
+# apt-get update
+# apt-get install apache2
+# ln -s /etc/apache2/mods-available/cgi.load /etc/apache2/mods-enabled/
+```
+
+You will use Python's requests module to interact with oxd's REST API:
+
+```
+# apt-get install python-requests
+```
+
+Put all 3 files in `/usr/lib/cgi-bin` and give them `755` permission.
+
+```
+# chmod 755 index.py helper.py config.py
+```
+
+### Configuration
+
+Use the `config.py` file to add your configuration
+
+| Properties | Description |
+|------------|-------------|
+|gg_admin_url|Gluu Gateway kong admin URL|
+|gg_proxy_url|Gluu Gateway kong proxy URL|
+|oxd_host|OXD server URL|
+|ce_url|CE OP Server URL|
+|api_path|your API path which you register during plugin configuration. Example: request path `/posts/1`. Check [here](../../plugin/common-features/#dynamic-resource-protection) for more details about path regular expression.|
+|host_with_claims|Kong Router object's host which you configure for claim gathering flow. As per above configuration, its value is `gathering.example.com`.|
+|host_without_claims| Ignore this for now. You can make policy without claim flow. |
+|client_oxd_id, client_id, client_secret|Consumer OP Client credentials|
+|claims_redirect_url|Claims redirect URL. As per above configuration, it is `<your-server.com>/cgi-bin/index.py`.|
+
+Hit this `<your-server.com>/cgi-bin/index.py?claim=true` URL in browser. It will show you 3 steps
+
+1. Request to resources and get ticket
+ 
+     ![uma-cg-tutorial-7.png](../img/uma-cg-tutorial-7.png)
+
+2. **need_info** response
+
+     ![uma-cg-tutorial-8.png](../img/uma-cg-tutorial-8.png)
+
+3. Get Claim Gathering URL 
+
+     ![uma-cg-tutorial-9.png](../img/uma-cg-tutorial-9.png)
+
+     Click on URL and it will redirect you to AS for claims. Enter details `Country: US` and `City: NY`
+
+4. After redirect, demo app gets ticket from url, get new RPT Token and show the requested resource output
+
+     ![uma-cg-tutorial-6.png](../img/uma-cg-tutorial-6.png)
+
+5. Request resources with new RPT Token and show the requested resource output
+
+     ![uma-cg-tutorial-10.png](../img/uma-cg-tutorial-10.png)
+        
+
+### Authentication Steps
+
+It shows you the step by step execution of every step.
+
+1. Request to protected resources and Get a resource ticket
+
+      ```
+        curl -X GET http://gg.example.com:8000/posts/1
+            --Header "Host: gathering.example.com"
+      ```
+
+      When you make this call, you'll receive a ticket in the WWW-Authenticate header with a permission ticket.
+
+2. Request for RPT token and you will get a **need_info** ticket for one more step i.e. claim gathering
+
+      ```
+        curl -X POST https://gg.example.com:8443/uma-rp-get-rpt
+            --Header "Authorization: Bearer <ACCESS_TOKEN>"
+            --Header "Content-Type: application/json"
+            --data '{"oxd_id": "<CONSUMER_OP_CLIENT_OXD_ID>","ticket":"<PERMISSION_TICKET>"}'
+      ```
+
+      When you make this call, you'll get a `need_info ticket` and `redirect_user` url.
+
+3. Get Claim gathering URL
+
+      You can use oxd `uma-rp-get-claims-gathering-url` command or concat your **claims_redirect_uri** to **redirect_user** URL
+      
+      For Example: Suppose you get `https://<your_op_server_host>/oxauth/restv1/uma/gather_claims?.....` as a **redirect_user(in need_info response)** then your final claim redirect url will be `https://<your_op_server_host>/oxauth/restv1/uma/gather_claims?.....&claims_redirect_uri=<your_claim_redirect_uri>`.  
+            
+      Request URL in the browser and add country and city data. Per default **uma_rpt_policy**, you need to enter **US** in Country and **NY** in City. If you change location values in the script, enter corresponding values here.
+            
+      If all claims are correct, the Gluu Server will redirect you to the `your_claim_redirect_uri` with a **new permission ticket**.
+
+5. Get an RPT token with a **new permission ticket**
+
+      ```
+        curl -X POST https://gg.example.com:8443/uma-rp-get-rpt
+            --Header "Authorization: Bearer <ACCESS_TOKEN>"
+            --Header "Content-Type: application/json"
+            --data '{"oxd_id": "<CONSUMER_OP_CLIENT_OXD_ID>","ticket":"<NEW_PERMISSION_TICKET>"}'
+      ```
+      
+      When you make this call, you'll receive an RPT access token.
+
+6. Request resource with new RPT Token
+
+      ```
+        curl -X GET http://gg.example.com:8000/<YOUR_PATH>
+            --Header "Authorization: Bearer <YOUR_NEW_RPT>"
+            --Header "Host: gathering.example.com"
+      ```
+      
+!!! Info
+    You can make a policy to without claim flow and just check request and return true and false. For Example: You can pass the id token as a PCT token, check the values in UMA Policy script and return true to allow and false to deny. In this case, there is no **need_info** response and no claim gathering process. Check [Gluu UMA Docs here](https://gluu.org/docs/ce/4.0/admin-guide/uma/) for more details. <br/> For none claim gathering, you need to set `host_with_claims` and request url of demo will be `<your-server.com>/cgi-bin/index.py` without `?claim=true`.
+
