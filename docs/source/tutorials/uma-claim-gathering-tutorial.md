@@ -4,7 +4,7 @@
 
 In this tutorial, we will use the [GLUU-UMA-Auth](../plugin/gluu-uma-auth-pep.md) and [GLUU-UMA-PEP](../plugin/gluu-uma-auth-pep.md) plugins to implement a claims gathering workflow, where an authenticated user is prompted to input information to satisfy access policies. 
 
-In the demo, the user will be prompted to enter city and state before being able to access a protected page. If the values entered are correct (NY, USA), the user is granted access. If not, access is denied. 
+In the demo, the user will be prompted to enter their city and state before being able to access a protected page. If the values entered are correct (NY, USA), the user is granted access. If not, access is denied. 
 
 ### Parties
 
