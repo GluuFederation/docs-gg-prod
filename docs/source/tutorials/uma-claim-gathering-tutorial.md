@@ -4,7 +4,6 @@
 
 In this tutorial, we will use the [GLUU-UMA-Auth](../plugin/gluu-uma-auth-pep.md) and [GLUU-UMA-PEP](../plugin/gluu-uma-auth-pep.md) plugins to implement a claims gathering workflow, where an authenticated user is prompted to input information to satisfy policies before being granted access to a protected resource. If the values entered are correct, the user is granted access. If not, access is denied. 
 
-
 ### Parties
 
 ![UMA Overview](../img/15_uma-tutorial-flow-parties.png)
@@ -13,16 +12,17 @@ In this tutorial, we will use the [GLUU-UMA-Auth](../plugin/gluu-uma-auth-pep.md
 ![Flow chart](../img/15_uma_flow.png)
 
 
-
 ## Pre-requisites 
-
-- Gluu Server 4.0: This is our UMA Authorization Server (AS), where policies are stored and evaluated, a.k.a. the Policy Decision Point (PDP). [Install Gluu](https://gluu.org/docs/ce/4.0/installation-guide/install-ubuntu/)
 
 - Gluu Gateway 4.0: This is our UMA Resource Server (RS), where policies are enforced, a.k.a. the Policy Enforcement Point (PEP). [Install Gluu Gateway](../installation.md)
 
-- Deploy the simple [Python CGI script demo app](https://github.com/GluuFederation/gluu-gateway/tree/version_4.0/gg-demo) on any CGI-enabled server.
+- Gluu Server 4.0: This is our UMA Authorization Server (AS), where policies are stored and evaluated, a.k.a. the Policy Decision Point (PDP). [Install Gluu](https://gluu.org/docs/ce/4.0/installation-guide/install-ubuntu/)
 
-## Gluu Gateway Configuration
+- Python CGI script demo app: This is our UMA Requesting Party (RqP), which will be making authentication and authorization requests on behalf of the user. Installation instructions [below](#demo-app-configuration-rqp)
+
+- Protected API: In our demo, we are using a demo Node.js App. 
+
+## Gluu Gateway configuration (RS)
 
 !!! Note
     The GG UI is only available on localhost. Since it is on a remote machine, we need SSH port forwarding to reach the GG UI. Plugin configuration can be done either via REST calls or via the Gluu Gateway web interface.  
@@ -35,7 +35,7 @@ Applications and their ports:
 |8001|Kong Admin API|
 |8000|Kong Proxy Endpoint|
 |443|Kong SSL Proxy Endpoint. Kong by default provide 8443 port for SSL proxy but during setup it change into 443.|
-|8443|OXD Server| 
+|8443|oxd Server| 
 
 ### Add Service
 
@@ -90,7 +90,7 @@ Follow these steps to make a **new OP Client** and **consumer** using GG UI:
 - Click on **+ CREATE CLIENT** button and add `client_id` in the `Gluu Client Id`.
 ![uma-cg-tutorial-5.png](../img/uma-cg-tutorial-5.png)
 
-## Gluu Server Configuration
+## Gluu Server configuration (AS)
    
 To enable UMA Claims Gathering, configure the following settings inside your Gluu Server: 
 
@@ -119,19 +119,23 @@ To enable UMA Claims Gathering, configure the following settings inside your Glu
      
      ![15_config_claim_url](../img/15_config_claim_url.png)
     
-## User Authentication and authorization requests (Requesting party)
+## Demo app configuration (RqP) 
 
-The Demo is a Python CGI script. You need to put it in a CGI-enabled web server. The script is divided into 3 parts:
+The demo app is a Python CGI script. It needs to be installed on a CGI-enabled web server. 
 
-* index.py - Main script
-* helper.py - REST calls and HTML template
-* config.py - Custom configuration
+The script is divided into 3 parts:
 
-Download the Demo from the [Gluu-Gateway repository](https://github.com/GluuFederation/gluu-gateway/tree/version_4.0/gg-demo).
+- `index.py` is the main script
+- `helper.py` includes REST calls and the HTML template
+- `config.py` is for custom configuration
+
+Download the app from the [repository](https://github.com/GluuFederation/gluu-gateway/tree/version_4.0/gg-demo).
 
 ### Deploy
 
-Since we are going to write a Python CGI script for simplicity, we first need to get a working web server to act as the Relying Party (RP). Install Apache on the host rp.server.com. This tutorial is using Ubuntu 16.04 LTS. First, install the Apache web server:
+Since we are using a Python CGI script for simplicity, we first need to get a working web server to act as the Relying Party (RP). Install Apache on the host rp.server.com. This tutorial is using Ubuntu 16.04 LTS. 
+
+First, install the Apache web server:
 
 ```
 # apt-get update
