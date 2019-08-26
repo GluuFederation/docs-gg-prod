@@ -82,12 +82,19 @@ OP Client is used to correlate an access token with a Kong consumer. You must cr
 Follow these steps to make a **new OP Client** and **consumer** using GG UI:
 
 - Click CONSUMERS on the left panel
+
 - Click on **+ CREATE CLIENT** button
+
 - Add `name` and submit the form
+
 ![uma-cg-tutorial-3.png](../img/uma-cg-tutorial-3.png)
+
 - It will create client in your OP Server and show you all the client details. You need to copy all the details. let's call it **consumer_op_client** so it will help you in next steps.
+
 ![uma-cg-tutorial-4.png](../img/uma-cg-tutorial-4.png)
+
 - Click on **+ CREATE CLIENT** button and add `client_id` in the `Gluu Client Id`.
+
 ![uma-cg-tutorial-5.png](../img/uma-cg-tutorial-5.png)
 
 ## Gluu Server configuration (AS)
@@ -177,21 +184,21 @@ Hit this `<your-server.com>/cgi-bin/index.py?claim=true` URL in browser. It will
  
      ![uma-cg-tutorial-7.png](../img/uma-cg-tutorial-7.png)
 
-2. **need_info** response
+1. **need_info** response
 
      ![uma-cg-tutorial-8.png](../img/uma-cg-tutorial-8.png)
 
-3. Get Claim Gathering URL 
+1. Get Claim Gathering URL 
 
      ![uma-cg-tutorial-9.png](../img/uma-cg-tutorial-9.png)
 
      Click on URL and it will redirect you to AS for claims. Enter details `Country: US` and `City: NY`
 
-4. After redirect, demo app gets ticket from url, get new RPT Token and show the requested resource output
+1. After redirect, demo app gets ticket from url, get new RPT Token and show the requested resource output
 
      ![uma-cg-tutorial-6.png](../img/uma-cg-tutorial-6.png)
 
-5. Request resources with new RPT Token and show the requested resource output
+1. Request resources with new RPT Token and show the requested resource output
 
      ![uma-cg-tutorial-10.png](../img/uma-cg-tutorial-10.png)
         
@@ -209,7 +216,7 @@ It shows you the step by step execution of every step.
 
       When you make this call, you'll receive a ticket in the WWW-Authenticate header with a permission ticket.
 
-2. Request for RPT token and you will get a **need_info** ticket for one more step i.e. claim gathering
+1. Request for RPT token and you will get a **need_info** ticket for one more step i.e. claim gathering
 
       ```
         curl -X POST https://gg.example.com:8443/uma-rp-get-rpt
@@ -220,7 +227,7 @@ It shows you the step by step execution of every step.
 
       When you make this call, you'll get a `need_info ticket` and `redirect_user` url.
 
-3. Get Claim gathering URL
+1. Get Claim gathering URL
 
       You can use oxd `uma-rp-get-claims-gathering-url` command or concat your **claims_redirect_uri** to **redirect_user** URL
       
@@ -230,7 +237,7 @@ It shows you the step by step execution of every step.
             
       If all claims are correct, the Gluu Server will redirect you to the `your_claim_redirect_uri` with a **new permission ticket**.
 
-5. Get an RPT token with a **new permission ticket**
+1. Get an RPT token with a **new permission ticket**
 
       ```
         curl -X POST https://gg.example.com:8443/uma-rp-get-rpt
@@ -241,7 +248,7 @@ It shows you the step by step execution of every step.
       
       When you make this call, you'll receive an RPT access token.
 
-6. Request resource with new RPT Token
+1. Request resource with new RPT Token
 
       ```
         curl -X GET http://gg.example.com:8000/<YOUR_PATH>
