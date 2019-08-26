@@ -90,21 +90,23 @@ Follow these steps to make a **new OP Client** and **consumer** using GG UI:
 - Click on **+ CREATE CLIENT** button and add `client_id` in the `Gluu Client Id`.
 ![uma-cg-tutorial-5.png](../img/uma-cg-tutorial-5.png)
 
-## Authorization Server and Configuration
+## Gluu Server Configuration
    
-For UMA with Claims Gathering, you need to configure below settings. Login into Gluu Admin(oxTrust) UI and follow the below steps.
+To enable UMA Claims Gathering, configure the following settings inside your Gluu Server: 
+
+1. In oxTrust, navigate to `Configuration` > `Manage Custom Scripts` 
 
 1. Enable UMA RPT Polices & UMA Claims Gathering
 
-     There is one **uma_rpt_policy** included in the script. During authorization, it checks County=US and City=NY. If you want to change the value, then you can update this script or add your own new script. For more details, take a look at [Gluu CE Documentation](https://gluu.org/docs/ce/admin-guide/uma/#uma-rpt-authorization-policies).
+     There is one **uma_rpt_policy** included in the script. During authorization, it checks Country=US and City=NY. If you want to change the value, update this script or add your own new script. For more details, take a look at [Gluu CE Documentation](https://gluu.org/docs/ce/admin-guide/uma/#uma-rpt-authorization-policies).
      ![uma_rpt_policy](../img/15_uma_rpt_policy.png)
      ![uma_claim_gatering_policy](../img/15_uma_claim_gatering_policy.png)
 
-2. UMA scope with Authorization Policy
+1. UMA scope with Authorization Policy
 
      ![uma_scope](../img/15_uma_scope.png)
      
-3. For this step you need to use OXD. Update the consumer_op_client with `claim_redirect_uris` using OXD `update-site` command.
+1. Update the `consumer_op_client` with `claim_redirect_uris` using the oxd command for `update-site`:  
 
      ```
      curl -X POST https://gg.example.com:8443/update-site
@@ -113,7 +115,8 @@ For UMA with Claims Gathering, you need to configure below settings. Login into 
            --data '{"oxd_id": "<CONSUMER_OP_CLIENT_OXD_ID>","claims_redirect_uri":"<your_claims_redirect_uri>"}'
      ```
     
-     If your cgi script is in `/usr/lib/cgi-bin/index.py` folder then your **claims_redirect_uri** will be `<your_cgi_server_url>/cgi-bin/index.py`. it will update your OP Client.
+     If your cgi script is in `/usr/lib/cgi-bin/index.py` folder, your **claims_redirect_uri** will be `<your_cgi_server_url>/cgi-bin/index.py`. It will update your OP Client.
+     
      ![15_config_claim_url](../img/15_config_claim_url.png)
     
 ## User Authentication and authorization requests (Requesting party)
