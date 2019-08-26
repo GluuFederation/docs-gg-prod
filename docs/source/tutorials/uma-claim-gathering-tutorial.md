@@ -1,23 +1,28 @@
-# Gluu Gateway UMA Claim Gathering Tutorial
+# UMA Claims Gathering Tutorial
 
 ## Overview
 
-This tutorial is **implementing a user consent workflow post authentication and authorization with** [**UMA Claim Gathering Flow**](https://docs.kantarainitiative.org/uma/wg/rec-oauth-uma-grant-4.0.html) using the [GLUU-UMA-Auth](../plugin/gluu-uma-auth-pep.md) and [GLUU-UMA-PEP](../plugin/gluu-uma-auth-pep.md) plugins. The [demo](https://github.com/GluuFederation/gluu-gateway/tree/version_4.0/gg-demo) is a **Python CGI** script that can be deployed on any CGI-enabled server.
+In this tutorial, we will use the [GLUU-UMA-Auth](../plugin/gluu-uma-auth-pep.md) and [GLUU-UMA-PEP](../plugin/gluu-uma-auth-pep.md) plugins to implement a claims gathering workflow, where an authenticated user is prompted to input information to satisfy policies before being granted access to a protected resource. If the values entered are correct, the user is granted access. If not, access is denied. 
 
-## Parties
+
+### Parties
 
 ![UMA Overview](../img/15_uma-tutorial-flow-parties.png)
 
-## Flow
+### Flow
 ![Flow chart](../img/15_uma_flow.png)
 
-## OpneID Connect Provider
-   
-For the Authorization Server(OpenID Connect Provider), we are using here the **Gluu Server CE 4.0**. Install the Gluu Server by following [these](https://gluu.org/docs/ce/4.0/installation-guide/install-ubuntu/) instructions.
 
-## Gluu Gateway
 
-Install **Gluu Gateway 4.0** by following [these](../installation.md) instructions.
+## Pre-requisites 
+
+- Gluu Server 4.0: This is our UMA Authorization Server (AS), where policies are stored and evaluated, a.k.a. the Policy Decision Point (PDP). [Install Gluu](https://gluu.org/docs/ce/4.0/installation-guide/install-ubuntu/)
+
+- Gluu Gateway 4.0: This is our UMA Resource Server (RS), where policies are enforced, a.k.a. the Policy Enforcement Point (PEP). [Install Gluu Gateway](../installation.md)
+
+- Deploy the simple [Python CGI script demo app](https://github.com/GluuFederation/gluu-gateway/tree/version_4.0/gg-demo) on any CGI-enabled server.
+
+## Gluu Gateway Configuration
 
 !!! Note
     The GG UI is only available on localhost. Since it is on a remote machine, we need SSH port forwarding to reach the GG UI. Plugin configuration can be done either via REST calls or via the Gluu Gateway web interface.  
@@ -36,7 +41,7 @@ Applications and their ports:
 
 Register your upstream API as a Service. For more details, see the [Gluu UMA Auth and UMA PEP service docs](/plugin/gluu-uma-auth-pep/#service-level).
 
-We are using `https://jsonplaceholder.typicode.com` as a Upstream API, it is your application which you wanna add user authentication and authorization.
+We are using `https://jsonplaceholder.typicode.com` as the Upstream API, it is your application which you wanna add user authentication and authorization.
 
 Follow these step to add Service using GG UI
  
