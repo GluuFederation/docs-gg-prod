@@ -8,18 +8,18 @@ In the demo, the user will be prompted to enter their city and state before bein
 
 ### Parties
 
-Below diagram is presenting the whole actors which are the parts of the UMA Authorization flow. If you are configuring this demo then you are the `Resource Owner` who register the resources in `Gluu Gateway - Resource server` and configure `Gluu Server - Authorization Server`. You will get further details next in this tutorial.
+The following diagram presents all actors that are part of the UMA Authorization flow. The person configuring this demo is the `Resource Owner`, who registers the resources in `Gluu Gateway - Resource server` and configures `Gluu Server - Authorization Server`. Further details are later in this tutorial.
 
 ![UMA Overview](../img/15_uma-tutorial-flow-parties.png)
 
 ### Flow
 
-Below flow diagram is showing the step-by-step activities perform by the actors in UMA Claim Gathering authorization.
+The following flow diagram shows the step-by-step activities performed by the actors in the UMA Claim Gathering authorization.
 
 ![Flow chart](../img/15_uma_flow.png)
 
 
-## Pre-requisites 
+## Requirements
 
 - Gluu Gateway 4.0: This is our UMA Resource Server (RS), where policies are enforced, a.k.a. the Policy Enforcement Point (PEP). [Install Gluu Gateway](../installation.md). [OXD Server](https://gluu.org/docs/oxd/4.0/) is a static APIs web application which will install during GG installation.
 
