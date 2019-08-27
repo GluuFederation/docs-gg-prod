@@ -8,9 +8,14 @@ In the demo, the user will be prompted to enter their city and state before bein
 
 ### Parties
 
+Below diagram is presenting the whole actors which are the parts of the UMA Authorization flow. If you are configuring this demo then you are the `Resource Owner` who register the resources in `Gluu Gateway - Resource server` and configure `Gluu Server - Authorization Server`. You will get further details next in this tutorial.
+
 ![UMA Overview](../img/15_uma-tutorial-flow-parties.png)
 
 ### Flow
+
+Below flow diagram is showing the step-by-step activities perform by the actors in UMA Claim Gathering authorization.
+
 ![Flow chart](../img/15_uma_flow.png)
 
 
