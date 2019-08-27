@@ -16,13 +16,13 @@ In the demo, the user will be prompted to enter their city and state before bein
 
 ## Pre-requisites 
 
-- Gluu Gateway 4.0: This is our UMA Resource Server (RS), where policies are enforced, a.k.a. the Policy Enforcement Point (PEP). [Install Gluu Gateway](../installation.md)
+- Gluu Gateway 4.0: This is our UMA Resource Server (RS), where policies are enforced, a.k.a. the Policy Enforcement Point (PEP). [Install Gluu Gateway](../installation.md). [OXD Server](https://gluu.org/docs/oxd/4.0/) is a static APIs web application which will install during GG installation.
 
 - Gluu Server 4.0: This is our UMA Authorization Server (AS), where policies are stored and evaluated, a.k.a. the Policy Decision Point (PDP). [Install Gluu](https://gluu.org/docs/ce/4.0/installation-guide/install-ubuntu/)
 
 - Python CGI script demo app: This is our UMA Requesting Party (RqP), which will be making authentication and authorization requests on behalf of the user. Installation instructions [below](#demo-app-configuration-rqp)
 
-- Protected API: In our demo, we are using a demo Node.js App. 
+- Protected(Upstream) API: In our demo, we are using a demo Node.js App. Take Node.js demo from [here](https://github.com/GluuFederation/gluu-gateway/tree/version_4.0/gg-demo/node-api). 
 
 ## Gluu Gateway configuration (RS)
 
@@ -43,7 +43,7 @@ Applications and their ports:
 
 Register your upstream API as a Service. For more details, see the [Gluu UMA Auth and UMA PEP service docs](/plugin/gluu-uma-auth-pep/#service-level).
 
-We are using `https://jsonplaceholder.typicode.com` as the Upstream API, it is your application which you wanna add user authentication and authorization.
+We are using [`http://localhost:3000`](https://github.com/GluuFederation/gluu-gateway/tree/version_4.0/gg-demo/node-api) as the Upstream API, it is your application where you want to add UMA Claim gathering authorization.
 
 Follow these step to add Service using GG UI
  
@@ -51,7 +51,7 @@ Follow these step to add Service using GG UI
 - Click on **+ ADD NEW SERVICE** button
 - Fill in the following boxes:
     - **Name:** claim-gathering
-    - **URL:** https://jsonplaceholder.typicode.com
+    - **URL:** http://localhost:3000
 
 ![uma-cg-tutorial-1](../img/uma-cg-tutorial-1.png)
 
