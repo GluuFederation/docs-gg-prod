@@ -4,7 +4,7 @@
 
 In this tutorial, we will use the [GLUU-UMA-Auth](../plugin/gluu-uma-auth-pep.md) and [GLUU-UMA-PEP](../plugin/gluu-uma-auth-pep.md) plugins to implement a claims gathering workflow, where an authenticated user is prompted to input information to satisfy access policies. 
 
-In the demo, the user will be prompted to enter their city and state before being able to access a protected page. If the values entered are correct (NY, USA), the user is granted access. If not, access is denied. 
+In the demo, the user will be prompted to enter their city and state before being able to access a protected page. If the values entered are correct (US, NY), the user is granted access. If not, access is denied. 
 
 ### Parties
 
@@ -180,7 +180,9 @@ Use the `config.py` file to add your configuration
 |client_oxd_id, client_id, client_secret|Consumer OP Client credentials|
 |claims_redirect_url|Claims redirect URL. As per above configuration, it is `<your-server.com>/cgi-bin/index.py`.|
 
-Hit this `<your-server.com>/cgi-bin/index.py?claim=true` URL in browser. It will show you 3 steps
+### UMA Authorization
+
+If all the things configured well, request this `<your-server.com>/cgi-bin/index.py?claim=true` URL in browser. Below is the step by step output of demo application.
 
 1. Request to resources and get ticket
  
@@ -190,13 +192,19 @@ Hit this `<your-server.com>/cgi-bin/index.py?claim=true` URL in browser. It will
 
      ![uma-cg-tutorial-8.png](../img/uma-cg-tutorial-8.png)
 
-1. Get Claim Gathering URL 
+1. Get Claim Gathering URL. It will show you Claim gathering URL, Click on URL and it will redirect you to AS for claims.
 
      ![uma-cg-tutorial-9.png](../img/uma-cg-tutorial-9.png)
 
-     Click on URL and it will redirect you to AS for claims. Enter details `Country: US` and `City: NY`
+1. Here AS ask user to enter some extra information to authorize a user. AS will first ask user to enter value for `Country`. Enter `US` in country.
 
-1. After redirect, demo app gets ticket from url, get new RPT Token and show the requested resource output
+     ![uma-cg-tutorial-10.png](../img/uma-cg-tutorial-11.png)
+     
+1. After submitting Country claim, AS will user to enter value for `City`. Enter `NY` in city.
+
+     ![uma-cg-tutorial-11.png](../img/uma-cg-tutorial-12.png)
+     
+1. After redirect, demo app gets ticket from url and get new RPT Token.
 
      ![uma-cg-tutorial-6.png](../img/uma-cg-tutorial-6.png)
 
@@ -205,9 +213,9 @@ Hit this `<your-server.com>/cgi-bin/index.py?claim=true` URL in browser. It will
      ![uma-cg-tutorial-10.png](../img/uma-cg-tutorial-10.png)
         
 
-### Authentication Steps
+#### Steps by Steps implementation
 
-It shows you the step by step execution of every step.
+Belows are the steps perform by the Demo Application(Requesting Party).
 
 1. Request to protected resources and Get a resource ticket
 
