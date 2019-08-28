@@ -4,18 +4,18 @@ Below are the features which is common in Gluu OAuth and UMA plugins.
 
 ## Phantom Token
 
-In some cases there is requirement that bearer token for outside of the network and JWT token for the internal network.
+Some deployments require the use of a bearer token outside of the internal network and a JWT token within it. This phantom token approach is similar to a reverse proxy, adding a layer of insulation between external requests and the internal network.
 
 ![phantom_token](../img/phantom_token.png)
  
-This feature is available in both plugins that is [`gluu-oauth-auth`](../gluu-oauth-auth-pep) and [`gluu-uma-auth`](../gluu-uma-auth-pep). To configure phantom token feature, you just need to set `pass_credentials='phantom_token'` in plugin configuration. 
+This feature is available in both the [`gluu-oauth-auth`](../gluu-oauth-auth-pep) and the [`gluu-uma-auth`](../gluu-uma-auth-pep) plugins. To configure phantom token feature, you just need to set `pass_credentials='phantom_token'` in plugin configuration. 
 
 !!! Important
     Set `access_token_as_jwt: false` and `rpt_as_jwt: false` in [client registration](../../admin-gui/#consumers), otherwise client by default returns you access token as JWT. 
 
 ## Dynamic Resource Protection
 
-This feature is available for both plugins that is  [`gluu-opneid-connect`](../gluu-openid-connect-uma-pep), [`gluu-oauth-pep`](../gluu-oauth-auth-pep) and [`gluu-uma-pep`](../gluu-uma-auth-pep). 
+This feature is available for both plugins that is  [`gluu-openid-connect`](./gluu-openid-connect-uma-pep.md), [`gluu-oauth-pep`](./gluu-oauth-auth-pep.md) and [`gluu-uma-pep`](./gluu-uma-auth-pep.md). 
 
 ![dynamic_path](../img/dynamic_path.png)
 
@@ -36,7 +36,7 @@ The priority for the elements are:
     slash(/) is required before multiple wildcards placeholder.
 
 !!! Info
-    `?` in HTTP method means allow all the http methods.
+    A `?` in the HTTP method allows all HTTP methods.
 
 Examples: 
 
