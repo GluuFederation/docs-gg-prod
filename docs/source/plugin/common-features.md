@@ -33,7 +33,7 @@ The priority for the elements are:
 1. ??
 
 !!! Important
-    slash(/) is required before multiple wildcards placeholder.
+    A slash(/) is required before multiple wildcards placeholder.
 
 !!! Info
     A `?` in the HTTP method allows all HTTP methods.
