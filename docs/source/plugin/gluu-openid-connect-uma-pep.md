@@ -201,7 +201,7 @@ Here is a list of all the parameters which can be used in this plugin's configur
           "otp"
         ],
         "httpMethods": [
-          "GET"
+          "?"
         ]
       }
     ]
@@ -214,7 +214,7 @@ Here is a list of all the parameters which can be used in this plugin's configur
           "auth_ldap_server"
         ],
         "httpMethods": [
-          "GET"
+          "?"
         ]
       }
     ]
