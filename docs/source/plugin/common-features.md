@@ -1,6 +1,6 @@
 # Common Features
 
-Below are the features which is common in Gluu OAuth and UMA plugins.
+Below are common features which in the Gluu OAuth and UMA plugins.
 
 ## Phantom Token
 
@@ -15,7 +15,7 @@ This feature is available in both the [`gluu-oauth-auth`](../gluu-oauth-auth-pep
 
 ## Dynamic Resource Protection
 
-This feature is available for both plugins that is  [`gluu-openid-connect`](./gluu-openid-connect-uma-pep.md), [`gluu-oauth-pep`](./gluu-oauth-auth-pep.md) and [`gluu-uma-pep`](./gluu-uma-auth-pep.md). 
+This feature is available for the  [`gluu-openid-connect`](./gluu-openid-connect-uma-pep.md), [`gluu-oauth-pep`](./gluu-oauth-auth-pep.md) and [`gluu-uma-pep`](./gluu-uma-auth-pep.md) plugins. 
 
 ![dynamic_path](../img/dynamic_path.png)
 
@@ -40,7 +40,7 @@ The priority for the elements are:
 
 Examples: 
 
-Assume that below all path is register in one plugin
+Assume that all paths below are registered in one plugin:
 
 | Register Path | Allow path | Deny path |
 |---------------|------------|-----------|
