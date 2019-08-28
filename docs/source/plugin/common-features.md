@@ -15,7 +15,7 @@ This feature is available in both plugins that is [`gluu-oauth-auth`](../gluu-oa
 
 ## Dynamic Resource Protection
 
-This feature is available for both plugins that is [`gluu-oauth-pep`](../gluu-oauth-auth-pep) and [`gluu-uma-pep`](../gluu-uma-auth-pep). 
+This feature is available for both plugins that is  [`gluu-opneid-connect`](../gluu-openid-connect-uma-pep), [`gluu-oauth-pep`](../gluu-oauth-auth-pep) and [`gluu-uma-pep`](../gluu-uma-auth-pep). 
 
 ![dynamic_path](../img/dynamic_path.png)
 
@@ -32,15 +32,19 @@ The priority for the elements are:
 1. ?
 1. ??
 
-!!! Note
+!!! Important
     slash(/) is required before multiple wildcards placeholder.
-    
+
+!!! Info
+    `?` in HTTP method means allow all the http methods.
+
 Examples: 
 
 Assume that below all path is register in one plugin
 
 | Register Path | Allow path | Deny path |
 |---------------|------------|-----------|
+| `/??` | <ul><li>/folder/file.ext</li><li>/folder/file2</li><li>Allow all the paths</li></ul> | |
 | `/folder/file.ext` | <ul><li>/folder/file.ext</li></ul> | <ul><li>/folder/file</li></ul> |
 | `/folder/?/file` | <ul><li>/folder/123/file</li> <li>/folder/xxx/file</li></ul> | |
 | `/path/??` | <ul><li>/path/</li> <li>/path/xxx</li> <li>/path/xxx/yyy/file</li></ul> | <ul><li>/path - Need slash at last</li></ul> |
