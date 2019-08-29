@@ -15,7 +15,7 @@ This feature is available in both the [`gluu-oauth-auth`](../gluu-oauth-auth-pep
 
 ## Dynamic Resource Protection
 
-This feature is available for the  [`gluu-openid-connect`](./gluu-openid-connect-uma-pep.md), [`gluu-oauth-pep`](./gluu-oauth-auth-pep.md) and [`gluu-uma-pep`](./gluu-uma-auth-pep.md) plugins. 
+This feature is available for the [`gluu-oauth-pep`](./gluu-oauth-auth-pep.md) and [`gluu-uma-pep`](./gluu-uma-auth-pep.md) plugins. 
 
 ![dynamic_path](../img/dynamic_path.png)
 
@@ -37,6 +37,10 @@ The priority for the elements are:
 
 !!! Info
     A `?` in the HTTP method allows all HTTP methods.
+
+!!! Info
+    You can use this elements to register more dynamic path for `required_acrs_expression` in [`gluu-openid-connect`](./gluu-openid-connect-uma-pep.md)
+
 
 Examples: 
 

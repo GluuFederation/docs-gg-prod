@@ -189,7 +189,13 @@ Here is a list of all the parameters which can be used in this plugin's configur
 
 #### Dynamic URL Base ACRs stepped up authentication
 
-`required_acrs_expression`, Used to configure URL Based ACRs Configuration - Stepped Up Authentication. If you do not configure ACR expression, authentication flow will execute with any acr, you may need to set acr at your IdP side.  
+`required_acrs_expression`, Used to configure URL Based ACRs Configuration - Stepped Up Authentication. If you do not configure ACR expression, authentication flow will execute with any acr, you may need to set acr at your IdP side. Below is the structure of the `required_acrs_expression`.
+
+- `path`: it is your url which you want to protect. There is regular expression facility for path configuration. Check [here](../common-features/#dynamic-resource-protection) for more dynamic path registration details.
+    - `condition`: it is the array of condition for the path where you can define acr values to path. You can add multiple condition with different Http Method.
+        - `httpMethods`: it is HTTP Method. During authentication, plugin use it as a filter the request. **`?`** in HTTP method allow all the http methods. It should be in capital case. e.g. GET, POST, PUT.
+        - `no_auth`: If it is true then plugin don't perform any authentication and just allow the requested resources. If it is false that means you want to add authentication and for that you need to configure `required_acrs`.
+        - `required_acrs`: It is used to specify the `acr` values which you wanted to apply on path.
 
 ```
 [
@@ -197,11 +203,12 @@ Here is a list of all the parameters which can be used in this plugin's configur
     "path": "/users/??",
     "conditions": [
       {
-        "required_acrs": [
-          "otp"
-        ],
         "httpMethods": [
           "?"
+        ],
+        "no_auth": false,
+        "required_acrs": [
+          "otp"
         ]
       }
     ]
@@ -210,25 +217,42 @@ Here is a list of all the parameters which can be used in this plugin's configur
     "path": "/??",
     "conditions": [
       {
-        "required_acrs": [
-          "auth_ldap_server"
-        ],
         "httpMethods": [
           "?"
+        ],
+        "no_auth": false,
+        "required_acrs": [
+          "auth_ldap_server"
         ]
+      }
+    ]
+  },
+  {
+    "path": "/home/??",
+    "conditions": [
+      {
+        "httpMethods": [
+          "?"
+        ],
+        "no_auth": true
       }
     ]
   }
 ]
 ```
-![oidc2](../img/oidc4.png)
-![oidc2](../img/oidc5.png)
-
-As per the above example, for `/users/??` path, GG will initiate the `OTP` stepped up authentication and for all other paths `/??`, GG will perform the `auth_ldap_server` authentication. There is regular expression facility for path configuration. Check [here](../common-features/#dynamic-resource-protection) for more details.
 
 !!! Info
     `?` in HTTP method means allow all the http methods.
 
+![oidc4](../img/oidc4.png)
+![oidc5](../img/oidc5.png)
+![oidc52](../img/oidc5-2.png)
+
+As per the above example, 
+
+- For `/users/??` path, GG will initiate the `OTP` stepped up authentication 
+- For other paths `/??`, GG will perform the `auth_ldap_server` authentication
+- For `/home` there is `no_auth = true` set, that means plugin will not perform any authentication. You just need to set `no_auth = true` for a path where you do not want to perform any authentication and just serve the request resources. 
 
 #### Gluu-UMA-PEP 
 
@@ -239,7 +263,7 @@ As per the above example, for `/users/??` path, GG will initiate the `OTP` stepp
 |**oxd_id**|| The ID for an existing client, used to introspect the token. If left blank, a new client will be registered dynamically |
 |**client_id**|| An existing client ID, used to get a protection access token to access the introspection API. Required if an existing oxd ID is provided.|
 |**client_secret**|| An existing client secret, used to get protection access token to access the introspection API. Required if an existing oxd ID is provided.|
-|**uma_scope_expression**|| Used to add scope security on an UMA scope token.|
+|**uma_scope_expression**|| Used to add scope security on an UMA scope token. The UMA Scope Expression is a JSON expression, used to register the resources in a resource server. See more details in the [Gluu Server docs](https://gluu.org/docs/ce/admin-guide/uma/#scopes-expressions). You can register more dynamic path, there are 3 elements to make more dynamic path registration and protection. Check [here](../common-features/#dynamic-resource-protection) for more details.|
 |**deny_by_default**| true | For paths not protected by UMA scope expressions. If true, denies unprotected paths.|
 |**require_id_token**|false| This is for Push Claim token. if it is true then it will use id_token for push claim token for getting RPT|
 |**obtain_rpt**|false|It is used to get RPT when you configure `gluu-openid-connect` plugin with `gluu-uma-pep`|
@@ -249,59 +273,6 @@ As per the above example, for `/users/??` path, GG will initiate the `OTP` stepp
 
 !!! Note
     GG UI can create a dynamic client. However, if the Kong Admin API is used for plugin configuration, it requires an existing client using the oxd API, then passing the client's credentials to the Gluu-OpenID-Connect and Gluu-UMA-PEP plugin.
-
-#### UMA Scope Expression
-
-The UMA Scope Expression is a JSON expression, used to register the resources in a resource server. See more details in the [Gluu Server docs](https://gluu.org/docs/ce/api-guide/uma-api/#uma-permission-registration-api).
-
-For example, to protect an API:
-
-```
-[
-  {
-    "path": "/images",
-    "conditions": [
-      {
-        "httpMethods": [
-          "GET"
-        ],
-        "scope_expression": {
-          "rule": {
-            "and": [
-              {
-                "var": 0
-              },
-              {
-                "or": [
-                  {
-                    "var": 1
-                  },
-                  {
-                    "var": 2
-                  }
-                ]
-              }
-            ]
-          },
-          "data": [
-            "admin",
-            "employee",
-            "ouside"
-          ]
-        }
-      }
-    ]
-  }
-]
-```
-
-![13_uma_scope_expression](../img/13_uma_scope_expression.png)
-
-At runtime, the plugin sends a request to the RS with an RPT token and checks the permission for requested resources.
-
-#### Dynamic Resource Protection
-
-There are 3 elements to make more dynamic path registration and protection. Check [here](../common-features/#dynamic-resource-protection) for more details.
 
 ## Usage
 
