@@ -44,21 +44,21 @@ $ curl -X POST \
 
 #### Configure Service Plugin using GG UI
 
-Use the [Manage Service](../admin-gui/#manage-service) section in GG UI to enable the Gluu UMA PEP plugin. In the security category, there is a Gluu UMA PEP box. Click on the **+** icon to enable the plugin.
+Use the [Manage Service](../admin-gui/#manage-service) section in the GG UI to enable the Gluu UMA PEP plugin. In the security category, there is a Gluu UMA PEP box. Click on the **+** icon to enable the plugin.
 
 ![11_path_uma_service](../img/11_path_uma_service.png)
 
 Clicking on the **+** icon will bring up the below form.
 
 !!! Important
-    You need to set the `Anonymous` consumer because it is used to by pass gluu-uma-auth authentication and help to get the ticket from gluu-uma-pep. In below form use `+` button front on anonymous field to add and configure consumer. You just need to copy consumer id and past it to anonymous field.
+    You need to set the `Anonymous` consumer because it is used to by pass gluu-uma-auth authentication and help to get the ticket from gluu-uma-pep. In the following form, use the `+` button in front of the anonymous field to add and configure the consumer. You just need to copy the consumer ID and pass it to the anonymous field.
 
 ![11_path_add_uma_service](../img/uma-auth-pep-form.png)
 
 #### Configure Service Plugin using Kong Admin API
 
 !!! Note
-    Use [OXD API](https://gluu.org/docs/oxd/4.0/) for [client registration](https://gluu.org/docs/oxd/4.0/api/#register-site) and [UMA resource registration](https://gluu.org/docs/oxd/4.0/api/#uma-rs-protect-resources).
+    Use the [oxd API](https://gluu.org/docs/oxd/4.0/) for [client registration](https://gluu.org/docs/oxd/4.0/api/#register-site) and [UMA resource registration](https://gluu.org/docs/oxd/4.0/api/#uma-rs-protect-resources).
 
 Configuration for `gluu-uma-auth`
 
@@ -120,7 +120,7 @@ $ curl -X POST \
 
 #### Add Route using GG UI
 
-Use [Manage Service Section](../admin-gui/#service-routes) to add a route using GG UI.
+Use the [Manage Service Section](../admin-gui/#service-routes) section in the GG UI to add a route.
 
 ![3_4_service_route](../img/3_4_service_route.png)
 
@@ -155,7 +155,7 @@ Clicking on the **+** icon will bring up the below form.
 #### Configure Route Plugin using Kong Admin API
 
 !!! Note
-    Use [OXD API](https://gluu.org/docs/oxd/4.0/) for [client registration](https://gluu.org/docs/oxd/4.0/api/#register-site) and [UMA resource registration](https://gluu.org/docs/oxd/4.0/api/#uma-rs-protect-resources).
+    Use the [oxd API](https://gluu.org/docs/oxd/4.0/) for [client registration](https://gluu.org/docs/oxd/4.0/api/#register-site) and [UMA resource registration](https://gluu.org/docs/oxd/4.0/api/#uma-rs-protect-resources).
 
 Configuration for `gluu-uma-auth`
 
@@ -226,7 +226,7 @@ Clicking on the **+** icon will bring up the below form.
 #### Configure Global Plugin using Kong Admin API
 
 !!! Note
-    Use [OXD API](https://gluu.org/docs/oxd/4.0/) for [client registration](https://gluu.org/docs/oxd/4.0/api/#register-site) and [UMA resource registration](https://gluu.org/docs/oxd/4.0/api/#uma-rs-protect-resources).
+    Use the [oxd API](https://gluu.org/docs/oxd/4.0/) for [client registration](https://gluu.org/docs/oxd/4.0/api/#register-site) and [UMA resource registration](https://gluu.org/docs/oxd/4.0/api/#uma-rs-protect-resources).
 
 Configuration for `gluu-uma-auth`
 
@@ -304,7 +304,7 @@ Here is a list of all the parameters which can be used in this plugin's configur
      |**oxd_id**|| The ID for an existing client, used to introspect the token. If left blank, a new client will be registered dynamically |
      |**client_id**|| An existing client ID, used to get a protection access token to access the introspection API. Required if an existing oxd ID is provided.|
      |**client_secret**|| An existing client secret, used to get protection access token to access the introspection API. Required if an existing oxd ID is provided.|
-     |**uma_scope_expression**|| Used to add scope security on an UMA scope token.|
+     |**uma_scope_expression**|| Used to add scope security on an UMA scope token. The UMA Scope Expression is a JSON expression, used to register the resources in a resource server. See more details in the [Gluu Server docs](https://gluu.org/docs/ce/admin-guide/uma/#scopes-expressions). You can register more dynamic path, there are 3 elements to make more dynamic path registration and protection. Check [here](../common-features/#dynamic-resource-protection) for more details.|
      |**deny_by_default**| true | For paths not protected by UMA scope expressions. If true, denies unprotected paths.|
      |**require_id_token**|false|It use when you configure `gluu-openid-connect` plugin. This is for Push Claim token. if it is true then it will use id_token for push claim token for getting RPT|
      |**obtain_rpt**|false|It is used to get RPT when you configure `gluu-openid-connect` plugin with `gluu-uma-pep`|

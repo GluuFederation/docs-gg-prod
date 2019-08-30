@@ -1,21 +1,21 @@
 # Common Features
 
-Below are the features which is common in Gluu OAuth and UMA plugins.
+Below are common features which in the Gluu OAuth and UMA plugins.
 
 ## Phantom Token
 
-In some cases there is requirement that bearer token for outside of the network and JWT token for the internal network.
+Some deployments require the use of a bearer token outside of the internal network and a JWT token within it. This phantom token approach is similar to a reverse proxy, adding a layer of insulation between external requests and the internal network.
 
 ![phantom_token](../img/phantom_token.png)
  
-This feature is available in both plugins that is [`gluu-oauth-auth`](../gluu-oauth-auth-pep) and [`gluu-uma-auth`](../gluu-uma-auth-pep). To configure phantom token feature, you just need to set `pass_credentials='phantom_token'` in plugin configuration. 
+This feature is available in both the [`gluu-oauth-auth`](../gluu-oauth-auth-pep) and the [`gluu-uma-auth`](../gluu-uma-auth-pep) plugins. To configure phantom token feature, you just need to set `pass_credentials='phantom_token'` in plugin configuration. 
 
 !!! Important
     Set `access_token_as_jwt: false` and `rpt_as_jwt: false` in [client registration](../../admin-gui/#consumers), otherwise client by default returns you access token as JWT. 
 
 ## Dynamic Resource Protection
 
-This feature is available for both plugins that is [`gluu-oauth-pep`](../gluu-oauth-auth-pep) and [`gluu-uma-pep`](../gluu-uma-auth-pep). 
+This feature is available for the [`gluu-oauth-pep`](./gluu-oauth-auth-pep.md) and [`gluu-uma-pep`](./gluu-uma-auth-pep.md) plugins. 
 
 ![dynamic_path](../img/dynamic_path.png)
 
@@ -32,15 +32,23 @@ The priority for the elements are:
 1. ?
 1. ??
 
-!!! Note
-    slash(/) is required before multiple wildcards placeholder.
-    
+!!! Important
+    A slash(/) is required before multiple wildcards placeholder.
+
+!!! Info
+    A `?` in the HTTP method allows all HTTP methods.
+
+!!! Info
+    You can use this elements to register more dynamic path for `required_acrs_expression` in [`gluu-openid-connect`](./gluu-openid-connect-uma-pep.md)
+
+
 Examples: 
 
-Assume that below all path is register in one plugin
+Assume that all paths below are registered in one plugin:
 
 | Register Path | Allow path | Deny path |
 |---------------|------------|-----------|
+| `/??` | <ul><li>/folder/file.ext</li><li>/folder/file2</li><li>Allow all the paths</li></ul> | |
 | `/folder/file.ext` | <ul><li>/folder/file.ext</li></ul> | <ul><li>/folder/file</li></ul> |
 | `/folder/?/file` | <ul><li>/folder/123/file</li> <li>/folder/xxx/file</li></ul> | |
 | `/path/??` | <ul><li>/path/</li> <li>/path/xxx</li> <li>/path/xxx/yyy/file</li></ul> | <ul><li>/path - Need slash at last</li></ul> |
