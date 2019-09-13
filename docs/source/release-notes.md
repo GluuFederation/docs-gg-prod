@@ -33,12 +33,17 @@ A description of our plugins follows:
 |**gluu-metics**| Metrics about client authentication, authorization and others|
 
 ### New Features
+- [#360](https://github.com/GluuFederation/gluu-gateway/issues/360) : Convert plugins to Kong 1.3
+- [#363](https://github.com/GluuFederation/gluu-gateway/issues/363) : Make a new GG 4.0 package with latest Kong 1.3
+- [#359](https://github.com/GluuFederation/gluu-gateway/issues/359) : Update Admin UI with Kong 1.3
 - [#283](https://github.com/GluuFederation/gluu-gateway/issues/283): New `gluu-openid-connect` plugin with UMA claim gathering support 
 - [#320](https://github.com/GluuFederation/gluu-gateway/issues/320) : Make new Open Policy Agent plugin `gluu-opa-pep`
 - [#317](https://github.com/GluuFederation/gluu-gateway/issues/317) : Support Phantom Token Flow
 - [#324](https://github.com/GluuFederation/gluu-gateway/issues/324) : GG UI - Add OPA plugin configuration in GG Admin Console
 - [#322](https://github.com/GluuFederation/gluu-gateway/issues/322) : GG UI - Update UI for phantom token configuration
 - [#296](https://github.com/GluuFederation/gluu-gateway/issues/296) : GG UI - OpenID Connect plugin configuration
+- [#345](https://github.com/GluuFederation/gluu-gateway/issues/345) : URL based Stepped up authentication in OIDC plugin
+- [#349](https://github.com/GluuFederation/gluu-gateway/issues/349) : Design GG UI for URL based Stepped up authentication feature in OIDC plugin
 
 ### Changes
 - [#297](https://github.com/GluuFederation/gluu-gateway/issues/297): Decouple existing gluu-uma-pep. Now there are two separate plugins 1. gluu-uma-auth 2. gluu-uma-pep.

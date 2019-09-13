@@ -101,10 +101,10 @@ Execute the following sequence of commands:
      # kong migrations reset
     ```
 
-1. The `up` option is used to create a table in the configured database. It also executes all missing migrations up to the latest available one.
+1. The `bootstrap` option is used to create a table in the configured database. It also executes all missing migrations up to the latest available one.
 
     ```
-     # kong migrations up
+     # kong migrations bootstrap
     ```
 
 1. Start Kong.
@@ -120,8 +120,8 @@ To migrate data from a development server to the production server, follow these
 - Export **kong** and **konga** database from development server.
 
 ```
- $ pg_dump --dbname=postgresql://postgres:admin@localhost:5432/konga > konga.sql
- $ pg_dump --dbname=postgresql://postgres:admin@localhost:5432/konga > kong.sql
+ $ pg_dump --dbname=postgresql://[user]:[password]@localhost:5432/konga > konga.sql
+ $ pg_dump --dbname=postgresql://[user]:[password]@localhost:5432/konga > kong.sql
 ```
 
 - [Install](./installation) and [set up](./installation/#run-the-setup-script) GG on the production server.
