@@ -113,14 +113,8 @@ Gluu Gateway needs to be deployed on a server or VM with the following minimum r
 !!! Important 
     Before start setup, stop your all services which run on ports 443, 8443, 1338, 8000 and 8001. 
 
-!!! Note
-    During setup, we are register your metrics endpoint at Gluu license server. GG configure below some things.
-      
-      - Kong Service object with `name: gluu-org-metrics-service` and url `url: http://localhost:8001`
-      - Kong Route object with `methods: GET`, `paths: /gluu-metrics`, `strip_path: false` and `service: above_service_id`.
-      - Kong IP Restriction plugin so that this endpoint only accessible to Gluu license server.
-      - Configure Gluu `gluu-metrics` plugin globally.
-      - Register customer at Gluu license server `license.gluu.org`. 
+!!! Info
+    If you are behind the corporate proxy, you need to export `HTTP_PROXY`, `HTTPS_PROXY`. [More details](https://github.com/GluuFederation/gluu-gateway/issues/352)
 
 ```
  # cd /opt/gluu-gateway/setup
@@ -132,6 +126,14 @@ After acknowledging the Gluu Stepped-Up Support License, you will be prompted to
 !!! Important 
     When prompted to provide a two-letter value, make sure to follow the instructions. A mistake may result in the lack of certificates.
 
+!!! Note
+    During setup, we are register your metrics endpoint at Gluu license server. GG configure below some things.
+      
+      - Kong Service object with `name: gluu-org-metrics-service` and url `url: http://localhost:8001`
+      - Kong Route object with `methods: GET`, `paths: /gluu-metrics`, `strip_path: false` and `service: above_service_id`.
+      - Kong IP Restriction plugin so that this endpoint only accessible to Gluu license server.
+      - Configure Gluu `gluu-metrics` plugin globally.
+      - Register customer at Gluu license server `license.gluu.org`. 
 
 | **Question** | **Explanation** |
 |----------|-------------|
@@ -228,3 +230,6 @@ Choose one of the following three options:
     ```
     # apt-get remove --auto-remove gluu-gateway
     ```
+
+!!! Info
+    To remove all other GGs sub components `apt-get purge gluu-gateway kong* postgresql-* oxd-server*`

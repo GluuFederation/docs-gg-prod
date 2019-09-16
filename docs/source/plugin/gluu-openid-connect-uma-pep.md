@@ -22,48 +22,55 @@ There are two plugins for OAuth security.
 
 ## Configuration
 
-We recommend enabling the plugin on Route Object because plugin needs correct redirect_uri, post_logout_uri and claim_gathering_uri for authorization code flow.
+We recommend enabling the plugin on Route Object because plugin needs correct `redirect_uri`, `post_logout_uri` and `claim_gathering_uri` for authorization code flow.
 
 !!! Important
     konga.log also shows the curl commands for all API requests to Kong and oxd made by the Konga GUI. This curl command can be used to automate configuration instead of using the web interface.
 
-#### Add Route using GG UI
+### Add Service
 
-Use [Manage Service Section](../admin-gui/#service-routes) to add a route using GG UI.
+Follow these step to add Service using GG UI
+ 
+- Click [`SERVICES`](../../admin-gui.md/#services) on the left panel
+- Click on [`+ ADD NEW SERVICE`](../../admin-gui/#add-service) button
+- Fill the form by your upstream service details
 
-![3_4_service_route](../img/3_4_service_route.png)
+### Add Route
 
-#### Add Route using Kong Admin API
+Follow these steps to add route:
 
-```
-$ curl -X POST \
-    http://<kong_hostname>:8001/routes \
-    -H 'Content-Type: application/json' \
-    -d '{
-    "hosts": [
-      "<your_host.com>"
-    ],
-    "service": {
-      "id": "<kong_service_object_id>"
-    }
-  }'
-```
+- Click above added service
 
-!!! Information
-    There are several possibilities for what to put in the `hosts` field. One technique is to send the request to a proxy. See more information and possibilities in the [Proxy reference](https://docs.konghq.com/0.14.x/proxy/) Kong Documents.
+- Click [`ROUTES`](../../admin-gui/#routes)
 
-#### Configure Plugin using GG UI
+- Click the [`+ ADD ROUTE`](../../admin-gui/#add-route) button
 
-Use the [Manage Route](../admin-gui/#manage-route) section in the GG UI to enable the Gluu UMA PEP plugin. In the security category, there is a Gluu UMA PEP box. Click on the **+** icon to enable the plugin.
+- Fill the form by routing details. Check kong docs for more routing capabilities [here](https://docs.konghq.com/0.14.x/proxy/#routes-and-matching-capabilities).
+
+
+### Add Plugin
+
+Follow these steps to add `gluu-openid-connect` plugin:
+
+- Click [`ROUTES`](../../admin-gui/#routes) on the left panel
+
+- Click on `route id/name` or `edit` button
+
+- Click on [`Plugins`](../../admin-gui/#route-plugins)
+
+- Click on `+ ADD PLUGIN` button
+
+- You will see `Gluu OIDC & UMA PEP` title and `+` icon in pop-up.
 
 ![12_oidc-plugin-add](../img/12_oidc-plugin-add.png)
 
-Clicking on the **+** icon will bring up the below form.
+Clicking on the `+` icon will bring up the below form.
+
 ![oidc1](../img/oidc1.png)
 ![oidc2](../img/oidc2.png)
 ![oidc3](../img/oidc3.png)
 
-This section is used to add the `URL Based ACR feature`. Check [here](#dynamic-url-base-acrs-stepped-up-authentication) for more description to configure acr expression. If you do not want to configure the `ACR expression` then just disable using the button which is at the top beside the title. In this case, authentication flow execute with any acr, you may need to set acr at your IdP side.
+This section is used to add the `URL Based ACR feature`. Check [here](#dynamic-url-base-acrs-stepped-up-authentication) for more description to configure acr expression. If you do not want to configure the `ACR expression` then just disable using the button which is at the top beside the title. In `no acr expression` case, authentication flow execute with any acr, you may need to set acr at your OP Server side.
 ![oidc4](../img/oidc4.png)
 ![oidc5](../img/oidc5.png)
 ![oidc52](../img/oidc5-2.png)
@@ -78,7 +85,7 @@ This section is used to add the `gluu-uma-pep` plugin. Check [here](#uma-scope-e
 !!! Note
     Use [OXD API](https://gluu.org/docs/oxd/4.0/) for [client registration](https://gluu.org/docs/oxd/4.0/api/#register-site) and [UMA resource registration](https://gluu.org/docs/oxd/4.0/api/#uma-rs-protect-resources).
 
-Configuration for `gluu-openid-connect` plugin
+Configuration for `gluu-openid-connect` plugin. See [here](#gluu-openid-connect) all available parameters for plugin.
 
 ```
 $ curl -X POST \
@@ -86,34 +93,12 @@ $ curl -X POST \
   -H 'Content-Type: application/json' \
   -d '{
   "name": "gluu-openid-connect",
-  "config": {
-    "oxd_url": "<your_oxd_server_url>",
-    "op_url": "<your_op_server_url>",
-    "oxd_id": "<oxd_id>",
-    "client_id": "<client_id>",
-    "client_secret": "<client_secret>",
-    "authorization_redirect_path": "/callback",
-    "post_logout_redirect_path_or_url": "/logout_redirect_uri",
-    "logout_path": "/logout",
-    "required_acrs": [
-      "auth_ldap_server",
-      "u2f",
-      "otp"
-    ],
-    "requested_scopes": [
-      "openid",
-      "oxd",
-      "email",
-      "profile"
-    ],
-    "max_id_token_auth_age": 3600,
-    "max_id_token_age": 3600
-  },
+  "config": { <parameters> },
   "route_id": "<kong_route_object_id>"
 }'
 ```
 
-Configuration for `gluu-uma-pep` plugin
+Configuration for `gluu-uma-pep` plugin. See [here](#gluu-uma-pep) all available parameters for plugin.
 
 ```
 $ curl -X POST \
@@ -121,50 +106,10 @@ $ curl -X POST \
   -H 'Content-Type: application/json' \
   -d '{
   "name": "gluu-uma-pep",
-  "config": {
-    "oxd_url": "<your_oxd_server_url>",
-    "op_url": "<your_op_server_url>",
-    "oxd_id": "<oxd_id>",
-    "client_id": "<client_id>",
-    "client_secret": "<client_secret>",
-    "obtain_rpt": true,
-    "redirect_claim_gathering_url": true,
-    "claims_redirect_path": "/claims_callback",
-    "deny_by_default": false,
-    "require_id_token": true,
-    "uma_scope_expression": [
-      {
-        "path": "/posts",
-        "conditions": [
-          {
-            "httpMethods": [
-              "GET"
-            ],
-            "scope_expression": {
-              "rule": {
-                "and": [
-                  {
-                    "var": 0
-                  },
-                  {
-                    "var": 1
-                  }
-                ]
-              },
-              "data": [
-                "admin",
-                "employee"
-              ]
-            }
-          }
-        ]
-      }
-    ],
-  },
+  "config": { <parameters> },
   "route_id": "<kong_route_object_id>"
 }'
 ```
-
 
 ### Parameters
 
@@ -189,7 +134,7 @@ Here is a list of all the parameters which can be used in this plugin's configur
 
 #### Dynamic URL Base ACRs stepped up authentication
 
-`required_acrs_expression`, Used to configure URL Based ACRs Configuration - Stepped Up Authentication. If you do not configure ACR expression, authentication flow will execute with any acr, you may need to set acr at your IdP side. Below is the structure of the `required_acrs_expression`.
+It is stringify json, Used to configure URL Based ACRs Configuration - Stepped Up Authentication. If you do not configure ACR expression, authentication flow will execute with any acr, you may need to set acr at your IdP side. Below is the structure of the `required_acrs_expression`.
 
 - `path`: it is your url which you want to protect. There is regular expression facility for path configuration. Check [here](../common-features/#dynamic-resource-protection) for more dynamic path registration details.
     - `condition`: it is the array of condition for the path where you can define acr values to path. You can add multiple condition with different Http Method.
@@ -197,6 +142,7 @@ Here is a list of all the parameters which can be used in this plugin's configur
         - `no_auth`: If it is true then plugin don't perform any authentication and just allow the requested resources. If it is false that means you want to add authentication and for that you need to configure `required_acrs`.
         - `required_acrs`: It is used to specify the `acr` values which you wanted to apply on path.
 
+JSON expression
 ```
 [
   {
@@ -239,6 +185,11 @@ Here is a list of all the parameters which can be used in this plugin's configur
     ]
   }
 ]
+```
+
+JSON expression in string format(stringify json)
+```
+"[{\"path\":\"/users/??\",\"conditions\":[{\"httpMethods\":[\"?\"],\"no_auth\":false,\"required_acrs\":[\"otp\"]}]},{\"path\":\"/??\",\"conditions\":[{\"httpMethods\":[\"?\"],\"no_auth\":false,\"required_acrs\":[\"auth_ldap_server\"]}]},{\"path\":\"/home/??\",\"conditions\":[{\"httpMethods\":[\"?\"],\"no_auth\":true}]}]"
 ```
 
 !!! Info
