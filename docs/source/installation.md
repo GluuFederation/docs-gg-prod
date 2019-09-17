@@ -126,15 +126,6 @@ After acknowledging the Gluu Stepped-Up Support License, you will be prompted to
 !!! Important 
     When prompted to provide a two-letter value, make sure to follow the instructions. A mistake may result in the lack of certificates.
 
-!!! Note
-    During setup, we are register your metrics endpoint at Gluu license server. GG configure below some things.
-      
-      - Kong Service object with `name: gluu-org-metrics-service` and url `url: http://localhost:8001`
-      - Kong Route object with `methods: GET`, `paths: /gluu-metrics`, `strip_path: false` and `service: above_service_id`.
-      - Kong IP Restriction plugin so that this endpoint only accessible to Gluu license server.
-      - Configure Gluu `gluu-metrics` plugin globally.
-      - Register customer at Gluu license server `license.gluu.org`. 
-
 | **Question** | **Explanation** |
 |----------|-------------|
 | **Enter IP Address** | IP Address of your API gateway  |
@@ -153,6 +144,15 @@ After acknowledging the Gluu Stepped-Up Support License, you will be prompted to
 | **Client Id** | Used to manually set the client ID. |
 | **Client Secret** | Used to manually set the client secret. |
 
+!!! Note
+    During setup, we are register your metrics endpoint at Gluu license server. GG configure below some things.
+      
+      - Kong Service object with `name: gluu-org-metrics-service` and url `url: http://localhost:8001`
+      - Kong Route object with `methods: GET`, `paths: /gluu-metrics`, `strip_path: false` and `service: above_service_id`.
+      - Kong IP Restriction plugin so that this endpoint only accessible to Gluu license server.
+      - Configure Gluu `gluu-metrics` plugin globally.
+      - Register customer at Gluu license server `license.gluu.org`. 
+
 ## Finish the setup
 
 ```
@@ -164,10 +164,11 @@ If you see the above message, it means the installation was successful. To log i
 !!! Important
     If you get any error in setup then check the logs in log file `/opt/gluu-gateway/setup/gluu-gateway-setup.log` and `/opt/gluu-gateway/setup/gluu-gateway-setup_error.log`
     
-
 !!! Note
     If you do not want an SSH tunnel connection. See [FAQ](./faq.md#how-can-i-change-the-listening-address-and-port) for global access configuration. After this settings, you also need to update the OP clients redirect url and post logout url using oxd [update-site]() api.
     
+you can pass the json values to setup script in case you want to do a installation automation. [check here for json values.](https://github.com/GluuFederation/gluu-gateway/blob/version_4.0/t/scripts/install.sh#L64)
+
 ## Applications and their ports
 
 | Port | Description |

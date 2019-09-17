@@ -27,244 +27,90 @@ Plugins can be configured at the **Service**, **Route** or **Global** level. The
 
 ### Service Level
 
-#### Add a Service using GG UI
+1. Add Service
 
-Use the [Service section](../admin-gui/#add-service) of the GG UI doc to add a service using GG UI.
+      Follow these step to add Service using GG UI:
+ 
+      - Click [`SERVICES`](../../admin-gui.md/#services) on the left panel
+      - Click on [`+ ADD NEW SERVICE`](../../admin-gui/#add-service) button
+      - Fill the form by your upstream service details
 
-![3_service_list](../img/3_1_service_list.png)
+1. Add Route
 
-#### Add a Service using Kong Admin API
+      Route is recommended to reach at kong proxy. Follow these steps to add route:
+      
+      - Click on `service name` or `edit` button of above added service
+      - Click [`ROUTES`](../../admin-gui/#routes)
+      - Click the [`+ ADD ROUTE`](../../admin-gui/#add-route) button
+      - Fill the form by routing details. Check kong docs for more routing capabilities [here](https://docs.konghq.com/0.14.x/proxy/#routes-and-matching-capabilities).
 
-```
-$ curl -X POST \
-  http://<kong_hostname>:8001/services \
-  -H 'Content-Type: application/json' \
-  -d '{
-  "name": "<service_name>",
-  "url": "http://upstream-api-url.com"
-}'
-```
+1. Add Plugins
 
-#### Configure Service Plugin using GG UI
+     Follow these steps to add plugins:
 
-Use the [Manage Service](../admin-gui/#manage-service) section in the GG UI to enable the Gluu OAuth PEP plugin. In the security category, there is a Gluu OAuth PEP box. Click on the **+** icon to enable the plugin.
-
-![11_path_oauth_service](../img/11_path_oauth_service.png)
-
-Clicking on the **+** icon will bring up the below form.
-
-!!! important
-    If you don't wanna add `gluu-oauth-pep` plugin then disable button which is on the top.
-
-![11_path_add_oauth_service](../img/11_add_oauth_pep_form.png)
-
-#### Configure a Service Plugin using Kong Admin API
-
-!!! Note
-    Use [OXD API](https://gluu.org/docs/oxd/4.0/) for [client registration](https://gluu.org/docs/oxd/4.0/api/#register-site).
-
-Configuration for `gluu-oauth-auth`
-
-```
-$ curl -X POST \
-  http://<kong_hostname>:8001/plugins \
-  -H 'Content-Type: application/json' \
-  -d '{
-  "name": "gluu-oauth-auth",
-  "config": {
-    "oxd_url": "<your_oxd_server_url>",
-    "op_url": "<your_op_server_url>",
-    "oxd_id": "<oxd_id>",
-    "client_id": "<client_id>",
-    "client_secret": "<client_secret>",
-    "hide_credentials": <false|true>,
-    "anonymous: "<anonymous_consumer_id>"
-  },
-  "service_id": "<kong_service_object_id>"
-}'
-```
-
-Configuration for `gluu-oauth-pep`
-
-```
-$ curl -X POST \
-  http://<kong_hostname>:8001/plugins \
-  -H 'Content-Type: application/json' \
-  -d '{
-  "name": "gluu-oauth-pep",
-  "config": {
-    "oxd_url": "<your_oxd_server_url>",
-    "op_url": "<your_op_server_url>",
-    "oxd_id": "<oxd_id>",
-    "client_id": "<client_id>",
-    "client_secret": "<client_secret>",
-    "deny_by_default": <false|true>,
-    "oauth_scope_expression": [
-      {
-        "path": "/posts",
-        "conditions": [
-          {
-            "httpMethods": [
-              "GET"
-            ],
-            "scope_expression": {
-              "rule": {
-                "and": [
-                  {
-                    "var": 0
-                  },
-                  {
-                    "var": 1
-                  }
-                ]
-              },
-              "data": [
-                "admin",
-                "employee"
-              ]
-            }
-          }
-        ]
-      }
-    ],
-  },
-  "service_id": "<kong_service_object_id>"
-}'
-```
-
-!!! Note
-    Kong does not allow proxying using only a service object--this feature requires a route. At minimum, one service is needed to register an Upstream API and one route is needed for proxying.
-
+     - Click [`SERVICES`](../../admin-gui.md/#services) on the left panel
+     - Click on `name` or `edit` button
+     - Click on [`Plugins`](../../admin-gui/#route-plugins)
+     - Click on `+ ADD PLUGIN` button
+     - You will see `Gluu OAuth Auth & PEP` title and `+` icon in pop-up
+     - Click here for [next]() step
+     
 ### Route Level
 
-#### Add a Route using GG UI
+1. Add Service
 
-Use the [Manage Service Section](../admin-gui/#service-routes) to add a route using the GG UI.
+      Follow these step to add Service using GG UI
+ 
+      - Click [`SERVICES`](../../admin-gui.md/#services) on the left panel
+      - Click on [`+ ADD NEW SERVICE`](../../admin-gui/#add-service) button
+      - Fill the form by your upstream service details
 
-![3_4_service_route](../img/3_4_service_route.png)
+1. Add Route
 
-#### Add a Route using Kong Admin API
+      Follow these steps to add route:
+      
+      - Click on `service name` or `edit` button of above added service
+      - Click [`ROUTES`](../../admin-gui/#routes)
+      - Click the [`+ ADD ROUTE`](../../admin-gui/#add-route) button
+      - Fill the form by routing details. Check kong docs for more routing capabilities [here](https://docs.konghq.com/0.14.x/proxy/#routes-and-matching-capabilities).
 
-```
-$ curl -X POST \
-    http://<kong_hostname>:8001/routes \
-    -H 'Content-Type: application/json' \
-    -d '{
-    "hosts": [
-      "<your_host.com>"
-    ],
-    "service": {
-      "id": "<kong_service_object_id>"
-    }
-  }'
-```
+1. Add Plugins
 
-!!! Information
-    There are several possibilities for what to put in the `hosts` field. One technique is to send the request to a proxy. See more information and possibilities in the [Proxy reference](https://docs.konghq.com/0.14.x/proxy/) Kong Documents.
+     Follow these steps to add plugins:
 
-#### Configure a Route Plugin using GG UI
-
-Use the [Manage Route](../admin-gui/#manage-route) section in the GG UI to enable the Gluu OAuth PEP plugin. In the security category, there is a Gluu OAuth PEP box. Click on the **+** icon to enable the plugin.
-
-![12_path_oauth_route](../img/12_path_oauth_route.png)
-
-Clicking on the **+** icon will bring up the below form.
-![11_path_add_oauth_service](../img/11_add_oauth_pep_form.png)
-
-
-#### Configure Route Plugin using Kong Admin API
-
-!!! Note
-    Use [OXD API](https://gluu.org/docs/oxd/4.0/) for [client registration](https://gluu.org/docs/oxd/4.0/api/#register-site).
-
-Configuration for `gluu-oauth-auth`
-
-```
-$ curl -X POST \
-  http://<kong_hostname>:8001/plugins \
-  -H 'Content-Type: application/json' \
-  -d '{
-  "name": "gluu-oauth-auth",
-  "config": {
-    "oxd_url": "<your_oxd_server_url>",
-    "op_url": "<your_op_server_url>",
-    "oxd_id": "<oxd_id>",
-    "client_id": "<client_id>",
-    "client_secret": "<client_secret>",
-    "hide_credentials": <false|true>,
-    "anonymous: "<anonymous_consumer_id>"
-  },
-  "route_id": "<kong_route_object_id>"
-}'
-```
-
-Configuration for `gluu-oauth-pep`
-
-```
-$ curl -X POST \
-  http://<kong_hostname>:8001/plugins \
-  -H 'Content-Type: application/json' \
-  -d '{
-  "name": "gluu-oauth-pep",
-  "config": {
-    "oxd_url": "<your_oxd_server_url>",
-    "op_url": "<your_op_server_url>",
-    "oxd_id": "<oxd_id>",
-    "client_id": "<client_id>",
-    "client_secret": "<client_secret>",
-    "deny_by_default": <false|true>,
-    "oauth_scope_expression": [
-      {
-        "path": "/posts",
-        "conditions": [
-          {
-            "httpMethods": [
-              "GET"
-            ],
-            "scope_expression": {
-              "rule": {
-                "and": [
-                  {
-                    "var": 0
-                  },
-                  {
-                    "var": 1
-                  }
-                ]
-              },
-              "data": [
-                "admin",
-                "employee"
-              ]
-            }
-          }
-        ]
-      }
-    ],
-  },
-  "route_id": "<kong_route_object_id>"
-}'
-```
+     - Click [`ROUTES`](../../admin-gui/#routes) on the left panel
+     - Click on `route id/name` or `edit` button
+     - Click on [`Plugins`](../../admin-gui/#route-plugins)
+     - Click on `+ ADD PLUGIN` button
+     - You will see `Gluu OAuth Auth & PEP` title and `+` icon in pop-up
+     - Click here for [next]() step
 
 ### Global Plugin
 
 A global plugin will apply to all services and routes.
 
-#### Configure a Global Plugin using GG UI
+Follow these steps to add plugins:
 
-Use the [Plugin section](../admin-gui/#add-plugin) in the GG UI to enable the Gluu OAuth PEP plugin. In the security category, there is a `Gluu OAuth PEP` box. Click on the **+** icon to enable the plugin.
+   - Click [`Plugins`](../../admin-gui/#plugins) on the left panel
+   - You will see `Gluu OAuth Auth & PEP` title and `+` icon in pop-up
+   - Click here for [next]() step
+     
+### Add Plugin
 
-![5_plugins_add](../img/5_plugins_add.png)
+You will see `Gluu OAuth Auth & PEP` title and `+` icon in pop-up.
 
-Clicking on the **+** icon will bring up the below form.
+![5_plugins_add](../img/oauth-auth-pep-plugin-add.png)
+
+Clicking on the `+` icon will bring up the below form. Check [here](#parameters) for all the parameter descriptions.
+
 ![11_path_add_oauth_service](../img/11_add_oauth_pep_form.png)
 
-#### Configure a Global Plugin using Kong Admin API
+#### Add Plugin using Kong API
 
 !!! Note
     Use [OXD API](https://gluu.org/docs/oxd/4.0/) for [client registration](https://gluu.org/docs/oxd/4.0/api/#register-site).
 
-Configuration for `gluu-oauth-auth`
+Configuration for `gluu-oauth-auth`. Check [here](#parameters) for parameter descriptions.
 
 ```
 $ curl -X POST \
@@ -272,19 +118,12 @@ $ curl -X POST \
   -H 'Content-Type: application/json' \
   -d '{
   "name": "gluu-oauth-auth",
-  "config": {
-    "oxd_url": "<your_oxd_server_url>",
-    "op_url": "<your_op_server_url>",
-    "oxd_id": "<oxd_id>",
-    "client_id": "<client_id>",
-    "client_secret": "<client_secret>",
-    "hide_credentials": <false|true>,
-    "anonymous: "<anonymous_consumer_id>"
-  },
+  "config": { <parameters> },
+  "route": { "id": "<kong_route_object_id>" }
 }'
 ```
 
-Configuration for `gluu-oauth-pep`
+Configuration for `gluu-oauth-pep`. Check [here](#parameters) for parameter descriptions.
 
 ```
 $ curl -X POST \
@@ -292,44 +131,18 @@ $ curl -X POST \
   -H 'Content-Type: application/json' \
   -d '{
   "name": "gluu-oauth-pep",
-  "config": {
-    "oxd_url": "<your_oxd_server_url>",
-    "op_url": "<your_op_server_url>",
-    "oxd_id": "<oxd_id>",
-    "client_id": "<client_id>",
-    "client_secret": "<client_secret>",
-    "deny_by_default": <false|true>,
-    "oauth_scope_expression": [
-      {
-        "path": "/posts",
-        "conditions": [
-          {
-            "httpMethods": [
-              "GET"
-            ],
-            "scope_expression": {
-              "rule": {
-                "and": [
-                  {
-                    "var": 0
-                  },
-                  {
-                    "var": 1
-                  }
-                ]
-              },
-              "data": [
-                "admin",
-                "employee"
-              ]
-            }
-          }
-        ]
-      }
-    ],
-  },
+  "config": { <parameters> },
+  "route": { "id": "<kong_route_object_id>" }
 }'
 ```
+
+Above example is passing `route` property which will add plugin for route level.
+
+| Request | For |
+|---------|-----|
+|`"route": { "id": "<kong_route_object_id>" }`|Plugin will add for kong route object|
+|`"service": { "id": "<kong_service_object_id>" }`|Plugin will add for kong service object|
+|  | If you not pass any `service` or `route`, it will add globally. Plugin will execute for any routes and services|
 
 ### Parameters
 
@@ -356,7 +169,7 @@ The following parameters can be used in this plugin's configuration.
      |**oxd_id**|| The ID for an existing client, used to introspect the token. If left blank, a new client will be registered dynamically |
      |**client_id**|| An existing client ID, used to get a protection access token to access the introspection API. Required if an existing oxd ID is provided.|
      |**client_secret**|| An existing client secret, used to get protection access token to access the introspection API. Required if an existing oxd ID is provided.|
-     |**oauth_scope_expression**|| Used to add scope security on an OAuth scope token.|
+     |**oauth_scope_expression**|| Used to add scope security on an OAuth scope token. Check [here](#oauth-scope-expression) for description. |
      |**deny_by_default**| true | For paths not protected by OAuth scope expressions. If true, denies unprotected paths.|
      |**method_path_tree**||It is for plugin internal use. We use it for tree level matching for dynamic paths which registered in `uma_scope_expression`|
 
