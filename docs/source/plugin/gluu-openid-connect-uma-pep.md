@@ -135,7 +135,7 @@ It is stringify json, Used to configure URL Based ACRs Configuration - Stepped U
         - `no_auth`: If it is true then plugin don't perform any authentication and just allow the requested resources. If it is false that means you want to add authentication and for that you need to configure `required_acrs`.
         - `required_acrs`: It is used to specify the `acr` values which you wanted to apply on path.
 
-JSON expression
+Example of JSON expression
 ```
 [
   {

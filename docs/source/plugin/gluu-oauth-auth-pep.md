@@ -31,7 +31,7 @@ Plugins can be configured at the **Service**, **Route** or **Global** level. The
 
       Follow these step to add Service using GG UI:
  
-      - Click [`SERVICES`](../../admin-gui.md/#services) on the left panel
+      - Click [`SERVICES`](../../admin-gui/#services) on the left panel
       - Click on [`+ ADD NEW SERVICE`](../../admin-gui/#add-service) button
       - Fill the form by your upstream service details
 
@@ -48,12 +48,12 @@ Plugins can be configured at the **Service**, **Route** or **Global** level. The
 
      Follow these steps to add plugins:
 
-     - Click [`SERVICES`](../../admin-gui.md/#services) on the left panel
+     - Click [`SERVICES`](../../admin-gui/#services) on the left panel
      - Click on `name` or `edit` button
      - Click on [`Plugins`](../../admin-gui/#route-plugins)
      - Click on `+ ADD PLUGIN` button
      - You will see `Gluu OAuth Auth & PEP` title and `+` icon in pop-up
-     - Click here for [next]() step
+     - Click here for [next](#add-plugin) step
      
 ### Route Level
 
@@ -61,7 +61,7 @@ Plugins can be configured at the **Service**, **Route** or **Global** level. The
 
       Follow these step to add Service using GG UI
  
-      - Click [`SERVICES`](../../admin-gui.md/#services) on the left panel
+      - Click [`SERVICES`](../../admin-gui/#services) on the left panel
       - Click on [`+ ADD NEW SERVICE`](../../admin-gui/#add-service) button
       - Fill the form by your upstream service details
 
@@ -83,7 +83,7 @@ Plugins can be configured at the **Service**, **Route** or **Global** level. The
      - Click on [`Plugins`](../../admin-gui/#route-plugins)
      - Click on `+ ADD PLUGIN` button
      - You will see `Gluu OAuth Auth & PEP` title and `+` icon in pop-up
-     - Click here for [next]() step
+     - Click here for [next](#add-plugin) step
 
 ### Global Plugin
 
@@ -93,13 +93,13 @@ Follow these steps to add plugins:
 
    - Click [`Plugins`](../../admin-gui/#plugins) on the left panel
    - You will see `Gluu OAuth Auth & PEP` title and `+` icon in pop-up
-   - Click here for [next]() step
+   - Click here for [next](#add-plugin) step
      
 ### Add Plugin
 
 You will see `Gluu OAuth Auth & PEP` title and `+` icon in pop-up.
 
-![5_plugins_add](../img/oauth-auth-pep-plugin-add.png)
+![oauth-auth-pep-plugin-add](../img/oauth-auth-pep-plugin-add.png)
 
 Clicking on the `+` icon will bring up the below form. Check [here](#parameters) for all the parameter descriptions.
 
@@ -110,7 +110,7 @@ Clicking on the `+` icon will bring up the below form. Check [here](#parameters)
 !!! Note
     Use [OXD API](https://gluu.org/docs/oxd/4.0/) for [client registration](https://gluu.org/docs/oxd/4.0/api/#register-site).
 
-Configuration for `gluu-oauth-auth`. Check [here](#parameters) for parameter descriptions.
+Configuration for `gluu-oauth-auth`. Check [here](#gluu-oauth-auth) for parameter descriptions.
 
 ```
 $ curl -X POST \
@@ -123,7 +123,7 @@ $ curl -X POST \
 }'
 ```
 
-Configuration for `gluu-oauth-pep`. Check [here](#parameters) for parameter descriptions.
+Configuration for `gluu-oauth-pep`. Check [here](#gluu-oauth-pep) for parameter descriptions.
 
 ```
 $ curl -X POST \
@@ -148,30 +148,30 @@ Above example is passing `route` property which will add plugin for route level.
 
 The following parameters can be used in this plugin's configuration.
 
-1. Gluu-OAuth-Auth
+#### Gluu-OAuth-Auth
 
-     | field | Default | Description |
-     |-------|---------|-------------|
-     |**op_url**||The URL of your OP server. Example: https://op.server.com|
-     |**oxd_url**||The URL of your oxd server. Example: https://oxd.server.com|
-     |**oxd_id**|| The ID for an existing client, used to introspect the token. If left blank, a new client will be registered dynamically |
-     |**client_id**|| An existing client ID, used to get a protection access token to access the introspection API. Required if an existing oxd ID is provided.|
-     |**client_secret**|| An existing client secret, used to get protection access token to access the introspection API. Required if an existing oxd ID is provided.|
-     |**anonymous**||An optional string (consumer UUID) value to use as an “anonymous” consumer if authentication fails. If empty (default), the request will fail with an authentication failure 4xx. This value must refer to the Consumer ID attribute that is internal to Kong, and not its custom_id.|
-     |**pass_credentials**|pass|It allows to 3 values. `pass`, `hide` and `phantom_token`. Used to operate the authorization header from the upstream service as per configuration. In `phantom_token` case, plugin will replace bearer token with new generated JWT(with introspection result) token, so for outside there is bearer token and JWT for internal use.|
+| field | Default | Description |
+|-------|---------|-------------|
+|**op_url**||The URL of your OP server. Example: https://op.server.com|
+|**oxd_url**||The URL of your oxd server. Example: https://oxd.server.com|
+|**oxd_id**|| The ID for an existing client, used to introspect the token. If left blank, a new client will be registered dynamically |
+|**client_id**|| An existing client ID, used to get a protection access token to access the introspection API. Required if an existing oxd ID is provided.|
+|**client_secret**|| An existing client secret, used to get protection access token to access the introspection API. Required if an existing oxd ID is provided.|
+|**anonymous**||An optional string (consumer UUID) value to use as an “anonymous” consumer if authentication fails. If empty (default), the request will fail with an authentication failure 4xx. This value must refer to the Consumer ID attribute that is internal to Kong, and not its custom_id.|
+|**pass_credentials**|pass|It allows to 3 values. `pass`, `hide` and `phantom_token`. Used to operate the authorization header from the upstream service as per configuration. In `phantom_token` case, plugin will replace bearer token with new generated JWT(with introspection result) token, so for outside there is bearer token and JWT for internal use.|
 
-2. Gluu-OAuth-PEP
+#### Gluu-OAuth-PEP
 
-     | field | Default | Description |
-     |-------|---------|-------------|
-     |**op_url**||The URL of your OP server. Example: https://op.server.com|
-     |**oxd_url**||The URL of your oxd server. Example: https://oxd.server.com|
-     |**oxd_id**|| The ID for an existing client, used to introspect the token. If left blank, a new client will be registered dynamically |
-     |**client_id**|| An existing client ID, used to get a protection access token to access the introspection API. Required if an existing oxd ID is provided.|
-     |**client_secret**|| An existing client secret, used to get protection access token to access the introspection API. Required if an existing oxd ID is provided.|
-     |**oauth_scope_expression**|| Used to add scope security on an OAuth scope token. Check [here](#oauth-scope-expression) for description. |
-     |**deny_by_default**| true | For paths not protected by OAuth scope expressions. If true, denies unprotected paths.|
-     |**method_path_tree**||It is for plugin internal use. We use it for tree level matching for dynamic paths which registered in `uma_scope_expression`|
+| field | Default | Description |
+|-------|---------|-------------|
+|**op_url**||The URL of your OP server. Example: https://op.server.com|
+|**oxd_url**||The URL of your oxd server. Example: https://oxd.server.com|
+|**oxd_id**|| The ID for an existing client, used to introspect the token. If left blank, a new client will be registered dynamically |
+|**client_id**|| An existing client ID, used to get a protection access token to access the introspection API. Required if an existing oxd ID is provided.|
+|**client_secret**|| An existing client secret, used to get protection access token to access the introspection API. Required if an existing oxd ID is provided.|
+|**oauth_scope_expression**|| Used to add scope security on an OAuth scope token. Check [here](#oauth-scope-expression) for description. |
+|**deny_by_default**| true | For paths not protected by OAuth scope expressions. If true, denies unprotected paths.|
+|**method_path_tree**||It is for plugin internal use. We use it for tree level matching for dynamic paths which registered in `uma_scope_expression`|
 
 !!! Note
     GG UI can create a dynamic client. However, if the Kong Admin API is used for plugin configuration, it requires an existing client using the oxd API, then passing the client's credentials to the Gluu-OAuth-PEP plugin.
@@ -182,13 +182,15 @@ In some cases there is requirement that bearer token for outside of the network 
 
 #### OAuth Scope Expression
 
-The OAuth Scope Expression is a JSON expression, providing security for OAuth scopes. It checks the scope (from token introspection) of the token with the configured OAuth JSON expression.
+It is stringify json, providing security for OAuth scopes. It checks the scope (from token introspection) of the token with the configured OAuth expression. Below is the structure of the `oauth_scope_expression`.
 
-!!! Note
-    Enable and disable the OAuth scope expression by setting `ignore_scope` to `true`.
+- `path`: it is your url which you want to protect. There is regular expression facility for path configuration. Check [here](../common-features/#dynamic-resource-protection) for more dynamic path registration details.
+    - `condition`: it is the array of condition for the path where you can define acr values to path. You can add multiple condition with different Http Method.
+        - `httpMethods`: it is HTTP Method. During authentication, plugin use it as a filter the request. **`?`** in HTTP method allow all the http methods. It should be in capital case. e.g. GET, POST, PUT.
+        - `scope_expression`: It is the rules to check the values. Check below example for details.
+        - `data`: It is the data for the `scope_expression`.
 
-For example, to protect an API:
-
+Example of JSON expression
 ```
 [
   {
@@ -228,11 +230,16 @@ For example, to protect an API:
 ]
 ```
 
+JSON expression in string format(stringify json)
+```
+"[{\"path\":\"/images\",\"conditions\":[{\"httpMethods\":[\"GET\"],\"scope_expression\":{\"rule\":{\"and\":[{\"var\":0},{\"or\":[{\"var\":1},{\"var\":2}]}]},\"data\":[\"openid\",\"email\",\"clientinfo\"]}}]}]"
+```
+
 ![13_oauth_scope_expression](../img/13_oauth_scope_expression.png)
 
 At runtime, the plugin matches the scope expression with token scopes. The inner expression is executed first, matching the scopes from the expression one by one with the requested scope. For each match,`true` is returned. If a check does not match, it returns `false`.
 
-**Example 1**: For a token with the `["clientinfo"]` scope only.
+**Example 1**: Token with the `["clientinfo"]` scope only.
 
 The values of `data` will convert into Boolean values. If the token scope matches the expression scope, return `true`. If not, return `false`.
 
@@ -246,7 +253,7 @@ Check the result using [http://jsonlogic.com](http://jsonlogic.com/play.html).
 
 The result is `false`, so the request is not allowed.
 
-**Example 2**: For a token with `["openid", "clientinfo"]` scopes.
+**Example 2**: Token with `["openid", "clientinfo"]` scopes.
 
 The data value is
 
@@ -266,7 +273,7 @@ There are 3 elements to make more dynamic path registration and protection. Chec
 
 ### Create Client
 
-Create a client using the [create client consumer section](../../admin-gui/#create-client). Use the oxd `register-site` API to create a client.
+Create a client using the [create client consumer section](../../admin-gui/#create-client) or use the oxd `register-site` API to create a client.
 
 ### Create Consumer
 

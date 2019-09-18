@@ -22,213 +22,92 @@ Plugins can be configured at the **Service**, **Route** or **Global** level. The
 !!! Important
     konga.log also shows the curl commands for all API requests to Kong and oxd made by the Konga GUI. This curl command can be used to automate configuration instead of using the web interface.
 
+
 ### Service Level
 
-#### Add Service using GG UI
+1. Add Service
 
-Use the [Service section](../admin-gui/#add-service) of the GG UI doc to add a service using GG UI.
+      Follow these step to add Service using GG UI:
+ 
+      - Click [`SERVICES`](../../admin-gui/#services) on the left panel
+      - Click on [`+ ADD NEW SERVICE`](../../admin-gui/#add-service) button
+      - Fill the form by your upstream service details
 
-![3_service_list](../img/3_1_service_list.png)
+1. Add Route
 
-#### Add Service using Kong Admin API
+      Route is recommended to reach at kong proxy. Follow these steps to add route:
+      
+      - Click on `service name` or `edit` button of above added service
+      - Click [`ROUTES`](../../admin-gui/#routes)
+      - Click the [`+ ADD ROUTE`](../../admin-gui/#add-route) button
+      - Fill the form by routing details. Check kong docs for more routing capabilities [here](https://docs.konghq.com/0.14.x/proxy/#routes-and-matching-capabilities).
 
-```
-$ curl -X POST \
-  http://<kong_hostname>:8001/services \
-  -H 'Content-Type: application/json' \
-  -d '{
-  "name": "<service_name>",
-  "url": "http://upstream-api-url.com"
-}'
-```
+1. Add Plugins
 
-#### Configure Service Plugin using GG UI
+     Follow these steps to add plugins:
 
-Use the [Manage Service](../admin-gui/#manage-service) section in the GG UI to enable the Gluu UMA PEP plugin. In the security category, there is a Gluu UMA PEP box. Click on the **+** icon to enable the plugin.
-
-![11_path_uma_service](../img/11_path_uma_service.png)
-
-Clicking on the **+** icon will bring up the below form.
-
-!!! Important
-    You need to set the `Anonymous` consumer because it is used to by pass gluu-uma-auth authentication and help to get the ticket from gluu-uma-pep. In the following form, use the `+` button in front of the anonymous field to add and configure the consumer. You just need to copy the consumer ID and pass it to the anonymous field.
-
-![11_path_add_uma_service](../img/uma-auth-pep-form.png)
-
-#### Configure Service Plugin using Kong Admin API
-
-!!! Note
-    Use the [oxd API](https://gluu.org/docs/oxd/4.0/) for [client registration](https://gluu.org/docs/oxd/4.0/api/#register-site) and [UMA resource registration](https://gluu.org/docs/oxd/4.0/api/#uma-rs-protect-resources).
-
-Configuration for `gluu-uma-auth`
-
-```
-$ curl -X POST \
-  http://<kong_hostname>:8001/plugins \
-  -H 'Content-Type: application/json' \
-  -d '{
-  "name": "gluu-uma-auth",
-  "config": {
-    "oxd_url": "<your_oxd_server_url>",
-    "op_url": "<your_op_server_url>",
-    "oxd_id": "<oxd_id>",
-    "client_id": "<client_id>",
-    "client_secret": "<client_secret>",
-    "hide_credentials": <false|true>,
-    "anonymous": "<anonymous_consumer_id>"
-  },
-  "service_id": "<kong_service_object_id>"
-}'
-```
-
-Configuration for `gluu-uma-pep`
-
-```
-$ curl -X POST \
-  http://<kong_hostname>:8001/plugins \
-  -H 'Content-Type: application/json' \
-  -d '{
-  "name": "gluu-uma-pep",
-  "config": {
-    "oxd_url": "<your_oxd_server_url>",
-    "op_url": "<your_op_server_url>",
-    "oxd_id": "<oxd_id>",
-    "client_id": "<client_id>",
-    "client_secret": "<client_secret>",
-    "uma_scope_expression": [
-      {
-        "path": "/posts",
-        "conditions": [
-          {
-            "httpMethods": [
-              "GET"
-            ]
-          }
-        ]
-      }
-    ],
-    "deny_by_default": <false|true>
-  },
-  "service_id": "<kong_service_object_id>"
-}'
-```
-
-!!! Note
-    Kong does not allow proxying using only a service object--this feature requires a route. At minimum, one service is needed to register an Upstream API and one route is needed for proxying.
-
+     - Click [`SERVICES`](../../admin-gui/#services) on the left panel
+     - Click on `name` or `edit` button
+     - Click on [`Plugins`](../../admin-gui/#route-plugins)
+     - Click on `+ ADD PLUGIN` button
+     - You will see `Gluu UMA Auth & PEP` title and `+` icon in pop-up
+     - Click here for [next](#add-plugin) step
+     
 ### Route Level
 
-#### Add Route using GG UI
+1. Add Service
 
-Use the [Manage Service Section](../admin-gui/#service-routes) section in the GG UI to add a route.
+      Follow these step to add Service using GG UI
+ 
+      - Click [`SERVICES`](../../admin-gui/#services) on the left panel
+      - Click on [`+ ADD NEW SERVICE`](../../admin-gui/#add-service) button
+      - Fill the form by your upstream service details
 
-![3_4_service_route](../img/3_4_service_route.png)
+1. Add Route
 
-#### Add Route using Kong Admin API
+      Follow these steps to add route:
+      
+      - Click on `service name` or `edit` button of above added service
+      - Click [`ROUTES`](../../admin-gui/#routes)
+      - Click the [`+ ADD ROUTE`](../../admin-gui/#add-route) button
+      - Fill the form by routing details. Check kong docs for more routing capabilities [here](https://docs.konghq.com/0.14.x/proxy/#routes-and-matching-capabilities).
 
-```
-$ curl -X POST \
-    http://<kong_hostname>:8001/routes \
-    -H 'Content-Type: application/json' \
-    -d '{
-    "hosts": [
-      "<your_host.com>"
-    ],
-    "service": {
-      "id": "<kong_service_object_id>"
-    }
-  }'
-```
+1. Add Plugins
 
-!!! Information
-    There are several possibilities for what to put in the `hosts` field. One technique is to send the request to a proxy. See more information and possibilities in the [Proxy reference](https://docs.konghq.com/0.14.x/proxy/) Kong Documents.
+     Follow these steps to add plugins:
 
-#### Configure Route Plugin using GG UI
-
-Use the [Manage Route](../admin-gui/#manage-route) section in the GG UI to enable the Gluu UMA PEP plugin. In the security category, there is a Gluu UMA PEP box. Click on the **+** icon to enable the plugin.
-
-![12_path_uma_route](../img/12_path_uma_route.png)
-
-Clicking on the **+** icon will bring up the below form.
-![12_path_add_uma_route](../img/uma-auth-pep-form.png)
-
-#### Configure Route Plugin using Kong Admin API
-
-!!! Note
-    Use the [oxd API](https://gluu.org/docs/oxd/4.0/) for [client registration](https://gluu.org/docs/oxd/4.0/api/#register-site) and [UMA resource registration](https://gluu.org/docs/oxd/4.0/api/#uma-rs-protect-resources).
-
-Configuration for `gluu-uma-auth`
-
-```
-$ curl -X POST \
-  http://<kong_hostname>:8001/plugins \
-  -H 'Content-Type: application/json' \
-  -d '{
-  "name": "gluu-uma-auth",
-  "config": {
-    "oxd_url": "<your_oxd_server_url>",
-    "op_url": "<your_op_server_url>",
-    "oxd_id": "<oxd_id>",
-    "client_id": "<client_id>",
-    "client_secret": "<client_secret>",
-    "hide_credentials": <false|true>,
-    "anonymous": "<anonymous_consumer_id>"
-  },
-  "route_id": "<kong_service_object_id>"
-}'
-```
-
-Configuration for `gluu-uma-pep`
-
-```
-$ curl -X POST \
-  http://<kong_hostname>:8001/plugins \
-  -H 'Content-Type: application/json' \
-  -d '{
-  "name": "gluu-uma-pep",
-  "config": {
-    "oxd_url": "<your_oxd_server_url>",
-    "op_url": "<your_op_server_url>",
-    "oxd_id": "<oxd_id>",
-    "client_id": "<client_id>",
-    "client_secret": "<client_secret>",
-    "uma_scope_expression": [
-      {
-        "path": "/posts",
-        "conditions": [
-          {
-            "httpMethods": [
-              "GET"
-            ]
-          }
-        ]
-      }
-    ],
-    "deny_by_default": <false|true>
-  },
-  "route_id": "<kong_service_object_id>"
-}'
-```
+     - Click [`ROUTES`](../../admin-gui/#routes) on the left panel
+     - Click on `route id/name` or `edit` button
+     - Click on [`Plugins`](../../admin-gui/#route-plugins)
+     - Click on `+ ADD PLUGIN` button
+     - You will see `Gluu UMA Auth & PEP` title and `+` icon in pop-up
+     - Click here for [next](#add-plugin) step
 
 ### Global Plugin
 
 A global plugin will apply to all services and routes.
 
-#### Configure Global Plugin using GG UI
+Follow these steps to add plugins:
 
-Use the [Plugin section](../admin-gui/#add-plugin) in the GG UI to enable the Gluu UMA PEP plugin. In the security category, there is a Gluu UMA PEP box. Click on the **+** icon to enable the plugin.
+   - Click [`Plugins`](../../admin-gui/#plugins) on the left panel
+   - You will see `Gluu UMA Auth & PEP` title and `+` icon in pop-up
+   - Click here for [next](#add-plugin) step
 
-![5_plugins_add](../img/5_uma_plugins_add.png)
+### Add Plugin
 
-Clicking on the **+** icon will bring up the below form.
-![11_path_add_uma_service](../img/uma-auth-pep-form.png)
+You will see `Gluu UMA Auth & PEP` title and `+` icon in pop-up.
 
-#### Configure Global Plugin using Kong Admin API
+![uma-auth-pep-plugin-add](../img/uma-auth-pep-plugin-add.png)
+
+Clicking on the `+` icon will bring up the below form. Check [here](#parameters) for all the parameter descriptions.
+
+![uma-auth-pep-form](../img/uma-auth-pep-form.png)
+#### Add Plugin using Kong API
 
 !!! Note
-    Use the [oxd API](https://gluu.org/docs/oxd/4.0/) for [client registration](https://gluu.org/docs/oxd/4.0/api/#register-site) and [UMA resource registration](https://gluu.org/docs/oxd/4.0/api/#uma-rs-protect-resources).
+    Use [OXD API](https://gluu.org/docs/oxd/4.0/) for [client registration](https://gluu.org/docs/oxd/4.0/api/#register-site).
 
-Configuration for `gluu-uma-auth`
+Configuration for `gluu-uma-auth`. Check [here](#gluu-uma-auth) for parameter descriptions.
 
 ```
 $ curl -X POST \
@@ -236,19 +115,12 @@ $ curl -X POST \
   -H 'Content-Type: application/json' \
   -d '{
   "name": "gluu-uma-auth",
-  "config": {
-    "oxd_url": "<your_oxd_server_url>",
-    "op_url": "<your_op_server_url>",
-    "oxd_id": "<oxd_id>",
-    "client_id": "<client_id>",
-    "client_secret": "<client_secret>",
-    "hide_credentials": <false|true>,
-    "anonymous": "<anonymous_consumer_id>"
-  }
+  "config": { <parameters> },
+  "route": { "id": "<kong_route_object_id>" }
 }'
 ```
 
-Configuration for `gluu-uma-pep`
+Configuration for `gluu-uma-pep`. Check [here](#gluu-uma-pep) for parameter descriptions.
 
 ```
 $ curl -X POST \
@@ -256,71 +128,127 @@ $ curl -X POST \
   -H 'Content-Type: application/json' \
   -d '{
   "name": "gluu-uma-pep",
-  "config": {
-    "oxd_url": "<your_oxd_server_url>",
-    "op_url": "<your_op_server_url>",
-    "oxd_id": "<oxd_id>",
-    "client_id": "<client_id>",
-    "client_secret": "<client_secret>",
-    "uma_scope_expression": [
-      {
-        "path": "/posts",
-        "conditions": [
-          {
-            "httpMethods": [
-              "GET"
-            ]
-          }
-        ]
-      }
-    ],
-    "deny_by_default": <false|true>
-  }
+  "config": { <parameters> },
+  "route": { "id": "<kong_route_object_id>" }
 }'
 ```
+
+Above example is passing `route` property which will add plugin for route level.
+
+| Request | For |
+|---------|-----|
+|`"route": { "id": "<kong_route_object_id>" }`|Plugin will add for kong route object|
+|`"service": { "id": "<kong_service_object_id>" }`|Plugin will add for kong service object|
+|  | If you not pass any `service` or `route`, it will add globally. Plugin will execute for any routes and services|
 
 ### Parameters
 
 Here is a list of all the parameters which can be used in this plugin's configuration.
 
-1. Gluu-UMA-Auth
+#### Gluu-UMA-Auth
 
-     | field | Default | Description |
-     |-------|---------|-------------|
-     |**op_url**||The URL of your OP server. Example: https://op.server.com|
-     |**oxd_url**||The URL of your oxd server. Example: https://oxd.server.com|
-     |**oxd_id**|| The ID for an existing client, used to introspect the token. If left blank, a new client will be registered dynamically |
-     |**client_id**|| An existing client ID, used to get a protection access token to access the introspection API. Required if an existing oxd ID is provided.|
-     |**client_secret**|| An existing client secret, used to get protection access token to access the introspection API. Required if an existing oxd ID is provided.|
-     |**anonymous**||An required string (consumer Id) value to use as an “anonymous” consumer if authentication fails. You need to set the Anonymous consumer because it is used to by pass gluu-uma-auth authentication and help to get the ticket from gluu-uma-pep. |
-     |**pass_credentials**|pass|It allows 3 values. `pass`, `hide` and `phantom_token`. Used to operate the authorization header from the upstream service as per configuration. In `phantom_token` case, plugin will replace bearer token with new generated JWT(with introspection result) token, so for outside there is bearer token and JWT for internal use.|
+| field | Default | Description |
+|-------|---------|-------------|
+|**op_url**||The URL of your OP server. Example: https://op.server.com|
+|**oxd_url**||The URL of your oxd server. Example: https://oxd.server.com|
+|**oxd_id**|| The ID for an existing client, used to introspect the token. If left blank, a new client will be registered dynamically |
+|**client_id**|| An existing client ID, used to get a protection access token to access the introspection API. Required if an existing oxd ID is provided.|
+|**client_secret**|| An existing client secret, used to get protection access token to access the introspection API. Required if an existing oxd ID is provided.|
+|**anonymous**||An required string (consumer Id) value to use as an “anonymous” consumer if authentication fails. You need to set the Anonymous consumer because it is used to by pass gluu-uma-auth authentication and help to get the ticket from gluu-uma-pep. |
+|**pass_credentials**|pass|It allows 3 values. `pass`, `hide` and `phantom_token`. Used to operate the authorization header from the upstream service as per configuration. In `phantom_token` case, plugin will replace bearer token with new generated JWT(with introspection result) token, so for outside there is bearer token and JWT for internal use.|
 
-2. Gluu-UMA-PEP 
+#### Gluu-UMA-PEP 
 
-     | field | Default | Description |
-     |-------|---------|-------------|
-     |**op_url**||The URL of your OP server. Example: https://op.server.com|
-     |**oxd_url**||The URL of your oxd server. Example: https://oxd.server.com|
-     |**oxd_id**|| The ID for an existing client, used to introspect the token. If left blank, a new client will be registered dynamically |
-     |**client_id**|| An existing client ID, used to get a protection access token to access the introspection API. Required if an existing oxd ID is provided.|
-     |**client_secret**|| An existing client secret, used to get protection access token to access the introspection API. Required if an existing oxd ID is provided.|
-     |**uma_scope_expression**|| Used to add scope security on an UMA scope token. The UMA Scope Expression is a JSON expression, used to register the resources in a resource server. See more details in the [Gluu Server docs](https://gluu.org/docs/ce/admin-guide/uma/#scopes-expressions). You can register more dynamic path, there are 3 elements to make more dynamic path registration and protection. Check [here](../common-features/#dynamic-resource-protection) for more details.|
-     |**deny_by_default**| true | For paths not protected by UMA scope expressions. If true, denies unprotected paths.|
-     |**require_id_token**|false|It use when you configure `gluu-openid-connect` plugin. This is for Push Claim token. if it is true then it will use id_token for push claim token for getting RPT|
-     |**obtain_rpt**|false|It is used to get RPT when you configure `gluu-openid-connect` plugin with `gluu-uma-pep`|
-     |**claims_redirect_path**||It use when you configure `gluu-openid-connect` plugin. Claims redirect URL in claim gathering flow for your OP Client. You just need to set path here like `/claim-callback` but you need to register OP Client with full URL like `https://kong.proxy.com/claim-callback`. GG UI creates OP client for you and also configure the `gluu-openid-connect` and `gluu-uma-pep` plugin.|
-     |**redirect_claim_gathering_url**|false|It use when you configure `gluu-openid-connect` plugin. It used to tell plugin that if `need_info` response comes in claim gathering situation then redirect it for claim gathering.|
-     |**method_path_tree**||It is for plugin internal use. We use it for tree level matching for dynamic paths which registered in `uma_scope_expression`| 
+| field | Default | Description |
+|-------|---------|-------------|
+|**op_url**||The URL of your OP server. Example: https://op.server.com|
+|**oxd_url**||The URL of your oxd server. Example: https://oxd.server.com|
+|**oxd_id**|| The ID for an existing client, used to introspect the token. If left blank, a new client will be registered dynamically |
+|**client_id**|| An existing client ID, used to get a protection access token to access the introspection API. Required if an existing oxd ID is provided.|
+|**client_secret**|| An existing client secret, used to get protection access token to access the introspection API. Required if an existing oxd ID is provided.|
+|**uma_scope_expression**|| Check [here](#uma-scope-expression) for description |
+|**deny_by_default**| true | For paths not protected by UMA scope expressions. If true, denies unprotected paths.|
+|**require_id_token**|false|It use when you configure `gluu-openid-connect` plugin. This is for Push Claim token. if it is true then it will use id_token for push claim token for getting RPT|
+|**obtain_rpt**|false|It is used to get RPT when you configure `gluu-openid-connect` plugin with `gluu-uma-pep`|
+|**claims_redirect_path**||It use when you configure `gluu-openid-connect` plugin. Claims redirect URL in claim gathering flow for your OP Client. You just need to set path here like `/claim-callback` but you need to register OP Client with full URL like `https://kong.proxy.com/claim-callback`. GG UI creates OP client for you and also configure the `gluu-openid-connect` and `gluu-uma-pep` plugin.|
+|**redirect_claim_gathering_url**|false|It use when you configure `gluu-openid-connect` plugin. It used to tell plugin that if `need_info` response comes in claim gathering situation then redirect it for claim gathering.|
+|**method_path_tree**||It is for plugin internal use. We use it for tree level matching for dynamic paths which registered in `uma_scope_expression`| 
 
 
 !!! Note
     GG UI can create a dynamic client. However, if the Kong Admin API is used for plugin configuration, it requires an existing client using the oxd API, then passing the client's credentials to the Gluu-UMA-PEP plugin.
 
+#### Phantom Token
+
+In some cases there is requirement that bearer token for outside of the network and JWT token for the internal network. Check [here](../common-features/#phantom-token) for more details.
+
+#### UMA Scope Expression
+
+It is stringify json. It used to register the resources in a resource server. See more details in the [Gluu Server docs](https://gluu.org/docs/ce/admin-guide/uma/#scopes-expressions).
+
+!!! Important
+    GG UI register the resources for you during plugin configuration. If you are using APIs, you need to register `client` and `resources` using [OXD APIs](https://gluu.org/docs/oxd/4.0/api). You don't need to pass stringify json during resource registration using OXD API. It is required only in plugin configuration.
+
+- `path`: it is your url which you want to protect. There is regular expression facility for path configuration. Check [here](../common-features/#dynamic-resource-protection) for more dynamic path registration details.
+    - `condition`: it is the array of condition for the path where you can define acr values to path. You can add multiple condition with different Http Method.
+        - `httpMethods`: it is HTTP Method. During authentication, plugin use it as a filter the request. **`?`** in HTTP method allow all the http methods. It should be in capital case. e.g. GET, POST, PUT.
+        - `scope_expression`: It is the rules to check the values.
+        - `data`: It is the data for the `scope_expression`.
+
+Example of JSON expression
+```
+[
+  {
+    "path": "/users",
+    "conditions": [
+      {
+        "httpMethods": [
+          "GET"
+        ],
+        "scope_expression": {
+          "rule": {
+            "and": [
+              {
+                "var": 0
+              },
+              {
+                "or": [
+                  {
+                    "var": 1
+                  },
+                  {
+                    "var": 2
+                  }
+                ]
+              }
+            ]
+          },
+          "data": [
+            "admin",
+            "employee",
+            "customer"
+          ]
+        }
+      }
+    ]
+  }
+]
+```
+
+JSON expression in string format(stringify json)
+```
+"[{\"path\":\"/users\",\"conditions\":[{\"httpMethods\":[\"GET\"],\"scope_expression\":{\"rule\":{\"and\":[{\"var\":0},{\"or\":[{\"var\":1},{\"var\":2}]}]},\"data\":[\"admin\",\"employee\",\"customer\"]}}]}]"
+```
+
+#### Dynamic Resource Protection
+
+There are 3 elements to make more dynamic path registration and protection. Check [here](../common-features/#dynamic-resource-protection) for more details.
+
 ## Usage
 
 ### Create Client
 
-Create a client using [create client consumer section](../../admin-gui/#create-client). Use the oxd `register-site` API to create a client.
+Create a client using [create client consumer section](../../admin-gui/#create-client) or use the oxd `register-site` API to create a client.
 
 ### Create Consumer
 
