@@ -102,6 +102,7 @@ You will see `Gluu UMA Auth & PEP` title and `+` icon in pop-up.
 Clicking on the `+` icon will bring up the below form. Check [here](#parameters) for all the parameter descriptions.
 
 ![uma-auth-pep-form](../img/uma-auth-pep-form.png)
+
 #### Add Plugin using Kong API
 
 !!! Note

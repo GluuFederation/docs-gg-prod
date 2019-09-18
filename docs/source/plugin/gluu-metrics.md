@@ -10,21 +10,6 @@ The plugin can be configured on **Service**, **Route** and **Global**. There are
 
 We recommend enabling the plugin Globally so metrics are gathered for all Gluu Gateway services.
 
-### Parameters
-
-The following parameters can be used for plugin configuration:  
-
-|Parameters|Default|Description|
-|-------------|-------|-----------|
-|name||The name of the plugin to use, in this case gluu-metrics.|
-|config.ip_restrict_plugin_id||The id of the `ip-restriction` plugin|
-|config.gluu_prometheus_server_host||The host(server) which collect the metrics about your server. `license.gluu.org` is the server which collect the metrics about your server.|
-|config.kong_admin_url||Your kong Admin API URL.|
-|config.check_ip_time|86400 sec|It is the time in second which check the ip of the `gluu_prometheus_server_host` server. If IP is change then it update the ip restriction plugin which has `config.ip_restrict_plugin_id` id. Default value is 86400 seconds(1 day).|
-|service_id (optional)||The id of the Kong Service Object which this plugin will target.|
-|consumer_id (optional)||The id of the Kong Consumer Object which this plugin will target.|
-|enabled|true|Whether this plugin will be applied.|
-
 ### Using the UI
 
 Navigate to the [Add Global Plugin section](../admin-gui/#add-plugin) in the UI to enable the Gluu Metrics plugin. In the Metrics category, there is a Gluu Metrics box. Click the **+** icon to enable the plugin.
@@ -43,12 +28,20 @@ $ curl -X POST \
   -H 'Content-Type: application/json' \
   -d '{
   "name": "gluu-metrics",
-  "config.ip_restrict_plugin_id": <ip_restriction_plugin_id>,
-  "config.gluu_prometheus_server_host": "license.gluu.org",
-  "config.kong_admin_url": "http://localhost:8001",
-  "config.check_ip_time": 86400
+  "config": { <parameters> }
 }'
 ```
+
+### Parameters
+
+The following parameters can be used for plugin configuration:  
+
+|Parameters|Default|Description|
+|-------------|-------|-----------|
+|ip_restrict_plugin_id||The id of the `ip-restriction` plugin|
+|gluu_prometheus_server_host||The host(server) which collect the metrics about your server. `license.gluu.org` is the server which collect the metrics about your server.|
+|kong_admin_url||Your kong Admin API URL.|
+|check_ip_time|86400 sec|It is the time in second which check the ip of the `gluu_prometheus_server_host` server. If IP is change then it update the ip restriction plugin which has `config.ip_restrict_plugin_id` id. Default value is 86400 seconds(1 day).|
 
 ## Metrics Endpoint
 

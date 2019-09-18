@@ -3,7 +3,7 @@
 ## Gluu Gateway
 Gluu Gateway bundles the following software components:
 
-- [Kong CE v1.3](https://konghq.com/community/): An open source API Gateway and Microservices Management Layer, delivering high performance and reliability.
+- [Kong CE v1.3.x](https://konghq.com/community/): An open source API Gateway and Microservices Management Layer, delivering high performance and reliability.
 
 - [Gluu Konga Admin GUI](https://github.com/GluuFederation/gluu-gateway/tree/version_4.0/konga): A web administration portal, based on the [Konga](https://github.com/pantsel/konga) GUI, to manage your Gluu Gateway.
 
