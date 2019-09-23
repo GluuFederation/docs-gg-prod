@@ -1,4 +1,4 @@
-# UMA Claims Gathering Tutorial
+# UMA Claims Gathering authorization Tutorial
 
 ## Overview
 

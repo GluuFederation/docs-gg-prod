@@ -44,7 +44,7 @@ nav:
 - 'Installation' : 'installation.md'
 - 'Tutorials':
     - 'OpenID Connect Stepped-up Authentication': 'tutorials/oidc-steppedup-auth-tutorial.md'
-    - 'UMA Claim Gathering': 'tutorials/uma-claim-gathering-tutorial.md'
+    - 'UMA Claim Gathering Authorization': 'tutorials/uma-claim-gathering-tutorial.md'
 - 'Configuration' : 'configuration.md'
 - 'Admin console' :  'admin-gui.md'   
 - Plugins:
