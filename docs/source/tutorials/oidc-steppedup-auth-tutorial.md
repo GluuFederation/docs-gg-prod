@@ -2,7 +2,7 @@
 
 ## Overview
 
-This tutorial covers adding `OpenID Connect Authorization code flow` stepped-up authentication by configuring the [`gluu-openid-connect`](../../plugin/gluu-openid-connect-uma-pep/) plugin. 
+This tutorial describes how to add `OpenID Connect Authorization code flow` stepped-up authentication by configuring the [`gluu-openid-connect`](../../plugin/gluu-openid-connect-uma-pep/) plugin. 
 
 In the demo, the user will first authenticate with basic (`auth_ldap_server`) auth, then needs to pass one more `OTP` authentication step for the `/payments/` resource. 
 
@@ -10,11 +10,11 @@ It is fully configurable, you can add stepped-up authentication on multiple reso
 
 ## Requirements
 
-- Gluu Gateway 4.0: This is our an OpenID Connect relying party(RP) between the client and the upstream service. [Install Gluu Gateway](../installation.md). The [oxd server](https://gluu.org/docs/oxd/4.0/) is a static API web application that will install during GG installation.
+- Gluu Gateway 4.0: This is an OpenID Connect relying party(RP) between the client and the upstream service. [Install Gluu Gateway](../installation.md). The [oxd server](https://gluu.org/docs/oxd/4.0/) is a static API web application that will install during GG installation.
 
 - Gluu Server 4.0: This is our OpenID Connect Server. [Install Gluu](https://gluu.org/docs/ce/4.0/installation-guide/install-ubuntu/)
 
-- Protected(Upstream) Website: In our demo, we are using a demo Node.js App. The Node.js demo is available [here](https://github.com/GluuFederation/gluu-gateway/tree/version_4.0/gg-demo/node-ejs). 
+- Protected(Upstream) Website: In our demo, we are using a demo Node.js App, available [here](https://github.com/GluuFederation/gluu-gateway/tree/version_4.0/gg-demo/node-ejs). 
 
 ## Gluu Server configuration (OpenID Connect Server)
    
@@ -26,11 +26,11 @@ First, add `OTP` stepped-up authentication by enabling the `OTP` ACR in the OP S
      
      ![oidc-demo9](../img/oidc-demo9.png)
 
-1. Now just confirm that it is enabled successfully by checking your OP discovery endpoint `<your_op_server>/.well-known/openid-configuration`, it should show `otp` in `acr_values_supported` property.
+1. Now just confirm that it is enabled successfully by checking your OP discovery endpoint `<your_op_server>/.well-known/openid-configuration`, it should show `otp` in the `acr_values_supported` property.
 
 ## Gluu Gateway configuration (RP)
 
-In this demo, we are going to register and protect the whole upstream service(the website) using `gluu-openid-connect` plugin. We will register `/payments/??` path with the `OTP` ACR and for all other resources, the default `auth_ldap_server`. As a result, a request for `/payments`, will ask for an additional `OTP` authentication step to access the resource.     
+In this demo, we are going to register and protect the whole upstream service (the website) using `gluu-openid-connect` plugin. We will register `/payments/??` path with the `OTP` ACR and for all other resources, the default `auth_ldap_server`. As a result, a request for `/payments`, will ask for an additional `OTP` authentication step to access the resource.     
 
 !!! Note
     The GG UI is only available on localhost. Since it is on a remote machine, we need SSH port forwarding to reach the GG UI. Plugin configuration can be done either via REST calls or via the Gluu Gateway web interface.  
@@ -49,7 +49,7 @@ Applications and their ports:
 
 Register your upstream website as a Service.
 
-For this demo, we are using [`http://localhost:4400`](https://github.com/GluuFederation/gluu-gateway/tree/version_4.0/gg-demo/node-ejs) as the Upstream Website, the application where OpenID Connect Authentication is added. End users always request to the Kong proxy first, then the plugin performs authentication. If it's successful, Kong will forward the request to the upstream website and serve the content that is returned by the upstream website.
+For this demo, we are using [`http://localhost:4400`](https://github.com/GluuFederation/gluu-gateway/tree/version_4.0/gg-demo/node-ejs) as the Upstream Website, the application where OpenID Connect Authentication is added. End users always request to the Kong proxy first, then the plugin performs authentication. If it's successful, Kong will forward the request to the upstream website and serve the content returned by the upstream website.
 
 Follow these step to add a Service using GG UI
  
@@ -83,9 +83,9 @@ Follow these steps to add route:
 - Click on `Plugins`
 - Click on `+ ADD PLUGIN` button
 - You will see `Gluu OIDC & UMA PEP` title and `+` icon in pop-up.
-- Click on `+` icon and it will show below form. Add the ACR expression as in below screenshots.
+- Click on the `+` icon and it will show the below form. Add the ACR expression as in below screenshots.
     - `OTP` stepped-up auth for path `/payments/??`
-    - `auth_ldap_server` authentication for all other paths. Check [here](../../plugin/gluu-openid-connect-uma-pep/#dynamic-url-base-acrs-stepped-up-authentication) for detail ACR Expression description.
+    - `auth_ldap_server` authentication for all other paths. Check [here](../../plugin/gluu-openid-connect-uma-pep/#dynamic-url-base-acrs-stepped-up-authentication) for more details about ACR expressions.
 
 ![oidc-demo3](../img/oidc-demo3.png)
 
@@ -99,7 +99,7 @@ Follow these steps to add route:
 
 ![oidc-demo8](../img/oidc-demo8.png)
 
-This finishes configuration. Next, request the Kong proxy at `https://<your_host>` in the browser. In my case, I am requesting `https://dev1.gluu.org`.
+This completes configuration. Next, request the Kong proxy at `https://<your_host>` in the browser. In this example, we are requesting `https://dev1.gluu.org`.
 
 ## Authentication
 
@@ -107,7 +107,7 @@ This finishes configuration. Next, request the Kong proxy at `https://<your_host
 
      ![oidc-demo10](../img/oidc-demo10.png)
      
-     After successful authentication, the OP will disply all requested permissions. Click `Allow`.
+     After successful authentication, the OP will display all requested permissions. Click `Allow`.
      
      ![oidc-demo10](../img/oidc-demo11.png)
 
