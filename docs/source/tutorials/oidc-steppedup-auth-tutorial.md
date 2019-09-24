@@ -53,8 +53,8 @@ For this demo, we are using [`http://localhost:4400`](https://github.com/GluuFed
 
 Follow these step to add a Service using GG UI
  
-- Click SERVICES on the left panel
-- Click on **+ ADD NEW SERVICE** button
+- Click `SERVICES` on the left panel
+- Click on `+ ADD NEW SERVICE` button
 - Fill in the following boxes:
     - **Name:** oidc-steppedup-demo
     - **URL:** http://localhost:4400
@@ -65,21 +65,22 @@ Follow these step to add a Service using GG UI
 
 Follow these steps to add route:
 
-- Click `oidc-steppedup-demo` on the services
+- Click on the `oidc-steppedup-demo` service
 
 - Click `Routes`
 
 - Click the `+ ADD ROUTE` button
 
 - Fill in the following boxes:
-     - Hosts: `<your-server-host>`, `Tip: Press Enter to accept value`. In my case, I am using a server and updated `/etc/hosts` file. This is the host which will be used to request in browser after configuration. You can register your domain host if you are using live servers. The examples in this tutorial use `dev1.gluu.org`, you need to substitute with your host. See the [Kong docs](https://docs.konghq.com/0.14.x/proxy/#routes-and-matching-capabilities) for more routing capabilities.
+     - **Name:** oidc-steppedup-demo
+     - **Hosts:** `<your-server-host>`, `Tip: Press Enter to accept value`. In my case, I am using server and updated `/etc/hosts` file. This is the host which we will used to request in browser after configuration. You can register your domain host if you are using live servers. For further next tutorial I am using `dev1.gluu.org`, you need to use your host. Check kong docs for more routing capabilities [here](https://docs.konghq.com/0.14.x/proxy/#routes-and-matching-capabilities).
   
 ![oidc-demo2](../img/oidc-demo2.png)
 
 ### Configure Plugin
 
 - Click `ROUTES` on the left panel
-- Click on `route id` which has host `dev1.gluu.org`
+- Click on `route id/name` which has host `dev1.gluu.org`
 - Click on `Plugins`
 - Click on `+ ADD PLUGIN` button
 - You will see `Gluu OIDC & UMA PEP` title and `+` icon in pop-up.
