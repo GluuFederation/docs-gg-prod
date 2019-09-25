@@ -144,30 +144,29 @@ After acknowledging the Gluu Stepped-Up Support License, you will be prompted to
 | **Client Id** | Used to manually set the client ID. |
 | **Client Secret** | Used to manually set the client secret. |
 
-!!! Note
-    During setup, we are register your metrics endpoint at Gluu license server. GG configure below some things.
+During setup, the metrics endpoint is registered with the Gluu license server. GG configures the following:
       
-      - Kong Service object with `name: gluu-org-metrics-service` and url `url: http://localhost:8001`
-      - Kong Route object with `methods: GET`, `paths: /gluu-metrics`, `strip_path: false` and `service: above_service_id`.
-      - Kong IP Restriction plugin so that this endpoint only accessible to Gluu license server.
-      - Configure Gluu `gluu-metrics` plugin globally.
-      - Register customer at Gluu license server `license.gluu.org`. 
+  - Kong Service object with `name: gluu-org-metrics-service` and `url: http://localhost:8001`
+  - Kong Route object with `methods: GET`, `paths: /gluu-metrics`, `strip_path: false` and `service: above_service_id`.
+  - Kong IP Restriction plugin, which ensures this endpoint is only accessible to the Gluu license server.
+  - Configures the  Gluu `gluu-metrics` plugin globally.
+  - Registers the customer at the Gluu license server, `https://license.gluu.org`. 
 
 ## Finish the setup
 
 ```
- Gluu Gateway configuration successful!!! https://localhost:1338
+Gluu Gateway configuration successful!!! https://localhost:1338
 ```
 
-If you see the above message, it means the installation was successful. To log in to the Gluu Gateway admin portal, create an SSH tunnel on port 1338 from your workstation to the Gluu Gateway server, and point your browser at `https://localhost:1338`. Use the login and password that you also use to access the Gluu Server.
+If you see the above message, it means the installation was successful. To log in to the Gluu Gateway admin portal, create an SSH tunnel on port 1338 to the Gluu Gateway server, and point the browser at `https://localhost:1338`. Use the login and password used to access the Gluu Server.
 
 !!! Important
-    If you get any error in setup then check the logs in log file `/opt/gluu-gateway/setup/gluu-gateway-setup.log` and `/opt/gluu-gateway/setup/gluu-gateway-setup_error.log`
+    To diagnose errors during setup, check the log files: `/opt/gluu-gateway/setup/gluu-gateway-setup.log` and `/opt/gluu-gateway/setup/gluu-gateway-setup_error.log`
     
 !!! Note
-    If you do not want an SSH tunnel connection. See [FAQ](./faq.md#how-can-i-change-the-listening-address-and-port) for global access configuration. After this settings, you also need to update the OP clients redirect url and post logout url using oxd [update-site]() api.
+    If you do not want an SSH tunnel connection, see the [FAQ](./faq.md#how-can-i-change-the-listening-address-and-port) for global access configuration. After these settings, you also need to update the OP clients redirect URL and post logout URL using the oxd [update-site](https://gluu.org/docs/oxd/4.0/api/#update-site) API.
     
-you can pass the json values to setup script in case you want to do a installation automation. [check here for json values.](https://github.com/GluuFederation/gluu-gateway/blob/version_4.0/t/scripts/install.sh#L64)
+If automating installation, the JSON values can be passed directly to the setup script. The JSON values can be found [here.](https://github.com/GluuFederation/gluu-gateway/blob/version_4.0/t/scripts/install.sh#L64)
 
 ## Applications and their ports
 
@@ -222,6 +221,7 @@ Choose one of the following three options:
     ```
 
 1. If you want to also remove the configuration files (/etc/init.d/gluu-gateway and /opt/gluu-gateway/konga/config), use `purge`.
+
     ```    	
     # apt-get purge gluu-gateway
     ```
@@ -233,4 +233,4 @@ Choose one of the following three options:
     ```
 
 !!! Info
-    To remove all other GGs sub components `apt-get purge gluu-gateway kong* postgresql-* oxd-server*`
+    To remove all other GGs sub components, use `apt-get purge gluu-gateway kong* postgresql-* oxd-server*`
