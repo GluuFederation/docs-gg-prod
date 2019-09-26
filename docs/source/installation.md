@@ -23,6 +23,22 @@ Gluu Gateway needs to be deployed on a server or VM with the following minimum r
 !!! Important 
     Always run the following commands as root.
 
+### Ubuntu 18
+* Add the Gluu repo:
+```
+# echo "deb https://repo.gluu.org/ubuntu/ bionic-devel main" > /etc/apt/sources.list.d/gluu-repo.list
+# curl https://repo.gluu.org/ubuntu/gluu-apt.key | apt-key add -
+```
+* Add the PostgreSQL 10 repo:
+```
+# echo "deb http://apt.postgresql.org/pub/repos/apt/ bionic-pgdg main" > /etc/apt/sources.list.d/psql.list
+# wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
+```
+* Add the Node repo:
+```
+# curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
+```
+
 ### Ubuntu 16
 * Add the Gluu repo:
 ```
@@ -96,7 +112,7 @@ Gluu Gateway needs to be deployed on a server or VM with the following minimum r
 !!! important
     The Gluu Gateway package installs the following required components: PostgreSQL v10, oxd Server 4.0, NodeJS v8, Kong Community Edition v0.14.1.
 
-### Ubuntu 16
+### Ubuntu 16, 18
 ```
  # apt update
  # apt install gluu-gateway
