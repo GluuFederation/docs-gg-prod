@@ -153,7 +153,7 @@ After acknowledging the Gluu Stepped-Up Support License, you will be prompted to
 | **Enter Email Address** | Used to generate web X.509 certificates |
 | **Password** | If you already have a postgres database password for user `postgres`, enter it here. Otherwise, enter a new password. |
 | **OP Server Host** | The hostname of the Gluu Server that will be used for OAuth 2.0 client credentials and access management. **Example**: your-op.server.com |
-| **Install OXD Server?** | If you choose Y(yes) then it will install fresh oxd server in your machine. If you choose N(No) then it will ask you next question `Enter your existing OXD server URL`, where you need to enter your existing oxd server URL. | 
+| **Install OXD Server?** | If you choose Y(yes) then it will install fresh oxd server in your machine. If you choose N(No) then it will ask you next question `Enter your existing OXD server URL`, where you need to enter your existing oxd server URL. Check [here](https://gluu.org/docs/oxd/4.0/) for more details about oxd server. | 
 | **OXD Server URL** | If oxd is installed on a different hostname than Gluu Gateway, provide its URL. If not, enter the hostname for Gluu Gateway|
 | **Generate client credentials to call oxd-server API's?** | Register an OpenID Client for Konga, or enter existing client credentials manually. Take care about yuor Client at your OP server side; make sure to [extend this expiration date](https://www.gluu.org/docs/oxd/4.0/faq/#client-expires-how-can-i-avoid-it). If you enter existing client details, make sure your client in Redirect Login URIs and Post Logout Redirect URIs field has the value `https://localhost:1338`. |
 | **OXD Id** | Used to manually set the oxd ID. |

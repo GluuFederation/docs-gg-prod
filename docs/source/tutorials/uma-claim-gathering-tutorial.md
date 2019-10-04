@@ -52,8 +52,8 @@ We are using [`http://localhost:3000`](https://github.com/GluuFederation/gluu-ga
 
 Follow these step to add Service using GG UI
  
-- Click SERVICES on the left panel
-- Click on **+ ADD NEW SERVICE** button
+- Click `SERVICES` on the left panel
+- Click on `+ ADD NEW SERVICE` button
 - Fill in the following boxes:
     - **Name:** claim-gathering
     - **URL:** http://localhost:3000
@@ -64,22 +64,32 @@ Follow these step to add Service using GG UI
 
 Follow these steps to add route:
 
-- Click **claim-gathering** on the services
+- Click `claim-gathering` on the services
 
-- Click Routes
+- Click on the `Routes`
 
-- Click the + ADD ROUTE button
+- Click the `+ ADD ROUTE` button
 
 - Fill in the following boxes:
-     - Hosts: gathering.example.com, `Tip: Press Enter to accept value`
+     - **Name:** claim-gathering
+     - **Hosts:** gathering.example.com, `Tip: Press Enter to accept value`
   
 ![uma-cg-tutorial-2](../img/uma-cg-tutorial-2.png)
 
 ### Configure Plugin on Service
 
-Configure Gluu-UMA-Auth and Gluu-UMA-PEP with UMA scopes and resources. See more details in the [Service Plugin docs](/plugin/gluu-uma-auth-pep/#configure-service-plugin-using-gg-ui).
+Configure Gluu-UMA-Auth and Gluu-UMA-PEP with UMA scopes and resources. 
 
-- Resource registration for **claim-gathering** service. Add `/posts/??` path, `http methods` and `claim_gathering` scope.
+- Click `claim-gathering` on the services
+
+- Click on the `Plugins`
+
+- Click on the `+ ADD PLUGIN` button
+
+- Click on the `+` of the title `Gluu UMA Auth & PEP`
+
+- It will show the plugin configuration form. Click on `+ ADD PATH` and  Add `/posts/??` path, `http methods` and `claim_gathering` scope.
+
 ![claim_gathering](../img/15_claim_gatering_uma_expression.png)
 
 ### Add Consumer with OP Client
@@ -88,9 +98,9 @@ OP Client is used to correlate an access token with a Kong consumer. You must cr
 
 Follow these steps to make a **new OP Client** and **consumer** using GG UI:
 
-- Click CONSUMERS on the left panel
+- Click `CONSUMERS` on the left panel
 
-- Click on **+ CREATE CLIENT** button
+- Click on `+ CREATE CLIENT` button
 
 - Add `name` and submit the form
 
@@ -100,7 +110,7 @@ Follow these steps to make a **new OP Client** and **consumer** using GG UI:
 
 ![uma-cg-tutorial-4.png](../img/uma-cg-tutorial-4.png)
 
-- Click on **+ CREATE CLIENT** button and add `client_id` in the `Gluu Client Id`.
+- Click on `+ CREATE CLIENT` button and add `client_id` in the `Gluu Client Id`.
 
 ![uma-cg-tutorial-5.png](../img/uma-cg-tutorial-5.png)
 
@@ -110,9 +120,9 @@ To enable UMA Claims Gathering, configure the following settings inside your Glu
 
 1. In oxTrust, navigate to `Configuration` > `Manage Custom Scripts` 
 
-1. Enable UMA RPT Polices & UMA Claims Gathering
+1. Enable `UMA RPT Polices` & `UMA Claims Gathering`
 
-     There is one **uma_rpt_policy** included in the script. During authorization, it checks Country=US and City=NY. If you want to change the value, update this script or add your own new script. For more details, take a look at [Gluu CE Documentation](https://gluu.org/docs/ce/admin-guide/uma/#uma-rpt-authorization-policies).
+     There is one `uma_rpt_policy` included in the script. During authorization, it checks Country=US and City=NY. If you want to change the value, update this script or add your own new script. For more details, take a look at [Gluu CE Documentation](https://gluu.org/docs/ce/admin-guide/uma/#uma-rpt-authorization-policies).
      ![uma_rpt_policy](../img/15_uma_rpt_policy.png)
      ![uma_claim_gatering_policy](../img/15_uma_claim_gatering_policy.png)
 
@@ -147,7 +157,7 @@ Download the app from the [repository](https://github.com/GluuFederation/gluu-ga
 
 ### Deploy
 
-Since we are using a Python CGI script for simplicity, we first need to get a working web server to act as the Relying Party (RP). Install Apache on the host rp.server.com. This tutorial is using Ubuntu 16.04 LTS. 
+Since we are using a Python CGI script for simplicity, we first need to get a working web server to act as the Relying Party (RP). This tutorial is using Ubuntu 16.04 LTS. 
 
 First, install the Apache web server:
 
