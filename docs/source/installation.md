@@ -194,7 +194,7 @@ If automating installation, the JSON values can be passed directly to the setup 
 |443|Kong SSL Proxy Endpoint. By default, Kong uses 8443 port for SSL proxy, but during setup it is changed to 443.|
 |8443|oxd Server|
 
-To change the port and configurations, you can update the specific application's config file. For details, see the [Configuration](./configuration) section.
+To change the port and configurations, you can update the specific application's config file. For details, see the [Configuration](./configuration.md) section.
 
 <!---
 
