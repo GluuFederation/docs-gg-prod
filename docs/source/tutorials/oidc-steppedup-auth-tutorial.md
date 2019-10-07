@@ -33,7 +33,7 @@ First, add `OTP` stepped-up authentication by enabling the `OTP` ACR in the OP S
 In this demo, we are going to register and protect the whole upstream service (the website) using `gluu-openid-connect` plugin. We will register `/payments/??` path with the `OTP` ACR and for all other resources, the default `auth_ldap_server`. As a result, a request for `/payments`, will ask for an additional `OTP` authentication step to access the resource.     
 
 !!! Note
-    The GG UI is only available on localhost. Since it is on a remote machine, we need SSH port forwarding to reach the GG UI. Plugin configuration can be done either via REST calls or via the Gluu Gateway web interface.  
+    The GG UI is only available on the localhost. Since it is on a remote machine, we need SSH port forwarding to reach the GG UI. Plugin configuration can be done either via REST calls or via the Gluu Gateway web interface.  
 
 Applications and their ports:
 
@@ -49,7 +49,7 @@ Applications and their ports:
 
 Register your upstream website as a Service.
 
-For this demo, we are using [`http://localhost:4400`](https://github.com/GluuFederation/gluu-gateway/tree/version_4.0/gg-demo/node-ejs) as the Upstream Website, the application where OpenID Connect Authentication is added. End users always request to the Kong proxy first, then the plugin performs authentication. If it's successful, Kong will forward the request to the upstream website and serve the content returned by the upstream website.
+For this demo, we are using [`http://localhost:4400`](https://github.com/GluuFederation/gluu-gateway/tree/version_4.0/gg-demo/node-ejs) as the Upstream Website, the application where OpenID Connect Authentication is added. End-users always request to the Kong proxy first, then the plugin performs authentication. If it's successful, Kong will forward the request to the upstream website and serve the content returned by the upstream website.
 
 Follow these step to add a Service using GG UI
  
@@ -63,7 +63,7 @@ Follow these step to add a Service using GG UI
 
 ### Add Route
 
-Follow these steps to add route:
+Follow these steps to add a route:
 
 - Click on the `oidc-steppedup-demo` service
 
@@ -73,7 +73,7 @@ Follow these steps to add route:
 
 - Fill in the following boxes:
      - **Name:** oidc-steppedup-demo
-     - **Hosts:** `<your-server-host>`, `Tip: Press Enter to accept value`. In my case, I am using server and updated `/etc/hosts` file. This is the host which we will used to request in browser after configuration. You can register your domain host if you are using live servers. For further next tutorial I am using `dev1.gluu.org`, you need to use your host. Check kong docs for more routing capabilities [here](https://docs.konghq.com/0.14.x/proxy/#routes-and-matching-capabilities).
+     - **Hosts:** `<your-server-host>`, `Tip: Press Enter to accept value`. In my case, I am using server and updated `/etc/hosts` file. This is the host which we will use to request in a browser after configuration. You can register your domain host if you are using live servers. For further next tutorial, I am using `dev1.gluu.org`, you need to use your host. Check kong docs for more routing capabilities [here](https://docs.konghq.com/0.14.x/proxy/#routes-and-matching-capabilities).
   
 ![oidc-demo2](../img/oidc-demo2.png)
 
@@ -84,7 +84,7 @@ Follow these steps to add route:
 - Click on `Plugins`
 - Click on `+ ADD PLUGIN` button
 - You will see `Gluu OIDC & UMA PEP` title and `+` icon in pop-up.
-- Click on the `+` icon and it will show the below form. Add the ACR expression as in below screenshots.
+- Click on the `+` icon and it will show the below form. Add the ACR expression as in the below screenshots.
     - `OTP` stepped-up auth for path `/payments/??`
     - `auth_ldap_server` authentication for all other paths. Check [here](../../plugin/gluu-openid-connect-uma-pep/#dynamic-url-base-acrs-stepped-up-authentication) for more details about ACR expressions.
 
@@ -100,7 +100,7 @@ Follow these steps to add route:
 
 ![oidc-demo8](../img/oidc-demo8.png)
 
-This completes configuration. Next, request the Kong proxy at `https://<your_host>` in the browser. In this example, we are requesting `https://dev1.gluu.org`.
+This completes the configuration. Next, request the Kong proxy at `https://<your_host>` in the browser. In this example, we are requesting `https://dev1.gluu.org`.
 
 ## Authentication
 
@@ -120,11 +120,11 @@ This completes configuration. Next, request the Kong proxy at `https://<your_hos
      
      ![oidc-demo12](../img/oidc-demo13.png)
 
-3. Now click `Payments`, on which we added the `OTP` stepped-up authentication. The plugin will redirect again to the OP. As per the `OTP` script, it will ask first `username` and `password`.
+3. Now click `Payments`, on which we added the `OTP` stepped-up authentication. The plugin will redirect again to the OP. As per the `OTP` script, it will ask the first `username` and `password`.
 
      ![oidc-demo10](../img/oidc-demo10.png)
      
-     After successful authentication, the OP Server ask you to enroll a device. Scan the displayed QR Code in an authenticator application on your device, then click on `Finish`. Check Gluu CE Docs [here](https://gluu.org/docs/ce/authn-guide/otp/#recommended-otp-apps) for OTP supported application.
+     After successful authentication, the OP Server asks you to enroll in a device. Scan the displayed QR Code in an authenticator application on your device, then click on `Finish`. Check Gluu CE Docs [here](https://gluu.org/docs/ce/authn-guide/otp/#recommended-otp-apps) for OTP supported applications.
      
      ![oidc-demo10](../img/oidc-demo14.png)
      

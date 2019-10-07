@@ -4,11 +4,11 @@
 
 In this tutorial, we will use the [GLUU-OAuth-Auth](../plugin/gluu-oauth-auth-pep.md) and [GLUU-UMA-PEP](../plugin/gluu-oauth-auth-pep.md) plugins to protect the APIs using OAuth token and check scope to authorize the request.  
 
-In the demo, we will protect `/posts` api with `read` oauth scope. Plugin will check the request has token is active or not if true then check the scopes of the token. If token has sufficient scope, the user is granted access. If not, access is denied. 
+In the demo, we will protect `/posts` api with `read` oauth scope. Plugin will check the request has token is active or not if true then check the scopes of the token. If a token has sufficient scope, the user is granted access. If not, access is denied. 
 
 ## Requirements
 
-- Gluu Gateway 4.0: This is our Resource Server (RS), where it checks the token first. At the second step, scope expressions are enforced, a.k.a. the Policy Enforcement Point (PEP) and check the scopes, whether token has sufficient scopes or not to access resources, a.k.a. the Policy Decision Point (PDP) . [Install Gluu Gateway](../installation.md). 
+- Gluu Gateway 4.0: This is our Resource Server (RS), where it checks the token first. In the second step, scope expressions are enforced, a.k.a. the Policy Enforcement Point (PEP) and check the scopes, whether the token has sufficient scopes or not to access resources, a.k.a. the Policy Decision Point (PDP). [Install Gluu Gateway](../installation.md). 
 
 - Gluu Server 4.0: This is our OpenID Connect Server (OP Server), from where Requesting(Relying) party issue the OAuth token with scopes. [Install Gluu](https://gluu.org/docs/ce/4.0/installation-guide/install-ubuntu/)
 
@@ -22,18 +22,18 @@ We need to add `read` scope at OP server so we can add it to OP Client and later
 
 1. In oxTrust, navigate to `OpenID Connect` > `Scopes` 
 
-1. Click on `+ Add Scope` button
+1. Click on the `+ Add Scope` button
 
 1. It will show the below form, Fill the `read` in display name and check the `Allow for dynamic registration` radio box.
 
     ![oauth-demo4.png](../img/oauth-demo4.png)
 
-1. Click on `Add` button 
+1. Click on the `Add` button 
 
 ## Gluu Gateway configuration (RS)
 
 !!! Note
-    The GG UI is only available on localhost. Since it is on a remote machine, we need SSH port forwarding to reach the GG UI. Plugin configuration can be done either via REST calls or via the Gluu Gateway web interface.  
+    The GG UI is only available on the localhost. Since it is on a remote machine, we need SSH port forwarding to reach the GG UI. Plugin configuration can be done either via REST calls or via the Gluu Gateway web interface.  
 
 Applications and their ports:
 
@@ -42,7 +42,7 @@ Applications and their ports:
 |1338| Gluu Gateway Admin GUI|
 |8001|Kong Admin API|
 |8000|Kong Proxy Endpoint|
-|443|Kong SSL Proxy Endpoint. Kong by default provide 8443 port for SSL proxy but during setup it change into 443.|
+|443|Kong SSL Proxy Endpoint. Kong by default provide 8443 port for SSL proxy but during setup, it changes into 443.|
 |8443|oxd Server| 
 
 ### Add Service
@@ -63,7 +63,7 @@ Follow these step to add Service using GG UI
 
 ### Add Route
 
-Follow these steps to add route:
+Follow these steps to add a route:
 
 - Click `oauth-demo` on the services
 
@@ -78,7 +78,7 @@ Follow these steps to add route:
 
 ### Configure Plugin
 
-Configure Gluu-OAuth-Auth and Gluu-OAuth-PEP with UMA scopes and resources. Follow these steps to add plugin:
+Configure Gluu-OAuth-Auth and Gluu-OAuth-PEP with UMA scopes and resources. Follow these steps to add the plugin:
 
 - Click `oauth-demo` on the services
 
@@ -92,11 +92,11 @@ Configure Gluu-OAuth-Auth and Gluu-OAuth-PEP with UMA scopes and resources. Foll
 
 ![oauth-demo3.png](../img/oauth-demo3.png)
 
-- Click on `Add Plugin` button at end of the page.
+- Click on the `Add Plugin` button at end of the page.
 
 ### Add Consumer with OP Client
 
-OP Client is used to correlate an access token with a Kong consumer. You must create a OP client before you can register it here as a way to identify a consumer.
+OP Client is used to correlating an access token with a Kong consumer. You must create an OP client before you can register it here as a way to identify a consumer.
 
 Follow these steps to make a **new OP Client** and **consumer** using GG UI:
 
@@ -108,11 +108,11 @@ Follow these steps to make a **new OP Client** and **consumer** using GG UI:
 
 ![oauth-demo5.png](../img/oauth-demo5.png)
 
-- It will create client in your OP Server and show you all the client details. You need to copy all the details. let's call it **consumer_op_client** so it will help you in next steps.
+- It will create a client in your OP Server and show you all the client details. You need to copy all the details. let's call it **consumer_op_client** so it will help you in the next steps.
 
 ![oauth-demo6.png](../img/oauth-demo6.png)
 
-- Click on `+ CREATE CLIENT` button and add `client_id` in the `Gluu Client Id`.
+- Click on the `+ CREATE CLIENT` button and add `client_id` in the `Gluu Client Id`.
 
 ![oauth-demo7.png](../img/oauth-demo7.png)
 
@@ -120,7 +120,7 @@ Follow these steps to make a **new OP Client** and **consumer** using GG UI:
 
 The demo app is a Python script. There is only one file. Download the `oauth-demo.py` from the [repository](https://github.com/GluuFederation/gluu-gateway/blob/version_4.0/gg-demo/oauth-demo.py). 
 
-Run `oauth-demo.py` file using below command.
+Run `oauth-demo.py` file using the below command.
 
 ```
 $ python oauth-demo.py
@@ -134,10 +134,10 @@ In `oauth-demo.py`, you need to set your configuration. Configuration details as
 
 | Config | Details |
 |--------|---------|
-| oxd_server_url  | This your oxd server url. It is not recommended to use oxd here. You can directly request to OP token endpoint to get the token. For demo, we are using oxd |
+| oxd_server_url  | This your oxd server url. It is not recommended to use oxd here. You can directly request to OP token endpoint to get the token. For the demo, we are using oxd |
 | consumer_client_id | This is the client id which we created during [consumer configuration](#add-consumer-with-op-client) step |
 | consumer_client_secret | This is the client secret. Requesting party need to use both client_id and client_secret to get the token |
-| kong_proxy_url | Proxy url of the your kong. As per above demo configuration, we are using `https://dev1.gluu.org` as a `kong_proxy_url` |
+| kong_proxy_url | Proxy url of your kong. As per the above demo configuration, we are using `https://dev1.gluu.org` as a `kong_proxy_url` |
 | kong_route_host | Kong route objects host which configured in above [route configuration](#add-route) step |
 | op_server | Your OpenID Connect server url |
 
@@ -145,7 +145,7 @@ In `oauth-demo.py`, you need to set your configuration. Configuration details as
 
 There only two steps:
 
-1. Get the OAuth token. we protected the resource with just the `read` scope so we just need to request for token with `read` scope.
+1. Get the OAuth token. we protected the resource with just the `read` scope so we just need to request for a token with `read` scope.
 
       ```
         curl -X POST https://<your_oxd_server_host>:8443/get-client-token

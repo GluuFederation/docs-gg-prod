@@ -1,6 +1,6 @@
 # Common Features
 
-Below are common features which in the Gluu OAuth and UMA plugins.
+Below are common features in the Gluu OAuth and UMA plugins.
 
 ## Phantom Token
 
@@ -21,7 +21,7 @@ This feature is available for the [`gluu-oauth-pep`](./gluu-oauth-auth-pep.md) a
 
 There are 3 elements to make more dynamic path registration and protection:
 
-- ? match any one path element
+- ? match anyone path element
 - ?? match zero or more path elements
 - {regexp} - match single path element against PCRE
 
@@ -33,7 +33,7 @@ The priority for the elements are:
 1. ??
 
 !!! Important
-    A slash(/) is required before multiple wildcards placeholder.
+    A slash(/) is required before multiple wildcards placeholders.
 
 !!! Info
     A `?` in the HTTP method allows all HTTP methods.

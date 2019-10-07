@@ -2,13 +2,13 @@
 
 ## Overview
 
-In this tutorial, we will use the [GLUU-UMA-Auth](../plugin/gluu-uma-auth-pep.md) and [GLUU-UMA-PEP](../plugin/gluu-uma-auth-pep.md) plugins to implement a claims gathering workflow, where an authenticated user is prompted to input information to satisfy access policies. 
+In this tutorial, we will use the [GLUU-UMA-Auth](../plugin/gluu-uma-auth-pep.md) and [GLUU-UMA-PEP](../plugin/gluu-uma-auth-pep.md) plugins to implement claims gathering workflow, where an authenticated user is prompted to input information to satisfy access policies. 
 
 In the demo, the user will be prompted to enter their country and city before being able to access a protected page. If the values entered are correct (US, NY), the user is granted access. If not, access is denied. 
 
 ### Parties
 
-The following diagram presents all actors that are part of the UMA Authorization flow. The person configuring this demo is the `Resource Owner`, who registers the resources in `Gluu Gateway - Resource server` and configures `Gluu Server - Authorization Server`. Further details are later in this tutorial.
+The following diagram presents all the actors that are part of the UMA Authorization flow. The person configuring this demo is the `Resource Owner`, who registers the resources in `Gluu Gateway - Resource server` and configures `Gluu Server - Authorization Server`. Further details are later in this tutorial.
 
 ![UMA Overview](../img/15_uma-tutorial-flow-parties.png)
 
@@ -21,7 +21,7 @@ The following flow diagram shows the step-by-step activities performed by the ac
 
 ## Requirements
 
-- Gluu Gateway 4.0: This is our UMA Resource Server (RS), where policies are enforced, a.k.a. the Policy Enforcement Point (PEP). [Install Gluu Gateway](../installation.md). [OXD Server](https://gluu.org/docs/oxd/4.0/) is a static APIs web application which will install during GG installation.
+- Gluu Gateway 4.0: This is our UMA Resource Server (RS), where policies are enforced, a.k.a. Policy Enforcement Point (PEP). [Install Gluu Gateway](../installation.md). [OXD Server](https://gluu.org/docs/oxd/4.0/) is a static APIs web application which will install during GG installation.
 
 - Gluu Server 4.0: This is our UMA Authorization Server (AS), where policies are stored and evaluated, a.k.a. the Policy Decision Point (PDP). [Install Gluu](https://gluu.org/docs/ce/4.0/installation-guide/install-ubuntu/)
 
@@ -32,7 +32,7 @@ The following flow diagram shows the step-by-step activities performed by the ac
 ## Gluu Gateway configuration (RS)
 
 !!! Note
-    The GG UI is only available on localhost. Since it is on a remote machine, we need SSH port forwarding to reach the GG UI. Plugin configuration can be done either via REST calls or via the Gluu Gateway web interface.  
+    The GG UI is only available on the localhost. Since it is on a remote machine, we need SSH port forwarding to reach the GG UI. Plugin configuration can be done either via REST calls or via the Gluu Gateway web interface.  
 
 Applications and their ports:
 
@@ -41,7 +41,7 @@ Applications and their ports:
 |1338| Gluu Gateway Admin GUI|
 |8001|Kong Admin API|
 |8000|Kong Proxy Endpoint|
-|443|Kong SSL Proxy Endpoint. Kong by default provide 8443 port for SSL proxy but during setup it change into 443.|
+|443|Kong SSL Proxy Endpoint. Kong by default provide 8443 port for SSL proxy but during setup, it changes into 443.|
 |8443|oxd Server| 
 
 ### Add Service
@@ -62,7 +62,7 @@ Follow these step to add Service using GG UI
 
 ### Add Route
 
-Follow these steps to add route:
+Follow these steps to add a route:
 
 - Click `claim-gathering` on the services
 
@@ -94,7 +94,7 @@ Configure Gluu-UMA-Auth and Gluu-UMA-PEP with UMA scopes and resources.
 
 ### Add Consumer with OP Client
 
-OP Client is used to correlate an access token with a Kong consumer. You must create a OP client before you can register it here as a way to identify a consumer.
+OP Client is used to correlating an access token with a Kong consumer. You must create an OP client before you can register it here as a way to identify a consumer.
 
 Follow these steps to make a **new OP Client** and **consumer** using GG UI:
 
@@ -106,11 +106,11 @@ Follow these steps to make a **new OP Client** and **consumer** using GG UI:
 
 ![uma-cg-tutorial-3.png](../img/uma-cg-tutorial-3.png)
 
-- It will create client in your OP Server and show you all the client details. You need to copy all the details. let's call it **consumer_op_client** so it will help you in next steps.
+- It will create the client in your OP Server and show you all the client details. You need to copy all the details. let's call it **consumer_op_client** so it will help you in the next steps.
 
 ![uma-cg-tutorial-4.png](../img/uma-cg-tutorial-4.png)
 
-- Click on `+ CREATE CLIENT` button and add `client_id` in the `Gluu Client Id`.
+- Click on the `+ CREATE CLIENT` button and add `client_id` in the `Gluu Client Id`.
 
 ![uma-cg-tutorial-5.png](../img/uma-cg-tutorial-5.png)
 
@@ -157,7 +157,7 @@ Download the app from the [repository](https://github.com/GluuFederation/gluu-ga
 
 ### Deploy
 
-Since we are using a Python CGI script for simplicity, we first need to get a working web server to act as the Relying Party (RP). This tutorial is using Ubuntu 16.04 LTS. 
+Since we are using a Python CGI script for simplicity, we first need to get a working webserver to act as the Relying Party (RP). This tutorial is using Ubuntu 16.04 LTS. 
 
 First, install the Apache web server:
 
@@ -191,15 +191,15 @@ Use the `config.py` file to add your configuration
 |ce_url|CE OP Server URL|
 |api_path|your API path which you register during plugin configuration. Example: request path `/posts/1`. Check [here](../../plugin/common-features/#dynamic-resource-protection) for more details about path regular expression.|
 |host_with_claims|Kong Router object's host which you configure for claim gathering flow. As per above configuration, its value is `gathering.example.com`.|
-|host_without_claims| Ignore this for now. You can make policy without claim flow. |
+|host_without_claims| Ignore this for now. You can make a policy without claim flow. |
 |client_oxd_id, client_id, client_secret|Consumer OP Client credentials|
-|claims_redirect_url|Claims redirect URL. As per above configuration, it is `<your-server.com>/cgi-bin/index.py`.|
+|claims_redirect_url|Claims redirect URL. As per the above configuration, it is `<your-server.com>/cgi-bin/index.py`.|
 
 ### UMA Authorization
 
-If all the things configured well, request this `<your-server.com>/cgi-bin/index.py?claim=true` URL in browser. Below is the step by step output of demo application.
+If all the things configured well, request this `<your-server.com>/cgi-bin/index.py?claim=true` URL in a browser. Below is the step by step output of the demo application.
 
-1. Request to resources and get ticket
+1. Request to resources and get a ticket
  
      ![uma-cg-tutorial-7.png](../img/uma-cg-tutorial-7.png)
 
@@ -211,15 +211,15 @@ If all the things configured well, request this `<your-server.com>/cgi-bin/index
 
      ![uma-cg-tutorial-9.png](../img/uma-cg-tutorial-9.png)
 
-1. Here AS ask user to enter some extra information to authorize a user. AS will first ask user to enter value for `Country`. Enter `US` in country.
+1. Here AS ask the user to enter some extra information to authorize a user. AS will first ask the user to enter a value for `Country`. Enter `US` in a country.
 
      ![uma-cg-tutorial-10.png](../img/uma-cg-tutorial-11.png)
      
-1. After submitting Country claim, AS will user to enter value for `City`. Enter `NY` in city.
+1. After submitting a Country claim, AS will ask the user to enter a value for `City`. Enter `NY` in the city.
 
      ![uma-cg-tutorial-11.png](../img/uma-cg-tutorial-12.png)
      
-1. After redirect, demo app gets ticket from url and get new RPT Token.
+1. After the redirect, the demo app gets the ticket from url and get a new RPT Token.
 
      ![uma-cg-tutorial-6.png](../img/uma-cg-tutorial-6.png)
 
@@ -230,7 +230,7 @@ If all the things configured well, request this `<your-server.com>/cgi-bin/index
 
 #### Steps by Steps implementation
 
-Belows are the steps perform by the Demo Application(Requesting Party).
+Below are the steps performed by the Demo Application(Requesting Party).
 
 1. Request to protected resources and Get a resource ticket
 
@@ -282,5 +282,5 @@ Belows are the steps perform by the Demo Application(Requesting Party).
       ```
       
 !!! Info
-    You can make a policy to without claim flow and just check request and return true and false. For Example: You can pass the id token as a PCT token, check the values in UMA Policy script and return true to allow and false to deny. In this case, there is no **need_info** response and no claim gathering process. Check [Gluu UMA Docs here](https://gluu.org/docs/ce/4.0/admin-guide/uma/) for more details. <br/> For none claim gathering, you need to set `host_with_claims` and request url of demo will be `<your-server.com>/cgi-bin/index.py` without `?claim=true`.
+    You can make policy without claim flow and just check requests and return true and false. For Example, You can pass the id token as a PCT token, check the values in UMA Policy script and return true to allow and false to deny. In this case, there is no **need_info** response and no claim gathering process. Check [Gluu UMA Docs here](https://gluu.org/docs/ce/4.0/admin-guide/uma/) for more details. <br/> For none claim gathering, you need to set `host_with_claims` and request url of demo will be `<your-server.com>/cgi-bin/index.py` without `?claim=true`.
 

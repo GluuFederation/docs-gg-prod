@@ -4,7 +4,7 @@
 **`gluu-opa-pep`** authorization plugin which interacts with the [Open Policy Agent](https://www.openpolicyagent.org/). It is executed after the Gluu authentication plugins i.e. `gluu-openid-connect` and `gluu-oauth-auth`. After client authentication, data is passed to the `gluu-opa-pep` plugin which calls the OPA authorization endpoint (specified in the configuration). The plugin priority is `996`.
 
 !!! Important
-    You can configured only one PEP plugin. If you have already configured `gluu-uma-pep` or `gluu-oauth-pep` then GG will not allow you to configure `gluu-opa-pep`.
+    You can configure only one PEP plugin. If you have already configured `gluu-uma-pep` or `gluu-oauth-pep` then GG will not allow you to configure `gluu-opa-pep`.
 
 ### What is passed to the OPA Policy endpoint? 
 
@@ -241,6 +241,6 @@ The following parameters can be used in this plugin's configuration.
 
 | field | Default | Description |
 |-------|---------|-------------|
-|**opa_url**||This is your OPA policy endpoint where authentication data will be pass.|
+|**opa_url**||This is your OPA policy endpoint where authentication data will be a pass.|
 |**forward_request_body**|false|Forward request body to OPA policy endpoint.|
 

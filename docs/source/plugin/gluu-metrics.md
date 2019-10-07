@@ -39,7 +39,7 @@ The following parameters can be used for plugin configuration:
 |Parameters|Default|Description|
 |-------------|-------|-----------|
 |ip_restrict_plugin_id || The ID of the `ip-restriction` plugin|
-|gluu_prometheus_server_host || The host(server) which collect the metrics about your server. Set to `license.gluu.org` during setup.|
+|gluu_prometheus_server_host || The host(server) which collects the metrics about your server. Set to `license.gluu.org` during setup.|
 |kong_admin_url || Your Kong Admin API URL.|
 |check_ip_time | 86400 sec| The frequency in seconds to check the IP of the `gluu_prometheus_server_host` server. If IP is changed, it updates the IP restriction plugin, which has `config.ip_restrict_plugin_id` ID. The default value is 86400 seconds(1 day).|
 

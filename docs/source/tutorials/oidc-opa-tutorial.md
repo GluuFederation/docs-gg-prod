@@ -4,7 +4,7 @@
 
 In this tutorial, we are going to add `OpenID Connect Authorization code flow` authentication by configuring the [`gluu-openid-connect`](../../plugin/gluu-openid-connect-uma-pep/) plugin and user authorization by the [`gluu-opa-pep`](../../plugin/gluu-opa-pep/) plugin. User will be authenticate first and second part is to check the user permission using [`OPA Policy`](https://openpolicyagent.org). 
 
-In demo, user will first authenticated by OpenID Connect and for `/fligths` resource, only the user with email `test@gluu.org` has rights to access resource. 
+In the demo, the user will first be authenticated by OpenID Connect and for `/flights` resource, only the user with email `test@gluu.org` has the right to access resources. 
 
 Check [Open Policy Agent](openpolicyagent.org) for more complex policy.
 
@@ -22,7 +22,7 @@ Check [Open Policy Agent](openpolicyagent.org) for more complex policy.
 
 For this demo, we are using below very simple policy. Deploy this policy in your OPA Server. For more complex policy please check [OPA docs](openpolicyagent.org).
 
-Below policy will check endpoint should be `flights`, http method should be `GET` and user should be `test@gluu.org` otherwise deny.
+Below policy will check endpoint should be `flights`, HTTP method should be `GET` and the user should be `test@gluu.org` otherwise deny.
  
 ```
 package httpapi.authz
@@ -43,7 +43,7 @@ allow {
 ## Gluu Gateway configuration (RP)
 
 !!! Note
-    The GG UI is only available on localhost. Since it is on a remote machine, we need SSH port forwarding to reach the GG UI. Plugin configuration can be done either via REST calls or via the Gluu Gateway web interface.  
+    The GG UI is only available on the localhost. Since it is on a remote machine, we need SSH port forwarding to reach the GG UI. Plugin configuration can be done either via REST calls or via the Gluu Gateway web interface.  
 
 Applications and their ports:
 
@@ -52,14 +52,14 @@ Applications and their ports:
 |1338| Gluu Gateway Admin GUI|
 |8001|Kong Admin API|
 |8000|Kong Proxy Endpoint|
-|443|Kong SSL Proxy Endpoint. Kong by default provide 8443 port for SSL proxy but during setup it change into 443.|
+|443|Kong SSL Proxy Endpoint. Kong by default provide 8443 port for SSL proxy but during setup, it changes into 443.|
 |8443|oxd Server| 
 
 ### Add Service
 
 Register your upstream website as a Service.
 
-We are using [`http://localhost:4400`](https://github.com/GluuFederation/gluu-gateway/tree/version_4.0/gg-demo/node-ejs) as the Upstream Website, it is your application where you want to add OpenID Connect Authentication. End users always request to first kong proxy, plugin will perform authentication and if all is ok then kong will forward request to upstream website and serve content which is return by the upstream website.
+We are using [`http://localhost:4400`](https://github.com/GluuFederation/gluu-gateway/tree/version_4.0/gg-demo/node-ejs) as the Upstream Website, it is your application where you want to add OpenID Connect Authentication. End-users always request to first kong proxy, the plugin will perform authentication and if all is ok then kong will forward a request to the upstream website and serve content which is return by the upstream website.
 
 Follow these step to add Service using GG UI
  
@@ -73,7 +73,7 @@ Follow these step to add Service using GG UI
 
 ### Add Route
 
-Follow these steps to add route:
+Follow these steps to add a route:
 
 - Click on the `oidc-opa-demo` service
 
@@ -83,7 +83,7 @@ Follow these steps to add route:
 
 - Fill in the following boxes:
      - **Name:** oidc-opa-demo
-     - **Hosts:** `<your-server-host>`, `Tip: Press Enter to accept value`. In my case, I am using server and updated `/etc/hosts` file. This is the host which we will used to request in browser after configuration. You can register your domain host if you are using live servers. For further next tutorial I am using `dev1.gluu.org`, you need to use your host. Check kong docs for more routing capabilities [here](https://docs.konghq.com/0.14.x/proxy/#routes-and-matching-capabilities).
+     - **Hosts:** `<your-server-host>`, `Tip: Press Enter to accept value`. In my case, I am using server and updated `/etc/hosts` file. This is the host which we will use to request in a browser after configuration. You can register your domain host if you are using live servers. For further next tutorial, I am using `dev1.gluu.org`, you need to use your host. Check kong docs for more routing capabilities [here](https://docs.konghq.com/0.14.x/proxy/#routes-and-matching-capabilities).
   
 ![oidc-demo5](../img/opa-demo5.png)
 
@@ -94,14 +94,14 @@ Follow these steps to add route:
 - Click on `Plugins`
 - Click on `+ ADD PLUGIN` button
 - You will see `Gluu OIDC & UMA PEP` title and `+` icon in pop-up.
-- Click on `+` icon and it will show below form.
+- Click on the `+` icon and it will show below form.
     - Disabled `ACR Expression` and `UMA PEP Security configuration`
 
 ![oidc-demo3](../img/opa-demo3.png)
 
 ![oidc-demo4](../img/opa-demo4.png)
 
-Configurations have been done here. Now request kong proxy that is `https://<your_host>` in browser. In my case, I am requesting `https://dev1.gluu.org`.
+Configurations have been done here. Now request kong proxy that is `https://<your_host>` in a browser. In my case, I am requesting `https://dev1.gluu.org`.
 
 ### Configure `gluu-opa-pep` plugin
 
@@ -110,18 +110,18 @@ Configurations have been done here. Now request kong proxy that is `https://<you
 - Click on `Plugins`
 - Click on `+ ADD PLUGIN` button
 - You will see `Gluu OPA PEP` title and `+` icon in pop-up.
-- Click on `+` icon and it will show below form and add your OPA endpoint. In my case, I setup OPA Docker and below is the OPA endpoint. For more details check OPA [docs](https://openpolicyagent.org).
+- Click on the `+` icon and it will show below form and add your OPA endpoint. In my case, I set up OPA Docker and below is the OPA endpoint. For more details check OPA [docs](https://openpolicyagent.org).
 
 ![oidc-demo6](../img/opa-demo6.png)
 
-This completes configuration. Next, request the Kong proxy at `https://<your_host>/flights` in the browser. As per my configuration, I am requesting `https://dev1.gluu.org/flights`.
+This completes the configuration. Next, request the Kong proxy at `https://<your_host>/flights` in the browser. As per my configuration, I am requesting `https://dev1.gluu.org/flights`.
 
 !!! Important
-    Request should be `/flights` not a `/flights/`. extra `/` means extra path so it will deny by policy.
+    The request should be `/flights` not a `/flights/`. extra `/` means extra path so it will deny by the policy.
 
 ## Authentication
 
-1. Once you request to kong proxy, plugin will redirect you to your OP side.
+1. Once you request to kong proxy, the plugin will redirect you to your OP side.
 
      ![oidc-demo10](../img/oidc-demo10.png)
      
@@ -133,7 +133,7 @@ This completes configuration. Next, request the Kong proxy at `https://<your_hos
 
      ![oidc-demo7](../img/opa-demo7.png)
      
-3. Now try to click on any other page. let's click on `payments`. It will deny you because policy only allow `flights`.
+3. Now try to click on any other page. let's click on `payments`. It will deny you because the policy only allows `flights`.
 
      ![oidc-demo8](../img/opa-demo8.png)
 

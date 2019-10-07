@@ -1,6 +1,6 @@
 # Gluu UMA Auth and UMA PEP
 ## Overview
-The UMA Auth and UMA PEP is used client authentication and to enforce the presence of UMA scopes for access to resources protected by the Gateway. UMA scopes and policies are defined in an external UMA Authorization Server (AS) -- in most cases the Gluu Server. The Gateway and AS leverage the oxd UMA middleware service for communication. 
+The UMA Auth and UMA PEP are used for client authentication and to enforce the presence of UMA scopes for access to resources protected by the Gateway. UMA scopes and policies are defined in an external UMA Authorization Server (AS) -- in most cases the Gluu Server. The Gateway and AS leverage the oxd UMA middleware service for communication. 
 
 There are two plugins for OAuth security.
 
@@ -10,7 +10,7 @@ There are two plugins for OAuth security.
 The plugin supports two tokens:  
 
    1. **Default Access Token**: The plugin will authenticate the token using introspection.   
-   1. **Access Token as JWT**: The plugin will authenticate the token using JWT verify. Currently three algorithms are supported: **RS256**, **RS384** and **RS512**.
+   1. **Access Token as JWT**: The plugin will authenticate the token using JWT verify. Currently, three algorithms are supported: **RS256**, **RS384** and **RS512**.
 
 ## Configuration
 
@@ -134,7 +134,7 @@ $ curl -X POST \
 }'
 ```
 
-Above example is passing `route` property which will add plugin for route level.
+The above example is passing `route` property which will add the plugin for route level.
 
 | Request | For |
 |---------|-----|
@@ -152,10 +152,10 @@ Here is a list of all the parameters which can be used in this plugin's configur
 |-------|---------|-------------|
 |**op_url**||The URL of your OP server. Example: https://op.server.com|
 |**oxd_url**||The URL of your oxd server. Example: https://oxd.server.com|
-|**oxd_id**|| The ID for an existing client, used to introspect the token. If left blank, a new client will be registered dynamically |
-|**client_id**|| An existing client ID, used to get a protection access token to access the introspection API. Required if an existing oxd ID is provided.|
-|**client_secret**|| An existing client secret, used to get protection access token to access the introspection API. Required if an existing oxd ID is provided.|
-|**anonymous**||An required string (consumer Id) value to use as an “anonymous” consumer if authentication fails. You need to set the Anonymous consumer because it is used to by pass gluu-uma-auth authentication and help to get the ticket from gluu-uma-pep. |
+|**oxd_id**|| The ID for an existing client used to introspect the token. If left blank, a new client will be registered dynamically |
+|**client_id**|| An existing client ID used to get a protection access token to access the introspection API. Required if an existing oxd ID is provided.|
+|**client_secret**|| An existing client secret, used to get a protection access token to access the introspection API. Required if an existing oxd ID is provided.|
+|**anonymous**||An required string (consumer Id) value to use as an “anonymous” consumer if authentication fails. You need to set the Anonymous consumer because it is used to bypass gluu-uma-auth authentication and help to get the ticket from gluu-uma-pep. |
 |**pass_credentials**|pass|It allows 3 values. `pass`, `hide` and `phantom_token`. Used to operate the authorization header from the upstream service as per configuration. In `phantom_token` case, plugin will replace bearer token with new generated JWT(with introspection result) token, so for outside there is bearer token and JWT for internal use.|
 
 #### Gluu-UMA-PEP 
@@ -164,16 +164,16 @@ Here is a list of all the parameters which can be used in this plugin's configur
 |-------|---------|-------------|
 |**op_url**||The URL of your OP server. Example: https://op.server.com|
 |**oxd_url**||The URL of your oxd server. Example: https://oxd.server.com|
-|**oxd_id**|| The ID for an existing client, used to introspect the token. If left blank, a new client will be registered dynamically |
-|**client_id**|| An existing client ID, used to get a protection access token to access the introspection API. Required if an existing oxd ID is provided.|
-|**client_secret**|| An existing client secret, used to get protection access token to access the introspection API. Required if an existing oxd ID is provided.|
+|**oxd_id**|| The ID for an existing client used to introspect the token. If left blank, a new client will be registered dynamically |
+|**client_id**|| An existing client ID used to get a protection access token to access the introspection API. Required if an existing oxd ID is provided.|
+|**client_secret**|| An existing client secret, used to get a protection access token to access the introspection API. Required if an existing oxd ID is provided.|
 |**uma_scope_expression**|| Check [here](#uma-scope-expression) for description |
 |**deny_by_default**| true | For paths not protected by UMA scope expressions. If true, denies unprotected paths.|
-|**require_id_token**|false|It use when you configure `gluu-openid-connect` plugin. This is for Push Claim token. if it is true then it will use id_token for push claim token for getting RPT|
+|**require_id_token**|false|It use when you configure `gluu-openid-connect` plugin. This is for the Push Claim token. if it is true then it will use id_token for push claim token for getting RPT|
 |**obtain_rpt**|false|It is used to get RPT when you configure `gluu-openid-connect` plugin with `gluu-uma-pep`|
 |**claims_redirect_path**||It use when you configure `gluu-openid-connect` plugin. Claims redirect URL in claim gathering flow for your OP Client. You just need to set path here like `/claim-callback` but you need to register OP Client with full URL like `https://kong.proxy.com/claim-callback`. GG UI creates OP client for you and also configure the `gluu-openid-connect` and `gluu-uma-pep` plugin.|
-|**redirect_claim_gathering_url**|false|It use when you configure `gluu-openid-connect` plugin. It used to tell plugin that if `need_info` response comes in claim gathering situation then redirect it for claim gathering.|
-|**method_path_tree**||It is for plugin internal use. We use it for tree level matching for dynamic paths which registered in `uma_scope_expression`| 
+|**redirect_claim_gathering_url**|false|It use when you configure `gluu-openid-connect` plugin. It used to tell the plugin that if `need_info` response comes in claim gathering situation then redirect it for claim gathering.|
+|**method_path_tree**||It is for plugin internal use. We use it for tree-level matching for dynamic paths which registered in `uma_scope_expression`| 
 
 
 !!! Note
@@ -181,18 +181,18 @@ Here is a list of all the parameters which can be used in this plugin's configur
 
 #### Phantom Token
 
-In some cases there is requirement that bearer token for outside of the network and JWT token for the internal network. Check [here](../common-features/#phantom-token) for more details.
+In some cases, there is a requirement that bearer token for outside of the network and JWT token for the internal network. Check [here](../common-features/#phantom-token) for more details.
 
 #### UMA Scope Expression
 
 It is stringify json. It used to register the resources in a resource server. See more details in the [Gluu Server docs](https://gluu.org/docs/ce/admin-guide/uma/#scopes-expressions).
 
 !!! Important
-    GG UI register the resources for you during plugin configuration. If you are using APIs, you need to register `client` and `resources` using [OXD APIs](https://gluu.org/docs/oxd/4.0/api). You don't need to pass stringify json during resource registration using OXD API. It is required only in plugin configuration.
+    GG UI registers the resources for you during plugin configuration. If you are using APIs, you need to register `client` and `resources` using [OXD APIs](https://gluu.org/docs/oxd/4.0/api). You don't need to pass stringify json during resource registration using OXD API. It is required only in the plugin configuration.
 
-- `path`: it is your url which you want to protect. There is regular expression facility for path configuration. Check [here](../common-features/#dynamic-resource-protection) for more dynamic path registration details.
-    - `condition`: it is the array of condition for the path where you can define acr values to path. You can add multiple condition with different Http Method.
-        - `httpMethods`: it is HTTP Method. During authentication, plugin use it as a filter the request. **`?`** in HTTP method allow all the http methods. It should be in capital case. e.g. GET, POST, PUT.
+- `path`: it is your url which you want to protect. There is a regular expression facility for path configuration. Check [here](../common-features/#dynamic-resource-protection) for more dynamic path registration details.
+    - `condition`: it is the array of conditions for the path where you can define acr values to the path. You can add multiple conditions with different Http Method.
+        - `httpMethods`: it is HTTP Method. During authentication, the plugin uses it as a filter for the request. **`?`** in the HTTP method allow all the http methods. It should be in a capital case. e.g. GET, POST, PUT.
         - `scope_expression`: It is the rules to check the values.
         - `data`: It is the data for the `scope_expression`.
 
@@ -262,8 +262,8 @@ $ curl -X POST \
     http://<kong_hostname>:8001/consumers \
     -H 'Content-Type: application/json' \
     -d '{
-  	"username": "<kong_consumer_name>",
-  	"custom_id": "<gluu_client_id>"
+   "username": "<kong_consumer_name>",
+   "custom_id": "<gluu_client_id>"
   }'
 ```
 
@@ -284,13 +284,13 @@ curl -X GET \
 
 ## Upstream Headers
 
-When a client has been authenticated, the plugin will append some headers to the request before proxying it to the upstream service to identify the consumer and the end user in the code:
+When a client has been authenticated, the plugin will append some headers to the request before proxying it to the upstream service to identify the consumer and the end-user in the code:
 
 1. **X-Consumer-ID**, the ID of the Consumer on Kong
 1. **X-Consumer-Custom-ID**, the custom_id of the Consumer (if set)
 1. **X-Consumer-Username**, the username of the Consumer (if set)
 1. **X-OAUTH-Client-ID**, the authenticated client ID (only if the consumer is not an 'anonymous' consumer)
-1. **X-RPT-Expiration**, the token expiration time, integer timestamp, measured in the number of seconds since January 1, 1970 UTC, indicating when this token will expire, as defined in JWT RFC7519. It is only returned if the consumer is not set to 'anonymous'.
+1. **X-RPT-Expiration**, the token expiration time, integer timestamp, measured in the number of seconds since January 1, 1970, UTC, indicating when this token will expire, as defined in JWT RFC7519. It is only returned if the consumer is not set to 'anonymous'.
 1. **X-Anonymous-Consumer**, will be set to true when authentication fails, and the 'anonymous' consumer is set instead.
 
 This information can be used to implement additional logic. For example, use the X-Consumer-ID value to query the Kong Admin API and retrieve more information about the Consumer.
