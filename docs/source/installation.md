@@ -23,6 +23,22 @@ Gluu Gateway needs to be deployed on a server or VM with the following minimum r
 !!! Important 
     Always run the following commands as root.
 
+### Ubuntu 18
+* Add the Gluu repo:
+```
+# echo "deb https://repo.gluu.org/ubuntu/ bionic-devel main" > /etc/apt/sources.list.d/gluu-repo.list
+# curl https://repo.gluu.org/ubuntu/gluu-apt.key | apt-key add -
+```
+* Add the PostgreSQL 10 repo:
+```
+# echo "deb http://apt.postgresql.org/pub/repos/apt/ bionic-pgdg main" > /etc/apt/sources.list.d/psql.list
+# wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
+```
+* Add the Node repo:
+```
+# curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
+```
+
 ### Ubuntu 16
 * Add the Gluu repo:
 ```
@@ -96,7 +112,7 @@ Gluu Gateway needs to be deployed on a server or VM with the following minimum r
 !!! important
     The Gluu Gateway package installs the following required components: PostgreSQL v10, oxd Server 4.0, NodeJS v8, Kong Community Edition v0.14.1.
 
-### Ubuntu 16
+### Ubuntu 16, 18
 ```
  # apt update
  # apt install gluu-gateway
@@ -113,14 +129,8 @@ Gluu Gateway needs to be deployed on a server or VM with the following minimum r
 !!! Important 
     Before start setup, stop your all services which run on ports 443, 8443, 1338, 8000 and 8001. 
 
-!!! Note
-    During setup, we are register your metrics endpoint at Gluu license server. GG configure below some things.
-      
-      - Kong Service object with `name: gluu-org-metrics-service` and url `url: http://localhost:8001`
-      - Kong Route object with `methods: GET`, `paths: /gluu-metrics`, `strip_path: false` and `service: above_service_id`.
-      - Kong IP Restriction plugin so that this endpoint only accessible to Gluu license server.
-      - Configure Gluu `gluu-metrics` plugin globally.
-      - Register customer at Gluu license server `license.gluu.org`. 
+!!! Info
+    If you are behind the corporate proxy, you need to export `HTTP_PROXY`, `HTTPS_PROXY`. [More details](https://github.com/GluuFederation/gluu-gateway/issues/352)
 
 ```
  # cd /opt/gluu-gateway/setup
@@ -131,7 +141,6 @@ After acknowledging the Gluu Stepped-Up Support License, you will be prompted to
 
 !!! Important 
     When prompted to provide a two-letter value, make sure to follow the instructions. A mistake may result in the lack of certificates.
-
 
 | **Question** | **Explanation** |
 |----------|-------------|
@@ -144,28 +153,37 @@ After acknowledging the Gluu Stepped-Up Support License, you will be prompted to
 | **Enter Email Address** | Used to generate web X.509 certificates |
 | **Password** | If you already have a postgres database password for user `postgres`, enter it here. Otherwise, enter a new password. |
 | **OP Server Host** | The hostname of the Gluu Server that will be used for OAuth 2.0 client credentials and access management. **Example**: your-op.server.com |
-| **Install OXD Server?** | If you choose Y(yes) then it will install fresh oxd server in your machine. If you choose N(No) then it will ask you next question `Enter your existing OXD server URL`, where you need to enter your existing oxd server URL. | 
+| **Install OXD Server?** | If you choose Y(yes) then it will install fresh oxd server in your machine. If you choose N(No) then it will ask you next question `Enter your existing OXD server URL`, where you need to enter your existing oxd server URL. Check [here](https://gluu.org/docs/oxd/4.0/) for more details about oxd server. | 
 | **OXD Server URL** | If oxd is installed on a different hostname than Gluu Gateway, provide its URL. If not, enter the hostname for Gluu Gateway|
 | **Generate client credentials to call oxd-server API's?** | Register an OpenID Client for Konga, or enter existing client credentials manually. Take care about yuor Client at your OP server side; make sure to [extend this expiration date](https://www.gluu.org/docs/oxd/4.0/faq/#client-expires-how-can-i-avoid-it). If you enter existing client details, make sure your client in Redirect Login URIs and Post Logout Redirect URIs field has the value `https://localhost:1338`. |
 | **OXD Id** | Used to manually set the oxd ID. |
 | **Client Id** | Used to manually set the client ID. |
 | **Client Secret** | Used to manually set the client secret. |
 
+During setup, the metrics endpoint is registered with the Gluu license server. GG configures the following:
+      
+  - Kong Service object with `name: gluu-org-metrics-service` and `url: http://localhost:8001`
+  - Kong Route object with `methods: GET`, `paths: /gluu-metrics`, `strip_path: false` and `service: above_service_id`.
+  - Kong IP Restriction plugin, which ensures this endpoint is only accessible to the Gluu license server.
+  - Configures the  Gluu `gluu-metrics` plugin globally.
+  - Registers the customer at the Gluu license server, `https://license.gluu.org`. 
+
 ## Finish the setup
 
 ```
- Gluu Gateway configuration successful!!! https://localhost:1338
+Gluu Gateway configuration successful!!! https://localhost:1338
 ```
 
-If you see the above message, it means the installation was successful. To log in to the Gluu Gateway admin portal, create an SSH tunnel on port 1338 from your workstation to the Gluu Gateway server, and point your browser at `https://localhost:1338`. Use the login and password that you also use to access the Gluu Server.
+If you see the above message, it means the installation was successful. To log in to the Gluu Gateway admin portal, create an SSH tunnel on port 1338 to the Gluu Gateway server, and point the browser at `https://localhost:1338`. Use the login and password used to access the Gluu Server.
 
 !!! Important
-    If you get any error in setup then check the logs in log file `/opt/gluu-gateway/setup/gluu-gateway-setup.log` and `/opt/gluu-gateway/setup/gluu-gateway-setup_error.log`
+    To diagnose errors during setup, check the log files: `/opt/gluu-gateway/setup/gluu-gateway-setup.log` and `/opt/gluu-gateway/setup/gluu-gateway-setup_error.log`
     
-
 !!! Note
-    If you do not want an SSH tunnel connection. See [FAQ](./faq.md#how-can-i-change-the-listening-address-and-port) for global access configuration. After this settings, you also need to update the OP clients redirect url and post logout url using oxd [update-site]() api.
+    If you do not want an SSH tunnel connection, see the [FAQ](./faq.md#how-can-i-change-the-listening-address-and-port) for global access configuration. After these settings, you also need to update the OP clients redirect URL and post logout URL using the oxd [update-site](https://gluu.org/docs/oxd/4.0/api/#update-site) API.
     
+If automating installation, the JSON values can be passed directly to the setup script. The JSON values can be found [here.](https://github.com/GluuFederation/gluu-gateway/blob/version_4.0/t/scripts/install.sh#L64)
+
 ## Applications and their ports
 
 | Port | Description |
@@ -219,6 +237,7 @@ Choose one of the following three options:
     ```
 
 1. If you want to also remove the configuration files (/etc/init.d/gluu-gateway and /opt/gluu-gateway/konga/config), use `purge`.
+
     ```    	
     # apt-get purge gluu-gateway
     ```
@@ -228,3 +247,6 @@ Choose one of the following three options:
     ```
     # apt-get remove --auto-remove gluu-gateway
     ```
+
+!!! Info
+    To remove all other GGs sub components, use `apt-get purge gluu-gateway kong* postgresql-* oxd-server*`

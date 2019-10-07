@@ -3,7 +3,7 @@
 ## Dashboard
 The Dashboard section shows application configuration details.
 
-**Global Info** shows the oxd and client details used by Konga. You can verify the version of the oxd server or the hostname of the Gluu Server in this section. The `oxd ID`, `Client ID` and `Client Secret` are the credentials for the Konga client created by default during the Gluu Gateway installation and setup.
+**Global Info** shows the oxd and client details used by Konga. You can verify the version of the oxd server or the hostname of the Gluu Server in this section. The `OXD ID`, `Client ID` and `Client Secret` are the credentials for the Konga client created by default during the Gluu Gateway installation and setup.
 
 The **Gateway** and **Database Info** sections show details about the Gateway itself and the included Postgres database.
 
@@ -23,11 +23,11 @@ The Info section shows generic details about the Kong node.
 
 ### Service List
 
-Service entities are abstractions of each upstream service. A billing API is an example of a service.
+Service entities, as the name implies, are abstractions of each of your own upstream services. Examples of Services would be a data transformation microservice, a billing API, etc.
 
-See Kong's [Service configuration](https://docs.konghq.com/0.14.x/proxy/#reminder-how-to-configure-a-service) documentation for more details.
+See Kong's [Service configuration](https://docs.konghq.com/1.3.x/proxy/#reminder-how-to-configure-a-service) documentation for more details.
 
-![3_service_list](img/3_1_service_list.png)
+![3_services](img/3_services.png)
 
 !!! Note
     The eye icon is used to see raw JSON objects. Use this to see the object ID, if needed.
@@ -43,7 +43,7 @@ See Kong's [Service configuration](https://docs.konghq.com/0.14.x/proxy/#reminde
 
 Add a Service using the `+ ADD NEW SERVICE` button.
 
-![3_2_add_service](img/3_2_add_service.png)
+![3_service_add](img/3_service_add.png)
 
 ### Manage Service
 
@@ -52,14 +52,14 @@ Edit a Service and manage its plugins by clicking on the pencil icon on the Serv
 #### Service Details
 This section is used to view and edit a Service.
 
-![3_3_service_details](img/3_3_service_details.png)
+![3_service_manage](img/3_service_manage.png)
 
 #### Service Routes
 This section is used to manage the routes within the selected service.
 
-Check Kong [routes configuration](https://docs.konghq.com/0.14.x/proxy/#routes-and-matching-capabilities) docs for more details.
+Check Kong [routes configuration](https://docs.konghq.com/1.3.x/proxy/#routes-and-matching-capabilities) docs for more details.
 
-![3_4_service_route](img/3_4_service_route.png)
+![3_service_routes](img/3_service_routes.png)
 
 | Tools | Details |
 |---|-----|
@@ -73,7 +73,7 @@ This section is used to add and view plugins.
 
 ##### Service Plugin List
 
-  ![3_5_service_plugins](img/3_5_service_plugins.png)
+  ![3_service_plugins](img/3_service_plugins.png)
 
   | Tools | Details |
   |---|-----|
@@ -86,13 +86,13 @@ This section is used to add and view plugins.
 
   Add a Plugin by clicking the `+` icon next to the plugin’s name.
 
-  ![3_6_add_plugins](img/3_6_add_plugins.png)
+  ![3_service_plugins_add](img/3_service_plugins_add.png)
 
 #### Eligible Consumers for Service
 
 This section is for the ACL Kong plugin, which restricts access to an API by whitelisting or blacklisting consumers using arbitrary ACL group names. It shows the list of consumers that are configured with ACL groups.
 
-  ![3_7_eligible_consumers](img/3_7_eligible_consumers.png)
+  ![3_service_eligible_consumer](img/3_service_eligible_consumer.png)
 
 ## Routes
 
@@ -100,9 +100,9 @@ This section is for the ACL Kong plugin, which restricts access to an API by whi
 
 The Route entities define rules to match client requests. Each Route is associated with a Service, and a Service may have multiple Routes associated with it. Every request matching a given Route will be proxied to its associated Service.
 
-Check Kong [routes configuration](https://docs.konghq.com/0.14.x/proxy/#routes-and-matching-capabilities) docs for more details.
+Check Kong [routes configuration](https://docs.konghq.com/1.3.x/proxy/#routes-and-matching-capabilities) docs for more details.
 
-![4_1_route_list](img/4_1_route_list.png)
+![4_routes](img/4_routes.png)
 
 | Tools | Details |
 |---|-----|
@@ -121,14 +121,14 @@ Edit a Route and manage its plugins by clicking on the pencil icon on the Route 
 #### Route Details
 This section is used to view and edit a Route.
 
-![4_2_route_details](img/4_2_route_details.png)
+![4_route_manage](img/4_route_manage.png)
 
 #### Route Plugins
 This section is used to view the list of added Plugins and add a new Plugin.
 
 ##### Route Plugin List
 
-  ![4_3_route_plugin](img/4_3_route_plugin.png)
+  ![4_route_plugins](img/4_route_plugins.png)
 
   | Tools | Details |
   |---    |-----|
@@ -141,28 +141,29 @@ This section is used to view the list of added Plugins and add a new Plugin.
 
   Add a Plugin by clicking the `+` icon next to a plugin’s name.
 
-  ![4_4_add_plugins](img/3_6_add_plugins.png)
+  ![4_route_plugins_add](img/4_route_plugins_add.png)
 
 #### Eligible Consumers for Route
 
   This section is for the ACL Kong plugin, which restricts access to an API by whitelisting or blacklisting consumers using arbitrary ACL group names. It shows the list of consumers that are configured with ACL Groups.
 
-  ![4_5_route_eligible_consumer](img/4_5_route_eligible_consumer.png)
+  ![4_route_eligible_consumer](img/4_route_eligible_consumer.png)
 
 ## Consumers
 
 The Consumer object represents a consumer - or a user - of a Service. Either rely on Kong as the primary datastore, or map the consumer list with a database to keep consistency between Kong and the existing primary datastore.
 
-![consumers](img/4_consumers.png)
+![consumers](img/5_consumers.png)
 
 Add Consumers by using the `+ CREATE CONSUMER` button.
 
-![consumers_add](img/4_customer_add.png)
+![consumers_add](img/5_consumer_add.png)
 
 | Fields | Details |
 |---|-----|
 | **Consumer Name** | The Kong Consumer Username, which is the identifier used by Kong for the client. Should contain no spaces or special characters.|
 | **Gluu Client Id** | The Kong Consumer Custom ID, used to correlate an access token with a Kong consumer. The client must already exist before being registered here as a way to identify a consumer.|
+| **Tags** | An optional set of strings associated with the Consumer, for grouping and filtering. |
 
 ### Manage Consumer
 
@@ -172,25 +173,25 @@ Click on the **Consumer Name** to manage a consumer. Edit and manage ACL plugin 
 
 View and edit the selected consumer details here.
 
-![4_edit_consumer](img/4_edit_consumer.png)
+![5_consumer_manage](img/5_consumer_manage.png)
 
 #### Groups
 
 Create a group for ACL plugins to whitelist and blacklist consumers according to ACL plugin configuration.
 
-![4_consumer_groups](img/4_consumer_groups.png)
+![5_consumer_groups](img/5_consumer_groups.png)
 
 #### Consumer Plugins
 
 Some plugins can be configured for each specific consumer. This section will also add the plugin globally, which will apply for every service and route.
 
-![4_consumer_plugin](img/4_consumer_plugin.png)
+![5_consumer_plugins](img/5_consumer_plugins.png)
 
 ### Create Client
 
 Click on the `+ CREATE CLIENT` button to create OP client. It will create a client with the `client_credentials` grant type. It creates a client using OXD `register-site` API, so you can use direct OXD API also.
 
-![4_consumer_client](img/4_consumer_client.png)
+![5_consumer_client_add](img/5_consumer_client_add.png)
 
 | Fields | Details |
 |---|-----|
@@ -211,55 +212,59 @@ If you need to add plugins to a specific consumer, do so in the respective [cons
 
 ### Plugin List
 
-![5_plugins](img/5_plugins.png)
+![6_plugins](img/6_plugins.png)
 
 ### Add Plugin
 
 Add Plugins by using the `+ ADD GLOBAL PLUGINS` button.
 
-![5_plugins_add](img/5_plugins_add.png)
+![6_plugins_add](img/6_plugins_add.png)
 
 ## Upstreams
 
 The upstream object represents a virtual hostname and can be used to loadbalance incoming requests over multiple services (targets). For example, an upstream with the name `service.v1.xyz` loadbalances requests for a Service object whose host is service.v1.xyz. Requests for this Service would be proxied to the targets defined within the upstream.
 
-Check Kong [load balancing](https://docs.konghq.com/0.14.x/loadbalancing/) and [health-check](https://docs.konghq.com/0.14.x/health-checks-circuit-breakers/) docs for more details.
+Check Kong [load balancing](https://docs.konghq.com/1.3.x/loadbalancing/) and [health-check](https://docs.konghq.com/1.3.x/health-checks-circuit-breakers/) docs for more details.
 
-![6_upstream](img/6_upstream.png)
+![7_upstreams](img/7_upstreams.png)
 
 Add Upstreams by using the `+ CREATE UPSTREAM` button.
 
-![6_upstream_add](img/6_upstream_add.png)
+![7_upstream_add](img/7_upstream_add.png)
 
 You can modify the details of an Upstream by clicking the `DETAILS` button next to its name.
 
-![6_upstream_details](img/6_upstream_details.png)
+![7_upstreams_manage](img/7_upstreams_manage.png)
 
 The `Targets` section is for managing targets. A target is an IP address/hostname with a port that identifies an instance of a backend service. Every upstream can have many targets, and the targets can be dynamically added. Changes are implemented on the fly.
 
-![6_upstream_targets](img/6_upstream_targets.png)
+![7_upstreams_targets](img/7_upstreams_targets.png)
 
 ## Certificates
 
 A Certificate object represents a public certificate/private key pair for an SSL certificate. These objects are used by Kong to handle SSL/TLS termination for encrypted requests. Certificates are optionally associated with SNI objects to tie a certificate/key pair to one or more hostnames.
 
-Check Kong [certificate configuration](https://docs.konghq.com/0.14.x/proxy/#configuring-ssl-for-a-route) docs for more details.
+Check Kong [certificate configuration](https://docs.konghq.com/1.3.x/proxy/#configuring-ssl-for-a-route) docs for more details.
 
-![cert](img/7_cert.png)
+![8_certificates](img/8_certificates.png)
 
 Add Certificates by using the `+ CREATE CERTIFICATE` button.
 
-![cert_add](img/7_cert_add.png)
+![8_certificates](img/8_certificates_add.png)
+
+Add `SNI`.
+
+![8_certificates_add_sni](img/8_certificates_add_sni.png)
 
 ## Connections
 
 Create connections to Kong nodes and select the one to use by clicking on the respective star icon.
 
-![conn](img/8_conn.png)
+![10_connections](img/10_connections.png)
 
 Add Connections by using the `+ NEW CONNECTION` button.
 
-![conn_add](img/8_conn_add.png)
+![10_connection_add](img/10_connection_add.png)
 
 ## Snapshots
 
@@ -298,11 +303,17 @@ Create a scheduled task using the `ADD SCHEDULE` button.
 
 ![9_snapshot_scheduled_add](img/9_snapshot_scheduled_add.png)
 
+## Audit logs
+
+This section shows logs about the `gluu-openid-connect` plugin operations(add, edit, delete).
+
+![11_audit_logs](img/11_audit_logs.png)
+
 ## Settings
 
 Set the dashboard refresh interval, logout session timeout and login restrictions in the settings section.
 
-![settings](img/10_settings.png)
+![settings](img/12_settings.png)
 
 ### General settings
 
