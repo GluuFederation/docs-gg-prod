@@ -124,7 +124,7 @@ To migrate data from a development server to the production server, follow these
  $ pg_dump --dbname=postgresql://[user]:[password]@localhost:5432/konga > kong.sql
 ```
 
-- [Install](./installation) and [set up](./installation/#run-the-setup-script) GG on the production server.
+- [Install](./installation.md) and [set up](./installation.md#run-the-setup-script) GG on the production server.
 
 - Stop the oxd server on the production server.
 
