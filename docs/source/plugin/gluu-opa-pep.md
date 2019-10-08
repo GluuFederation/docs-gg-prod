@@ -244,3 +244,5 @@ The following parameters can be used in this plugin's configuration.
 |**opa_url**||This is your OPA policy endpoint where authentication data will be a pass.|
 |**forward_request_body**|false|Forward request body to OPA policy endpoint.|
 
+!!! Info
+    You can check the kong's [`error.log`](../../logs) file to check the request to OPA server and which data are passed to OPA endpoint.
