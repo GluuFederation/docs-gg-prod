@@ -2,13 +2,21 @@
 
 ## General FAQs and troubleshooting
 
-### Where should Gluu Gateway be used?
-Gluu Gateway should be used in every API gateway where you need advanced security measures using OAuth 2.0 and User-Managed Access (UMA) 2.0 Grant. Easy to add OpenID Connect Authentication.
+### Where should Gluu-Gateway be used?
+Gluu Gateway should be used in every API gateway where you need advanced security measures using OAuth 2.0 and User-Managed Access (UMA) 2.0 Grant. For Web, there is OpenID Connect Authentication. 
+
+### Can we install Gluu-Server and Gluu-Gateway on same machine?
+Yes, You can install Gluu Gateway(GG) in the same machine but GG is also using the 443 port. You need to change your Gluu-Server port first then install GG.
+
+The good way is, both should be on a different servers. If you still want to install both on the same machine then you should assign 443 to GG because this is service which you are exposing to your application end-user.
+
+### Where to install OXD-server on Gluu-Gateway side or Gluu-Server side?
+OXD-server is the OIDC Client which request to OP server. Gluu Gateway acts as relying party so OXD-Server should be on the Gluu-Gateway side. OXD server will be install during the Gluu-Gateway installation and setup. Check [here](https://gluu.org/docs/oxd/4.0/) for more details about oxd-server. 
 
 ### How to get more idea about Services and Routes configuration in Kong?
 Please check the [Kong 1.3.x docs about proxy configuration](https://docs.konghq.com/1.3.x/proxy/).
 
-### How can I investigate Gluu Gateway problems?
+### How can I investigate Gluu-Gateway problems?
 Gluu Gateway uses Gluu Server and oxd. That means any potential issue on these servers can influence the work of Gluu Gateway.
 
 ![](./img/10_oxd_error_faq.png)

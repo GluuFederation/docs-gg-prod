@@ -126,11 +126,11 @@ This completes the configuration. Next, request the Kong proxy at `https://<your
      
      After successful authentication, the OP Server asks you to enroll in a device. Scan the displayed QR Code in an authenticator application on your device, then click on `Finish`. Check Gluu CE Docs [here](https://gluu.org/docs/ce/authn-guide/otp/#recommended-otp-apps) for OTP supported applications.
      
-     ![oidc-demo10](../img/oidc-demo14.png)
+     ![oidc-demo10](../img/oidc-demo15.png)
      
      After successful enrollment, it will prompt you to enter the OTP. Enter the OTP from the authenticator application and click on `Login`.
      
-     ![oidc-demo10](../img/oidc-demo15.png)
+     ![oidc-demo10](../img/oidc-demo14.png)
 
 4. After `OTP` authentication, the OP server will redirect back to the Kong proxy and serve the `Payments` page. 
 
