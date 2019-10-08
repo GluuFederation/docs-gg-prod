@@ -6,7 +6,7 @@ In this tutorial, we are going to add `OpenID Connect Authorization code flow` a
 
 In the demo, the user will first be authenticated by OpenID Connect and for `/flights` resource, only the user with email `test@gluu.org` has the right to access resources. 
 
-Check [Open Policy Agent](openpolicyagent.org) for more complex policy.
+Check [Open Policy Agent](https://openpolicyagent.org) for more complex policy.
 
 ## Requirements
 
@@ -14,13 +14,13 @@ Check [Open Policy Agent](openpolicyagent.org) for more complex policy.
 
 - Gluu Server 4.0: This is our OpenID Connect Server. [Install Gluu](https://gluu.org/docs/ce/4.0/installation-guide/install-ubuntu/)
 
-- Open Policy Agent: Install OPA from [here](openpolicyagent.org) and add [below policy](#opa-policy).
+- Open Policy Agent: Install OPA from [here](https://openpolicyagent.org) and add [below policy](#opa-policy).
 
 - Protected(Upstream) Website: In our demo, we are using a demo Node.js App. Take Node.js demo from [here](https://github.com/GluuFederation/gluu-gateway/tree/version_4.0/gg-demo/node-ejs). 
 
 ## OPA Policy
 
-For this demo, we are using below very simple policy. Deploy this policy in your OPA Server. For more complex policy please check [OPA docs](openpolicyagent.org).
+For this demo, we are using below very simple policy. Deploy this policy in your OPA Server. For more complex policy please check [OPA docs](https://openpolicyagent.org).
 
 Below policy will check endpoint should be `flights`, HTTP method should be `GET` and the user should be `test@gluu.org` otherwise deny.
  
