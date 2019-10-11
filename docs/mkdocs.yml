@@ -41,6 +41,7 @@ nav:
 - Home: 'index.md'
 - Release Notes: 'release-notes.md'      
 - 'Components' : 'components.md'
+- 'Architecture': 'architecture.md'
 - 'Installation' : 'installation.md'
 - 'Tutorials':
     - 'OpenID Connect Stepped-up Authentication': 'tutorials/oidc-steppedup-auth-tutorial.md'
