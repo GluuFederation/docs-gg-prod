@@ -14,7 +14,7 @@ Check [Open Policy Agent](https://openpolicyagent.org) for more complex policy.
 
 - Gluu Server 4.0: This is our OpenID Connect Server. [Install Gluu](https://gluu.org/docs/ce/4.0/installation-guide/install-ubuntu/)
 
-- Open Policy Agent: Install OPA from [here](https://openpolicyagent.org) and add [below policy](#opa-policy).
+- Open Policy Agent(OPA) Server: This is policy server. It executes the policy and check all the given values a.k.a. the Policy Decision Point (PDP). Install OPA from [here](https://openpolicyagent.org) and add [below policy](#opa-policy).
 
 - Protected(Upstream) Website: In our demo, we are using a demo Node.js App. Take Node.js demo from [here](https://github.com/GluuFederation/gluu-gateway/tree/version_4.0/gg-demo/node-ejs). 
 

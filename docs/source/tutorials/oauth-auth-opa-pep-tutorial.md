@@ -2,19 +2,44 @@
 
 ## Overview
 
-In this tutorial, we will use the [GLUU-OAuth-Auth](../plugin/gluu-oauth-auth-pep.md) and [GLUU-UMA-PEP](../plugin/gluu-oauth-auth-pep.md) plugins to protect the APIs using OAuth token and check scope to authorize the request.  
+In this tutorial, we will use the [GLUU-OAuth-Auth](../plugin/gluu-oauth-auth-pep.md) for client authentication and [GLUU-OPA-PEP](../plugin/gluu-opa-pep.md) plugins to secure api by [OPA](https://openpolicyagent.org) Policy.  
 
-In the demo, we will protect `/posts/` api with `read` oauth scope. Plugin will check the request has token is active or not if true then check the scopes of the token. If a token has sufficient scope, the user is granted access. If not, access is denied. 
+In the demo, we will protect `/posts` api with `read` oauth scope. Plugin will check the request has token is active or not if true then check the OPA Policy. If a token has sufficient scope to pass policy, the user is granted access. If not, access is denied. 
 
 ## Requirements
 
-- Gluu Gateway 4.0: This is our Resource Server (RS), where it checks the token first. In the second step, scope expressions are enforced, a.k.a. the Policy Enforcement Point (PEP) and check the scopes, whether the token has sufficient scopes or not to access resources, a.k.a. the Policy Decision Point (PDP). [Install Gluu Gateway](../installation.md). 
+- Gluu Gateway 4.0: This is our Resource Server (RS), where it checks the token first. In the second step, scope expressions are enforced, a.k.a. the Policy Enforcement Point (PEP). 
+
+- Open Policy Agent(OPA) Server: This is policy server. It executes the policy and check whether the token has sufficient scopes or not to access resources, a.k.a. the Policy Decision Point (PDP). Install OPA from [here](https://openpolicyagent.org) and add [below policy](#opa-policy). 
 
 - Gluu Server 4.0: This is our OpenID Connect Server (OP Server), from where Requesting(Relying) party issue the OAuth token with scopes. [Install Gluu](https://gluu.org/docs/ce/4.0/installation-guide/install-ubuntu/)
 
 - Python Script demo app: This is our Requesting Party (RqP), which will be making authentication and authorization requests on behalf of the user. Installation instructions [below](#demo-app-configuration-rqp)
 
 - Protected(Upstream) API: In our demo, we are using a demo Node.js App. Take Node.js demo from [here](https://github.com/GluuFederation/gluu-gateway/tree/version_4.0/gg-demo/node-api). 
+
+## OPA Policy
+
+For this demo, we are using below very simple policy. Deploy this policy in your OPA Server. For more complex policy please check [OPA docs](https://openpolicyagent.org).
+
+Below policy will check endpoint should be `/posts`, HTTP method should be `GET` and the user should be `test@gluu.org` otherwise deny.
+ 
+```
+package httpapi.authz
+
+# HTTP API request
+import input
+
+default allow = false
+
+# allow posts with read scope
+allow {
+  input.path = ["posts"]
+  input.request_token_data.scope = ["openid", "read"]
+}
+```
+
+Check [OPA Plugin docs](/plugin/gluu-opa-pep/#what-is-passed-to-the-opa-policy-endpoint) for which data passed by OAuth plugin to OPA. 
 
 ## Gluu Server configuration (OP Server)
    
@@ -76,9 +101,9 @@ Follow these steps to add a route:
   
 ![uma-cg-tutorial-2](../img/oauth-demo2.png)
 
-### Configure Plugin
+### Configure `gluu-oauth-auth` Plugin
 
-Configure Gluu-OAuth-Auth and Gluu-OAuth-PEP with OAuth scopes and resources. Follow these steps to add the plugin:
+Follow these steps to add the plugin:
 
 - Click `oauth-demo` on the services
 
@@ -88,11 +113,23 @@ Configure Gluu-OAuth-Auth and Gluu-OAuth-PEP with OAuth scopes and resources. Fo
 
 - Click on the `+` of the title `Gluu OAuth Auth & PEP`
 
-- It will show the plugin configuration form. Click on `+ ADD PATH` and add `/posts/??` path, check `and` radio, `http methods` and `read` scope. Check [here](/plugin/gluu-oauth-auth-pep/#oauth-scope-expression) to add more complex dynamic path.
+- It will show the plugin configuration form. Disable the oAuth Expression button at the top and add plugin by clicking on `+ ADD PLUGIN` button at the bottom.  
 
-![oauth-demo3.png](../img/oauth-demo3.png)
+![opa-auth-demo1.png](../img/opa-auth-demo1.png)
 
-- Click on the `Add Plugin` button at end of the page.
+### Configure `gluu-opa-pep` plugin
+
+- Click `oauth-demo` on the services
+
+- Click on the `Plugins`
+
+- Click on the `+ ADD PLUGIN` button
+
+- You will see `Gluu OPA PEP` title and `+` icon in pop-up.
+
+- Click on the `+` icon and it will show below form and add your OPA endpoint. In my case, I set up OPA Docker and below is the OPA endpoint. For more details check OPA [docs](https://openpolicyagent.org).
+
+![oidc-demo6](../img/opa-demo6.png)
 
 ### Add Consumer with OP Client
 
@@ -118,15 +155,15 @@ Follow these steps to make a **new OP Client** and **consumer** using GG UI:
 
 ## Demo app configuration (RqP) 
 
-The demo app is a Python script. There is only one file. Download the `oauth-demo.py` from the [GG repository here](https://github.com/GluuFederation/gluu-gateway/blob/version_4.0/gg-demo/oauth-demo.py). 
+The demo app is a Python script. There is only one file. Download the `oauth-opa-demo.py` from the [GG repository here](https://github.com/GluuFederation/gluu-gateway/blob/version_4.0/gg-demo/oauth-opa-demo.py). 
 
-Run `oauth-demo.py` file using the below command.
+Run `oauth-opa-demo.py` file using the below command.
 
 ```
-$ python oauth-demo.py
+$ python oauth-opa-demo.py
 ```
 
-It will return the resource result i.e. the output of `/posts/` endpoint. If not then you need to check the response.
+It will return the resource result i.e. the output of `/posts` endpoint. If not then you need to check the response.
 
 #### Configuration
 
@@ -156,7 +193,7 @@ There only two steps:
 1. Request resource with above token
 
       ```
-        curl -X GET https://<your_kong_proxy_host>/posts/1
+        curl -X GET https://<your_kong_proxy_host>/posts
             --Header "Authorization: Bearer <YOUR_NEW_RPT>"
             --Header "Host: oauth-demo.example.com"
       ```

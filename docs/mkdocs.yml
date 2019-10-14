@@ -45,6 +45,7 @@ nav:
 - 'Installation' : 'installation.md'
 - 'Tutorials':
     - 'OpenID Connect Stepped-up Authentication': 'tutorials/oidc-steppedup-auth-tutorial.md'
+    - 'OAuth API protection and OPA PEP security': 'tutorials/oauth-auth-opa-pep-tutorial.md'
     - 'UMA Claim Gathering Authorization': 'tutorials/uma-claim-gathering-tutorial.md'
     - 'OpenID Connect Authentication and OPA PEP Authorization': 'tutorials/oidc-opa-tutorial.md'
     - 'OAuth API protection and Scope security': 'tutorials/oauth-auth-pep-tutorial.md'
