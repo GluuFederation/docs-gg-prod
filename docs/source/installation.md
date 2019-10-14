@@ -26,33 +26,53 @@ Gluu Gateway needs to be deployed on a server or VM with the following minimum r
 ### Ubuntu 18
 * Add the Gluu repo:
 ```
-# echo "deb https://repo.gluu.org/ubuntu/ bionic-devel main" > /etc/apt/sources.list.d/gluu-repo.list
-# curl https://repo.gluu.org/ubuntu/gluu-apt.key | apt-key add -
+echo "deb https://repo.gluu.org/ubuntu/ bionic-devel main" > /etc/apt/sources.list.d/gluu-repo.list
 ```
+
+```
+curl https://repo.gluu.org/ubuntu/gluu-apt.key | apt-key add -
+```
+
 * Add the PostgreSQL 10 repo:
+
 ```
-# echo "deb http://apt.postgresql.org/pub/repos/apt/ bionic-pgdg main" > /etc/apt/sources.list.d/psql.list
-# wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
+echo "deb http://apt.postgresql.org/pub/repos/apt/ bionic-pgdg main" > /etc/apt/sources.list.d/psql.list
 ```
+
+```
+wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
+```
+
 * Add the Node repo:
+
 ```
-# curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
+curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
 ```
 
 ### Ubuntu 16
+
 * Add the Gluu repo:
+
 ```
-# echo "deb https://repo.gluu.org/ubuntu/ xenial-devel main" > /etc/apt/sources.list.d/gluu-repo.list
-# curl https://repo.gluu.org/ubuntu/gluu-apt.key | apt-key add -
+echo "deb https://repo.gluu.org/ubuntu/ xenial-devel main" > /etc/apt/sources.list.d/gluu-repo.list
 ```
+
+```
+curl https://repo.gluu.org/ubuntu/gluu-apt.key | apt-key add -
+```
+
 * Add the PostgreSQL 10 repo:
 ```
-# echo "deb http://apt.postgresql.org/pub/repos/apt/ xenial-pgdg main" > /etc/apt/sources.list.d/psql.list
-# wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
+echo "deb http://apt.postgresql.org/pub/repos/apt/ xenial-pgdg main" > /etc/apt/sources.list.d/psql.list
+```
+
+```
+wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
 ```
 * Add the Node repo:
+
 ```
-# curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
+curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
 ```
 
 <!--
@@ -74,36 +94,60 @@ Gluu Gateway needs to be deployed on a server or VM with the following minimum r
 -->
 
 ### CentOS 7
+
 * Add the Gluu repo:
+
 ```
-# wget https://repo.gluu.org/centos/Gluu-centos-7-testing.repo -O /etc/yum.repos.d/Gluu.repo
-# wget https://repo.gluu.org/centos/RPM-GPG-KEY-GLUU -O /etc/pki/rpm-gpg/RPM-GPG-KEY-GLUU
-# rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-GLUU
+wget https://repo.gluu.org/centos/Gluu-centos-7-testing.repo -O /etc/yum.repos.d/Gluu.repo
 ```
+
+```
+wget https://repo.gluu.org/centos/RPM-GPG-KEY-GLUU -O /etc/pki/rpm-gpg/RPM-GPG-KEY-GLUU
+```
+
+```
+rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-GLUU
+```
+
 * Add the PostgreSQL 10 repo:
+
 ```
-# rpm -Uvh https://yum.postgresql.org/10/redhat/rhel-7-x86_64/pgdg-centos10-10-2.noarch.rpm
+rpm -Uvh https://yum.postgresql.org/10/redhat/rhel-7-x86_64/pgdg-centos10-10-2.noarch.rpm
 ```
+
 * Add the Node repo:
+
 ```
-# curl -sL https://rpm.nodesource.com/setup_8.x | sudo -E bash -
+curl -sL https://rpm.nodesource.com/setup_8.x | sudo -E bash -
 ```
 
 
 ### RHEL 7
+
 * Add the Gluu repo:
+
 ```
-# wget https://repo.gluu.org/rhel/Gluu-rhel-7-testing.repo -O /etc/yum.repos.d/Gluu.repo
-# wget https://repo.gluu.org/rhel/RPM-GPG-KEY-GLUU -O /etc/pki/rpm-gpg/RPM-GPG-KEY-GLUU
-# rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-GLUU
+wget https://repo.gluu.org/rhel/Gluu-rhel-7-testing.repo -O /etc/yum.repos.d/Gluu.repo
 ```
+
+```
+wget https://repo.gluu.org/rhel/RPM-GPG-KEY-GLUU -O /etc/pki/rpm-gpg/RPM-GPG-KEY-GLUU
+```
+
+```
+rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-GLUU
+```
+
 * Add the PostgreSQL 10 repo:
+
 ```
-# rpm -Uvh https://yum.postgresql.org/10/redhat/rhel-7-x86_64/pgdg-redhat10-10-2.noarch.rpm
+rpm -Uvh https://yum.postgresql.org/10/redhat/rhel-7-x86_64/pgdg-redhat10-10-2.noarch.rpm
 ```
+
 * Add the Node repo:
+
 ```
-# curl -sL https://rpm.nodesource.com/setup_8.x | sudo -E bash -
+curl -sL https://rpm.nodesource.com/setup_8.x | sudo -E bash -
 ```
 
 
@@ -113,15 +157,23 @@ Gluu Gateway needs to be deployed on a server or VM with the following minimum r
     The Gluu Gateway package installs the following required components: PostgreSQL v10, oxd Server 4.0, NodeJS v8, Kong Community Edition v0.14.1.
 
 ### Ubuntu 16, 18
+
 ```
- # apt update
- # apt install gluu-gateway
+apt update
+```
+
+```
+apt install gluu-gateway
 ```
 
 ### Centos 7, RHEL 7
+
 ```
- # yum clean all
- # yum install gluu-gateway
+yum clean all
+```
+
+```
+yum install gluu-gateway
 ```
 
 ## Run the setup script
@@ -133,8 +185,11 @@ Gluu Gateway needs to be deployed on a server or VM with the following minimum r
     If you are behind the corporate proxy, you need to export `HTTP_PROXY`, `HTTPS_PROXY`. [More details](https://github.com/GluuFederation/gluu-gateway/issues/352)
 
 ```
- # cd /opt/gluu-gateway/setup
- # python setup-gluu-gateway.py
+cd /opt/gluu-gateway/setup
+```
+
+```
+python setup-gluu-gateway.py
 ```
 
 After acknowledging the Gluu Stepped-Up Support License, you will be prompted to answer several questions. Just hit Enter to accept the default values, which are specified in square brackets.
@@ -233,19 +288,19 @@ Choose one of the following three options:
 1. Use `apt-get` to remove only the gluu-gateway package. Any dependencies installed at the same time, as well as configuration, will remain.
 
     ```
-    # apt-get remove gluu-gateway
+    apt-get remove gluu-gateway
     ```
 
 1. If you want to also remove the configuration files (/etc/init.d/gluu-gateway and /opt/gluu-gateway/konga/config), use `purge`.
 
     ```    	
-    # apt-get purge gluu-gateway
+    apt-get purge gluu-gateway
     ```
 
 1. Using the `--auto-remove` parameter will also remove the package dependencies (kong-community-edition, lua-cjson, nodejs, oxd-server, postgresql).
 
     ```
-    # apt-get remove --auto-remove gluu-gateway
+    apt-get remove --auto-remove gluu-gateway
     ```
 
 !!! Info
