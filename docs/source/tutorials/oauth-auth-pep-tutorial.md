@@ -78,7 +78,7 @@ Follow these steps to add a route:
 
 ### Configure Plugin
 
-Configure Gluu-OAuth-Auth and Gluu-OAuth-PEP with UMA scopes and resources. Follow these steps to add the plugin:
+Configure Gluu-OAuth-Auth and Gluu-OAuth-PEP with OAuth scopes and resources. Follow these steps to add the plugin:
 
 - Click `oauth-demo` on the services
 
