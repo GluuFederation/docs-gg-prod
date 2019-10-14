@@ -4,13 +4,11 @@ This diagram illustrates the architecture of Gluu Gateway and some of its compon
 
 ![gg-architecture.png](img/gg-architecture.png)
 
-Below is the details description of the above diagram:
-
 ### Point 1: Admin UI
 
-The first step is configurations and added security plugins. Gluu Gateway(GG) will provide you [`Admin UI`](admin-gui.md) on the port `:1338`. You can use this UI to add your API/Web application(Upstream Service/API/Web) with `kong service object`, `kong route object`, `create OpenID Connect client`, `kong consumer object` and configure the `plugins`. 
+The first step is configuration and added security plugins. Gluu Gateway (GG) will provide the [`Admin UI`](./admin-gui.md) on port `:1338`. Use this UI to add your API or Web application (such as Upstream Service/API/Web) with `kong service object`, `kong route object`, `create OpenID Connect client`, `kong consumer object` and configure the `plugins`. 
 
-The Kong Service is the object where you need to register Upstream Service. Check [plugins](/plugin/gluu-openid-connect-uma-pep/) and [tutorial](/tutorials/oidc-steppedup-auth-tutorial/) section for UI configurations.
+The Kong Service is the object where you need to register Upstream Service. Check [plugins](./plugin/gluu-openid-connect-uma-pep.md) and [tutorial](./tutorials/oidc-steppedup-auth-tutorial.md) section for UI configurations.
 
 ### Point 2: Security configuration using UI
 
@@ -18,7 +16,7 @@ UI uses the [Kong Admin APIs](https://docs.konghq.com/1.3.x/admin-api/) to confi
 
 ### Point 3: Security configuration using Kong API
 
-You can directly use the [Kong Admin APIs](https://docs.konghq.com/1.3.x/admin-api/) to configure the Kong's Services, Routes, Consumers and Plugins. You can find APIs description in [Kong Docs](https://docs.konghq.com/1.3.x/admin-api/) and [GG plugins docs](/plugin/gluu-openid-connect-uma-pep/) for Gluu plugins configuration API.
+You can directly use the [Kong Admin APIs](https://docs.konghq.com/1.3.x/admin-api/) to configure the Kong's Services, Routes, Consumers and Plugins. You can find APIs description in [Kong Docs](https://docs.konghq.com/1.3.x/admin-api/) and [GG plugins docs](./plugin/gluu-openid-connect-uma-pep.md) for Gluu plugins configuration API.
 
 ### Point 4: UI uses OXD Server to manage OP Client
 
@@ -26,7 +24,7 @@ UI uses the [OXD Server](https://gluu.org/docs/oxd/4.0/) endpoint during plugin 
 
 ### Point 5: Upstream API/Web Application registration
 
-Upstream Service is your Rest API/Web application which you want to protect using Kong and plugins. We already explain this point in `Point 1`. The Kong Service is the object where you need to register Upstream Service. Check [plugins](/plugin/gluu-openid-connect-uma-pep/) and [tutorial](/tutorials/oidc-steppedup-auth-tutorial/) section for UI configurations.
+Upstream Service is your Rest API/Web application which you want to protect using Kong and plugins. We already explain this point in `Point 1`. The Kong Service is the object where you need to register Upstream Service. Check [plugins](./plugin/gluu-openid-connect-uma-pep.md) and [tutorial](./tutorials/oidc-steppedup-auth-tutorial.md) section for UI configurations.
 
 ### Point 6: OpenID Connect Server configuration
 
