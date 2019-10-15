@@ -45,6 +45,8 @@ Applications and their ports:
 |443|Kong SSL Proxy Endpoint. Kong by default provides port 8443 for SSL proxy, but during setup changes it to 443.|
 |8443|oxd Server| 
 
+Login into Gluu Gateway Admin GUI(:1338) and follow the below steps.
+
 ### Add Service
 
 Register your upstream website as a Service.
