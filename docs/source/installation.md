@@ -25,6 +25,7 @@ Gluu Gateway needs to be deployed on a server or VM with the following minimum r
 
 ### Ubuntu 18
 * Add the Gluu repo:
+
 ```
 echo "deb https://repo.gluu.org/ubuntu/ bionic-devel main" > /etc/apt/sources.list.d/gluu-repo.list
 ```
@@ -62,6 +63,7 @@ curl https://repo.gluu.org/ubuntu/gluu-apt.key | apt-key add -
 ```
 
 * Add the PostgreSQL 10 repo:
+
 ```
 echo "deb http://apt.postgresql.org/pub/repos/apt/ xenial-pgdg main" > /etc/apt/sources.list.d/psql.list
 ```
