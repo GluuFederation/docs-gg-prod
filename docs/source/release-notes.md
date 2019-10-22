@@ -10,7 +10,7 @@ The document is released with Version 4.0.x of the Gluu Gateway Software. The pu
 
 ## Background
 
-Gluu Gateway is an API Gateway whichh leverages the [Gluu Server](https://gluu.org) for central client management and access control using OAuth and UMA scopes. 
+Gluu Gateway is an API Gateway which leverages the [Gluu Server](https://gluu.org) for central client management and access control using OAuth and UMA scopes. 
 
 ## Documentation
 
