@@ -17,6 +17,13 @@ Gluu Gateway needs to be deployed on a server or VM with the following minimum r
 |--------|--- |----------|--------------|
 |1       |2 GB|10 GB     |64 Bit|
 
+## Pre-requirements
+
+Gluu Gateway requires an OAuth 2.0 Authorization Server (AS), typically the Gluu Server, to issue OAuth clients and scopes, and perform client authentication.
+
+Gluu Gateway is compatible with the following versions of Gluu:
+
+- Gluu Server [CE 4.0](https://gluu.org/docs/ce/4.0)
 
 ## Required Third Party repositories
 
