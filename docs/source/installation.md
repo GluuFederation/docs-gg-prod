@@ -287,12 +287,6 @@ When a Gluu Gateway upgrade is available, follow these steps:
 
 --->
 
-## Clustering
-
-Kong is the gateway which provide the proxy endpoint where end-users request for your Web or API application so for load balancer and cluster you need to configure and setup the Kong.
-
-Kong provides the clustering. Please check the Kong docs for more details [here](https://docs.konghq.com/1.3.x/clustering/). One Kong community discussion about clustering, check [here](https://discuss.konghq.com/t/how-to-set-up-cluster/1545).
-
 ## Removal
 
 !!! Important 

@@ -28,7 +28,7 @@ Below is a sample:
 
 - `gluu-openid-connect` case : 
   
-     Below is an example of a request for authorization while using the `gluu-openid-connect` plugin. The `id_token`  is found isn the `request_token_data` property and Userinfo is in the `userinfo` property.
+     Below is an example of a request for authorization while using the `gluu-openid-connect` plugin. The `id_token`  is found in the `request_token_data` property and Userinfo is in the `userinfo` property.
    ```json
    {
      "input": {

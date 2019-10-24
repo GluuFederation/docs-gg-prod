@@ -43,6 +43,7 @@ nav:
 - 'Components' : 'components.md'
 - 'Architecture': 'architecture.md'
 - 'Installation' : 'installation.md'
+- 'Clustering' : 'clustering.md'
 - 'Tutorials':
     - 'OpenID Connect Stepped-up Authentication': 'tutorials/oidc-steppedup-auth-tutorial.md'
     - 'OAuth API protection and OPA PEP security': 'tutorials/oauth-auth-opa-pep-tutorial.md'
