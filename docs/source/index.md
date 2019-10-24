@@ -11,7 +11,7 @@ Gluu Gateway inherits its core API gateway functionality from [Kong CE v0.14](ht
 Primary use cases and functionalities supported by Gluu Gateway include:
 
 - Control access to APIs by requiring OAuth or UMA scopes
-- Control access to API's by delegating the decision to an Open Policy Agent server (PDP)
+- Control access to APIs by delegating the decision to an Open Policy Agent server (PDP)
 - Proxy websites, acting as an OpenID Connect Relying Party (RP)
 - Control access to websites by requiring a valid UMA token
 - Collect and report OAuth and UMA usage metrics
