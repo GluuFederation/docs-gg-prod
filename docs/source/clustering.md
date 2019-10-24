@@ -1,14 +1,16 @@
 # Clustering
 
-Gluu-Gateway has the [kong](http://konghq.com/). Kong is the gateway which provide the proxy endpoint where end-users or client applications request for your Web or API application so for cluster you need to configure and setup the Kong.
+Gluu-Gateway is based on the [Kong Gateway](https://konghq.com/kong/). The world’s most popular open source API gateway.
 
-A Kong cluster allows you to scale the system horizontally by adding more machines to handle more incoming requests. They will all share the same configuration since they point to the same database. Kong nodes pointing to the same datastore will be part of the same Kong cluster.
+Kong supports clustering, please check the docs for more details about clustering [here](https://docs.konghq.com/1.3.x/clustering/).
 
-**To configure multiple Kong nodes into a cluster, point them all to the same datastore.**
+A Kong cluster allows you to scale the system horizontally by adding more machines/VMs/containers to handle more incoming requests.
+
+**To configure multiple Kong nodes into a cluster, point them all to the same datastore or use the same declarative config in DB-less mode.**
 
 **You need a load-balancer in front of your Kong cluster to distribute traffic across your available nodes.**
 
-## Setup Kong node
+## Setup Gluu-Gateway node by OS package
 
 ### 1. Install Kong
 
@@ -38,4 +40,7 @@ Install Kong from the [Kong official website.](https://konghq.com/install/)
 
 For more kong configurations, you need to update the `/etc/kong/kong.conf`.
 
-Please check the Kong docs for more details about cluster [here](https://docs.konghq.com/1.3.x/clustering/).
+
+## Deploy Gluu-Gateway node as Docker container
+
+Coming soon. 
