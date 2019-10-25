@@ -240,6 +240,13 @@ Gluu Gateway configuration successful!!! https://localhost:1338
 
 If you see the above message, it means the installation was successful. To log in to the Gluu Gateway admin portal, create an SSH tunnel on port 1338 to the Gluu Gateway server, and point the browser at `https://localhost:1338`. Use the login and password used to access the Gluu Server.
 
+At Linux terminal you can create the tunnel as:
+
+```
+ssh -L 1338:localhost:1338 user@your_linux_host
+
+```
+
 !!! Important
     To diagnose errors during setup, check the log files: `/opt/gluu-gateway/setup/gluu-gateway-setup.log` and `/opt/gluu-gateway/setup/gluu-gateway-setup_error.log`
     
