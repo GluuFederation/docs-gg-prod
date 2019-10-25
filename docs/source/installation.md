@@ -34,7 +34,7 @@ Gluu Gateway is compatible with the following versions of Gluu:
 * Add the Gluu repo:
 
 ```
-echo "deb https://repo.gluu.org/ubuntu/ bionic-devel main" > /etc/apt/sources.list.d/gluu-repo.list
+echo "deb https://repo.gluu.org/ubuntu/ bionic main" > /etc/apt/sources.list.d/gluu-repo.list
 ```
 
 ```
@@ -62,7 +62,7 @@ curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
 * Add the Gluu repo:
 
 ```
-echo "deb https://repo.gluu.org/ubuntu/ xenial-devel main" > /etc/apt/sources.list.d/gluu-repo.list
+echo "deb https://repo.gluu.org/ubuntu/ xenial main" > /etc/apt/sources.list.d/gluu-repo.list
 ```
 
 ```
@@ -107,7 +107,7 @@ curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
 * Add the Gluu repo:
 
 ```
-wget https://repo.gluu.org/centos/Gluu-centos-7-testing.repo -O /etc/yum.repos.d/Gluu.repo
+wget https://repo.gluu.org/centos/Gluu-centos7.repo -O /etc/yum.repos.d/Gluu.repo
 ```
 
 ```
@@ -136,7 +136,7 @@ curl -sL https://rpm.nodesource.com/setup_8.x | sudo -E bash -
 * Add the Gluu repo:
 
 ```
-wget https://repo.gluu.org/rhel/Gluu-rhel-7-testing.repo -O /etc/yum.repos.d/Gluu.repo
+wget https://repo.gluu.org/rhel/Gluu-rhel7.repo -O /etc/yum.repos.d/Gluu.repo
 ```
 
 ```
