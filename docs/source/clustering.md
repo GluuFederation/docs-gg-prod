@@ -4,11 +4,11 @@ Gluu Gateway is based on the [Kong Gateway](https://konghq.com/kong/), which sup
 
 A Kong cluster can scale the system horizontally by adding more machines/VMs/containers to handle more incoming requests.
 
-**To configure multiple Kong nodes into a cluster, point them all to the same datastore or use the same declarative configuration in DB-less mode.**
+To configure multiple Kong nodes into a cluster, point them all to the same datastore or use the same declarative configuration in DB-less mode.
 
-**A load-balancer is required in front of the Kong cluster to distribute traffic across the available nodes.**
+A load balancer is required in front of the Kong cluster to distribute traffic across the available nodes.
 
-## Set up the Gluu Gateway node by OS package
+## Set up the Gluu Gateway node
 
 ### 1. Install Kong
 
