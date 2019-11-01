@@ -284,5 +284,5 @@ Below are the steps performed by the Demo Application(Requesting Party).
       ```
       
 !!! Info
-    You can make policy without claim flow and just check requests and return true and false. For Example, You can pass the id token as a PCT token, check the values in UMA Policy script and return true to allow and false to deny. In this case, there is no **need_info** response and no claim gathering process. Check [Gluu UMA Docs here](https://gluu.org/docs/ce/4.0/admin-guide/uma/) for more details. <br/> For none claim gathering, you need to set `host_with_claims` and request url of demo will be `<your-server.com>/cgi-bin/index.py` without `?claim=true`.
+    You can make policy without claim flow and just check requests and return true and false. For Example, You can pass the id token as a push claim token, check the values in UMA Policy script and return true to allow and false to deny. In this case, there is no **need_info** response and no claim gathering process. Check [Gluu UMA Docs here](https://gluu.org/docs/ce/4.0/admin-guide/uma/) for more details. <br/> For none claim gathering, you need to set `host_with_claims` and request url of demo will be `<your-server.com>/cgi-bin/index.py` without `?claim=true`.
 
