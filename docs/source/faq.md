@@ -2,22 +2,20 @@
 
 ## General FAQs and troubleshooting
 
-### Where should Gluu-Gateway be used?
+### Where should Gluu Gateway be used?
 Gluu Gateway should be used in every API gateway where you need advanced security measures using OAuth 2.0 and User-Managed Access (UMA) 2.0 Grant. For Web, there is OpenID Connect Authentication. 
 
-### Can we install Gluu-Server and Gluu-Gateway on same machine?
-Yes, You can install Gluu Gateway(GG) in the same machine but GG is also using the 443 port. You need to change your Gluu-Server port first then install GG.
+### Can I install the Gluu Server and Gluu Gateway on same machine?
+Although it is not recommended, Gluu Gateway (GG) can be installed on the same machine as CE, but both use port 443. Before installing GG, the main Gluu Server's port will need to be changed. If it's required to use both on the same machine, port 443 should be assigned to GG, since this service is exposed to the application end-user.
 
-The good way is, both should be on a different servers. If you still want to install both on the same machine then you should assign 443 to GG because this is service which you are exposing to your application end-user.
+### Should the oxd server be installed on the machine with Gluu Gateway or the Gluu Server?
+The oxd server is the OIDC Client that sends requests to the OP server. Gluu Gateway acts as the relying party, so oxd should be installed on the Gluu Gateway machine. The oxd server can be installed as an option during the Gluu Gateway installation and setup. Check [the docs](https://gluu.org/docs/oxd/4.0/) for more details about oxd. 
 
-### Where to install OXD-server on Gluu-Gateway side or Gluu-Server side?
-OXD-server is the OIDC Client which request to OP server. Gluu Gateway acts as relying party so OXD-Server should be on the Gluu-Gateway side. OXD server will be install during the Gluu-Gateway installation and setup. Check [here](https://gluu.org/docs/oxd/4.0/) for more details about oxd-server. 
+### Where can I get more information about Kong Service and Route configuration?
+Check the [Kong 1.3.x docs about proxy configuration](https://docs.konghq.com/1.3.x/proxy/).
 
-### How to get more idea about Services and Routes configuration in Kong?
-Please check the [Kong 1.3.x docs about proxy configuration](https://docs.konghq.com/1.3.x/proxy/).
-
-### How can I investigate Gluu-Gateway problems?
-Gluu Gateway uses Gluu Server and oxd. That means any potential issue on these servers can influence the work of Gluu Gateway.
+### How can I investigate Gluu Gateway problems?
+Gluu Gateway works in connection with the Gluu Server and oxd. That means any potential issue on these servers can affect the Gluu Gateway.
 
 ![](./img/10_oxd_error_faq.png)
 
@@ -33,7 +31,7 @@ Your Gluu Gateway version is always visible in the bottom left corner of the Glu
 ## Technical FAQs
 
 ### How can I generate an OAuth token?
-Generate an OAuth token during OAuth-PEP authentication by calling the oxd-server endpoint `/get-client-token` with customer credentials. Read more OAuth generation [here](https://gluu.org/docs/oxd/api/#get-client-token).
+Generate an OAuth token during OAuth-PEP authentication by calling the oxd server `/get-client-token` endpoint with customer credentials. Read more about OAuth token generation [here](https://gluu.org/docs/oxd/api/#get-client-token).
 
 ### How can I generate UMA tokens?
 In order to generate an UMA token, follow these steps:  
@@ -45,7 +43,7 @@ In order to generate an UMA token, follow these steps:
 1. Send an `uma-rp-get-rpt` request with Consumer `oxd_id`, the ticket from Step 1 and the access token from Step 2.  
 
 ### How can I change the listening address and port?
-By default, Gluu Gateway listens to localhost only, but you can change it manually by configuring the `local.js` config file using the [Configuration section](./configuration.md#admin-gui-portal-konga). You just need to update the `explicitHost` to your global IP or remove this attribute. Read more about the configuration [here](https://0.12.sailsjs.com/documentation/reference/configuration/sails-config).
+By default, Gluu Gateway listens to localhost only, but you can change it manually by configuring the `local.js` config file using the [Configuration doc](./configuration.md#admin-gui-portal-konga). You just need to update the `explicitHost` to your global IP or remove this attribute. Read more about the configuration [here](https://0.12.sailsjs.com/documentation/reference/configuration/sails-config).
  
  
 If you require any further support, please open a ticket on the [Gluu support portal](https://support.gluu.org).
