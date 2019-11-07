@@ -68,6 +68,16 @@ The `gluu-gateway` service is used to manage all GG components, including the Ad
     ```
     kong [restart|stop|restart|status]
     ```
+    
+* SSL Certs setup
+
+    Use `kong.conf` for setup ssl certs for Kong Proxy and Kong Admin API. Below are the properties in `kong.conf`: 
+    
+    | For | Properties |
+    |-----|------------|
+    |  Proxy | <ul><li>ssl_cert</li><li>ssl_cert_key</li></ul>|
+    |  Admin API | <ul><li>admin_ssl_cert</li><li>admin_ssl_cert_key</li></ul>|
+    | CA Certs | <ul><li>lua_ssl_trusted_certificate</li></ul> |
 
 ## oxd
 
