@@ -18,9 +18,9 @@ The GG UI uses the [Kong Admin APIs](https://docs.konghq.com/1.3.x/admin-api/) t
 
 ### 3. Security configuration using Kong API
 
-You can directly use the [Kong Admin APIs](https://docs.konghq.com/1.3.x/admin-api/) to configure the Kong's Services, Routes, Consumers and Plugins. You can find APIs description in [Kong Docs](https://docs.konghq.com/1.3.x/admin-api/) and [GG plugins docs](./plugin/gluu-openid-connect-uma-pep.md) for Gluu plugins configuration API.
+Instead, you can directly use the [Kong Admin APIs](https://docs.konghq.com/1.3.x/admin-api/) to configure the Kong's Services, Routes, Consumers and Plugins. You can find API descriptions in the [Kong Docs](https://docs.konghq.com/1.3.x/admin-api/) and [GG plugins docs](./plugin/gluu-openid-connect-uma-pep.md) for Gluu plugins configuration API.
 
-### 4. UI uses the oxd server to manage the OP Client
+### 4. The UI uses the oxd server to manage the OP Client
 
 The UI uses the [oxd server](https://gluu.org/docs/oxd/4.0/) endpoint during plugin configuration to create and manage the OpenID Connect Client.
 
@@ -55,7 +55,7 @@ Now the token is with the client application. It will send a request to the Kong
 
 At this point, Kong executes all configured plugins and uses the oxd server to validate the token with the OP Server. Using the `OAuth Plugin`, for example, the plugin uses the [`/introspect-access-token`](https://gluu.org/docs/oxd/4.0/api/#introspect-access-token) endpoint to validate the token.
 
-### 11. oxd server sends a request to the OP Server
+### 11. The oxd server sends a request to the OP Server
 
 The oxd server sends a request to the OP server for authentication and authorization. Using the `OAuth Plugin`, for example, the oxd server sends a request to the OP server's introspection endpoint to validate the token.
 
