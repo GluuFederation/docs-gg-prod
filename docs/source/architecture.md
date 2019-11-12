@@ -8,31 +8,31 @@ The following sections explain the numbered points in the diagram:
 
 ### 1. Admin UI
 
-The first step is configuration and added security plugins. Gluu Gateway (GG) will provide the [`Admin UI`](./admin-gui.md) on port `:1338`. Use this UI to add your API or Web application (such as Upstream Service/API/Web) with `kong service object`, `kong route object`, `create OpenID Connect client`, `kong consumer object` and configure the `plugins`. 
+The first step is setting up configuration and adding security plugins. Gluu Gateway (GG) will provide its [`Admin UI`](./admin-gui.md) on port `:1338`. Use this UI to add your API or Web application (such as Upstream Service/API/Web) with `kong service object`, `kong route object`, `create OpenID Connect client`, `kong consumer object` and configure the `plugins`. 
 
-The Kong Service is the object where you need to register Upstream Service. Check [Services](./admin-gui.md#services) and [Routes](./admin-gui.md#routes) section.
+The Upstream Service should be registered with the Kong Service. See the [Services](./admin-gui.md#services) and [Routes](./admin-gui.md#routes) sections.
 
 ### 2. Security configuration using UI
 
-UI uses the [Kong Admin APIs](https://docs.konghq.com/1.3.x/admin-api/) to configure the Kong's Services, Routes, Consumers and Plugins.
+The GG UI uses the [Kong Admin APIs](https://docs.konghq.com/1.3.x/admin-api/) to configure Kong's Services, Routes, Consumers and Plugins.
 
 ### 3. Security configuration using Kong API
 
 You can directly use the [Kong Admin APIs](https://docs.konghq.com/1.3.x/admin-api/) to configure the Kong's Services, Routes, Consumers and Plugins. You can find APIs description in [Kong Docs](https://docs.konghq.com/1.3.x/admin-api/) and [GG plugins docs](./plugin/gluu-openid-connect-uma-pep.md) for Gluu plugins configuration API.
 
-### 4. UI uses the oxd Server to manage OP Client
+### 4. UI uses the oxd server to manage the OP Client
 
-UI uses the [oxd Server](https://gluu.org/docs/oxd/4.0/) endpoint during plugin configuration to create and manage the OpenID Connect Client.
+The UI uses the [oxd server](https://gluu.org/docs/oxd/4.0/) endpoint during plugin configuration to create and manage the OpenID Connect Client.
 
 ### 5. Upstream API/Web Application registration
 
-Upstream Service is your Rest API/Web application which you want to protect using Kong and plugins. We already explain this point in `Point 1`. The Kong Service is the object where you need to register Upstream Application. You can register N number of upstream application. As you can see in diagram, there is 3 different upstream applications registered in kong. Upstream Apps should be locally hosted and do not open it for public. You need to open the kong proxy endpoint for your end-users or client applications. Check [Services](./admin-gui.md#services) and [Routes](./admin-gui.md#routes) section for upstream application registration in kong.
+The Upstream Service is the Rest API/Web application to protect using Kong and the plugins, as discussed in point 1, above. The Kong Service is the object where the Upstream Application is registered. You can register multiple upstream applications. As shown in diagram, there are three different upstream applications registered in Kong. Upstream Apps should be locally hosted and not publically accessible. However, the Kong proxy endpoint should be opened for end-users or client applications. Check the [Services](./admin-gui.md#services) and [Routes](./admin-gui.md#routes) docs for upstream application registration in Kong.
 
-After registering upstream app as a services/routes in kong, next step is to add security plugins. Check [plugins](./plugin/gluu-openid-connect-uma-pep.md) and [tutorial](./tutorials/oidc-steppedup-auth-tutorial.md) section for plugins details and configurations.
+After registering an upstream app as a service or route in Kong, the next step is to add security plugins. Check the [plugins](./plugin/gluu-openid-connect-uma-pep.md) and [tutorial](./tutorials/oidc-steppedup-auth-tutorial.md) docs for plugin details and configuration.
 
 ### 6. OpenID Connect Server configuration
 
-This is the last configuration step. The UI creates the OP Client, which can be managed using oxTrust, the Gluu Server's UI.
+This is the last configuration step. The UI creates the OP Client, which can be managed using oxTrust, the Gluu Server UI.
 
 !!! Important
     Do not update the client using the OP server, always use the oxd server's `/update-site` endpoint to update the client, since GG uses the oxd server with both the client and OP server.
