@@ -51,7 +51,7 @@ This is same as the previous step, but this time the client application directly
 
 Now the token is with the client application. It will send a request to the Kong proxy endpoint with the token in the `authorization` header. 
 
-### 10. Kong execute the configured plugins
+### 10. Kong executes the configured plugins
 
 At this point, Kong executes all configured plugins and uses the oxd server to validate the token with the OP Server. Using the `OAuth Plugin`, for example, the plugin uses the [`/introspect-access-token`](https://gluu.org/docs/oxd/4.0/api/#introspect-access-token) endpoint to validate the token.
 
