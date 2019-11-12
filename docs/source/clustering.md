@@ -10,11 +10,11 @@ A load balancer is required in front of the Kong cluster to distribute traffic a
 
 ## Set up the Gluu Gateway node
 
-### 1. Install Kong
+### Install Kong
 
 Install Kong from the [Kong official website.](https://konghq.com/install/)
 
-### 2. Set up GG plugins and libs
+### Set up GG plugins and libraries
 
 - Download [gluu-gateway-node-deps.zip](https://github.com/GluuFederation/gluu-gateway/raw/version_4.0/gluu-gateway-node-deps.zip)
 
@@ -24,7 +24,7 @@ Install Kong from the [Kong official website.](https://konghq.com/install/)
 
 - `python gg-kong-node-setup.py`
 
-- The script will ask the following question about the postgres database. This is the database which your are sharing between the multiple nodes.
+- The script will ask the following questions about the Postgres database, which is shared between the nodes.
 
     | Questions | Descriptions |
     |-----------|--------------|
@@ -38,6 +38,8 @@ Install Kong from the [Kong official website.](https://konghq.com/install/)
 
 Other Kong configurations are adjusted by updating `/etc/kong/kong.conf`.
 
+<!--
 ## Deploy Gluu-Gateway node as Docker container
 
 Coming soon. 
+-->
