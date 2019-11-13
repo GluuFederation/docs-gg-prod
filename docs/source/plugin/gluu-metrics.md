@@ -6,7 +6,7 @@ During Gluu Gateway [setup](../../installation), this plugin is set up globally 
 
 ## Configuration
 
-The plugin can be configured on **Service**, **Route** and **Global**. There are several possibilities for plugin configuration with services and routes. More details are available in the [Kong docs](https://docs.konghq.com/0.14.x/admin-api/#precedence).
+The plugin can be configured on **Service**, **Route** and **Global** levels. There are several possibilities for plugin configuration with services and routes. More details are available in the [Kong docs](https://docs.konghq.com/0.14.x/admin-api/#precedence).
 
 We recommend enabling the plugin Globally so metrics are gathered for all Gluu Gateway services.
 
