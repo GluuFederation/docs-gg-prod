@@ -6,7 +6,7 @@ Gluu Gateway (GG) is Authentication and Authorization Management solution for AP
 
 Gluu Gateway is based on Open Source  [Kong Gateway v1.3](https://konghq.com/community/), and leverages the existing ecosystem of Kong plugins to enable rate limiting, logging, and many other capabilities.
 
-## Pre requirements
+## Prerequisites 
 
 - GG requires an installation of the [Gluu Server](https://gluu.org/) for OAuth2, UMA and OpenID Connect use cases.
 
@@ -53,21 +53,6 @@ OpenID is an identity layer. The Gluu Gateway can act as an OpenID Relying Party
 
 ### Clients v. Consumers
 In Gluu Gateway, a `client_id` is associated with a "Consumer" in Kong. This is useful where access control is restricted to certain clients. All other forms of client authentication are disabled in the Gluu Gateway Admin GUI -- we just want to use an OAuth Authorization Server like the Gluu Server for client authentication. The Gluu Server plugins verify the `client_id` for which a token was issued by looking at the JSON equivalent (either the JWT or the introspection response).
-
-## Getting Started
-
-Use the following links to get started:  
-
-1. [Installation](./installation.md)
-1. [Configuration](./configuration.md)
-1. [Admin GUI](./admin-gui.md)
-1. Plugins
-    1. [OAuth Auth and PEP](./plugin/gluu-oauth-auth-pep.md)
-    1. [UMA Auth and PEP](./plugin/gluu-uma-auth-pep.md)
-    1. [OpenID Connect and UMA PEP](./plugin/gluu-openid-connect-uma-pep.md)
-    1. [Open Policy Agent (OPA) PEP](./plugin/gluu-opa-pep.md)
-    1. [Metrics](./plugin/gluu-metrics.md)
-1. [FAQ](./faq.md)
 
 ## License  
 
