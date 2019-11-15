@@ -1,5 +1,8 @@
 # Gluu Gateway 4.0.x
 
+!!! Attention
+    The Gluu Gateway documentation is currently being restructured. There may be temporary broken links or formatting errors. Thank you for your patience while we improve this documentation!
+
 ## Overview
 
 Gluu Gateway (GG) is Authentication and Authorization Management solution for APIs and websites based on OAuth2, OpenID Connect, UMA and OPA industry standards.
