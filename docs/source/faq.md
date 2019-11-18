@@ -14,6 +14,9 @@ The oxd server is the OIDC Client that sends requests to the OP server. Gluu Gat
 ### Where can I get more information about Kong Service and Route configuration?
 Check the [Kong 1.3.x docs about proxy configuration](https://docs.konghq.com/1.3.x/proxy/).
 
+### Should we need to expose OXD endpoint public/outside web?
+GG uses OXD to communicate with OP Server. You don't need to open it when you deal with OAuth and OpenID Connect case but when you deal with UMA at this case, you may need to expose it globally for your client applications because it is bit complex to get RPT token for protected resources. You can get RPT token without using OXD endpoints for this you need to study and manually code to get RPT token, take a look [UMA Docs here](https://docs.kantarainitiative.org/uma/wg/rec-oauth-uma-grant-2.0.html) for more information. 
+
 ### How can I investigate Gluu Gateway problems?
 Gluu Gateway works in connection with the Gluu Server and oxd. That means any potential issue on these servers can affect the Gluu Gateway.
 
