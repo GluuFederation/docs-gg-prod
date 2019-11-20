@@ -1,0 +1,29 @@
+# Gluu Gateway Administration Guide
+
+## Overview
+
+## Routes
+
+### Adding a route
+
+### Route options
+
+## Services
+
+### Adding a service
+
+### Service options
+
+## Logs
+
+Gluu Gateway logs can be found at: 
+
+| Components | Log file path |
+|------------|---------------|
+| Admin Console(Konga) | `/var/log/konga.log` |
+| Kong | `/usr/local/kong/logs` |
+| oxd | `/var/log/oxd-server/oxd-server.log` |
+| GG Setup logs | `/opt/gluu-gateway/setup/gluu-gateway-setup.log` and `/opt/gluu-gateway/setup/gluu-gateway-setup_error.log` |
+
+!!! Important
+    konga.log also shows the curl commands for all API requests to Kong and oxd made by the Konga GUI. You can use this curl command to automate the configuration instead of using the web interface.
