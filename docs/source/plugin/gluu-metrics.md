@@ -65,9 +65,9 @@ Metrics are available via the following Admin API endpoint: `http://<kong_hostna
 
 - **gluu_opa_client_granted**: Counts how many time user authorized by the OPA PEP plugin.
 
-- **gluu_total_client_authenticated**: Counts the total authnetication done by all authentication plugin that is `gluu-oauth-auth`, `gluu-uma-auth` and `gluu-openid-connect`.
+- **gluu_total_client_authenticated**: Counts the total authentication done by all authentication plugin that is `gluu-oauth-auth`, `gluu-uma-auth` and `gluu-openid-connect`.
 
-- **gluu_total_client_authenticated**: Counts the total authnetication done by all authorization plugin that is `gluu-oauth-pep`, `gluu-uma-pep` and `gluu-opa-pep`. 
+- **gluu_total_client_granted**: Counts the total authorization done by all authorization plugin that is `gluu-oauth-pep`, `gluu-uma-pep` and `gluu-opa-pep`. 
 
 ### Example metrics  
 
