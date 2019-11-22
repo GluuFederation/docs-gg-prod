@@ -1,4 +1,45 @@
-# Architecture
+# Overview
+
+Gluu Gateway architecture will help you understand the components of the GG and flow between the components. 
+
+## Terminology
+
+- **Upstream Service/Application**: The upstream application can be a REST API or Web Application. This is the application secured by Gluu Gateway.   
+
+- **Gateway or Proxy:** The gateway is proxy software that acts as middleware between client applications and upstream applications. It provides very the powerful ability to add and execute code to filter requests and and add a layer of security. If the request is approved, the gateway takes the response from the upstream application and returns it to the client applications. Gluu Gateway uses Kong for this purpose. 
+
+- **Kong Services:** The Kong Admin API entity that represents an upstream application.
+
+- **Kong Routes:** The Kong Admin API entity that represents a way to map downstream requests to upstream services. It's used to filter the request and send it to the appropriate service at the upstream application.
+
+  ```
+  Request --> Routes --> Service --> Upstream Application
+  ```
+ 
+- **Consumer:** The Admin API entity that represents a developer or machine using the API. The consumer only communicates with Kong, which then proxies every call to the appropriate upstream API. In both the `gluu-oauth-auth` and `gluu-uma-auth` plugins, the OP client is validated by checking with consumer entity.
+  
+     In Gluu Gateway, a `OpenID Connect Client's client_id` is associated with a `Consumer` in Kong. This is useful where access control is restricted to certain clients. All other default Kong client authentication plugins are disabled in the Gluu Gateway Admin GUI -- we just want to use an **OAuth Authorization Server** like the **Gluu Server** for client authentication. The Gluu Server plugins verify the `client_id` for which a token was issued by looking at the JSON equivalent (either the JWT or the introspection response).
+
+## Components
+
+Gluu Gateway includes the following components.
+
+- [Kong CE v1.3.x](https://konghq.com/community/): An open source API Gateway and Microservices Management Layer, delivering high performance and reliability. We are using Kong Community edition version 1.3 here. 
+
+- [Gluu Admin UI](https://github.com/GluuFederation/gluu-gateway/tree/version_4.0/konga): A web administration portal, based on the [Konga](https://github.com/pantsel/konga) GUI, to manage your Gluu Gateway configurations.
+
+- [Gluu Gateway plugins](https://github.com/GluuFederation/gluu-gateway/tree/version_4.0/kong/plugins): Plugins that leverage the Gluu Server for central client management and to control access to upstream APIs using OAuth 2.0 and UMA 2.0.
+
+- [oxd Server v4.0](https://www.gluu.org/docs/oxd/4.0): Middleware server for OpenID, OAuth, and UMA client communication with an associated OAuth Authorization Server, typically an instance of the Gluu Server. Gluu-gateway uses oxd server endpoints to communicate with OP Server.
+
+- Others: The following runtime environment is required by the Gluu Gateway package:
+    - OpenJDK v8
+    - Python v2.x
+    - Postgres v10
+    - Node v8.9.4
+    - NPM v5.6.0
+
+## Architecture
 
 This diagram illustrates the architecture of Gluu Gateway and some of its components:
 
