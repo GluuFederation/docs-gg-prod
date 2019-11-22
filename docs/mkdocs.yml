@@ -49,11 +49,6 @@ nav:
 - Admin Guide:
     - 'GUI Overview' :  'admin-gui.md' 
     - 'Configuration' : 'configuration.md'
-    - 'OpenID Connect Stepped-up Authentication': 'tutorials/oidc-steppedup-auth-tutorial.md'
-    - 'OAuth API protection and OPA PEP security': 'tutorials/oauth-auth-opa-pep-tutorial.md'
-    - 'UMA Claim Gathering Authorization': 'tutorials/uma-claim-gathering-tutorial.md'
-    - 'OpenID Connect Authentication and OPA PEP Authorization': 'tutorials/oidc-opa-tutorial.md'
-    - 'OAuth API protection and Scope security': 'tutorials/oauth-auth-pep-tutorial.md'  
     - 'Logs' : 'logs/index.md'
 - Plugins:
     - 'Gluu OpenID Connect and UMA PEP' : 'plugin/gluu-openid-connect-uma-pep.md'
@@ -62,4 +57,10 @@ nav:
     - 'Gluu OPA PEP': 'plugin/gluu-opa-pep.md'
     - 'Gluu Metrics' :  'plugin/gluu-metrics.md'
     - 'Common Features': 'plugin/common-features.md'
+- Tutorials:
+    - 'OpenID Connect Stepped-up Authentication': 'tutorials/oidc-steppedup-auth-tutorial.md'
+    - 'OAuth API protection and OPA PEP security': 'tutorials/oauth-auth-opa-pep-tutorial.md'
+    - 'UMA Claim Gathering Authorization': 'tutorials/uma-claim-gathering-tutorial.md'
+    - 'OpenID Connect Authentication and OPA PEP Authorization': 'tutorials/oidc-opa-tutorial.md'
+    - 'OAuth API protection and Scope security': 'tutorials/oauth-auth-pep-tutorial.md'  
 - 'FAQ' : 'faq.md'
