@@ -40,10 +40,10 @@ nav:
 - ' ': 'https://gluu.org'
 - Home: 'index.md'
 - Release Notes: 'release-notes.md'      
-- 'Installation Guide':
-      - 'Installation' : 'installation.md'
-      - 'Clustering' : 'clustering.md'
-- 'Architecture': 'architecture.md'
+- Installation Guide:
+    - 'Installation' : 'installation.md'
+    - 'Clustering' : 'clustering.md'
+- 'Overview': 'architecture.md'
 - Admin Guide:
     - 'GUI Overview' :  'admin-gui.md' 
     - 'Configuration' : 'configuration.md'
