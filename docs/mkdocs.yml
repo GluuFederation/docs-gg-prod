@@ -49,11 +49,11 @@ nav:
     - 'Configuration' : 'configuration.md'
     - 'Logs' : 'logs/index.md'
 - Plugins:
-    - 'Gluu OpenID Connect and UMA PEP' : 'plugin/gluu-openid-connect-uma-pep.md'
-    - 'Gluu OAuth Auth and OAuth PEP' : 'plugin/gluu-oauth-auth-pep.md'
-    - 'Gluu UMA Auth and UMA PEP' :  'plugin/gluu-uma-auth-pep.md'
-    - 'Gluu OPA PEP': 'plugin/gluu-opa-pep.md'
-    - 'Gluu Metrics' :  'plugin/gluu-metrics.md'
+    - 'OpenID Connect with UMA PEP' : 'plugin/gluu-openid-connect-uma-pep.md'
+    - 'OAuth Authn and PEP' : 'plugin/gluu-oauth-auth-pep.md'
+    - 'UMA Authn and PEP' :  'plugin/gluu-uma-auth-pep.md'
+    - 'OPA PEP': 'plugin/gluu-opa-pep.md'
+    - 'Metrics' :  'plugin/gluu-metrics.md'
     - 'Common Features': 'plugin/common-features.md'
 - Tutorials:
     - 'OpenID Connect Stepped-up Authentication': 'tutorials/oidc-steppedup-auth-tutorial.md'
