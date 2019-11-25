@@ -12,9 +12,9 @@ Gluu Gateway architecture will help you understand the components of the GG and 
 
 - **Kong Routes:** The Kong Admin API entity that represents a way to map downstream requests to upstream services. It's used to filter the request and send it to the appropriate service at the upstream application.
 
-  ```
-  Request --> Routes --> Service --> Upstream Application
-  ```
+     ```
+     Request --> Routes --> Service --> Upstream Application
+     ```
  
 - **Consumer:** The Admin API entity that represents a developer or machine using the API. The consumer only communicates with Kong, which then proxies every call to the appropriate upstream API. In both the `gluu-oauth-auth` and `gluu-uma-auth` plugins, the OP client is validated by checking with consumer entity.
   
