@@ -2,11 +2,11 @@
 
 ## Overview
 
-## Configuration
-
 ## Terminology
 
 --8<-- "terms.md"
+
+## Configuration
 
 ### Service Level
 
