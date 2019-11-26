@@ -1,3 +1,5 @@
+## Terminology
+
 - **plugin**: a plugin executing actions inside Kong before or after a request has been proxied to the upstream API.
 - **Service**: the Kong entity representing an external upstream API or microservice.
 - **Route**: the Kong entity representing a way to map downstream requests to upstream services.
