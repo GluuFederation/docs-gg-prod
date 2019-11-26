@@ -2,8 +2,6 @@
 
 ## Overview
 
-## Terminology
-
 --8<-- "terms.md"
 
 ## Configuration
