@@ -4,6 +4,10 @@
 
 ## Configuration
 
+## Terminology
+
+--8<-- "terms.md"
+
 ### Service Level
 
 1. Add Service
