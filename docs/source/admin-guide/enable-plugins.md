@@ -2,17 +2,13 @@
 
 A plugin entity represents a plugin configuration that will be executed during the HTTP request/response lifecycle. Plugins add functionality to services that run behind Kong, such as Authentication, Security, Rate Limiting and others.
 
-There are 3 scopes to add plugins.
-
-- [Add Plugins on Service](#add-plugins-on-service)
-- [Add Plugins on Route](#add-plugins-on-route)
-- [Add Plugins Globally](#add-plugins-globally)
+Plugins can be added on the [Service](#add-plugins-on-service), [Route](#add-plugins-on-route), or [Global](#add-plugins-globally) levels.
 
 ## Add Plugins on Service
 
-If you add plugins in Service entity then plugin will execute for every route which is under the service.
+If you add plugins in a Service entity, the plugin will execute for every route under the service.
 
-For example: You created one service `test-service1` and it has two routes `route1` and `route2`. Then you added one plugin on service `test-service1`. When user request for `route1`, it will execute the plugin. When user request for `route2`, it will also execute the plugin. Because overall it targeting to same service and plugin is configured on service.
+For example: One service `test-service1` is created with two routes, `route1` and `route2`. One plugin is added on `test-service1`. When the user requests `route1`, the plugin will be executed. The same is true if the user requests `route2`. Overall, both requests target the same service with the attached plugin.
 
 Below are the steps to enable plugins on the Service entity.
 
@@ -30,9 +26,9 @@ Below are the steps to enable plugins on the Service entity.
 
 ## Add Plugins on Route
 
-If you add plugins in Route entity then plugin will execute for only configured route.
+If you add plugins to a Route entity, the plugin will only execute for that route.
 
-For example: You created one service `test-service1` and it has two routes `route1` and `route2`. Then you added one plugin on route `route1`. When user request for `route1`, it will execute the plugin. When user request for `route2`, it **will not execute** the plugin. Because plugin added only for `route1`.
+For example: One service `test-service1` is created with two routes, `route1` and `route2`. One plugin is added on `route1`. When a user requests `route1`, it will execute the plugin, but **not** if the user requests `route2`.
 
 Below are the steps to enable plugins on the Route entity.
 
@@ -50,7 +46,7 @@ Below are the steps to enable plugins on the Route entity.
 
 ## Add Plugins Globally
 
-If you add plugin globally then it will apply for every services and routes.
+If a plugin is added globally, it will apply for all services and routes.
 
 - Go to `Plugins` view by clicking on `Plugins` in left side of the navigation bar.
 
@@ -62,7 +58,7 @@ If you add plugin globally then it will apply for every services and routes.
 
 ## Gluu Plugin Combinations and scopes
 
-Below table describe you the possible combination of the Gluu Plugins for security and where you can add this plugins.
+The following table describes the possible combination of Gluu Plugins for security, as well as where the plugins can be added.
 
 | Plugin | Service | Route | Globally |
 |--------|---------|-------|----------|
