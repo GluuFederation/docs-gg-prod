@@ -4,6 +4,22 @@ A plugin entity represents a plugin configuration that will be executed during t
 
 Plugins can be added on the [Service](#add-plugins-on-service), [Route](#add-plugins-on-route), or [Global](#add-plugins-globally) levels.
 
+## Plugin Precedence
+
+Plugins can be configured to run on the service, route, consumer, or global level. The plugin will only run once, even if configured on multiple levels. This allows a plugin to behave one way for most requests, but differently for a specific type of request. Gluu Gateway has adopted Kong's order of plugin precedence, as follows:
+
+1. Plugins configured on a Route, a Service, **and** a Consumer.
+1. Plugins configured on a Route **and** a Consumer.
+1. Plugins configured on a Service **and** a Consumer.
+1. Plugins configured on a Route **and** a Service.
+1. Plugins configured on a Consumer.
+1. Plugins configured on a Route.
+1. Plugins configured on a Service.
+1. Plugins configured to run Globally.
+
+!!! Note
+    Plugins configured on the Consumer level requires requests to be authenticated. 
+
 ## Add Plugins on Service
 
 If you add plugins in a Service entity, the plugin will execute for every route under the service.
