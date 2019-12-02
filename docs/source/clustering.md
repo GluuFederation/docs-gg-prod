@@ -12,7 +12,42 @@ A load balancer is required in front of the Kong cluster to distribute traffic a
 
 ### Install Kong
 
-Install Kong from the [Kong official website.](https://konghq.com/install/)
+1. Ubuntu 16
+    
+      - Download Kong 1.3 from [here](https://bintray.com/kong/kong-deb/download_file?file_path=kong-1.3.0.xenial.amd64.deb).
+      - 
+        ```
+        sudo apt-get update
+        sudo apt-get install openssl libpcre3 procps perl
+        sudo dpkg -i kong-*.deb
+        ``` 
+      
+1. Ubuntu 18
+    
+      - Download Kong 1.3 from [here](https://bintray.com/kong/kong-deb/download_file?file_path=kong-1.3.0.bionic.amd64.deb).
+      - 
+        ```
+        sudo apt-get update
+        sudo apt-get install openssl libpcre3 procps perl
+        sudo dpkg -i kong-*.deb
+        ``` 
+
+1. RHEL 7
+  
+      - Download Kong 1.3 from [here](https://bintray.com/kong/kong-rpm/download_file?file_path=rhel/7/kong-1.3.0.rhel7.amd64.rpm)
+      - 
+        ```
+        sudo yum install kong-*.rpm --nogpgcheck
+        ```
+
+1. CentOS 7
+
+      - Download Kong 1.3 from [here](https://bintray.com/kong/kong-rpm/download_file?file_path=centos/7/kong-1.3.0.el7.amd64.rpm)
+      - 
+        ```
+        sudo yum install epel-release
+        sudo yum install kong-*.rpm --nogpgcheck
+        ```
 
 ### Set up GG plugins and libraries
 
