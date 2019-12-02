@@ -46,10 +46,10 @@ nav:
     - 'Clustering' : 'clustering.md'
 - Admin Guide:
     - 'Overview' :  'admin-guide/getting-started.md'
-    - 'Add Upstream App, Services and Routes': 'admin-guide/services-routes-config.md'
+    - 'Configure Services and Routes': 'admin-guide/services-routes-config.md'
     - 'Enable Plugins': 'admin-guide/enable-plugins.md'
-    - 'Others UI Configurations': 'admin-guide/other-ui-config.md'
-    - 'Components Settings' : 'configuration.md'
+    - 'Other UI Configuration': 'admin-guide/other-ui-config.md'
+    - 'Component Settings' : 'configuration.md'
     - 'Logs' : 'logs/index.md'
 - Plugins:
     - 'OpenID Connect with UMA PEP' : 'plugin/gluu-openid-connect-uma-pep.md'
