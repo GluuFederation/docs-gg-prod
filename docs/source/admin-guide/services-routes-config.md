@@ -1,12 +1,12 @@
 # Services and Routes Configurations
 
-This sections describe you how to configure your upstream app into Gluu Gateway. GG has Kong and it is the proxy and it has very simple flow as below. You just need to add your upstream application in kong.
+This section describes how to configure an upstream app with Gluu Gateway. GG uses Kong as its proxy with a very simple flow, described below. You just need to add your upstream application in kong.
 
 [![info](../img/how-kong-proxy-works.png)](../img/how-kong-proxy-works.png)
  
-## Step-1 : Create a new Service
+## Create a new Service
 
-First step is to add your Upstream Application in Kong. Kong provides the service entity which represent the `Upstream Application`. You just need to add your Upstream Application URL.
+First, add the Upstream Application in Kong. In Kong, the Service entity represents the `Upstream Application`. Just add the Upstream Application's URL.
 
 - Open the `Services` section, left side in the navigation menu.
 
@@ -14,33 +14,33 @@ First step is to add your Upstream Application in Kong. Kong provides the servic
 
     [![3_services](../img/3_services.png)](../img/3_services.png)
 
-- It will open a below form.  
+- It will open the following form.  
 
     [![3_service_add](../img/3_service_add.png)](../img/3_service_add.png)
 
 - Enter the `name` and `URL`. 
     
-    For Example: If your upstream service url is `http://localhost:5555`, then set URL `http://localhost:5555` and name `test-service`.
+    For Example: If your upstream service URL is `http://localhost:5555`, then set the URL to `http://localhost:5555` and the name to `test-service`.
     
-    Kong also allows Services to be configured using `Protocol`, `Host`, `Path`, and `Port` (optional). To configure the Service using this method, you just need to leave URL field and enter values in this field one by one. URL field is just quick and short way to configure service. 
+    Kong also allows Services to be configured using `Protocol`, `Host`, `Path`, and `Port` (optional). To configure the Service using this method, you just need to leave the URL field and enter values in this field one by one. The URL field is just quick and short way to configure service. 
 
 - Click on `SUBMIT SERVICE` at the bottom of the form
 
 If successful, it will show it in list. Click on name of the service or pencil icon to see full details about service. 
 
-## Step-2 : Create a new Route attached to the Service
+## Create a new Route attached to the Service
 
-Second step is to create a route in the same service which you created above. Route represent the actual request to kong proxy endpoint to reach at Kong service.
+The second step is to create a route in the newly created Service. The Route represents the actual request to the Kong proxy endpoint to reach at Kong service.
 
 - To create a new Route, click on service name or pencil icon and it will open below view.
 
      [![3_service_manage](../img/3_service_manage.png)](../img/3_service_manage.png) 
      
-- Click on `Routes`. It will show you already created routes. Click on `+ ADD ROUTE` button to add new route. 
+- Click on `Routes`. It will show you previously-created routes. Click on `+ ADD ROUTE` button to add new route. 
 
      [![3_service_routes](../img/3_service_routes.png)](../img/3_service_routes.png)
 
-- After clicking on button, it will open below form. The Route will also need a name, and at least one of the following fields: `Host`, `Methods`, or `Paths`. Set name `test-service-route` and hosts `test.com`. Press enter when you enter values in hosts field.
+- After clicking on the button, it will open the following form. The Route will also need a name, and at least one of the following fields: `Host`, `Methods`, or `Paths`. Set the name to `test-service-route` and hosts to `test.com`. Press enter after adding values to the hosts field.
 
      [![4_route_plugins_add](../img/4_route_add.png)](../img/4_route_add.png) 
 
@@ -48,11 +48,11 @@ Second step is to create a route in the same service which you created above. Ro
 
 If successful, it will shows it in listing in `Routes` section.
 
-## Step-3: Test the new Service and Route
+## Test the new Service and Route
 
-Use below curl command which request to kong proxy endpoint and verify that kong is properly forwarding request to Service. As per default setup kong proxy endpoint is exposed on `:443` port.
+Use the following curl command which sends a request to the Kong proxy endpoint and verifies that Kong is properly forwarding request to Service. As per default, the setup Kong proxy endpoint is exposed on `:443` port.
 
-- Run this below command on same machine where you installed Gluu-Gateway, I am using `https://localhost` because of I am on same machine.
+- Run this command on the same machine where you installed Gluu Gateway. This example uses `https://localhost` because I am on the same machine.
 
      ```
      curl -k -X GET \
@@ -60,7 +60,7 @@ Use below curl command which request to kong proxy endpoint and verify that kong
        -H 'Host: test.com'
      ```
 
-- Run this below command on any other machine, the condition is you just need to expose your proxy endpoint globally with domain. For Example: Suppose I installed GG on `dev.gluu.org` then request will be 
+- Run this command on any other machine, after exposing the proxy endpoint globally with a domain. For example: if GG is installed on `dev.gluu.org` then request will be 
 
      ```
      curl -k -X GET \
@@ -68,7 +68,7 @@ Use below curl command which request to kong proxy endpoint and verify that kong
        -H 'Host: test.com'
      ```
 
-- Suppose you have `/users` endpoint then you just need to add your endpoint path in URL like below example.
+- For example, with the `/users` endpoint, add an endpoint path in URL like below example.
 
      ```
      curl -k -X GET \
@@ -76,11 +76,11 @@ Use below curl command which request to kong proxy endpoint and verify that kong
        -H 'Host: test.com'
      ```
 
-One important thing is here, I am passing `Host: test.com` in header this is the filter for our above created route which we configured with same host details. So when you make this request, kong match all the request with kong route configurations. In above case, it is matching `host`. There are several possibilities for routing.
+One important thing is here, `Host: test.com` is passed in the header at the filter for the newly created route, which is configured with same host details. When the request is made, Kong matches all the requests with Kong route configurations. In the above case, it is matching `host`. There are several possibilities for routing.
 
-## Routes configurations
+## Route configuration
 
-The route configuration is just like we define API in any programming language where we add HTTP Method and Endpoint Path. Here kong has more powerful tools for routing. The Route provides to add `Hosts`, `HTTP Methods`, `Paths` and `Headers`. Let's see some example
+The route configuration is just like defining APIs in any programming language, adding HTTP Methods and Endpoint Paths. Here, Kong has more powerful tools for routing. The Route can add `Hosts`, `HTTP Methods`, `Paths` and `Headers`. For example,
 
 - GREEN requests are valid and allowed by Kong.
 - RED requests are invalid and deny by Kong.
@@ -95,11 +95,11 @@ The route configuration is just like we define API in any programming language w
 
 ## Configure multiple Upstream Application
 
-Yes, you can configure multiple upstream application in the Kong. You just need to organization and configure the routes.
+Multiple upstream applications can be configured in Kong. You just need to organization and configure the routes.
 
 [![info](../img/how-kong-proxy-works-multiple-upstreams.png)](../img/how-kong-proxy-works-multiple-upstreams.png)
 
-For Example: we have three upstream applications **http://localhost:5001**, **http://localhost:5002** and **http://localhost:5003** then the configuration is as below
+For Example: we have three upstream applications **http://localhost:5001**, **http://localhost:5002** and **http://localhost:5003** then the configuration is follows:
 
 1. **http://localhost:5001**
 
@@ -116,11 +116,11 @@ For Example: we have three upstream applications **http://localhost:5001**, **ht
       - **Service:** `name: test-service-5003`, `URL: http://localhost:5003`
       - **Route:** `Hosts: test.com`, `Path: /v3`      
 
-I am using `PATHs` field of Route to configure and differentiate the request from one another services. 
+This example uses the `PATHs` field of the Route to configure and differentiate the request from other services. 
 
-For `http://localhost:5001` case, you just need to request with `Host: test.com` in header.
+For `http://localhost:5001`, request with `Host: test.com` in header.
 
-For `http://localhost:5002` case, you need to request with `Host: test.com` and `/v2` in URL.
+For `http://localhost:5002`, request with `Host: test.com` and `/v2` in URL.
 
-For `http://localhost:5003` case, you need to request with `Host: test.com` and `/v3` in URL.
+For `http://localhost:5003`, request with `Host: test.com` and `/v3` in URL.
 
