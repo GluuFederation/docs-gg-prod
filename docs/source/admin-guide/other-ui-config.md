@@ -1,4 +1,4 @@
-# Others Admin GUI Components and configurations
+# Advanced Admin GUI Components and Configuration
 
 ## Consumers
 
@@ -34,13 +34,13 @@ Create a group for ACL plugins to whitelist and blacklist consumers according to
 
 #### Consumer Plugins
 
-Some plugins can be configured for each specific consumer. This section will also add the plugin globally, which will apply for every service and route.
+Some plugins can be configured for each specific consumer. This section will also add the plugin globally, which will apply to every service and route.
 
 [![5_consumer_plugins](../img/5_consumer_plugins.png)](../img/5_consumer_plugins.png)
 
 ### Create Client
 
-Click on the `+ CREATE CLIENT` button to create OP client. It will create a client with the `client_credentials` grant type. It creates a client using OXD `register-site` API, so you can use direct OXD API also.
+Click on the `+ CREATE CLIENT` button to create OP client. It will create a client with the `client_credentials` grant type. It creates a client using the oxd `register-site` API, so you can use direct the oxd API as well.
 
 [![5_consumer_client_add](../img/5_consumer_client_add.png)](../img/5_consumer_client_add.png)
 
@@ -58,7 +58,7 @@ Click on the `+ CREATE CLIENT` button to create OP client. It will create a clie
 
 The upstream object represents a virtual hostname and can be used to loadbalance incoming requests over multiple services (targets). For example, an upstream with the name `service.v1.xyz` loadbalances requests for a Service object whose host is service.v1.xyz. Requests for this Service would be proxied to the targets defined within the upstream.
 
-Check Kong [load balancing](https://docs.konghq.com/1.3.x/loadbalancing/) and [health-check](https://docs.konghq.com/1.3.x/health-checks-circuit-breakers/) docs for more details.
+Check Kong [load balancing](https://docs.konghq.com/1.3.x/loadbalancing/) and [health-check](https://docs.konghq.com/1.3.x/health-checks-circuit-breakers/) docs for more details. <!-- Replace this with information -->
 
 [![7_upstreams](../img/7_upstreams.png)](../img/7_upstreams.png)
 
