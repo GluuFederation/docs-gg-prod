@@ -5,9 +5,7 @@
 
 ## Overview
 
-Gluu Gateway (GG) is Authentication and Authorization Management solution for APIs and websites based on OAuth2, OpenID Connect, UMA and OPA industry standards.
-
-Gluu Gateway is based on Open Source  [Kong Gateway v1.3](https://konghq.com/community/), and leverages the existing ecosystem of Kong plugins to enable rate limiting, logging, and many other capabilities.
+Gluu Gateway (GG) is an authentication and authorization solution for APIs and websites. Gluu Gateway bundles the open source [Kong Gateway](https://konghq.com/community/), and leverages the existing ecosystem of Kong plugins to enable rate limiting, logging, and many other capabilities.
 
 ## Terminology
 
