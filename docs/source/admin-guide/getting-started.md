@@ -1,10 +1,10 @@
 # Getting started with GG Admin GUI
 
-This guide will describe you to use Gluu Gateway Admin UI to configure the upstream application with Kong, added plugin and security configuration.
+This guide will explain how to use Gluu Gateway's admin UI to configure upstream applications, add plugins and set security configurations.
 
 ## Dashboard - Kong Proxy Details
 
-The first section on the top of the navigation is the dashboard. This section shows application credentials and configuration details. Let's take a look by sections wise.
+The dashboard provides application credentials and configuration details, including the following:
 
 1. **Global Info:** shows the oxd OP Client credentials which is used to log in to GG UI. GG UI is just a UI to configure the Kong and plugins. which are protected using OpenID Connect flow. It shows the `OXD Id`, `Client Id` and `Client Secret` used by GG UI. This credentials has been created during installation step.
 
