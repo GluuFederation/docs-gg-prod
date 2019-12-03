@@ -1,6 +1,6 @@
-# Getting started with GG Admin GUI
+# Getting started with the admin UI
 
-This guide will explain how to use Gluu Gateway's admin UI to configure upstream applications, add plugins and set security configurations.
+This guide will explain how to use the admin UI to configure upstream applications, add plugins and set security configurations.
 
 ## Dashboard - Kong Proxy Details
 
