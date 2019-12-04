@@ -1,7 +1,7 @@
 # Gluu Gateway 4.0.x
 
 !!! Attention
-    The Gluu Gateway documentation is currently being restructured. There may be temporary broken links or formatting errors. Thank you for your patience while we improve this documentation!
+    This documentation is currently being restructured. There may be temporary broken links or formatting errors. Thank you for your patience while we improve this documentation!
 
 ## Overview
 
