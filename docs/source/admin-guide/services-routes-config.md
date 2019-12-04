@@ -1,4 +1,4 @@
-# Services and Routes Configurations
+# Configuring Services and Routes
 
 This section describes how to configure an upstream app with Gluu Gateway. GG uses Kong as its proxy with a very simple flow, described below. You just need to add your upstream application in kong.
 
