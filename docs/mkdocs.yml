@@ -59,9 +59,9 @@ nav:
     - 'Metrics' :  'plugin/gluu-metrics.md'
     - 'Common Features': 'plugin/common-features.md'
 - Tutorials:
-    - 'OpenID Connect Stepped-up Authentication': 'tutorials/oidc-steppedup-auth-tutorial.md'
+    - 'Stepped-up Authentication': 'tutorials/oidc-steppedup-auth-tutorial.md'
     - 'OAuth API protection and OPA PEP security': 'tutorials/oauth-auth-opa-pep-tutorial.md'
-    - 'UMA Claim Gathering Authorization': 'tutorials/uma-claim-gathering-tutorial.md'
+    - 'Claim Gathering Authorization': 'tutorials/uma-claim-gathering-tutorial.md'
     - 'OpenID Connect Authentication and OPA PEP Authorization': 'tutorials/oidc-opa-tutorial.md'
     - 'OAuth API protection and Scope security': 'tutorials/oauth-auth-pep-tutorial.md'  
 - 'FAQ' : 'faq.md'
