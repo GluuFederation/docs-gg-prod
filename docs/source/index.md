@@ -37,10 +37,6 @@ Primary use cases supported by Gluu Gateway include:
   
      In Gluu Gateway, an `OpenID Connect Client's client_id` is associated with a `Consumer` in Kong. This is useful where access control is restricted to certain clients. All other default Kong client authentication plugins are disabled -- we only want to use the [Gluu Server](https://gluu.org/docs/ce) for client authentication. The `client_id` is verified by looking at the JWT or introspection response. 
 
-## Prerequisites 
-
-- GG requires an installation of the [Gluu Server](https://gluu.org/) for OAuth2, UMA and OpenID Connect use cases.
-
 ## Components
 
 Gluu Gateway includes the following components.
@@ -59,6 +55,12 @@ Gluu Gateway includes the following components.
     - Postgres v10
     - Node v8.9.4
     - NPM v5.6.0
+    
+## Dependencies 
+
+- To support OAuth2, UMA and OpenID Connect use cases, GG requires an external [Gluu Server Authorization Server](https://gluu.org/). 
+
+- To support OPA use cases, GG requires an external [OPA Policy Engine](https://gluu.org/). 
 
 ## Access Control
 
@@ -81,7 +83,7 @@ OAuth scopes normally represent a user's authorization, for example authorizatio
 
 ### Open Policy Agent based policies
 
-In the Gluu Server, additional claims can be included in an access token. Gluu Gateway can forward this access token to an Open Policy Agent server for a policy decision.
+In the Gluu Server, additional claims can be included in an access token. Gluu Gateway can forward this access token to an Open Policy Agent (OPA) server for a policy decision.
 
 ### OIDC and UMA with Claim gathering Security
 OpenID is an identity layer. The Gluu Gateway can act as an OpenID Relying Party, redirecting the subject's browser to the OpenID Provider, and obtaining user information. At that point, the Gluu Gateway can attempt to obtain an UMA access token, pushing the OpenID Connect id_token to the UMA RPT endpoint as input to the policy decision. If user interaction is required, the Gluu Gateway may redirect the subject to the UMA Authorization endpoint.  
