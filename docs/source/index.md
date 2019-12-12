@@ -33,9 +33,9 @@ Primary use cases supported by Gluu Gateway include:
      Request --> Routes --> Service --> Upstream Application
      ```
  
-- **Consumer:** The Admin API entity that represents a developer or machine using the API. The consumer only communicates with Kong, which then proxies every call to the appropriate upstream API. In both the `gluu-oauth-auth` and `gluu-uma-auth` plugins, the OP client is validated by checking with consumer entity.
+- **Consumer:** The Admin API entity that represents a developer or machine using the API. The Consumer only communicates with Kong, which then proxies all calls to the appropriate Upstream Service. In both `gluu-oauth-auth` and `gluu-uma-auth` plugins, the OP client is validated by checking the Consumer entity.
   
-     In Gluu Gateway, a `OpenID Connect Client's client_id` is associated with a `Consumer` in Kong. This is useful where access control is restricted to certain clients. All other default Kong client authentication plugins are disabled in the Gluu Gateway Admin GUI -- we just want to use an **OAuth Authorization Server** like the **Gluu Server** for client authentication. The Gluu Server plugins verify the `client_id` for which a token was issued by looking at the JSON equivalent (either the JWT or the introspection response).
+     In Gluu Gateway, an `OpenID Connect Client's client_id` is associated with a `Consumer` in Kong. This is useful where access control is restricted to certain clients. All other default Kong client authentication plugins are disabled -- we only want to use the [Gluu Server](https://gluu.org/docs/ce) for client authentication. The `client_id` is verified by looking at the JWT or introspection response. 
 
 ## Prerequisites 
 
