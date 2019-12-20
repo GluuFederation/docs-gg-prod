@@ -124,6 +124,7 @@ Here is a list of all the parameters which can be used in this plugin's configur
 |**required_acrs_expression**(optional)||Check [here](#dynamic-url-base-acrs-stepped-up-authentication) for details|
 |**max_id_token_age**||Maximum age of `id token` in seconds |
 |**max_id_token_auth_age**||Maximum authentication age of `id_token` in seconds |
+|**custom_headers**||Used to set the custom headers, which is passed to upstream service by kong after authentication.|
 
 #### Dynamic URL Base ACRs stepped up authentication
 
