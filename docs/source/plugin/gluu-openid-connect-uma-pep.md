@@ -63,6 +63,10 @@ Clicking on the `+` icon will bring up the below form.
 ![oidc2](../img/oidc2.png)
 ![oidc3](../img/oidc3.png)
 
+Use this section to setup the headers, which will sent to your upstream service afterauthnetication.
+
+![oidc3-1](../img/oidc3-1.png)
+
 This section is used to add the `URL Based ACR feature`. Check [here](#dynamic-url-base-acrs-stepped-up-authentication) for more description to configure acr expression. If you do not want to configure the `ACR expression` then just disable using the button which is at the top beside the title. In `no acr expression` case, authentication flow executes with any acr, you may need to set acr at your OP Server side.
 ![oidc4](../img/oidc4.png)
 ![oidc5](../img/oidc5.png)
@@ -124,7 +128,7 @@ Here is a list of all the parameters which can be used in this plugin's configur
 |**required_acrs_expression**(optional)||Check [here](#dynamic-url-base-acrs-stepped-up-authentication) for details|
 |**max_id_token_age**||Maximum age of `id token` in seconds |
 |**max_id_token_auth_age**||Maximum authentication age of `id_token` in seconds |
-|**custom_headers**||Used to set the custom headers, which is passed to upstream service by kong after authentication.|
+|**custom_headers**||Used to set the custom headers, which is passed to upstream service by kong after authentication. Check [here for more details](../common-features/#custom-headers)|
 
 #### Dynamic URL Base ACRs stepped up authentication
 
@@ -230,10 +234,6 @@ After configuration just hit your proxy endpoint in a browser.
 
 ## Upstream Headers
 
-When a client has been authenticated, the plugin will append some headers to the request before proxying it to the upstream service to identify the consumer and the end-user in the code:
+When a client has been authenticated, the plugin will append headers to the request before proxying it to the upstream service to identify the request and the end-user.
 
-1. **X-OpenId-Connect-idtoken**, Base64 encoded ID Token JSON.
-1. **X-OpenId-Connect-userinfo**, Base64 encoded Userinfo JSON.
-
-
-
+Check [here](../common-features/#custom-headers) to setup custom headers.

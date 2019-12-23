@@ -84,6 +84,10 @@ Every plugin has the `custom_headers` field. which is the the array and below is
 |**sep**|it is use when your header format is list type. It join the list of values by separator. **Example:** , (comma)|
 |**iterate**|the header value should point to an environment values, for example id_token It use to iterate thru keys/values and create separate header for every key. The captured key is accessible in header name via special placeholder i.e. {*}.|
 
+In UI, you will get facility to add custom headers. You just need to use header section. Click on `Add` Button to add header.
+
+![oidc3-1](../img/oidc3-1.png)
+
 ### Example
 
 1. `gluu-uma-auth`

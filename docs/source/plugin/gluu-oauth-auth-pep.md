@@ -103,7 +103,8 @@ You will see `Gluu OAuth Auth & PEP` title and `+` icon in a pop-up.
 
 Clicking on the `+` icon will bring up the below form. Check [here](#parameters) for all the parameter descriptions.
 
-![11_path_add_oauth_service](../img/11_add_oauth_pep_form.png)
+![11_path_add_oauth_service](../img/11_add_oauth_pep_form-1.png)
+![11_path_add_oauth_service](../img/11_add_oauth_pep_form-2.png)
 
 #### Add Plugin using Kong API
 
@@ -159,6 +160,7 @@ The following parameters can be used in this plugin's configuration.
 |**client_secret**|| An existing client secret, used to get a protection access token to access the introspection API. Required if an existing oxd ID is provided.|
 |**anonymous**||An optional string (consumer UUID) value to use as an “anonymous” consumer if authentication fails. If empty (default), the request will fail with an authentication failure 4xx. This value must refer to the Consumer ID attribute that is internal to Kong, and not its custom_id.|
 |**pass_credentials**|pass|It allows to 3 values. `pass`, `hide` and `phantom_token`. Used to operate the authorization header from the upstream service as per configuration. In `phantom_token` case, the plugin will replace bearer token with new generated JWT(with introspection result) token, so for outside there is bearer token and JWT for internal use.|
+|**custom_headers**||Used to set the custom headers, which is passed to upstream service by kong after authentication. Check [here for more details](../common-features/#custom-headers)|
 
 #### Gluu-OAuth-PEP
 
@@ -310,12 +312,6 @@ curl -X GET \
 
 When a client has been authenticated, the plugin will append some headers to the request before proxying it to the upstream service to identify the consumer and the end-user in the code:
 
-1. **X-Consumer-ID**, the ID of the Consumer on Kong
-1. **X-Consumer-Custom-ID**, the custom_id of the Consumer (if set)
-1. **X-Consumer-Username**, the username of the Consumer (if set)
-1. **X-Authenticated-Scope**, the comma-separated list of scopes that the end-user has authenticated, if available (only if the consumer is not an 'anonymous' consumer)
-1. **X-OAuth-Client-ID**, the authenticated client ID (only if the consumer is not an 'anonymous' consumer)
-1. **X-OAuth-Expiration**, the token expiration time, integer timestamp, measured in the number of seconds since January 1, 1970, UTC, indicating when this token will expire, as defined in JWT RFC7519. It is only returned if the consumer is not set to 'anonymous'.
-1. **X-Anonymous-Consumer**, will be set to true when authentication fails, and the 'anonymous' consumer is set instead.
+Check [here](../common-features/#custom-headers) to setup custom headers.
 
-This information can be used to implement additional logic. For example, use the X-Consumer-ID value to query the Kong Admin API and retrieve more information about the Consumer.
+This information can be used to implement additional logic. For example, use the `Consumer` value to query the Kong Admin API and retrieve more information about the Consumer.
