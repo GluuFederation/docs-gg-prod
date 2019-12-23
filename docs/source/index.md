@@ -1,8 +1,5 @@
 # Gluu Gateway 4.0.x
 
-!!! Attention
-    This documentation is being restructured. There may be temporary broken links or formatting errors. Thank you for your patience while we improve our docs!
-
 ## Overview
 
 Gluu Gateway (GG) is an authentication and authorization solution for APIs and websites. 
@@ -145,4 +142,4 @@ The following sections explain the numbered points in the diagram:
 
 ## License  
 
-Gluu Gateway is available under the [GLUU SUPPORT license](https://raw.githubusercontent.com/GluuFederation/gluu-gateway/master/LICENSE).
+Gluu Gateway is available under the [Apache 2.0 license](https://raw.githubusercontent.com/GluuFederation/gluu-gateway/master/LICENSE).
