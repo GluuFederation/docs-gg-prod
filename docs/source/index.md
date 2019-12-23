@@ -1,8 +1,5 @@
 # Gluu Gateway 4.0.x
 
-!!! Attention
-    This documentation is being restructured. There may be temporary broken links or formatting errors. Thank you for your patience while we improve our docs!
-
 ## Overview
 
 Gluu Gateway (GG) is an authentication and authorization solution for APIs and websites. 
