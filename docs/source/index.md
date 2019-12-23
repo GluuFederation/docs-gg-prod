@@ -57,4 +57,4 @@ Use the following links to get started:
 
 ## License  
 
-Gluu Gateway is available under the [GLUU SUPPORT license](https://raw.githubusercontent.com/GluuFederation/gluu-gateway/master/LICENSE). 
+Gluu Gateway is available under the [Apache 2.0 license](https://raw.githubusercontent.com/GluuFederation/gluu-gateway/master/LICENSE). 
