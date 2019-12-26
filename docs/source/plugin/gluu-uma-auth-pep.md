@@ -159,6 +159,7 @@ Here is a list of all the parameters which can be used in this plugin's configur
 |**anonymous**||An required string (consumer Id) value to use as an “anonymous” consumer if authentication fails. You need to set the Anonymous consumer because it is used to bypass gluu-uma-auth authentication and help to get the ticket from gluu-uma-pep. |
 |**pass_credentials**|pass|It allows 3 values. `pass`, `hide` and `phantom_token`. Used to operate the authorization header from the upstream service as per configuration. In `phantom_token` case, plugin will replace bearer token with new generated JWT(with introspection result) token, so for outside there is bearer token and JWT for internal use.|
 |**custom_headers**||Used to set the custom headers, which is passed to upstream service by kong after authentication. Check [here for more details](../common-features/#custom-headers)|
+|**consumer_mapping**|| <ul><li> `consumer_mapping = true`, GG introspect the token and try to find Kong consumer with `custom_id == client_id`. If consumer with such custom_id doesn’t exists - authentication fail. For `rate-limite` plugin configuration, you need to configure it as `limit_by=consumer`.</li><li> With `consumer_mapping = false`, you don’t need to create a Kong consumer for every OAuth2 client. GG will introspect the token and perform authentication. For `rate-limite` plugin configuration, you need to configure it as `limit_by=credential`.</li></ul>|
 
 #### Gluu-UMA-PEP 
 
