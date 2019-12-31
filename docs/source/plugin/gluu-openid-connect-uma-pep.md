@@ -63,7 +63,7 @@ Clicking on the `+` icon will bring up the below form.
 ![oidc2](../img/oidc2.png)
 ![oidc3](../img/oidc3.png)
 
-Use this section to setup the headers, which will sent to your upstream service afterauthnetication.
+Use this section to setup the headers, which will sent to your upstream service after authnetication.
 
 ![oidc3-1](../img/oidc3-1.png)
 
@@ -219,9 +219,31 @@ As per the above example,
 |**claims_redirect_path**||Claims redirect URL in claim gathering flow for your OP Client. You just need to set path here like `/claim-callback` but you need to register OP Client with full URL like `https://kong.proxy.com/claim-callback`. GG UI creates OP client for you and also configure the `gluu-openid-connect` and `gluu-uma-pep` plugin.|
 |**redirect_claim_gathering_url**|false|It used to tell the plugin that if `need_info` response comes in claim gathering situation then redirect it for claim gathering.|
 |**method_path_tree**||It is for plugin internal use. We use it for tree level matching for dynamic paths which registered in `uma_scope_expression`| 
+|**pushed_claims_lua_exp**||Used to make the Push claim token. Check [here](#configure-pushed-claims-lua-expression) for more details.|
 
 !!! Note
     GG UI can create a dynamic client. However, if the Kong Admin API is used for plugin configuration, it requires an existing client using the oxd API, then passing the client's credentials to the Gluu-OpenID-Connect and Gluu-UMA-PEP plugin.
+
+#### Configure Pushed Claims Lua Expression
+
+You can pass some more extra information to UMA Policy so that you can make more configurable authorization policy using UMA and UMA Policies. After OpenID Connect authentication, you can pass userinfo to UMA Policy for authorization. So `gluu-uma-pep` has facility to build a custom Push Claim token. It provides 3 environments
+
+|Environments|Description| 
+|------------|-----------|
+|`id_token`|This environment has the decoded ID Token|
+|`userinfo`|This environment has the user info which is the response of the `/useinfo` endpoint|
+|`request`|This environment has the all the value of HTTP Request object|
+
+For Example: If you want to pass the userinfo to UMA policy then you need to configure `pushed_claims_lua_exp = userinfo`. This is Lua expression so plugin will pass this as it is. After this you can easily get this information in your `UMA RPT Policy` For Example: `context.getClaim("name")`, `context.getClaim("email")`. 
+
+More Examples:
+
+|Configuration|Use in Policy Script|
+|-------------|---|
+|`id_token`|<ul><li>You will have all the fields of decoded id_token.</li><li>`context.getClaim("exp")`</li><li>`context.getClaim("aud")`</li><li>`context.getClaim("auth_time")`</li></ul>|
+|`userinfo`|<ul><li>You will have all the fields of userinfo response.</li><li>`context.getClaim("name")`</li><li>`context.getClaim("email")`</li><li>`context.getClaim("sub")`</li></ul>|
+|`{id_token=id_token,userinfo=userinfo}`|<ul><li>Here you are passing both values as a single object. So you will have values of both `userinfo` and `id_token`. Here we are using `{}` to make a object.</li><li>`context.getClaim("id_token").optString("aud")`</li><li>`context.getClaim("userinfo").getString("name")`</li></ul>|
+|`{name=userinfo.name}`|<ul><li>You have here only one field i.e. `name`</li><li>`context.getClaim("name")`</li></ul>|
 
 ## Usage
 

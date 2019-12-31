@@ -62,9 +62,9 @@ Assume that all paths below are registered in one plugin:
 
 After successful authentication, kong forward request upstream service. During this step, kong sends headers to your upstream headers. You can use this header to check and identify the user or request.
 
-There is feature in all 3 authentication plugins `gluu-oauth-auth`, `gluu-uma-auth` and `gluu-openid-connect`.
+There is feature in all 3 authentication plugins `gluu-oauth-auth`, `gluu-uma-auth` and `gluu-openid-connect`. Every plugin provide an environment which you need to use to set headers. 
 
-Every plugin provide an environment which you need to use to set headers. **For Example:** `gluu-oauth-auth` plugin has the `introspect_data` environment which has the token introspect response data. So If you want to set one header like `x-auth-token-exp` which will has the token expiration timestamp then you need to use the environment `introspect_data.exp` to set value.
+**For Example:** `gluu-oauth-auth` plugin has the `introspect_data` environment which has the token introspect response data. So If you want to set one header like `x-auth-token-exp` which will has the token expiration timestamp then you need to use the environment `introspect_data.exp` to set value.
 
 Take a look on below table for available environment in every plugin
 
