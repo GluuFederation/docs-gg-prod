@@ -224,14 +224,6 @@ After acknowledging the Gluu Stepped-Up Support License, you will be prompted to
 | **Client Id** | Used to manually set the client ID. |
 | **Client Secret** | Used to manually set the client secret. |
 
-During setup, the metrics endpoint is registered with the Gluu license server. GG configures the following:
-      
-  - Kong Service object with `name: gluu-org-metrics-service` and `url: http://localhost:8001`
-  - Kong Route object with `methods: GET`, `paths: /gluu-metrics`, `strip_path: false` and `service: above_service_id`.
-  - Kong IP Restriction plugin, which ensures this endpoint is only accessible to the Gluu license server.
-  - Configures the  Gluu `gluu-metrics` plugin globally.
-  - Registers the customer at the Gluu license server, `https://license.gluu.org`. 
-
 ## Finish the setup
 
 ```
