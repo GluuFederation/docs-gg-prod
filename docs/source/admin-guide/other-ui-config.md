@@ -1,59 +1,5 @@
 # Advanced Admin GUI Components and Configuration
 
-## Consumers
-
-The Consumer object represents a consumer - or a user - of a Service. Either rely on Kong as the primary datastore, or map the consumer list with a database to keep consistency between Kong and the existing primary datastore.
-
-[![consumers](../img/5_consumers.png)](../img/5_consumers.png)
-
-Add Consumers by using the `+ CREATE CONSUMER` button.
-
-[![consumers_add](../img/5_consumer_add.png)](../img/5_consumer_add.png)
-
-| Fields | Details |
-|---|-----|
-| **Consumer Name** | The Kong Consumer Username, which is the identifier used by Kong for the client. Should contain no spaces or special characters.|
-| **Gluu Client Id** | The Kong Consumer Custom ID, used to correlate an access token with a Kong consumer. The client must already exist before being registered here as a way to identify a consumer.|
-| **Tags** | An optional set of strings associated with the Consumer, for grouping and filtering. |
-
-### Manage Consumer
-
-Click on the **Consumer Name** to manage a consumer. Edit and manage ACL plugin groups and add plugins here.
-
-#### Consumer Details
-
-View and edit the selected consumer details here.
-
-[![5_consumer_manage](../img/5_consumer_manage.png)](../img/5_consumer_manage.png)
-
-#### Groups
-
-Create a group for ACL plugins to whitelist and blacklist consumers according to ACL plugin configuration.
-
-[![5_consumer_groups](../img/5_consumer_groups.png)](../img/5_consumer_groups.png)
-
-#### Consumer Plugins
-
-Some plugins can be configured for each specific consumer. This section will also add the plugin globally, which will apply to every service and route.
-
-[![5_consumer_plugins](../img/5_consumer_plugins.png)](../img/5_consumer_plugins.png)
-
-### Create Client
-
-Click on the `+ CREATE CLIENT` button to create OP client. It will create a client with the `client_credentials` grant type. It creates a client using the oxd `register-site` API, so you can use direct the oxd API as well.
-
-[![5_consumer_client_add](../img/5_consumer_client_add.png)](../img/5_consumer_client_add.png)
-
-| Fields | Details |
-|---|-----|
-| **Client Name**(required) | Name for newly-created client.|
-| **Client Id**(optional) | Use any existing OP Client's client_id. If left blank, the oxd server will create a new client in the OP server.|
-| **Client Secret**(optional) | Use any existing OP Client's client_secret. If left blank, the oxd server will create a new client in the OP server.|
-| **Access Token as JWT**(optional) | It will create client with `Access Token as JWT:true`, It is used to return the access token as a JWT. The Gluu OAuth PEP plugin supports JWT access tokens.|
-| **RPT as JWT**(optional) |It will create client with `RPT as JWT:true`. It is used to return access token(RPT) as JWT. The Gluu UMA PEP plugin supports JWT RPT access tokens.|
-| **Token signing algorithm**(optional) | The default token signing algorithm for the client. It is used for both OAuth access tokens and UMA RPT tokens. Currently, plugins only support 3 algorithms: **RS256**, **RS384** and **RS512**.|
-| **Scope**|The scope for the OP Client. `uma_protection` is required in UMA(gluu-uma-auth plugin) authentication case. Note: Press Enter to accept a value.|
-
 ## Upstreams
 
 The upstream object represents a virtual hostname and can be used to loadbalance incoming requests over multiple services (targets). For example, an upstream with the name `service.v1.xyz` loadbalances requests for a Service object whose host is service.v1.xyz. Requests for this Service would be proxied to the targets defined within the upstream.
