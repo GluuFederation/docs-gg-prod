@@ -48,6 +48,7 @@ nav:
     - 'Overview' :  'admin-guide/getting-started.md'
     - 'Configure Services and Routes': 'admin-guide/services-routes-config.md'
     - 'Enable Plugins': 'admin-guide/enable-plugins.md'
+    - 'Consumer Configuration': 'admin-guide/consumer-config.md'
     - 'Advanced Configuration': 'admin-guide/other-ui-config.md'
     - 'Component Settings' : 'configuration.md'
     - 'Logs' : 'logs/index.md'
