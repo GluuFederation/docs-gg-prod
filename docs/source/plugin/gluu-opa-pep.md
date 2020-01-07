@@ -138,8 +138,8 @@ Plugins can be configured at the **Service**, **Route** or **Global** level. The
 
       Follow these step to add Service using GG UI:
  
-      - Click [`SERVICES`](../../admin-gui/#services) on the left panel
-      - Click on [`+ ADD NEW SERVICE`](../../admin-gui/#add-service) button
+      - Click [`SERVICES`](../../admin-guide/services-routes-config/) on the left panel
+      - Click on [`+ ADD NEW SERVICE`](../../admin-guide/services-routes-config/) button
       - Fill the form by your upstream service details
 
 1. Add Route
@@ -147,17 +147,17 @@ Plugins can be configured at the **Service**, **Route** or **Global** level. The
       Route is recommended to reach at kong proxy. Follow these steps to add route:
       
       - Click on `service name` or `edit` button of above added service
-      - Click [`ROUTES`](../../admin-gui/#routes)
-      - Click the [`+ ADD ROUTE`](../../admin-gui/#add-route) button
+      - Click [`ROUTES`](../../admin-guide/services-routes-config/#create-a-new-route-attached-to-the-service)
+      - Click the [`+ ADD ROUTE`](../../admin-guide/services-routes-config/#create-a-new-route-attached-to-the-service) button
       - Fill the form by routing details. Check kong docs for more routing capabilities [here](https://docs.konghq.com/0.14.x/proxy/#routes-and-matching-capabilities).
 
 1. Add Plugins
 
      Follow these steps to add plugins:
 
-     - Click [`SERVICES`](../../admin-gui/#services) on the left panel
+     - Click [`SERVICES`](../../admin-guide/services-routes-config/) on the left panel
      - Click on `name` or `edit` button
-     - Click on [`Plugins`](../../admin-gui/#route-plugins)
+     - Click on [`Plugins`](../../admin-guide/services-routes-config/#create-a-new-route-attached-to-the-service)
      - Click on `+ ADD PLUGIN` button
      - You will see `Gluu OPA PEP` title and `+` icon in pop-up
      - Click here for [next](#add-plugin) step
@@ -168,8 +168,8 @@ Plugins can be configured at the **Service**, **Route** or **Global** level. The
 
       Follow these step to add Service using GG UI
  
-      - Click [`SERVICES`](../../admin-gui/#services) on the left panel
-      - Click on [`+ ADD NEW SERVICE`](../../admin-gui/#add-service) button
+      - Click [`SERVICES`](../../admin-guide/services-routes-config/) on the left panel
+      - Click on [`+ ADD NEW SERVICE`](../../admin-guide/services-routes-config/) button
       - Fill the form by your upstream service details
 
 1. Add Route
@@ -177,17 +177,17 @@ Plugins can be configured at the **Service**, **Route** or **Global** level. The
       Follow these steps to add route:
       
       - Click on `service name` or `edit` button of above added service
-      - Click [`ROUTES`](../../admin-gui/#routes)
-      - Click the [`+ ADD ROUTE`](../../admin-gui/#add-route) button
+      - Click [`ROUTES`](../../admin-guide/services-routes-config/#create-a-new-route-attached-to-the-service)
+      - Click the [`+ ADD ROUTE`](../../admin-guide/services-routes-config/#create-a-new-route-attached-to-the-service) button
       - Fill the form by routing details. Check kong docs for more routing capabilities [here](https://docs.konghq.com/0.14.x/proxy/#routes-and-matching-capabilities).
 
 1. Add Plugins
 
      Follow these steps to add plugins:
 
-     - Click [`ROUTES`](../../admin-gui/#routes) on the left panel
+     - Click [`ROUTES`](../../admin-guide/services-routes-config/#create-a-new-route-attached-to-the-service) on the left panel
      - Click on `route id/name` or `edit` button
-     - Click on [`Plugins`](../../admin-gui/#route-plugins)
+     - Click on [`Plugins`](../../admin-guide/services-routes-config/#create-a-new-route-attached-to-the-service)
      - Click on `+ ADD PLUGIN` button
      - You will see `Gluu OPA PEP` title and `+` icon in pop-up
      - Click here for [next](#add-plugin) step
@@ -198,7 +198,7 @@ A global plugin will apply to all services and routes.
 
 Follow these steps to add plugins:
 
-   - Click [`Plugins`](../../admin-gui/#plugins) on the left panel
+   - Click `Plugins` on the left panel
    - You will see `Gluu OPA PEP` title and `+` icon in pop-up
    - Click here for [next](#add-plugin) step
 

@@ -11,7 +11,7 @@ Some deployments require the use of a bearer token outside of the internal netwo
 This feature is available in both the [`gluu-oauth-auth`](../gluu-oauth-auth-pep) and the [`gluu-uma-auth`](../gluu-uma-auth-pep) plugins. To configure phantom token feature, you just need to set `pass_credentials='phantom_token'` in plugin configuration. 
 
 !!! Important
-    Set `access_token_as_jwt: false` and `rpt_as_jwt: false` in [client registration](../../admin-gui/#consumers), otherwise client by default returns you access token as JWT. 
+    Set `access_token_as_jwt: false` and `rpt_as_jwt: false` in [client registration](../../admin-guide/consumer-config/), otherwise client by default returns you access token as JWT. 
 
 ## Dynamic Resource Protection
 

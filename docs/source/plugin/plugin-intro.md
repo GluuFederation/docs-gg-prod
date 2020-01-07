@@ -31,9 +31,9 @@ Plugins can be configured to run on the service, route, consumer, or global leve
 
 ### Add a plugin on the route level 
 
-1. Click [`ROUTES`](../../admin-gui/#routes) on the left panel
+1. Click [`ROUTES`](../../admin-guide/services-routes-config/#create-a-new-route-attached-to-the-service) on the left panel
 1. Click on `route id/name` or `edit` button
-1. Click on [`Plugins`](../../admin-gui/#route-plugins)
+1. Click on [`Plugins`](../../admin-guide/services-routes-config/#create-a-new-route-attached-to-the-service)
 1. Click on `+ ADD PLUGIN` button
 1. Select the desired plugin and click its `+` icon
 1. Fill in the [plugin's parameters](#available-plugins)
@@ -42,7 +42,7 @@ Plugins can be configured to run on the service, route, consumer, or global leve
 
 A global plugin will apply to all services and routes.
 
-1. Click [`Plugins`](../../admin-gui/#plugins) on the left panel
+1. Click `Plugins` on the left panel
 1. Select the desired plugin and click its `+` icon
 1. Fill in the [plugin's parameters](#available-plugins)
 
