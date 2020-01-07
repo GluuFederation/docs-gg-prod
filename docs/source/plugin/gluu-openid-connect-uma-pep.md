@@ -32,7 +32,7 @@ We recommend enabling the plugin on Route Object because plugin needs correct `r
 Follow these step to add Service using GG UI
  
 - Click [`SERVICES`](../../admin-gui.md/#services) on the left panel
-- Click on [`+ ADD NEW SERVICE`](../../admin-gui/#add-service) button
+- Click on [`+ ADD NEW SERVICE`](../../admin-guide/services-routes-config/) button
 - Fill the form by your upstream service details
 
 ### Add Route
@@ -40,8 +40,8 @@ Follow these step to add Service using GG UI
 Follow these steps to add a route:
 
 - Click on `service name` or `edit` button of above added service
-- Click [`ROUTES`](../../admin-gui/#routes)
-- Click the [`+ ADD ROUTE`](../../admin-gui/#add-route) button
+- Click [`ROUTES`](../../admin-guide/services-routes-config/#create-a-new-route-attached-to-the-service)
+- Click the [`+ ADD ROUTE`](../../admin-guide/services-routes-config/#create-a-new-route-attached-to-the-service) button
 - Fill the form by routing details. Check kong docs for more routing capabilities [here](https://docs.konghq.com/0.14.x/proxy/#routes-and-matching-capabilities).
 
 
@@ -49,9 +49,9 @@ Follow these steps to add a route:
 
 Follow these steps to add `gluu-openid-connect` plugin:
 
-- Click [`ROUTES`](../../admin-gui/#routes) on the left panel
+- Click [`ROUTES`](../../admin-guide/services-routes-config/#create-a-new-route-attached-to-the-service) on the left panel
 - Click on `route id/name` or `edit` button
-- Click on [`Plugins`](../../admin-gui/#route-plugins)
+- Click on [`Plugins`](../../admin-guide/services-routes-config/#create-a-new-route-attached-to-the-service)
 - Click on `+ ADD PLUGIN` button
 - You will see `Gluu OIDC & UMA PEP` title and `+` icon in pop-up.
 
