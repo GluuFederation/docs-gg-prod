@@ -100,8 +100,8 @@ This diagram illustrates the architecture of Gluu Gateway and some of its compon
 The following sections explain the numbered points in the diagram:
 
 1. Admin UI
-    The first step is setting up configuration and adding security plugins. Gluu Gateway (GG) will provide its [`Admin UI`](./admin-gui.md) on port `:1338`. Use this UI to add your API or Web application (such as Upstream Service/API/Web) with `kong service object`, `kong route object`, `create OpenID Connect client`, `kong consumer object` and configure the `plugins`. 
-    The Upstream Service should be registered with the Kong Service. See the [Services](./admin-gui.md#services) and [Routes](./admin-gui.md#routes) sections.
+    The first step is setting up configuration and adding security plugins. Gluu Gateway (GG) will provide its Admin UI on port `:1338`. Use this UI to add your API or Web application (such as Upstream Service/API/Web) with `kong service object`, `kong route object`, `create OpenID Connect client`, `kong consumer object` and configure the `plugins`. 
+    The Upstream Service should be registered with the Kong Service. See the [Services](./admin-guide/services-routes-config/) and [Routes](./admin-guide/services-routes-config/) sections.
 
 1. Security configuration using UI
     The GG UI uses the [Kong Admin APIs](https://docs.konghq.com/1.3.x/admin-api/) to configure Kong's Services, Routes, Consumers and Plugins.
@@ -113,7 +113,7 @@ The following sections explain the numbered points in the diagram:
     The UI uses the [oxd server](https://gluu.org/docs/oxd/4.0/) endpoint during plugin configuration to create and manage the OpenID Connect Client.
 
 1. Upstream API/Web Application registration
-    The Upstream Service is the Rest API/Web application to protect using Kong and the plugins, as discussed in point 1, above. The Kong Service is the object where the Upstream Application is registered. You can register multiple upstream applications. As shown in diagram, there are three different upstream applications registered in Kong. Upstream Apps should be locally hosted and not publically accessible. However, the Kong proxy endpoint should be opened for end-users or client applications. Check the [Services](./admin-gui.md#services) and [Routes](./admin-gui.md#routes) docs for upstream application registration in Kong.
+    The Upstream Service is the Rest API/Web application to protect using Kong and the plugins, as discussed in point 1, above. The Kong Service is the object where the Upstream Application is registered. You can register multiple upstream applications. As shown in diagram, there are three different upstream applications registered in Kong. Upstream Apps should be locally hosted and not publically accessible. However, the Kong proxy endpoint should be opened for end-users or client applications. Check the [Services](./admin-guide/services-routes-config/) and [Routes](./admin-guide/services-routes-config/) docs for upstream application registration in Kong.
      After registering an upstream app as a service or route in Kong, the next step is to add security plugins. Check the [plugins](./plugin/gluu-openid-connect-uma-pep.md) and [tutorial](./tutorials/oidc-steppedup-auth-tutorial.md) docs for plugin details and configuration.
 
 1. OpenID Connect Server configuration
