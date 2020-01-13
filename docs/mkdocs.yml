@@ -15,14 +15,18 @@ repo_name: GluuFederation/docs-gg-prod
 extra:
     version: '4.0'
 theme:
-    name: material
-#    custom_dir: 'theme'
+    name: material    
     palette:
         primary: 'green'
         accent: 'green'
     logo: 'gluu.jpg'
     favicon: 'favicon.ico'
 
+# Tracking
+google_analytics:
+  - 'UA-31008645-7'
+  - 'auto'
+  
 # Extensions
 markdown_extensions:
 - admonition
