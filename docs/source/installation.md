@@ -54,7 +54,7 @@ wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-
 * Add the Node repo:
 
 ```
-curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
+curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
 ```
 
 ### Ubuntu 16
@@ -81,7 +81,7 @@ wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-
 * Add the Node repo:
 
 ```
-curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
+curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
 ```
 
 <!--
@@ -98,7 +98,7 @@ curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
 ```
 * Add the Node repo:
 ```
-# curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
+# curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
 ```
 -->
 
@@ -127,7 +127,7 @@ rpm -Uvh https://yum.postgresql.org/10/redhat/rhel-7-x86_64/pgdg-centos10-10-2.n
 * Add the Node repo:
 
 ```
-curl -sL https://rpm.nodesource.com/setup_8.x | sudo -E bash -
+curl -sL https://rpm.nodesource.com/setup_10.x | sudo -E bash -
 ```
 
 
@@ -156,7 +156,7 @@ rpm -Uvh https://yum.postgresql.org/10/redhat/rhel-7-x86_64/pgdg-redhat10-10-2.n
 * Add the Node repo:
 
 ```
-curl -sL https://rpm.nodesource.com/setup_8.x | sudo -E bash -
+curl -sL https://rpm.nodesource.com/setup_10.x | sudo -E bash -
 ```
 
 

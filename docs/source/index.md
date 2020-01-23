@@ -50,8 +50,8 @@ Gluu Gateway includes the following components.
     - OpenJDK v8
     - Python v2.x
     - Postgres v10
-    - Node v8.9.4
-    - NPM v5.6.0
+    - Node v10.x
+    - NPM v6.x
     
 ## Dependencies 
 
