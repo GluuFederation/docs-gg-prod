@@ -99,9 +99,9 @@ Below are the 2 steps to setup the kong nodes.
 
 ### 2. Set up GG plugins and libraries
 
-- Download [gluu-gateway-node-deps.zip](https://github.com/GluuFederation/gluu-gateway/raw/version_4.0/gluu-gateway-node-deps.zip)
+- Download [gluu-gateway-node-deps.tar.gz](https://github.com/GluuFederation/gluu-gateway-setup/blob/version_4.1/setup/gluu-gateway-node-deps.tar.gz)
 
-- `unzip gluu-gateway-node-deps.zip`
+- `tar -xvzf gluu-gateway-node-deps.tar.gz`
 
 - `cd gluu-gateway-node-deps`
 
