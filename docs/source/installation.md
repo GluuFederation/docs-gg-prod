@@ -245,7 +245,7 @@ ssh -L 1338:localhost:1338 user@your_linux_host
 !!! Note
     If you do not want an SSH tunnel connection, see the [FAQ](./faq.md#how-can-i-change-the-listening-address-and-port) for global access configuration. After these settings, you also need to update the OP clients redirect URL and post logout URL using the oxd [update-site](https://gluu.org/docs/oxd/4.0/api/#update-site) API.
     
-If automating installation, the JSON values can be passed directly to the setup script. The JSON values can be found [here.](https://github.com/GluuFederation/gluu-gateway/blob/version_4.0/t/scripts/install.sh#L64)
+If automating installation, the JSON values can be passed directly to the setup script. The JSON values can be found [here.](https://github.com/GluuFederation/gluu-gateway/blob/version_4.1/t/scripts/install.sh#L64)
 
 ## Applications and their ports
 
