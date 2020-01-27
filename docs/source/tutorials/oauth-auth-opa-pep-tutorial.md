@@ -16,7 +16,7 @@ In the demo, we will protect `/posts` api with `read` oauth scope. Plugin will c
 
 - Python Script demo app: This is our Requesting Party (RqP), which will be making authentication and authorization requests on behalf of the user. Installation instructions [below](#demo-app-configuration-rqp)
 
-- Protected(Upstream) API: In our demo, we are using a demo Node.js App. Take Node.js demo from [here](https://github.com/GluuFederation/gluu-gateway/tree/version_4.0/gg-demo/node-api). 
+- Protected(Upstream) API: In our demo, we are using a demo Node.js App. Take Node.js demo from [here](https://github.com/GluuFederation/gluu-gateway-setup/tree/version_4.1/gg-demo/node-api). 
 
 ## OPA Policy
 
@@ -76,7 +76,7 @@ Login into Gluu Gateway Admin GUI(:1338) and follow the below steps.
 
 Register your upstream API as a Service.
 
-We are using [`http://localhost:3000`](https://github.com/GluuFederation/gluu-gateway/tree/version_4.0/gg-demo/node-api) as the Upstream API, it is your application where you want to add security.
+We are using [`http://localhost:3000`](https://github.com/GluuFederation/gluu-gateway-setup/tree/version_4.1/gg-demo/node-api) as the Upstream API, it is your application where you want to add security.
 
 Follow these step to add Service using GG UI
  

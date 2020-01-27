@@ -27,7 +27,7 @@ The following flow diagram shows the step-by-step activities performed by the ac
 
 - Python CGI script demo app: This is our UMA Requesting Party (RqP), which will be making authentication and authorization requests on behalf of the user. Installation instructions [below](#demo-app-configuration-rqp)
 
-- Protected(Upstream) API: In our demo, we are using a demo Node.js App. Take Node.js demo from [here](https://github.com/GluuFederation/gluu-gateway/tree/version_4.0/gg-demo/node-api). 
+- Protected(Upstream) API: In our demo, we are using a demo Node.js App. Take Node.js demo from [here](https://github.com/GluuFederation/gluu-gateway-setup/tree/version_4.1/gg-demo/node-api). 
 
 ## Gluu Gateway configuration (RS)
 
@@ -50,7 +50,7 @@ Login into Gluu Gateway Admin GUI(:1338) and follow the below steps.
 
 Register your upstream API as a Service. For more details, see the [Gluu UMA Auth and UMA PEP service docs](/plugin/gluu-uma-auth-pep/#service-level).
 
-We are using [`http://localhost:3000`](https://github.com/GluuFederation/gluu-gateway/tree/version_4.0/gg-demo/node-api) as the Upstream API, it is your application where you want to add UMA Claim gathering authorization.
+We are using [`http://localhost:3000`](https://github.com/GluuFederation/gluu-gateway-setup/tree/version_4.1/gg-demo/node-api) as the Upstream API, it is your application where you want to add UMA Claim gathering authorization.
 
 Follow these step to add Service using GG UI
  
@@ -155,7 +155,7 @@ The script is divided into 3 parts:
 - `helper.py` includes REST calls and the HTML template
 - `config.py` is for custom configuration
 
-Download the app from the [repository](https://github.com/GluuFederation/gluu-gateway/tree/version_4.0/gg-demo).
+Download the app from the [repository](https://github.com/GluuFederation/gluu-gateway-setup/tree/version_4.1/gg-demo).
 
 ### Deploy
 

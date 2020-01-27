@@ -103,8 +103,6 @@ Follow these steps to add a route:
 
 ![oidc-demo4](../img/opa-demo4.png)
 
-Configurations have been done here. Now request kong proxy that is `https://<your_host>` in a browser. In my case, I am requesting `https://dev1.gluu.org`.
-
 ### Configure `gluu-opa-pep` plugin
 
 - Click `ROUTES` on the left panel
