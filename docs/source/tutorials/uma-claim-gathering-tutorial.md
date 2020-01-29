@@ -128,7 +128,7 @@ To enable UMA Claims Gathering, configure the following settings inside your Glu
      ![uma_rpt_policy](../img/15_uma_rpt_policy.png)
      ![uma_claim_gatering_policy](../img/15_uma_claim_gatering_policy.png)
 
-1. UMA scope with Authorization Policy
+1. Add Authorization Policy in `claim_gatering` UMA scope. Navigate to `UMA` > `Scopes`.
 
      ![uma_scope](../img/15_uma_scope.png)
      

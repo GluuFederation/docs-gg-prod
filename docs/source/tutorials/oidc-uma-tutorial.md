@@ -17,6 +17,7 @@ In the demo, the user will first be **authenticated by OpenID Connect** and for 
 
 - Protected(Upstream) Website: In our demo, we are using a demo Node.js App. Take Node.js demo from [here](https://github.com/GluuFederation/gluu-gateway-setup/tree/version_4.1/gg-demo/node-ejs). 
 
+    
 ## Gluu Gateway configuration (RP)
 
 !!! Note
@@ -83,12 +84,29 @@ Follow these steps to add a route:
 |HTTPMethods|?|it will used to protect the HTTP Methods. `?` means all the HTTP methods. For Example: `GET`, `POST`, all others.|
 |scope|with-claims|it is just a name of the scope. GG UI will create UMA scope in your Gluu CE. In Gluu CE UI(oxtrust) you need to add the UMA Policy in this scope|  
 |Deny By Default|No(false)|it is optional. `false` means it is will allow unprotected path i.e. the path which is not registered. We registered only `/settings/??` path so except this path all other path are unprotected path.|
+|Pushed Claim Token Lua expression|{id_token=id_token,userinfo=userinfo}|it is optional. If you want to pass Push claim token to get RPT Token then you need to enable `UMA Push Claim Token: True ID Token` in form and configure this expression. Plugin will pass this value to your UMA Policy and you can use this values to authorized the User. <br/> Currently in default expression ti passing both values but you can modify it. Check [here](../../plugin/gluu-openid-connect-uma-pep/#configure-pushed-claims-lua-expression) for more about expression and build UMA policy.|
 
 ![oidc-uma-1.png](../img/oidc-uma-3.png)
 ![oidc-uma-1.png](../img/oidc-uma-4.png)
 ![oidc-uma-1.png](../img/oidc-uma-5.png)
 ![oidc-uma-1.png](../img/oidc-uma-6.png)
 
+## Gluu Server configuration (AS)
+   
+To enable UMA Policy, configure the following settings inside your Gluu Server UI(oxTrust). We are configuring here UMA Claim gathering flow. We are using the default policy available in the Gluu CE but you can code policy as per your requirement. 
+
+1. In oxTrust, navigate to `Configuration` > `Manage Custom Scripts` 
+
+1. Enable `UMA RPT Polices` & `UMA Claims Gathering`
+
+     There is one `uma_rpt_policy` included in the script. During authorization, it checks Country=US and City=NY. If you want to change the value, update this script or add your own new script. For more details, take a look at [Gluu CE Documentation](https://gluu.org/docs/ce/admin-guide/uma/#uma-rpt-authorization-policies).
+     ![uma_rpt_policy](../img/15_uma_rpt_policy.png)
+     ![uma_claim_gatering_policy](../img/15_uma_claim_gatering_policy.png)
+
+1. Add policy in `with-claims` scope. Navigate to `UMA` > `Scopes`.
+
+     ![oidc-uma-12.png](../img/oidc-uma-12.png)
+     
 This completes the configuration. Next, request the Kong proxy at `https://<your_host>/settings/` in the browser. As per my configuration, I am requesting `https://dev1.gluu.org/settings/`.
 
 !!! Important
@@ -98,20 +116,24 @@ This completes the configuration. Next, request the Kong proxy at `https://<your
 
 1. Once you request to kong proxy, the plugin will redirect you to your OP side.
 
-     ![oidc-demo10](../img/oidc-demo10.png)
+     ![oidc-uma-7.png](../img/oidc-uma-7.png)
      
      After successful authentication, OP will show you all requested permissions, click on `Allow`.
      
-     ![oidc-demo10](../img/oidc-demo11.png)
+     ![oidc-uma-8.png](../img/oidc-uma-8.png)
 
-2. After `allow`, you will get back to kong proxy and plugin will serve you `/flights` page.
-
-     ![oidc-demo7](../img/opa-demo7.png)
+1. Next Gluu Server prompt the user to enter some extra information to authorize a user. AS will first ask the user to enter a value for `Country`. Enter `US` in a country.
+                    
+     ![oidc-uma-9.png](../img/oidc-uma-9.png)
      
-3. Now try to click on any other page. let's click on `payments`. It will deny you because the policy only allows `flights`.
+1. After submitting a Country claim, AS will ask the user to enter a value for `City`. Enter `NY` in the city.
 
-     ![oidc-demo8](../img/opa-demo8.png)
+     ![oidc-uma-10.png](../img/oidc-uma-10.png)
+     
+1. If all ok then you will see the below page that is `/settings/`
 
-You can check the kong's [`error.log`](../../logs) file or [`gluu-opa-pep docs`](../../plugin/gluu-opa-pep) to check the request to OPA server and which data are passed to OPA endpoint.  
+     ![oidc-uma-11.png](../img/oidc-uma-11.png)
 
-For more details and configuration check [`gluu-openid-connect` plugin docs](../../plugin/gluu-openid-connect-uma-pep/) and for [`gluu-opa-pep` check docs](../../plugin/gluu-opa-pep/).
+If you get some error then you can check the kong's [`error.log`](../../logs) file.  
+
+For more details and configuration check [`gluu-openid-connect` plugin docs](../../plugin/gluu-openid-connect-uma-pep/).
