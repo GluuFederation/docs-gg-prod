@@ -232,7 +232,7 @@ You can pass some more extra information to UMA Policy so that you can make more
 |------------|-----------|
 |`id_token`|This environment has the decoded ID Token|
 |`userinfo`|This environment has the user info which is the response of the `/useinfo` endpoint|
-|`request`|This environment has the all the value of HTTP Request object|
+|`request`|This environment has the all the value of HTTP Request object. check [here](https://docs.konghq.com/1.3.x/pdk/kong.request/) for values of request object. For example: If you want to get http request method then set value as `{method = request.get_method()}`|
 
 For Example: If you want to pass the userinfo to UMA policy then you need to configure `pushed_claims_lua_exp = userinfo`. This is Lua expression so plugin will pass this as it is. After this you can easily get this information in your `UMA RPT Policy` For Example: `context.getClaim("name")`, `context.getClaim("email")`. 
 
@@ -244,6 +244,7 @@ More Examples:
 |`userinfo`|<ul><li>You will have all the fields of userinfo response.</li><li>`context.getClaim("name")`</li><li>`context.getClaim("email")`</li><li>`context.getClaim("sub")`</li></ul>|
 |`{id_token=id_token,userinfo=userinfo}`|<ul><li>Here you are passing both values as a single object. So you will have values of both `userinfo` and `id_token`. Here we are using `{}` to make a object.</li><li>`context.getClaim("id_token").optString("aud")`</li><li>`context.getClaim("userinfo").getString("name")`</li></ul>|
 |`{name=userinfo.name}`|<ul><li>You have here only one field i.e. `name`</li><li>`context.getClaim("name")`</li></ul>|
+|`{path=request.get_path(), method=request.get_method(), headers=request.get_headers(), specific_header_host=request.get_header('Host')}`|<ul><li>`context.getClaim("path")`</li><li>`context.getClaim("method")`</li><li>`context.getClaim("headers").getString("host")` and etc in headers</li><li>`context.getClaim("specific_header_host")`</li></ul>|
 
 ## Usage
 

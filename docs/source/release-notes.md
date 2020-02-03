@@ -44,10 +44,21 @@ A description of our plugins follows:
 - [#296](https://github.com/GluuFederation/gluu-gateway/issues/296) : GG UI - OpenID Connect plugin configuration
 - [#345](https://github.com/GluuFederation/gluu-gateway/issues/345) : URL based Stepped up authentication in OIDC plugin
 - [#349](https://github.com/GluuFederation/gluu-gateway/issues/349) : Design GG UI for URL based Stepped up authentication feature in OIDC plugin
+- [#381](https://github.com/GluuFederation/gluu-gateway/issues/381) : Add Custom header map configuration for OAuth and UMA plugins as well
+- [#373](https://github.com/GluuFederation/gluu-gateway/issues/373) : Map Userinfo and id_token claims to HTTP headers 
+- [#379](https://github.com/GluuFederation/gluu-gateway/issues/379) : Make Oauth2 client Kong consumer mapping optional
+- [#370](https://github.com/GluuFederation/gluu-gateway/issues/370) : OpenID plugin configuration for UMA access control: Push UserInfo token
+- [#390](https://github.com/GluuFederation/gluu-gateway/issues/390) : Maintain access_token in user session, gluu-openid-connect
 
 ### Changes
-- [#297](https://github.com/GluuFederation/gluu-gateway/issues/297): Decouple existing gluu-uma-pep. Now there are two separate plugins 1. gluu-uma-auth 2. gluu-uma-pep.
-- [#298](https://github.com/GluuFederation/gluu-gateway/issues/298): Decouple existing gluu-oauth-pep. Now there are two separate plugins 1. gluu-oauth-auth 2. gluu-oauth-pep.
+- [#297](https://github.com/GluuFederation/gluu-gateway/issues/297) : Decouple existing gluu-uma-pep. Now there are two separate plugins 1. gluu-uma-auth 2. gluu-uma-pep.
+- [#298](https://github.com/GluuFederation/gluu-gateway/issues/298) : Decouple existing gluu-oauth-pep. Now there are two separate plugins 1. gluu-oauth-auth 2. gluu-oauth-pep.
 - [#328](https://github.com/GluuFederation/gluu-gateway/issues/328) : Collect more metrics about all plugins
 - [#336](https://github.com/GluuFederation/gluu-gateway/issues/336) : GG UI: Remove extra API for plugin config
 - [#325](https://github.com/GluuFederation/gluu-gateway/issues/325) : Usage and metrics tracking
+- [#384](https://github.com/GluuFederation/gluu-gateway/issues/384) : gluu-metrics gluu_prometheus_server_host DNS resolution and architectural issues
+
+### Bug Fix
+- [#411](https://github.com/GluuFederation/gluu-gateway/issues/411) : Bug in gluu-metrics plugin 
+- [#400](https://github.com/GluuFederation/gluu-gateway/issues/400) : Inactive oxd access token
+
