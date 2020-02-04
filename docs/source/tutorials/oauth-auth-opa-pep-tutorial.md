@@ -1,4 +1,4 @@
-# OAuth API protection and OAuth scope security
+# OAuth API protection and Open Policy Agent policy security
 
 ## Overview
 

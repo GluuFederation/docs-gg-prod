@@ -212,7 +212,7 @@ As per the above example,
 |**oxd_id**|| The ID for an existing client used to introspect the token. If left blank, a new client will be registered dynamically |
 |**client_id**|| An existing client ID used to get a protection access token to access the introspection API. Required if an existing oxd ID is provided.|
 |**client_secret**|| An existing client secret, used to get a protection access token to access the introspection API. Required if an existing oxd ID is provided.|
-|**uma_scope_expression**|| Used to add scope security on an UMA scope token. The UMA Scope Expression is a JSON expression, used to register the resources in a resource server. See more details in the [Gluu Server docs](https://gluu.org/docs/ce/admin-guide/uma/#scopes-expressions). You can register a more dynamic path, there are 3 elements to make more dynamic path registration and protection. Check [here](../common-features/#dynamic-resource-protection) for more details.|
+|**uma_scope_expression**|| Used to add scope security on an UMA scope token. The UMA Scope Expression is a JSON expression, used to register the resources in a resource server. See more details in the [Gluu Server docs](https://gluu.org/docs/ce/admin-guide/uma/#scopes-expressions). You can register a more dynamic path, there are 3 elements to make more dynamic path registration and protection. Check [here](../../plugin/gluu-uma-auth-pep/#uma-scope-expression) for more details.|
 |**deny_by_default**| true | For paths not protected by UMA scope expressions. If true, denies unprotected paths.|
 |**require_id_token**|false| This is for Push Claim token. if it is true then it will use id_token for push claim token for getting RPT|
 |**obtain_rpt**|false|It is used to get RPT when you configure `gluu-openid-connect` plugin with `gluu-uma-pep`|
@@ -226,7 +226,7 @@ As per the above example,
 
 #### Configure Pushed Claims Lua Expression
 
-You can pass some more extra information to UMA Policy so that you can make more configurable authorization policy using UMA and UMA Policies. After OpenID Connect authentication, you can pass userinfo to UMA Policy for authorization. So `gluu-uma-pep` has facility to build a custom Push Claim token. It provides 3 environments
+You can pass some more extra information to [UMA Policy](https://www.gluu.org/docs/ce/4.0/admin-guide/uma/#uma-rpt-authorization-policies) so that you can make more configurable authorization policy using UMA and UMA Policies. After OpenID Connect authentication, you can pass userinfo to UMA Policy for authorization. So `gluu-uma-pep` has facility to build a custom Push Claim token. It provides 3 environments
 
 |Environments|Description| 
 |------------|-----------|
@@ -260,3 +260,14 @@ After configuration just hit your proxy endpoint in a browser.
 When a client has been authenticated, the plugin will append headers to the request before proxying it to the upstream service to identify the request and the end-user.
 
 Check [here](../common-features/#custom-headers) to setup custom headers.
+
+
+## Demos and Tutorials
+
+1. [OpenID Connect Authentication and UMA PEP Authorization](/tutorials/oidc-uma-tutorial/)
+
+1. [OpenID Connect Stepped-up Authentication Tutorial](/tutorials/oidc-steppedup-auth-tutorial/)
+
+1. [OpenID Connect Authentication and OPA PEP Authorization Tutorial](/tutorials/oidc-opa-tutorial/)
+
+1. [Shell script for configuration and quick test](https://github.com/GluuFederation/gluu-gateway-setup/blob/version_4.1/scripts/run_tests.sh#L191)

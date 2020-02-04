@@ -246,3 +246,9 @@ The following parameters can be used in this plugin's configuration.
 
 !!! Info
     You can check the kong's [`error.log`](../../logs) file to check the request to OPA server and which data are passed to OPA endpoint.
+
+## Demos and Tutorials
+
+1. [OpenID Connect Authentication and OPA PEP Authorization Tutorial](/tutorials/oidc-opa-tutorial/)
+
+1. [OAuth API protection and Open Policy Agent policy security Tutorial](/tutorials/oauth-auth-opa-pep-tutorial/)

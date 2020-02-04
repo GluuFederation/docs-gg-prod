@@ -293,3 +293,10 @@ Check [here](../common-features/#custom-headers) to setup custom headers.
 
 This information can be used to implement additional logic. For example, use the X-Consumer-ID value to query the Kong Admin API and retrieve more information about the Consumer.
 
+## Demos and Tutorials
+
+1. [UMA Claims Gathering Authorization Tutorial](/tutorials/uma-claim-gathering-tutorial/)
+
+1. [OpenID Connect Authentication and UMA PEP Authorization](/tutorials/oidc-uma-tutorial/)
+
+1. [Shell script for configuration and quick test](https://github.com/GluuFederation/gluu-gateway-setup/blob/version_4.1/scripts/run_tests.sh#L104)

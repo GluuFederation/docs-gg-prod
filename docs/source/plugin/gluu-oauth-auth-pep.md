@@ -316,3 +316,11 @@ When a client has been authenticated, the plugin will append some headers to the
 Check [here](../common-features/#custom-headers) to setup custom headers.
 
 This information can be used to implement additional logic. For example, use the `Consumer` value to query the Kong Admin API and retrieve more information about the Consumer.
+
+## Demos and Tutorials
+
+1. [OAuth API protection and OAuth scope security tutorial](/tutorials/oauth-auth-pep-tutorial/)
+
+1. [OAuth API protection and Open Policy Agent policy security tutorial](/tutorials/oauth-auth-opa-pep-tutorial/)
+
+1. [Shell script for configuration and quick test](https://github.com/GluuFederation/gluu-gateway-setup/blob/version_4.1/scripts/run_tests.sh#L18)
