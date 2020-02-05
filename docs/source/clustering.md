@@ -1,6 +1,6 @@
 # Clustering
 
-Gluu Gateway is based on the [Kong Gateway](https://konghq.com/kong/), which supports clustering. Kong's docs about clustering are available [here](https://docs.konghq.com/1.3.x/clustering/).
+Gluu Gateway is based on the [Kong Gateway](https://konghq.com/kong/), which supports clustering. Kong's docs about clustering are available [here](https://docs.konghq.com/2.0.x/clustering/).
 
 A Kong cluster can scale the system horizontally by adding more machines/VMs/containers to handle more incoming requests.
 
@@ -24,11 +24,11 @@ There are two approaches in Kong for configuration storage.
 
 ### GG Kong DB-less Clustering
 
-   In this approach Kong uses the second configuration file, in YAML or JSON, using [declarative configuration](https://docs.konghq.com/1.3.x/db-less-and-declarative-config/#what-is-declarative-configuration). 
+   In this approach Kong uses the second configuration file, in YAML or JSON, using [declarative configuration](https://docs.konghq.com/2.0.x/db-less-and-declarative-config/#what-is-declarative-configuration). 
    
    To use Kong in DB-less mode, set the `database` directive of `kong.conf` to `off`. As usual, you can do this by editing `kong.conf` and setting `database=off` or via environment variables. You can then start Kong as usual.
    
-   Check [here](https://docs.konghq.com/1.3.x/db-less-and-declarative-config/) for Kong DB-less configurations.
+   Check [here](https://docs.konghq.com/2.0.x/db-less-and-declarative-config/) for Kong DB-less configurations.
    
    In below diagram there is no `Kong Database`. It use YAML Configuration file on every node with same configurations.
    
@@ -62,7 +62,7 @@ Below are the 2 steps to setup the kong nodes.
 
 1. Ubuntu 16
     
-      - Download Kong 1.3 from [here](https://bintray.com/kong/kong-deb/download_file?file_path=kong-1.3.0.xenial.amd64.deb).
+      - Download Kong 2.0.0 from [here](https://bintray.com/kong/kong-deb/download_file?file_path=kong-2.0.0.xenial.amd64.deb).
       - 
         ```
         sudo apt-get update
@@ -72,7 +72,7 @@ Below are the 2 steps to setup the kong nodes.
       
 1. Ubuntu 18
     
-      - Download Kong 1.3 from [here](https://bintray.com/kong/kong-deb/download_file?file_path=kong-1.3.0.bionic.amd64.deb).
+      - Download Kong 2.0.0 from [here](https://bintray.com/kong/kong-deb/download_file?file_path=kong-2.0.0.bionic.amd64.deb).
       - 
         ```
         sudo apt-get update
@@ -82,7 +82,7 @@ Below are the 2 steps to setup the kong nodes.
 
 1. RHEL 7
   
-      - Download Kong 1.3 from [here](https://bintray.com/kong/kong-rpm/download_file?file_path=rhel/7/kong-1.3.0.rhel7.amd64.rpm)
+      - Download Kong 2.0.0 from [here](https://bintray.com/kong/kong-rpm/download_file?file_path=rhel/7/kong-2.0.0.rhel7.amd64.rpm)
       - 
         ```
         sudo yum install kong-*.rpm --nogpgcheck
@@ -90,7 +90,7 @@ Below are the 2 steps to setup the kong nodes.
 
 1. CentOS 7
 
-      - Download Kong 1.3 from [here](https://bintray.com/kong/kong-rpm/download_file?file_path=centos/7/kong-1.3.0.el7.amd64.rpm)
+      - Download Kong 2.0.0 from [here](https://bintray.com/kong/kong-rpm/download_file?file_path=centos/7/kong-2.0.0.el7.amd64.rpm)
       - 
         ```
         sudo yum install epel-release

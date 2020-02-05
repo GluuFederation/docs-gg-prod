@@ -232,7 +232,7 @@ You can pass some more extra information to [UMA Policy](https://www.gluu.org/do
 |------------|-----------|
 |`id_token`|This environment has the decoded ID Token|
 |`userinfo`|This environment has the user info which is the response of the `/useinfo` endpoint|
-|`request`|This environment has the all the value of HTTP Request object. check [here](https://docs.konghq.com/1.3.x/pdk/kong.request/) for values of request object. For example: If you want to get http request method then set value as `{method = request.get_method()}`|
+|`request`|This environment has the all the value of HTTP Request object. check [here](https://docs.konghq.com/2.0.x/pdk/kong.request/) for values of request object. For example: If you want to get http request method then set value as `{method = request.get_method()}`|
 
 For Example: If you want to pass the userinfo to UMA policy then you need to configure `pushed_claims_lua_exp = userinfo`. This is Lua expression so plugin will pass this as it is. After this you can easily get this information in your `UMA RPT Policy` For Example: `context.getClaim("name")`, `context.getClaim("email")`. 
 

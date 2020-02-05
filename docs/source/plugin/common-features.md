@@ -99,7 +99,7 @@ In UI, you will get facility to add custom headers. You just need to use header 
      |x-oauth-client-id|introspect_data.client_id|[string \| base64 \| urlencoded]||false|
      |x-rpt-expiration|introspect_data.exp|[string \| base64 \| urlencoded]||false|
      |x-oauth-token-{*}|introspect_data|[string \| urlencoded \| base64]||true|
-     |kong-version|"version 1.3", <p style="color:green">Note: double quotes required for custom values.</p>|[string \| urlencoded \| base64]||false|
+     |kong-version|"version 2.0", <p style="color:green">Note: double quotes required for custom values.</p>|[string \| urlencoded \| base64]||false|
 
 1. `gluu-oauth-auth`
 
@@ -110,7 +110,7 @@ In UI, you will get facility to add custom headers. You just need to use header 
      |x-oauth-client-id|introspect_data.client_id|[string \| base64 \| urlencoded]||false|
      |x-rpt-expiration|introspect_data.exp|[string \| base64 \| urlencoded]||false|
      |x-oauth-token-{*}|introspect_data|[string \| urlencoded \| base64]||true|
-     |kong-version|"version 1.3", <p style="color:green">Note: double quotes required for custom values.</p>|[string \| urlencoded \| base64]||false|
+     |kong-version|"version 2.0", <p style="color:green">Note: double quotes required for custom values.</p>|[string \| urlencoded \| base64]||false|
      |x-authenticated-scope|introspect_data.scope|list|, (comma)|No|
 
 1. `gluu-openid-connect`

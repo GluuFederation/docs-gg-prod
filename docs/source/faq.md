@@ -12,7 +12,7 @@ Although it is not recommended, Gluu Gateway (GG) can be installed on the same m
 The oxd server is the OIDC Client that sends requests to the OP server. Gluu Gateway acts as the relying party, so oxd should be installed on the Gluu Gateway machine. The oxd server can be installed as an option during the Gluu Gateway installation and setup. Check [the docs](https://gluu.org/docs/oxd/4.0/) for more details about oxd. 
 
 ### Where can I get more information about Kong Service and Route configuration?
-Check the [Kong 1.3.x docs about proxy configuration](https://docs.konghq.com/1.3.x/proxy/).
+Check the [Kong 2.0.x docs about proxy configuration](https://docs.konghq.com/2.0.x/proxy/).
 
 ### Should we need to expose OXD endpoint public/outside web?
 GG uses OXD to communicate with OP Server. You don't need to open it when you deal with OAuth and OpenID Connect case but when you deal with UMA at this case, you may need to expose it globally for your client applications because it is bit complex to get RPT token for protected resources. You can get RPT token without using OXD endpoints for this you need to study and manually code to get RPT token, take a look [UMA Docs here](https://docs.kantarainitiative.org/uma/wg/rec-oauth-uma-grant-2.0.html) for more information. 

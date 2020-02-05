@@ -38,7 +38,7 @@ Primary use cases supported by Gluu Gateway include:
 
 Gluu Gateway includes the following components.
 
-- [Kong CE v1.3.x](https://konghq.com/community/): An open source API Gateway and Microservices Management Layer, delivering high performance and reliability. We are using Kong Community edition version 1.3 here. 
+- [Kong CE v2.0.0](https://konghq.com/community/): An open source API Gateway and Microservices Management Layer, delivering high performance and reliability. We are using Kong Community edition version 2.0 here. 
 
 - [Gluu Admin UI](https://github.com/GluuFederation/gluu-gateway/tree/version_4.0/konga): A web administration portal, based on the [Konga](https://github.com/pantsel/konga) GUI, to manage your Gluu Gateway configurations.
 
@@ -104,10 +104,10 @@ The following sections explain the numbered points in the diagram:
     The Upstream Service should be registered with the Kong Service. See the [Services](./admin-guide/services-routes-config/) and [Routes](./admin-guide/services-routes-config/) sections.
 
 1. Security configuration using UI
-    The GG UI uses the [Kong Admin APIs](https://docs.konghq.com/1.3.x/admin-api/) to configure Kong's Services, Routes, Consumers and Plugins.
+    The GG UI uses the [Kong Admin APIs](https://docs.konghq.com/2.0.x/admin-api/) to configure Kong's Services, Routes, Consumers and Plugins.
 
 1. Security configuration using Kong API
-    Instead, you can directly use the [Kong Admin APIs](https://docs.konghq.com/1.3.x/admin-api/) to configure the Kong's Services, Routes, Consumers and Plugins. You can find API descriptions in the [Kong Docs](https://docs.konghq.com/1.3.x/admin-api/) and [GG plugins docs](./plugin/gluu-openid-connect-uma-pep.md) for Gluu plugins configuration API.
+    Instead, you can directly use the [Kong Admin APIs](https://docs.konghq.com/2.0.x/admin-api/) to configure the Kong's Services, Routes, Consumers and Plugins. You can find API descriptions in the [Kong Docs](https://docs.konghq.com/2.0.x/admin-api/) and [GG plugins docs](./plugin/gluu-openid-connect-uma-pep.md) for Gluu plugins configuration API.
 
 1. The UI uses the oxd server to manage the OP Client
     The UI uses the [oxd server](https://gluu.org/docs/oxd/4.0/) endpoint during plugin configuration to create and manage the OpenID Connect Client.

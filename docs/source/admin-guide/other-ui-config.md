@@ -4,7 +4,7 @@
 
 The upstream object represents a virtual hostname and can be used to loadbalance incoming requests over multiple services (targets). For example, an upstream with the name `service.v1.xyz` loadbalances requests for a Service object whose host is service.v1.xyz. Requests for this Service would be proxied to the targets defined within the upstream.
 
-Check Kong [load balancing](https://docs.konghq.com/1.3.x/loadbalancing/) and [health-check](https://docs.konghq.com/1.3.x/health-checks-circuit-breakers/) docs for more details. <!-- Replace this with information -->
+Check Kong [load balancing](https://docs.konghq.com/2.0.x/loadbalancing/) and [health-check](https://docs.konghq.com/2.0.x/health-checks-circuit-breakers/) docs for more details. <!-- Replace this with information -->
 
 [![7_upstreams](../img/7_upstreams.png)](../img/7_upstreams.png)
 
@@ -24,7 +24,7 @@ The `Targets` section is for managing targets. A target is an IP address/hostnam
 
 A Certificate object represents a public certificate/private key pair for an SSL certificate. These objects are used by Kong to handle SSL/TLS termination for encrypted requests. Certificates are optionally associated with SNI objects to tie a certificate/key pair to one or more hostnames.
 
-Check Kong [certificate configuration](https://docs.konghq.com/1.3.x/proxy/#configuring-ssl-for-a-route) docs for more details.
+Check Kong [certificate configuration](https://docs.konghq.com/2.0.x/proxy/#configuring-ssl-for-a-route) docs for more details.
 
 [![8_certificates](../img/8_certificates.png)](../img/8_certificates.png)
 
