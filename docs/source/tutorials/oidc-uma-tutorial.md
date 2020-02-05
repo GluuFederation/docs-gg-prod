@@ -81,7 +81,7 @@ Follow these steps to add a route:
 |Fields|Value|Description|
 |-----|-------|----------|
 |Path|/settings/?|it will protect path `/settings/` and also any sub path in settings path.|
-|HTTPMethods|?|it will used to protect the HTTP Methods. `?` means all the HTTP methods. For Example: `GET`, `POST`, all others.|
+|HTTPMethods|GET|it will used to protect the HTTP Methods. `GET` means for the GET HTTP methods. You can configure as your requirement For Example: `GET`, `POST`, all others.|
 |scope|with-claims|it is just a name of the scope. GG UI will create UMA scope in your Gluu CE. In Gluu CE UI(oxtrust) you need to add the UMA Policy in this scope|  
 |Deny By Default|No(false)|it is optional. `false` means it is will allow unprotected path i.e. the path which is not registered. We registered only `/settings/??` path so except this path all other path are unprotected path.|
 |Pushed Claim Token Lua expression|{id_token=id_token,userinfo=userinfo}|it is optional. If you want to pass Push claim token to get RPT Token then you need to enable `UMA Push Claim Token: True ID Token` in form and configure this expression. Plugin will pass this value to your UMA Policy and you can use this values to authorized the User. <br/> Currently in default expression ti passing both values but you can modify it. Check [here](../../plugin/gluu-openid-connect-uma-pep/#configure-pushed-claims-lua-expression) for more about expression and build UMA policy.|

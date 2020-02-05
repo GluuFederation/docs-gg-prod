@@ -57,6 +57,7 @@ A description of our plugins follows:
 - [#336](https://github.com/GluuFederation/gluu-gateway/issues/336) : GG UI: Remove extra API for plugin config
 - [#325](https://github.com/GluuFederation/gluu-gateway/issues/325) : Usage and metrics tracking
 - [#384](https://github.com/GluuFederation/gluu-gateway/issues/384) : gluu-metrics gluu_prometheus_server_host DNS resolution and architectural issues
+- [#418](https://github.com/GluuFederation/gluu-gateway/issues/418) : resty/hmac.lua throwing error in kong 1.5 and Bump Kong version to 2.0.0
 
 ### Bug Fix
 - [#411](https://github.com/GluuFederation/gluu-gateway/issues/411) : Bug in gluu-metrics plugin 
