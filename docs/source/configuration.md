@@ -63,12 +63,6 @@ The `gluu-gateway` service is used to manage all GG components, including the Ad
     service kong [restart|stop|restart|status]
     ```
 
-    or 
-
-    ```
-    kong [restart|stop|restart|status]
-    ```
-    
 * SSL Certs setup
 
     Use `kong.conf` for setup ssl certs for Kong Proxy and Kong Admin API. Below are the properties in `kong.conf`: 
@@ -102,25 +96,25 @@ Execute the following sequence of commands:
 1. Stop Kong.
 
     ```
-    kong stop
+    service kong stop
     ```
 
 1. The `reset` option is used to reset the configured database. It deletes all the tables and data of the configured database.
 
     ```
-    kong migrations reset
+    service kong migrations reset
     ```
 
 1. The `bootstrap` option is used to create a table in the configured database. It also executes all missing migrations up to the latest available one.
 
     ```
-    kong migrations bootstrap
+    service kong migrations bootstrap
     ```
 
 1. Start Kong.
 
     ```
-    kong start
+    service kong start
     ```
 
 ## Migrate from Development to Production 
