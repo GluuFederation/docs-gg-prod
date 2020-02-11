@@ -23,7 +23,7 @@ Gluu Gateway requires an OAuth 2.0 Authorization Server (AS), typically the Gluu
 
 Gluu Gateway is compatible with the following versions of Gluu:
 
-- Gluu Server [CE 4.0](https://gluu.org/docs/ce/4.0)
+- Gluu Server [CE 4.1](https://gluu.org/docs/ce/4.1)
 
 ## Required Third Party repositories
 
@@ -163,7 +163,7 @@ curl -sL https://rpm.nodesource.com/setup_10.x | sudo -E bash -
 ## Install the Gluu Gateway package
 
 !!! important
-    The Gluu Gateway package installs the following required components: PostgreSQL v10, oxd Server 4.0, NodeJS v8, Kong Community Edition v0.14.1.
+    The Gluu Gateway package installs the following required components: PostgreSQL v10, oxd Server 4.1, NodeJS v8, Kong Community Edition v0.14.1.
 
 ### Ubuntu 16, 18
 
@@ -217,9 +217,9 @@ After acknowledging the Gluu Stepped-Up Support License, you will be prompted to
 | **Enter Email Address** | Used to generate web X.509 certificates |
 | **Password** | If you already have a postgres database password for user `postgres`, enter it here. Otherwise, enter a new password. |
 | **OP Server Host** | The hostname of the Gluu Server that will be used for OAuth 2.0 client credentials and access management. **Example**: your-op.server.com |
-| **Install OXD Server?** | If you choose Y(yes) then it will install fresh oxd server in your machine. If you choose N(No) then it will ask you next question `Enter your existing OXD server URL`, where you need to enter your existing oxd server URL. Check [here](https://gluu.org/docs/oxd/4.0/) for more details about oxd server. | 
+| **Install OXD Server?** | If you choose Y(yes) then it will install fresh oxd server in your machine. If you choose N(No) then it will ask you next question `Enter your existing OXD server URL`, where you need to enter your existing oxd server URL. Check [here](https://gluu.org/docs/oxd/4.1/) for more details about oxd server. | 
 | **OXD Server URL** | If oxd is installed on a different hostname than Gluu Gateway, provide its URL. If not, enter the hostname for Gluu Gateway|
-| **Generate client credentials to call oxd-server API's?** | Register an OpenID Client for Konga, or enter existing client credentials manually. Take care about your Client at your OP server side; make sure to [extend this expiration date](https://www.gluu.org/docs/oxd/4.0/faq/#client-expires-how-can-i-avoid-it). It will create a client with the `openid`, `oxd`, `permission` and `username` scope. You need to enable all this scope for dynamic client registration so that it will include during client creation. In case if missing then you can add this scope after setup complete using [Gluu oxTrust UI](https://gluu.org/docs/ce/4.0/admin-guide/openid-connect/#dynamic-client-registration). If you enter existing client details, make sure your client in Redirect Login URIs and Post Logout Redirect URIs field has the value `https://localhost:1338`.|
+| **Generate client credentials to call oxd-server API's?** | Register an OpenID Client for Konga, or enter existing client credentials manually. Take care about your Client at your OP server side; make sure to [extend this expiration date](https://www.gluu.org/docs/oxd/4.1/faq/#client-expires-how-can-i-avoid-it). It will create a client with the `openid`, `oxd`, `permission` and `username` scope. You need to enable all this scope for dynamic client registration so that it will include during client creation. In case if missing then you can add this scope after setup complete using [Gluu oxTrust UI](https://gluu.org/docs/ce/4.1/admin-guide/openid-connect/#dynamic-client-registration). If you enter existing client details, make sure your client in Redirect Login URIs and Post Logout Redirect URIs field has the value `https://localhost:1338`.|
 | **OXD Id** | Used to manually set the oxd ID. |
 | **Client Id** | Used to manually set the client ID. |
 | **Client Secret** | Used to manually set the client secret. |
@@ -243,7 +243,7 @@ ssh -L 1338:localhost:1338 user@your_linux_host
     To diagnose errors during setup, check the log files: `/opt/gluu-gateway/setup/gluu-gateway-setup.log` and `/opt/gluu-gateway/setup/gluu-gateway-setup_error.log`
     
 !!! Note
-    If you do not want an SSH tunnel connection, see the [FAQ](./faq.md#how-can-i-change-the-listening-address-and-port) for global access configuration. After these settings, you also need to update the OP clients redirect URL and post logout URL using the oxd [update-site](https://gluu.org/docs/oxd/4.0/api/#update-site) API.
+    If you do not want an SSH tunnel connection, see the [FAQ](./faq.md#how-can-i-change-the-listening-address-and-port) for global access configuration. After these settings, you also need to update the OP clients redirect URL and post logout URL using the oxd [update-site](https://gluu.org/docs/oxd/4.1/api/#update-site) API.
     
 If automating installation, the JSON values can be passed directly to the setup script. The JSON values can be found [here.](https://github.com/GluuFederation/gluu-gateway/blob/version_4.1/t/scripts/install.sh#L64)
 
