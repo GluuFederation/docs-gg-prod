@@ -77,7 +77,7 @@ The `gluu-gateway` service is used to manage all GG components, including the Ad
 
 ## oxd
 
-Refer to the [oxd docs](https://gluu.org/docs/oxd/4.0) for more information on the topics below. 
+Refer to the [oxd docs](https://gluu.org/docs/oxd/4.1) for more information on the topics below. 
 
 * Configure the oxd Server
 

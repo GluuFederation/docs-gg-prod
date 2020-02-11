@@ -11,9 +11,9 @@ In the demo, the user will first be **authenticated by OpenID Connect** and for 
 
 ## Requirements
 
-- Gluu Gateway 4.1: This is our an OpenID Connect relying party(RP) between the client and the upstream service. [Install Gluu Gateway](../installation.md). [OXD Server](https://gluu.org/docs/oxd/4.0/) is a static APIs web application which will install during GG installation.
+- Gluu Gateway 4.1: This is our an OpenID Connect relying party(RP) between the client and the upstream service. [Install Gluu Gateway](../installation.md). [OXD Server](https://gluu.org/docs/oxd/4.1/) is a static APIs web application which will install during GG installation.
 
-- Gluu Server 4.0: This is our OpenID Connect Server. [Install Gluu](https://gluu.org/docs/ce/4.0/installation-guide/install-ubuntu/)
+- Gluu Server 4.1: This is our OpenID Connect Server. [Install Gluu](https://gluu.org/docs/ce/4.1/installation-guide/install-ubuntu/)
 
 - Protected(Upstream) Website: In our demo, we are using a demo Node.js App. Take Node.js demo from [here](https://github.com/GluuFederation/gluu-gateway-setup/tree/version_4.1/gg-demo/node-ejs). 
 

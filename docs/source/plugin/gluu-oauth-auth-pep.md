@@ -109,7 +109,7 @@ Clicking on the `+` icon will bring up the below form. Check [here](#parameters)
 #### Add Plugin using Kong API
 
 !!! Note
-    Use [OXD API](https://gluu.org/docs/oxd/4.0/) for [client registration](https://gluu.org/docs/oxd/4.0/api/#register-site).
+    Use [OXD API](https://gluu.org/docs/oxd/4.1/) for [client registration](https://gluu.org/docs/oxd/4.1/api/#register-site).
 
 Configuration for `gluu-oauth-auth`. Check [here](#gluu-oauth-auth) for parameter descriptions.
 

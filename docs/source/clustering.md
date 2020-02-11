@@ -42,7 +42,7 @@ There are two approaches in Kong for configuration storage.
 
 2. **OXD-Server**
 
-     Kong(Plugins) uses the OXD-Server for every operation to communicate with OP Server. For OXD-Server clustering you need to deploy OXD-Server on every node and use the same `redis` for central data storage and access. For more details check [OXD redis setup](https://gluu.org/docs/oxd/4.0/configuration/redis/) docs. 
+     Kong(Plugins) uses the OXD-Server for every operation to communicate with OP Server. For OXD-Server clustering you need to deploy OXD-Server on every node and use the same `redis` for central data storage and access. For more details check [OXD redis setup](https://gluu.org/docs/oxd/4.1/configuration/redis/) docs. 
      
 3. **GG UI**
 

@@ -9,7 +9,7 @@ Gluu Gateway should be used in every API gateway where you need advanced securit
 Although it is not recommended, Gluu Gateway (GG) can be installed on the same machine as CE, but both use port 443. Before installing GG, the main Gluu Server's port will need to be changed. If it's required to use both on the same machine, port 443 should be assigned to GG, since this service is exposed to the application end-user.
 
 ### Should the oxd server be installed on the machine with Gluu Gateway or the Gluu Server?
-The oxd server is the OIDC Client that sends requests to the OP server. Gluu Gateway acts as the relying party, so oxd should be installed on the Gluu Gateway machine. The oxd server can be installed as an option during the Gluu Gateway installation and setup. Check [the docs](https://gluu.org/docs/oxd/4.0/) for more details about oxd. 
+The oxd server is the OIDC Client that sends requests to the OP server. Gluu Gateway acts as the relying party, so oxd should be installed on the Gluu Gateway machine. The oxd server can be installed as an option during the Gluu Gateway installation and setup. Check [the docs](https://gluu.org/docs/oxd/4.1/) for more details about oxd. 
 
 ### Where can I get more information about Kong Service and Route configuration?
 Check the [Kong 2.0.x docs about proxy configuration](https://docs.konghq.com/2.0.x/proxy/).

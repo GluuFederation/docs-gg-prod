@@ -126,7 +126,7 @@ Below is a sample:
    }
    ```
 
-Sample OPA Policy Example is [here](https://github.com/GluuFederation/gluu-gateway/blob/version_4.0/t/specs/gluu-opa-pep/policy.rego)
+Sample OPA Policy Example is [here](https://github.com/GluuFederation/gluu-gateway/blob/version_4.1/t/specs/gluu-opa-pep/policy.rego)
 
 ## Configuration
 

@@ -14,7 +14,7 @@ An OAuth Client is required to add a consumer in Kong. This is the same client t
 
 1. Using Gluu Server oxTrust. Navigate to `OpenID Connect` > `Clients` > `+ Add Client`.
 
-1. Using oxd `/register-site` endpoint. [More Details](https://gluu.org/docs/oxd/4.0/api/#register-site)
+1. Using oxd `/register-site` endpoint. [More Details](https://gluu.org/docs/oxd/4.1/api/#register-site)
 
 1. Using GG UI. Navigate to `Consumers` > `+ Create Client`. It creates a client with the `client_credentials` grant type.
 

@@ -21,9 +21,9 @@ The following flow diagram shows the step-by-step activities performed by the ac
 
 ## Requirements
 
-- Gluu Gateway 4.0: This is our UMA Resource Server (RS), where policies are enforced, a.k.a. Policy Enforcement Point (PEP). [Install Gluu Gateway](../installation.md). [OXD Server](https://gluu.org/docs/oxd/4.0/) is a static APIs web application which will install during GG installation.
+- Gluu Gateway 4.1: This is our UMA Resource Server (RS), where policies are enforced, a.k.a. Policy Enforcement Point (PEP). [Install Gluu Gateway](../installation.md). [OXD Server](https://gluu.org/docs/oxd/4.1/) is a static APIs web application which will install during GG installation.
 
-- Gluu Server 4.0: This is our UMA Authorization Server (AS), where policies are stored and evaluated, a.k.a. the Policy Decision Point (PDP). [Install Gluu](https://gluu.org/docs/ce/4.0/installation-guide/install-ubuntu/)
+- Gluu Server 4.1: This is our UMA Authorization Server (AS), where policies are stored and evaluated, a.k.a. the Policy Decision Point (PDP). [Install Gluu](https://gluu.org/docs/ce/4.1/installation-guide/install-ubuntu/)
 
 - Python CGI script demo app: This is our UMA Requesting Party (RqP), which will be making authentication and authorization requests on behalf of the user. Installation instructions [below](#demo-app-configuration-rqp)
 
@@ -284,5 +284,5 @@ Below are the steps performed by the Demo Application(Requesting Party).
       ```
       
 !!! Info
-    You can make policy without claim flow and just check requests and return true and false. For Example, You can pass the id token as a push claim token, check the values in UMA Policy script and return true to allow and false to deny. In this case, there is no **need_info** response and no claim gathering process. Check [Gluu UMA Docs here](https://gluu.org/docs/ce/4.0/admin-guide/uma/) for more details. <br/> For none claim gathering, you need to set `host_with_claims` and request url of demo will be `<your-server.com>/cgi-bin/index.py` without `?claim=true`.
+    You can make policy without claim flow and just check requests and return true and false. For Example, You can pass the id token as a push claim token, check the values in UMA Policy script and return true to allow and false to deny. In this case, there is no **need_info** response and no claim gathering process. Check [Gluu UMA Docs here](https://gluu.org/docs/ce/4.1/admin-guide/uma/) for more details. <br/> For none claim gathering, you need to set `host_with_claims` and request url of demo will be `<your-server.com>/cgi-bin/index.py` without `?claim=true`.
 
