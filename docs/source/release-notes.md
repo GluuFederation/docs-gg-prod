@@ -1,12 +1,12 @@
 ## Notice
 
-This document, also known as the Gluu Gateway Release Note, relates to the Gluu Gateway Release versioned 4.0.x. The work is licensed under the “[Gluu Support License](https://raw.githubusercontent.com/GluuFederation/gluu-gateway/master/LICENSE)” allowing the use, copy, modify, merge, publish, distribute, sub-license and sale without limitation and liability, provided the end-user person or organization using this software has an active support subscription for this software with either Gluu or one of Gluu's OEM partners after using the software for more than 30 days. This document extends only to the aforementioned release version in the heading.  
+This document, also known as the Gluu Gateway Release Note, relates to the Gluu Gateway Release versioned 4.1.x. The work is licensed under the “[Gluu Support License](https://raw.githubusercontent.com/GluuFederation/gluu-gateway/master/LICENSE)” allowing the use, copy, modify, merge, publish, distribute, sub-license and sale without limitation and liability, provided the end-user person or organization using this software has an active support subscription for this software with either Gluu or one of Gluu's OEM partners after using the software for more than 30 days. This document extends only to the aforementioned release version in the heading.  
 
 UNLESS IT HAS BEEN EXPRESSLY AGREED UPON BY ANY WRITTEN AGREEMENT BEFOREHAND, THE WORK/RELEASE IS PROVIDED “AS IS”, WITHOUT ANY WARRANTY OR GUARANTEE OF ANY KIND EXPRESS OR IMPLIED. UNDER NO CIRCUMSTANCE, THE AUTHOR, OR GLUU SHALL BE LIABLE FOR ANY CLAIMS OR DAMAGES CAUSED DIRECTLY OR INDIRECTLY TO ANY PROPERTY OR LIFE WHILE INSTALLING OR USING THE RELEASE.  
 
 ## Purpose
 
-The document is released with Version 4.0.x of the Gluu Gateway Software. The purpose of this document is list changes made and new features included in this release. The list is not exhaustive and there might be some omission of negligible issues, but the noteworthy features, enhancements and fixes are covered.  
+The document is released with Version 4.1.x of the Gluu Gateway Software. The purpose of this document is list changes made and new features included in this release. The list is not exhaustive and there might be some omission of negligible issues, but the noteworthy features, enhancements and fixes are covered.  
 
 ## Background
 
@@ -16,50 +16,34 @@ Gluu Gateway is an API Gateway which leverages the [Gluu Server](https://gluu.or
 
 Please visit the [Gluu Gateway docs](./index.md) for more complete documentation.   
  
-## Gluu Gateway 4.0
+## Gluu Gateway 4.1
 
-There are major changes in GG 4.0. Plugins have been de-coupled and separated in to two categories: authentication and authorization. In addition, two new plugins have been added: `gluu-openid-connect` and `gluu-opa-pep`.  
-
-A description of our plugins follows: 
-
-| Plugin | Description | 
-|--------|-------------|
-|**gluu-oauth-auth**| Authenticate client by OAuth Token|
-|**gluu-uma-auth**| Authenticate client by RPT|
-|**gluu-openid-connect**| Authenticate client by OIDC code flow|
-|**gluu-oauth-pep**| Authorization by OAuth token scopes|
-|**gluu-opa-pep**| Authorization plugin for [Open Policy Agent](https://www.openpolicyagent.org/)|
-|**gluu-uma-pep**| Authorization by UMA Scope security|
-|**gluu-metics**| Metrics about client authentication, authorization and others|
-
-### New Features
-- [#360](https://github.com/GluuFederation/gluu-gateway/issues/360) : Convert plugins to Kong 1.3
-- [#363](https://github.com/GluuFederation/gluu-gateway/issues/363) : Make a new GG 4.0 package with latest Kong 1.3
-- [#359](https://github.com/GluuFederation/gluu-gateway/issues/359) : Update Admin UI with Kong 1.3
-- [#283](https://github.com/GluuFederation/gluu-gateway/issues/283): New `gluu-openid-connect` plugin with UMA claim gathering support 
-- [#320](https://github.com/GluuFederation/gluu-gateway/issues/320) : Make new Open Policy Agent plugin `gluu-opa-pep`
-- [#317](https://github.com/GluuFederation/gluu-gateway/issues/317) : Support Phantom Token Flow
-- [#324](https://github.com/GluuFederation/gluu-gateway/issues/324) : GG UI - Add OPA plugin configuration in GG Admin Console
-- [#322](https://github.com/GluuFederation/gluu-gateway/issues/322) : GG UI - Update UI for phantom token configuration
-- [#296](https://github.com/GluuFederation/gluu-gateway/issues/296) : GG UI - OpenID Connect plugin configuration
-- [#345](https://github.com/GluuFederation/gluu-gateway/issues/345) : URL based Stepped up authentication in OIDC plugin
-- [#349](https://github.com/GluuFederation/gluu-gateway/issues/349) : Design GG UI for URL based Stepped up authentication feature in OIDC plugin
-- [#381](https://github.com/GluuFederation/gluu-gateway/issues/381) : Add Custom header map configuration for OAuth and UMA plugins as well
-- [#373](https://github.com/GluuFederation/gluu-gateway/issues/373) : Map Userinfo and id_token claims to HTTP headers 
-- [#379](https://github.com/GluuFederation/gluu-gateway/issues/379) : Make Oauth2 client Kong consumer mapping optional
-- [#370](https://github.com/GluuFederation/gluu-gateway/issues/370) : OpenID plugin configuration for UMA access control: Push UserInfo token
-- [#390](https://github.com/GluuFederation/gluu-gateway/issues/390) : Maintain access_token in user session, gluu-openid-connect
+The most important update in Gluu Gateway 4.1 is the upgrade from Kong 1.3 to 2.0. Additionally, several improvements have been made to metrics and access tokens.
 
 ### Changes
-- [#297](https://github.com/GluuFederation/gluu-gateway/issues/297) : Decouple existing gluu-uma-pep. Now there are two separate plugins 1. gluu-uma-auth 2. gluu-uma-pep.
-- [#298](https://github.com/GluuFederation/gluu-gateway/issues/298) : Decouple existing gluu-oauth-pep. Now there are two separate plugins 1. gluu-oauth-auth 2. gluu-oauth-pep.
-- [#328](https://github.com/GluuFederation/gluu-gateway/issues/328) : Collect more metrics about all plugins
-- [#336](https://github.com/GluuFederation/gluu-gateway/issues/336) : GG UI: Remove extra API for plugin config
-- [#325](https://github.com/GluuFederation/gluu-gateway/issues/325) : Usage and metrics tracking
-- [#384](https://github.com/GluuFederation/gluu-gateway/issues/384) : gluu-metrics gluu_prometheus_server_host DNS resolution and architectural issues
-- [#418](https://github.com/GluuFederation/gluu-gateway/issues/418) : resty/hmac.lua throwing error in kong 1.5 and Bump Kong version to 2.0.0
+- [#420](https://github.com/GluuFederation/gluu-gateway/issues/420) Kong 2.0
+- [#418](https://github.com/GluuFederation/gluu-gateway/issues/418) resty/hmac.lua throwing error in kong 1.5
+- [#416](https://github.com/GluuFederation/gluu-gateway/issues/416) Bump Kong to 1.5.0
+- [#417](https://github.com/GluuFederation/gluu-gateway/issues/417) bump Kong to 1.5.0
+- [#342](https://github.com/GluuFederation/gluu-gateway/issues/342) Update Grafana configuration and make reports
+- [#411](https://github.com/GluuFederation/gluu-gateway/issues/411) One bug in gluu-metrics plugin
+- [#370](https://github.com/GluuFederation/gluu-gateway/issues/370) OpenID plugin configuration for UMA access control: Push UserInfo token
+- [#402](https://github.com/GluuFederation/gluu-gateway/issues/402) Update submodule oxd-web-lua
+- [#403](https://github.com/GluuFederation/gluu-gateway/issues/403) update oxdweb to latest master
+- [#400](https://github.com/GluuFederation/gluu-gateway/issues/400) inactive oxd access token
+- [#399](https://github.com/GluuFederation/gluu-gateway/issues/399) add ability to run test suite against any docker image
+- [#396](https://github.com/GluuFederation/gluu-gateway/issues/396) write a script to run our test suite against an image from Dockerhub
+- [#382](https://github.com/GluuFederation/gluu-gateway/issues/382) Map access_token to HTTP header in OIDC plugin, Default: off
+- [#273](https://github.com/GluuFederation/gluu-gateway/issues/273) Add unsupported JWT signing algorithms
+- [#394](https://github.com/GluuFederation/gluu-gateway/issues/394) lua folder structure, custom headers, OpenId Connect access tokens
+- [#390](https://github.com/GluuFederation/gluu-gateway/issues/390) Maintain access_token in user session, gluu-openid-connect
+- [#392](https://github.com/GluuFederation/gluu-gateway/issues/392) Refactor Lua code folder structure
+- [#381](https://github.com/GluuFederation/gluu-gateway/issues/381) Add Custom header map configuration for OAuth and UMA plugins as well
+- [#393](https://github.com/GluuFederation/gluu-gateway/issues/393) Farther GG repo decomposition
+- [#377](https://github.com/GluuFederation/gluu-gateway/issues/377) Refactor test suite to use GG docker image
+- [#373](https://github.com/GluuFederation/gluu-gateway/issues/373) Map Userinfo and id_token claims to HTTPS headers
+- [#379](https://github.com/GluuFederation/gluu-gateway/issues/379) Make Oauth2 client Kong consumer mapping optional
+- [#365](https://github.com/GluuFederation/gluu-gateway/issues/365) GG Lua deps and plugins archive
+- [#376](https://github.com/GluuFederation/gluu-gateway/issues/376) Update setup script to remove daos.lua for safe kong db migration
 
-### Bug Fix
-- [#411](https://github.com/GluuFederation/gluu-gateway/issues/411) : Bug in gluu-metrics plugin 
-- [#400](https://github.com/GluuFederation/gluu-gateway/issues/400) : Inactive oxd access token
 
