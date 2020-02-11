@@ -40,6 +40,8 @@ The `gluu-gateway` service is used to manage all GG components, including the Ad
     |ggVersion|It shows the Gluu Gateway version|
     |explicitHost|Used to define the Gluu Gateway GUI host explicitly. It by default listens to localhost only for security. You can set it with global IP to access GUI globally.|
     |postgresVersion| Postgres DB Version |
+    |ggUIRedirectURLHost|It is used to set the redirect url and logout redirect url for GG UI Client login/logout request.|
+    |ggHost|It is your GG Kong Gateway Host. It is useful for plugin configuration.|
 
     GUI is in `sailsjs-v0.12` node js framework. For more detail configuration take a look on [sailjs documentation](https://0.12.sailsjs.com/documentation/reference/configuration).
 
