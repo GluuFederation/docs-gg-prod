@@ -46,7 +46,7 @@ In order to generate an UMA token, follow these steps:
 1. Send an `uma-rp-get-rpt` request with Consumer `oxd_id`, the ticket from Step 1 and the access token from Step 2.  
 
 ### How can I change the listening address and port for GG UI?
-By default, Gluu Gateway UI listens to localhost only, but you can change it manually by configuring the `local.js` config file using the [Configuration doc](./configuration.md#admin-gui-portal-konga). You just need to update the `explicitHost` to your global IP or remove this attribute. Read more about the configuration [here](https://0.12.sailsjs.com/documentation/reference/configuration/sails-config).
+By default, Gluu Gateway UI listens to localhost only, but you can change it manually by configuring the `local.js` config file using the [Configuration doc](./configuration.md#admin-gui-portal-konga). You just need to update the `explicitHost` to your global IP and `ggUIRedirectURLHost` with your Host name.
  
  
 If you require any further support, please open a ticket on the [Gluu support portal](https://support.gluu.org).
