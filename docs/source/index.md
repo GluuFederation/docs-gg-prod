@@ -1,4 +1,4 @@
-# Gluu Gateway 4.0.x
+# Gluu Gateway 4.1.x
 
 ## Overview
 
@@ -40,11 +40,11 @@ Gluu Gateway includes the following components.
 
 - [Kong CE v2.0.0](https://konghq.com/community/): An open source API Gateway and Microservices Management Layer, delivering high performance and reliability. We are using Kong Community edition version 2.0 here. 
 
-- [Gluu Admin UI](https://github.com/GluuFederation/gluu-gateway/tree/version_4.0/konga): A web administration portal, based on the [Konga](https://github.com/pantsel/konga) GUI, to manage your Gluu Gateway configurations.
+- [Gluu Admin UI](https://github.com/GluuFederation/gluu-gateway/tree/version_4.1/konga): A web administration portal, based on the [Konga](https://github.com/pantsel/konga) GUI, to manage your Gluu Gateway configurations.
 
-- [Gluu Gateway plugins](https://github.com/GluuFederation/gluu-gateway/tree/version_4.0/kong/plugins): Plugins that leverage the Gluu Server for central client management and to control access to upstream APIs using OAuth 2.0 and UMA 2.0.
+- [Gluu Gateway plugins](https://github.com/GluuFederation/gluu-gateway/tree/version_4.1/kong/plugins): Plugins that leverage the Gluu Server for central client management and to control access to upstream APIs using OAuth 2.0 and UMA 2.0.
 
-- [oxd Server v4.1](https://www.gluu.org/docs/oxd/4.0): Middleware server for OpenID, OAuth, and UMA client communication with an associated OAuth Authorization Server, typically an instance of the Gluu Server. Gluu-gateway uses oxd server endpoints to communicate with OP Server.
+- [oxd Server v4.1](https://www.gluu.org/docs/oxd/4.1): Middleware server for OpenID, OAuth, and UMA client communication with an associated OAuth Authorization Server, typically an instance of the Gluu Server. Gluu-gateway uses oxd server endpoints to communicate with OP Server.
 
 - Others: The following runtime environment is required by the Gluu Gateway package:
     - OpenJDK v8
@@ -110,7 +110,7 @@ The following sections explain the numbered points in the diagram:
     Instead, you can directly use the [Kong Admin APIs](https://docs.konghq.com/2.0.x/admin-api/) to configure the Kong's Services, Routes, Consumers and Plugins. You can find API descriptions in the [Kong Docs](https://docs.konghq.com/2.0.x/admin-api/) and [GG plugins docs](./plugin/gluu-openid-connect-uma-pep.md) for Gluu plugins configuration API.
 
 1. The UI uses the oxd server to manage the OP Client
-    The UI uses the [oxd server](https://gluu.org/docs/oxd/4.0/) endpoint during plugin configuration to create and manage the OpenID Connect Client.
+    The UI uses the [oxd server](https://gluu.org/docs/oxd/) endpoint during plugin configuration to create and manage the OpenID Connect Client.
 
 1. Upstream API/Web Application registration
     The Upstream Service is the Rest API/Web application to protect using Kong and the plugins, as discussed in point 1, above. The Kong Service is the object where the Upstream Application is registered. You can register multiple upstream applications. As shown in diagram, there are three different upstream applications registered in Kong. Upstream Apps should be locally hosted and not publically accessible. However, the Kong proxy endpoint should be opened for end-users or client applications. Check the [Services](./admin-guide/services-routes-config/) and [Routes](./admin-guide/services-routes-config/) docs for upstream application registration in Kong.
@@ -122,7 +122,7 @@ The following sections explain the numbered points in the diagram:
     
 1. Client Application requests a token using the oxd server
     The client application sends a request to the application endpoint (i.e. the Kong proxy endpoint :443). The admin has to provide the OP Client's `client_id` and `client_secret` to the client application for it to use these credentials to get the OAuth token and send a request to access registered resources in GG.
-    The client application can use the oxd server endpoint to get the token. In this case, it needs to use the [oxd server endpoints](https://gluu.org/docs/oxd/4.0/api/).
+    The client application can use the oxd server endpoint to get the token. In this case, it needs to use the [oxd server endpoints](https://gluu.org/docs/oxd/4.1/api/).
 
 1. Client Application request for Token directly to OP server endpoints
     This is same as the previous step, but this time the client application directly communicates with the OP server using `client_id` and `client_secret` to get tokens.
@@ -131,7 +131,7 @@ The following sections explain the numbered points in the diagram:
     Now the token is with the client application. It will send a request to the Kong proxy endpoint with the token in the `authorization` header. 
 
 1. Kong executes the configured plugins
-    At this point, Kong executes all configured plugins and uses the oxd server to validate the token with the OP Server. Using the `OAuth Plugin`, for example, the plugin uses the [`/introspect-access-token`](https://gluu.org/docs/oxd/4.0/api/#introspect-access-token) endpoint to validate the token.
+    At this point, Kong executes all configured plugins and uses the oxd server to validate the token with the OP Server. Using the `OAuth Plugin`, for example, the plugin uses the [`/introspect-access-token`](https://gluu.org/docs/oxd/4.1/api/#introspect-access-token) endpoint to validate the token.
 
 1. The oxd server sends a request to the OP Server
     The oxd server sends a request to the OP server for authentication and authorization. Using the `OAuth Plugin`, for example, the oxd server sends a request to the OP server's introspection endpoint to validate the token.
