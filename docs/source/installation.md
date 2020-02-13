@@ -312,4 +312,4 @@ Choose one of the following three options:
     ```
 
 !!! Info
-    To remove all other GGs sub components, use `apt-get purge gluu-gateway kong* postgresql-* oxd-server*`
+    To remove all other GGs sub components, use `apt-get purge gluu-gateway kong* postgresql-* oxd-server* node*`
