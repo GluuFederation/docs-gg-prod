@@ -194,7 +194,7 @@ yum install gluu-gateway
     If you are behind the corporate proxy, you need to export `HTTP_PROXY`, `HTTPS_PROXY`. [More details](https://github.com/GluuFederation/gluu-gateway/issues/352)
 
 ```
-cd /opt/gluu-gateway/setup
+cd /opt/gluu-gateway-setup
 ```
 
 ```
