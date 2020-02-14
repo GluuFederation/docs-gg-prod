@@ -109,9 +109,6 @@ To enable UMA Policy, configure the following settings inside your Gluu Server U
      
 This completes the configuration. Next, request the Kong proxy at `https://<your_host>/settings/` in the browser. As per my configuration, I am requesting `https://dev1.gluu.org/settings/`.
 
-!!! Important
-    The request should be `/settings/` not a `/settings`. Look [here](../../plugin/common-features/#dynamic-resource-protection) for more detail about dynamic path registration.
-
 ## Authentication
 
 1. Once you request to kong proxy, the plugin will redirect you to your OP side.
