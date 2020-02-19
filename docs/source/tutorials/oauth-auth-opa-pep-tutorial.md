@@ -151,7 +151,7 @@ Follow these steps to make a **new OP Client** and **consumer** using GG UI:
 
 ![oauth-demo6.png](../img/oauth-demo6.png)
 
-- Click on the `+ CREATE CLIENT` button and add `client_id` in the `Gluu Client Id`.
+- Click on the `+ CREATE CONSUMER` button and add `client_id` in the `Gluu Client Id`.
 
 ![oauth-demo7.png](../img/oauth-demo7.png)
 
