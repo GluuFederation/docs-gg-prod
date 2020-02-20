@@ -22,11 +22,13 @@ For OpenID Connect Authorization Code flow, we are integrating the [AppAuthJS](h
 
 ### Create OP Client
 
-OP Client for your angular client application which request for resources. This same client will be used to configure Gluu Gateway Kong consumer.
+OP Client for your angular client application which request for resources. This same client will be used to configure Gluu Gateway Kong consumer and in angular client.
 
 1. Open Gluu CE oxTrust(Admin GUI).
 
 2. Navigate to `Configuration > OpenID Connect > Clients > Add Client` and fill the details as below screenshot.
+
+3. Make sure to set `Authentication method for the Token Endpoint: none`. In Frontend AppAuth JS is not support token endpoint authentication method. which is safe because its prevent to share `client_secret` publicly. We don't need to use `client_secret` in angular app.
 
 ![angular-demo-12.png](../img/angular-demo-12.png)
 
@@ -50,13 +52,11 @@ Gluu Server has great feature where you can add custom logic to modify the respo
 
 1. Navigate to `Configuration > Manage Custom Script > Introspection`
 
-1. We have demo script. Copy the introspection script [here](https://raw.githubusercontent.com/GluuFederation/gluu-gateway-setup/version_4.1/gg-demo/introspection_script.py) and replace it in `Script` field and `enable` the `introspection_sample` script. You can add new script or update existing.
+1. We have demo script. Copy the introspection script from [here](https://raw.githubusercontent.com/GluuFederation/gluu-gateway-setup/version_4.1/gg-demo/introspection_script.py) and replace it in `Script` field and `enable` the `introspection_sample` script. You can add new script or update existing.
 
 ![angular-demo-10.png](../img/angular-demo-10.png)
 
-## Gluu Gateway configuration (RP)
-
-Let's first register the resources in Gluu Gateway.
+## Gluu Gateway configuration
 
 In this demo, we are going to register and protect the resources using `gluu-oauth-auth` and `gluu-oauth-pep` plugin. We will register the `/company/??` path with the scope expression i.e. role base rules.     
 
@@ -79,7 +79,7 @@ Log in to the Gluu Gateway Admin GUI(:1338) and follow the below steps.
 
 Register the upstream website as a Service.
 
-This demo uses [`http://localhost:3000`](https://github.com/GluuFederation/gluu-gateway-setup/tree/version_4.1/gg-demo/node-api-2) as the Upstream Website, the application where Gluu Gateway security added.
+This demo uses [`http://localhost:3000`](https://github.com/GluuFederation/gluu-gateway-setup/tree/version_4.1/gg-demo/node-api-2) as the Upstream Website, the application which will be protected by Gluu Gateway security.
 
 Follow these step to add a Service using GG UI
  
@@ -103,7 +103,7 @@ Follow these steps to add a route:
 
 - Fill in the following boxes:
      - **Name:** test-api, you can give any name here.
-     - **Hosts:** `<your-server-host>`, `Tip: Press Enter to accept value`. This is the host of your gluu gateway proxy. This is the host that will be requested in the browser after configuration. I have install GG on my server `gluu.local.org`. The rest of the tutorial will use `gluu.local.org` as an example, replace it with your host. Check the [Kong docs](https://docs.konghq.com/2.0.x/proxy/#routes-and-matching-capabilities) for more routing capabilities.
+     - **Hosts:** `<your-server-host>`, `Tip: Press Enter to accept value`. This is the host of your gluu gateway proxy. This is the host that will be requested in the angular app. I have install GG on my server `gluu.local.org`. The rest of the tutorial will use `gluu.local.org` as an example, replace it with your host. Check the [Kong docs](https://docs.konghq.com/2.0.x/proxy/#routes-and-matching-capabilities) for more routing capabilities.
   
 ![angular-demo2](../img/angular-demo-2.png)
 
@@ -111,12 +111,16 @@ Follow these steps to add a route:
 
 #### Gluu OAuth Auth and PEP
 
+Follow these steps to add a `gluu-oauth-auth` and `gluu-oauth-pep` plugin:
+
 - Click `ROUTES` on the left panel
 - Click on the `route id/name` with `gluu.local.org` as the host
 - Click on `Plugins`
 - Click on `+ ADD PLUGIN` button
 - You will see `Gluu OAuth Auth and PEP` title and `+` icon in pop-up.
-- Click on the `+` icon and it will show the below form. Add the ACR expression as in the below screenshots.
+- Click on the `+` icon and it will show the below form. Add the ACR expression as in the below screenshots. 
+
+    In below ACR expression `/company/??` path is protected. `HTTP GET` operation allow for both `user` and `admin`. `HTTP POST, PUT, PATCH, OPTIONS, DELETE` operation allow for only for `admin`.Check [here](../../plugin/gluu-oauth-auth-pep/#oauth-scope-expression) to make more complex ACR expression.
 
 ![angular-demo3](../img/angular-demo-3.png)
 
@@ -154,7 +158,7 @@ Follow these steps to make a **new OP Client** and **consumer** using GG UI:
 
 - Click `CONSUMERS` on the left panel in GG UI
 
-- Click on the `+ CREATE CONSUMER` button and add `client_id` in the `Gluu Client Id`. `client_id` is the id of the client which you have created in above steps. This is the same client which will be used by angular app.
+- Click on the `+ CREATE CONSUMER` button and add `client_id` in the `Gluu Client Id`. `client_id` is the id of the client which you have created in above Gluu oxTrust steps. This is the same client which will be used by angular app.
 
 ![oauth-demo7.png](../img/angular-demo-13.png)
 
@@ -167,6 +171,8 @@ You need `NodeJS >= 10.x.x` to setup Angular 8 App. Below are the steps to setup
 1. Download or clone the angular client code from [here](https://github.com/GluuFederation/angular-appauth-gg-role-security).
 
 1. `cd angular-appauth-gg-role-security`
+
+1. `npm install -g @angular/cli` to install angular cli which provide `ng` command. it helps to run angular app. I am using `Angular CLI: 8.3.6` version.
 
 1. `npm i`
 
@@ -189,7 +195,9 @@ You need `NodeJS >= 10.x.x` to setup Angular 8 App. Below are the steps to setup
 
 ## Authentication
 
-1. Run the angular app by `ng s` and hit the URL `http://localhost:4200` in browser. You will see the below screen.
+1. `cd angular-appauth-gg-role-security`
+
+1. Run the angular app by `ng s` command and hit the URL `http://localhost:4200` in browser. You will see the below screen.
 
       ![angular-demo-14.png](../img/angular-demo-14.png)
 
