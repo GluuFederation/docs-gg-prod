@@ -38,7 +38,7 @@ Primary use cases supported by Gluu Gateway include:
 
 Gluu Gateway includes the following components.
 
-- [Kong CE v2.0.0](https://konghq.com/community/): An open source API Gateway and Microservices Management Layer, delivering high performance and reliability. We are using Kong Community edition version 2.0 here. 
+- [Kong CE v2.0.1](https://konghq.com/community/): An open source API Gateway and Microservices Management Layer, delivering high performance and reliability. We are using Kong Community edition version 2.0 here. 
 
 - [Gluu Admin UI](https://github.com/GluuFederation/gluu-gateway/tree/version_4.1/konga): A web administration portal, based on the [Konga](https://github.com/pantsel/konga) GUI, to manage your Gluu Gateway configurations.
 

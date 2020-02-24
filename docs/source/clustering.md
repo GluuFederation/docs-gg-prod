@@ -62,7 +62,7 @@ Below are the 2 steps to setup the kong nodes.
 
 1. Ubuntu 16
     
-      - Download Kong 2.0.0 from [here](https://bintray.com/kong/kong-deb/download_file?file_path=kong-2.0.0.xenial.amd64.deb).
+      - Download Kong 2.0.1 from [here](https://bintray.com/kong/kong-deb/download_file?file_path=kong-2.0.1.xenial.amd64.deb).
       - 
         ```
         sudo apt-get update
@@ -72,7 +72,7 @@ Below are the 2 steps to setup the kong nodes.
       
 1. Ubuntu 18
     
-      - Download Kong 2.0.0 from [here](https://bintray.com/kong/kong-deb/download_file?file_path=kong-2.0.0.bionic.amd64.deb).
+      - Download Kong 2.0.1 from [here](https://bintray.com/kong/kong-deb/download_file?file_path=kong-2.0.1.bionic.amd64.deb).
       - 
         ```
         sudo apt-get update
@@ -82,7 +82,7 @@ Below are the 2 steps to setup the kong nodes.
 
 1. RHEL 7
   
-      - Download Kong 2.0.0 from [here](https://bintray.com/kong/kong-rpm/download_file?file_path=rhel/7/kong-2.0.0.rhel7.amd64.rpm)
+      - Download Kong 2.0.1 from [here](https://bintray.com/kong/kong-rpm/download_file?file_path=rhel/7/kong-2.0.1.rhel7.amd64.rpm)
       - 
         ```
         sudo yum install kong-*.rpm --nogpgcheck
@@ -90,7 +90,7 @@ Below are the 2 steps to setup the kong nodes.
 
 1. CentOS 7
 
-      - Download Kong 2.0.0 from [here](https://bintray.com/kong/kong-rpm/download_file?file_path=centos/7/kong-2.0.0.el7.amd64.rpm)
+      - Download Kong 2.0.1 from [here](https://bintray.com/kong/kong-rpm/download_file?file_path=centos/7/kong-2.0.1.el7.amd64.rpm)
       - 
         ```
         sudo yum install epel-release
