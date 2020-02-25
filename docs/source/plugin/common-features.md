@@ -38,6 +38,8 @@ The priority for the elements are:
 !!! Info
     You can use this elements to register more dynamic path for `required_acrs_expression` in [`gluu-openid-connect`](./gluu-openid-connect-uma-pep.md)
 
+!!! Warning
+    Multiple times `??` in path not supported.
 
 Examples: 
 
