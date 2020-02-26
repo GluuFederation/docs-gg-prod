@@ -56,6 +56,12 @@ Gluu Server has great feature where you can add custom logic to modify the respo
 
 ![angular-demo-10.png](../img/angular-demo-10.png)
 
+### Cors Settings
+
+In case if you face CORS problem to hit `/token` endpoint then you need to set `corsAllowedOrigins` with your origin name. For example: If your angular app is on `https://my-demo.com` then set `corsAllowedOrigins: my-demo.com`. Wildcard characters are not allowed. 
+
+To setup cors in oxTrust, navigate to `Login into oxTrust > JSON Configuration > oxAuth Configuration > corsAllowedOrigins`
+
 ## Gluu Gateway configuration
 
 In this demo, we are going to register and protect the resources using `gluu-oauth-auth` and `gluu-oauth-pep` plugin. We will register the `/company/??` path with the scope expression i.e. role base rules.     
@@ -144,7 +150,7 @@ Configuration is as below :
 - Click on the `route id/name` with `gluu.local.org` as the host
 - Click on `Plugins`
 - Click on `+ ADD PLUGIN` button
-- You will see `Cors` title and `+` icon in pop-up and fill detail as per below screenshot.
+- You will see `Cors` title and `+` icon in pop-up and fill detail as per below screenshot. If your angular app is on https then in origin field you need to enter value with https. For Example: If your angular app host on `https://gg-demo.com` then you need to set `https://gg-demo.com` in origin field.
 
 ![angular-demo-9.png](../img/angular-demo-9.png)
 
