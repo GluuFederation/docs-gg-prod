@@ -3,7 +3,7 @@ site_name: Gluu Gateway 1.0 Docs
 site_description: Documentation for Gluu Gateway
 
 # Copyright
-copyright: Copyright &copy; 2019, Gluu, Inc.
+copyright: Copyright &copy; 2020, Gluu, Inc.
 
 # Repository
 docs_dir: source
@@ -34,7 +34,8 @@ markdown_extensions:
 nav:
 - 'Versions':
     - '1.0': 'https://gluu.org/docs/gg/1.0/'
-    - '4.0 Beta': 'https://gluu.org/docs/gg/4.0/'    
+    - '4.1': 'https://gluu.org/docs/gg/4.1/'
+    - '4.0': 'https://gluu.org/docs/gg/4.0/'    
 - ' ': 'https://gluu.org'
 - ' ': 'https://gluu.org'
 - Home: 'index.md'
