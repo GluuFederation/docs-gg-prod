@@ -2,6 +2,9 @@
 
 Follow the below step to upgrade from 4.0 to 4.1.
 
+!!! Important
+    Upgrades should always be thoroughly scoped and tested on a development environment first.
+
 1. Take a backup of your `Kong` and `Konga` database. Use below command to export a Database.
 
       ```
@@ -48,10 +51,10 @@ Follow the below step to upgrade from 4.0 to 4.1.
       mv konga.sql kong.sql oxd_db.mv.db  /opt/gluu-gateway-setup/templates
       ```
 
-1. Download upgrade script from here and start installation by following command.
+1. [Download upgrade script from here](https://raw.githubusercontent.com/GluuFederation/gluu-gateway-setup/version_4.1/setup/gg-upgrade-4-0-to-4-1.py) and start installation by following command.
       
-      - When generate client question will ask, select `n` then it will prompt to ask oxd_id.
-      - you need to open new terminal, open `local.js` which you have take backup in step-2. Open it and copy past the oxd_id, client_id and client_secret.
+      - When `generate client` question will ask, select `n` then it will prompt to ask oxd_id.
+      - Open new terminal, open `local.js` which you have take backup in step-2. Open it and copy past the oxd_id, client_id and client_secret.
 
       ```
       cd /opt/gluu-gateway-setup/
