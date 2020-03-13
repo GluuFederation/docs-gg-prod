@@ -22,7 +22,7 @@ theme:
         accent: 'green'
     logo: 'gluu.jpg'
     favicon: 'favicon.ico'
-    
+
 # Tracking
 google_analytics:
   - 'UA-31008645-7'
@@ -46,10 +46,11 @@ nav:
 - ' ': 'https://gluu.org'
 - ' ': 'https://gluu.org'
 - Home: 'index.md'
-- Release Notes: 'release-notes.md' 
+- Release Notes: 'release-notes.md'
 - Installation Guide:
     - 'Installation' : 'installation.md'
     - 'Clustering' : 'clustering.md'
+    - 'Upgrade': 'upgrade.md'
 - Admin Guide:
     - 'Overview' :  'admin-guide/getting-started.md'
     - 'Configure Services and Routes': 'admin-guide/services-routes-config.md'
