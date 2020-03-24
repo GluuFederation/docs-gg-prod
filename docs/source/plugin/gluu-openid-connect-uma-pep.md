@@ -248,26 +248,31 @@ More Examples:
 
 ### Session Configuration
 
-Pluging uses [lua-resty-session](https://github.com/bungle/lua-resty-session#pluggable-storage-adapters) for user session management. It provides several pluggable storage adapter to store session. To set configuration, make one file with any name for example: `injected_http.conf` and save the configuration command in this config file.
+Pluging uses [lua-resty-session](https://github.com/bungle/lua-resty-session) for user session management. It provides several pluggable storage adapters to store session.
 
 | Adapter | Description | Configuration Command |
 |---------|-------------|---------------|
-|`cookie`|aka Client Side Cookie (this is the default adapter)|`set $session_storage cookie;`|
-|`shm`|aka Lua Shared Dictionary|`set $session_storage shm;`|
-|`memcache`|aka Memcached Storage Backend (thanks @zandbelt)|`set $session_storage memcache;`|
-|`redis`|aka Redis Backend|`set $session_storage redis;`|
+|`cookie`|Client Side Cookie (this is the default adapter)|`set $session_storage cookie;`|
+|`shm`|Lua Shared Dictionary|`set $session_storage shm;`|
+|`memcache`|Memcached Storage Backend|`set $session_storage memcache;`|
+|`redis`|Redis Backend|`set $session_storage redis;`|
+|`dshm`|DSHM Storage Adapter|`set $session_storage dshm;`|
 
-Include this file in `/etc/kong/kong.conf` with property `nginx_proxy_include=/etc/kong/injected_http.conf`. For Detail description check [here](https://github.com/bungle/lua-resty-session#pluggable-storage-adapters).
+With default cookie storage Cookie header starts from 4k size and it may be a problem for some web servers.
+Obviously Lua Shared Dictionary doesn't work for a cluster.
+Memcached/Redis/DSHM work well in distributed environment, but require some additional efforts.
+An admin has a choice to select and configure any storage.
+For detailed description check [here](https://github.com/bungle/lua-resty-session#pluggable-storage-adapters).
 
-#### Session in cluster
+To set configuration, we recommend make one file with any name for example: `/etc/kong/injected_http.conf` and save the configuration command in this config file. Include this file in `/etc/kong/kong.conf` using environment Kong variable `KONG_NGINX_PROXY_INCLUDE=/etc/kong/injected_http.conf`. Keep in mind that this config will be shared between all gluu-openid-connect plugins.
 
-If you are in cluster, you need to set same session secret for all the node. For this in the same `injected_http.conf` file on every node set session secret using `set $session_secret <your_secret>;`
+#### Session secret in cluster
 
-Final `injected_http.conf`
-
+If you are in cluster, you need to set same session secret for all nodes. Include the same `injected_http.conf` file on every node:
 ```
-set $session_storage cookie;
 set $session_secret <your_secret>;
+set $session_storage <your storage>;
+<storage configuration parameters>
 ```
 
 ## Usage
