@@ -246,6 +246,30 @@ More Examples:
 |`{name=userinfo.name}`|<ul><li>You have here only one field i.e. `name`</li><li>`context.getClaim("name")`</li></ul>|
 |`{path=request.get_path(), method=request.get_method(), headers=request.get_headers(), specific_header_host=request.get_header('Host')}`|<ul><li>`context.getClaim("path")`</li><li>`context.getClaim("method")`</li><li>`context.getClaim("headers").getString("host")` and etc in headers</li><li>`context.getClaim("specific_header_host")`</li></ul>|
 
+### Session Configuration
+
+Pluging uses [lua-resty-session](https://github.com/bungle/lua-resty-session#pluggable-storage-adapters) for user session management. It provides several pluggable storage adapter to store session. To set configuration, make one file with any name for example: `injected_http.conf` and save the configuration command in this config file.
+
+| Adapter | Description | Configuration Command |
+|---------|-------------|---------------|
+|`cookie`|aka Client Side Cookie (this is the default adapter)|`set $session_storage cookie;`|
+|`shm`|aka Lua Shared Dictionary|`set $session_storage shm;`|
+|`memcache`|aka Memcached Storage Backend (thanks @zandbelt)|`set $session_storage memcache;`|
+|`redis`|aka Redis Backend|`set $session_storage redis;`|
+
+Include this file in `/etc/kong/kong.conf` with property `nginx_proxy_include=/etc/kong/injected_http.conf`. For Detail description check [here](https://github.com/bungle/lua-resty-session#pluggable-storage-adapters).
+
+#### Session in cluster
+
+If you are in cluster, you need to set same session secret for all the node. For this in the same `injected_http.conf` file on every node set session secret using `set $session_secret <your_secret>;`
+
+Final `injected_http.conf`
+
+```
+set $session_storage cookie;
+set $session_secret <your_secret>;
+```
+
 ## Usage
 
 ### Security & Access Proxy
