@@ -258,13 +258,17 @@ Pluging uses [lua-resty-session](https://github.com/bungle/lua-resty-session) fo
 |`redis`|Redis Backend|`set $session_storage redis;`|
 |`dshm`|DSHM Storage Adapter|`set $session_storage dshm;`|
 
-With default cookie storage Cookie header starts from 4k size and it may be a problem for some web servers.
-Obviously Lua Shared Dictionary doesn't work for a cluster.
-Memcached/Redis/DSHM work well in distributed environment, but require some additional efforts.
-An admin has a choice to select and configure any storage.
-For detailed description check [here](https://github.com/bungle/lua-resty-session#pluggable-storage-adapters).
+Some important point:
 
-To set configuration, we recommend make one file with any name for example: `/etc/kong/injected_http.conf` and save the configuration command in this config file. Include this file in `/etc/kong/kong.conf` using environment Kong variable `KONG_NGINX_PROXY_INCLUDE=/etc/kong/injected_http.conf`. Keep in mind that this config will be shared between all gluu-openid-connect plugins.
+* With default cookie storage Cookie header starts from 4k size and it may be a problem for some web servers.
+
+* Obviously Lua Shared Dictionary doesn't work for a cluster.
+
+* Memcached/Redis/DSHM work well in distributed environment, but require some additional efforts.
+
+* An admin has a choice to select and configure any storage. For detailed description check [here](https://github.com/bungle/lua-resty-session#pluggable-storage-adapters).
+
+* To set configuration, we recommend make one file with any name for example: `/etc/kong/injected_http.conf` and save the configuration command in this config file. Include this file in `/etc/kong/kong.conf` using environment Kong variable `KONG_NGINX_PROXY_INCLUDE=/etc/kong/injected_http.conf`. Keep in mind that this config will be shared between all gluu-openid-connect plugins.
 
 #### Session secret in cluster
 
