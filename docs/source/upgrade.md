@@ -1,6 +1,6 @@
 # Upgrade 4.0 to 4.1
 
-Follow the below step to upgrade from 4.0 to 4.1.
+Follow these steps to upgrade from 4.0 to 4.1.
 
 !!! Important
     Upgrades should always be thoroughly scoped and tested on a development environment first.
