@@ -1,10 +1,12 @@
-# Kong DB Less Setup
+# Kong Databaseless Setup
 
-Kong has excellent db less setup where you don't need postgres database. You just need to save the configuration in configuration file, in YAML or JSON, using declarative configuration.
+## Overview 
 
-But there is one limitation, You cannot configure it via a GG UI Admin Panel. Kong has no API for DB Less configuration. You need to add all the details by your self in declarative configuration file. Also You need to manually create the OP Clients using the OXD `/register-client` endpoint and pass all the credential to plugin configuration.
+Kong has an excellent option to set it up without the Postgres database. You just need to save the configuration in configuration file, in YAML or JSON format, using declarative configuration.
 
-For Clustering you need to put same configuration on the all the nodes.
+Unfortunately, there is no Kong API for databaseless configuration, so it can't be set up using the GG UI Admin Panel. You need to add all the details by yourself in a declarative configuration file. Also you need to manually create the OP Clients using the oxd `/register-client` endpoint and pass all the credentials to plugin configuration.
+
+When clustering, the configuration in all nodes should be the same.
 
 ## Configuration
 
@@ -12,7 +14,7 @@ To use Kong in DB-less mode, set the `database` directive of kong.conf to `off`.
 
 ### Creating a Declarative Configuration File
 
-To load entities into DB-less Kong, we need a declarative configuration file. Run following command to create configuration file:
+To load entities into DB-less Kong, we need a declarative configuration file. Run the following command to create the configuration file:
 
 ```bash
 cd /etc/kong
@@ -21,9 +23,9 @@ touch kong.yml
 
 Let's configure the `gluu-oauth-auth` plugin with DB-Less mode.
 
-1. First Step is to you need to create a OP Client for `gluu-oauth-auth` plugin using the OXD `/register-site` endpoint.
-
-      You need two client one for `gluu-oauth-auth` plugin which responsible for introspect the token. Below is the request to create client using OXD Endpoint. It will return you `oxd_id`, `client_id` and `client_secret`. You need to use this configurations in `gluu-oauth-auth` plugin configuration.
+1. First, create two OP Clients for the `gluu-oauth-auth` plugin using the oxd `/register-site` endpoint.
+    
+    The first is for the `gluu-oauth-auth` plugin, which is responsible for introspecting the token. Below is the request to create a client using the oxd endpoint. It will return the `oxd_id`, `client_id` and `client_secret`. You need to use this configurations in the `gluu-oauth-auth` plugin configuration.
       
       ```bash
       curl -k -X POST https://<oxd_host>/register-site \
@@ -44,7 +46,7 @@ Let's configure the `gluu-oauth-auth` plugin with DB-Less mode.
           }'
       ```
       
-      Second client is for Kong Consumer. It will return `oxd_id`, `client_id` and `client_secret`. For 
+      The second client is for the Kong Consumer. It will return `oxd_id`, `client_id` and `client_secret`. 
 
       ```bash
       curl -k -X POST https://<your_oxd_host>/register-site \
@@ -65,7 +67,7 @@ Let's configure the `gluu-oauth-auth` plugin with DB-Less mode.
           }'
       ```
 
-1. Add the below JSON Configuration in your kong.yml file.
+1. Add the following JSON Configuration to the `kong.yml` file.
 
       ```json
       {
@@ -121,7 +123,7 @@ Let's configure the `gluu-oauth-auth` plugin with DB-Less mode.
 
       Set `kong.conf` with `declarative_config=/etc/kong/kong.yml`.
             
-3. Checking The Declarative Configuration File.
+3. Checking the Declarative Configuration File.
 
       ```bash
       sudo kong config -c /etc/kong/kong.conf parse /etc/kong/kong.yml
@@ -133,8 +135,8 @@ Let's configure the `gluu-oauth-auth` plugin with DB-Less mode.
       kong start
       ```
 
-After starting kong, you can see configuration in GG UI but you can't edit it. You always need to update the `kong.yml` file. 
+After starting Kong, you can see configuration in GG UI, but can't edit it. You always need to update the `kong.yml` file. 
 
-We configured the `gluu-oauth-auth` plugin like wise you can configure the all other plugins using `kong.yml`. In `Plugins` section, you can see the parameters for every plugin.
+In this example, we configured the `gluu-oauth-auth` plugin, and you can similarly configure the all other plugins using `kong.yml`. In the `Plugins` section, you can see the parameters for every plugin.
 
-Check kong docs [here](https://docs.konghq.com/2.0.x/db-less-and-declarative-config/) for more details about the Kong DB Less feature.
+Check the Kong docs [here](https://docs.konghq.com/2.0.x/db-less-and-declarative-config/) for more details about the Kong DB-less feature.
