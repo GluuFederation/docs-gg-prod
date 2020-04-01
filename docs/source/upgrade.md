@@ -43,7 +43,7 @@ Follow these steps to upgrade from 4.0 to 4.1.
       yum remove gluu-gateway kong nodejs oxd-server
       ```
 
-1. Install GG 4.1 by following details [here](./installation). Don't run the setup script. Follow the next step for upgrade.
+1. Install GG 4.1 by following details [here](../installation). Don't run the setup script. Follow the next step for upgrade.
 
 1. Move `konga.sql`, `kong.sql` and `oxd_db.mv.db` file to `/opt/gluu-gateway-setup/templates`
 
