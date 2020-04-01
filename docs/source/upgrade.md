@@ -5,14 +5,14 @@ Follow these steps to upgrade from 4.0 to 4.1.
 !!! Important
     Upgrades should always be thoroughly scoped and tested on a development environment first.
 
-1. Take a backup of your `Kong` and `Konga` database. Use the following command to export a Database.
+1. Take a backup of your `Kong` and `Konga` database. Use the following command to export a Database. Make sure your `postgresql` service is started. 
 
       ```
       pg_dump --dbname=postgresql://<user>:<password>@localhost:5432/konga > konga.sql
       pg_dump --dbname=postgresql://<user>:<password>@localhost:5432/kong > kong.sql
       ```
       
-      If you get `Ident authentication failed for user ...` problem then you need to update the file `/var/lib/pgsql/10/data/pg_hba.conf`. Set `host .. .. .. ident` to `host .. .. .. md5`.
+      If you get `Ident authentication failed for user ...` problem then you need to update the file `/var/lib/pgsql/10/data/pg_hba.conf`. Set `host .. .. .. ident` to `host .. .. .. md5`. After this change you need to restart the `service postgresql restart` service.
 
 1. Take a backup of `/opt/gluu-gateway/konga/config/local.js`, `/etc/kong/kong.conf` and `/opt/oxd-server/data/oxd_db.mv.db`. Run the following command.
 
