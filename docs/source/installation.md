@@ -151,6 +151,7 @@ rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-GLUU
 
 ```
 rpm -Uvh https://yum.postgresql.org/10/redhat/rhel-7-x86_64/pgdg-redhat-repo-latest.noarch.rpm
+```
 
 * Add the Node repo:
 
