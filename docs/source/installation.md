@@ -121,7 +121,7 @@ rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-GLUU
 * Add the PostgreSQL 10 repo:
 
 ```
-rpm -Uvh https://yum.postgresql.org/10/redhat/rhel-7-x86_64/pgdg-centos10-10-2.noarch.rpm
+rpm -Uvh https://yum.postgresql.org/10/redhat/rhel-7-x86_64/pgdg-redhat-repo-latest.noarch.rpm
 ```
 
 * Add the Node repo:
@@ -150,8 +150,7 @@ rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-GLUU
 * Add the PostgreSQL 10 repo:
 
 ```
-rpm -Uvh https://yum.postgresql.org/10/redhat/rhel-7-x86_64/pgdg-redhat10-10-2.noarch.rpm
-```
+rpm -Uvh https://yum.postgresql.org/10/redhat/rhel-7-x86_64/pgdg-redhat-repo-latest.noarch.rpm
 
 * Add the Node repo:
 
