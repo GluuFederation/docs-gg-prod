@@ -50,7 +50,7 @@ nav:
 - Installation Guide:
     - 'Installation' : 'installation.md'
     - 'Clustering' : 'clustering.md'
-    - 'DB Less Setup': 'db-less-setup.md'
+    - 'Databaseless Setup': 'db-less-setup.md'
     - 'Upgrade': 'upgrade.md'
 - Admin Guide:
     - 'Overview' :  'admin-guide/getting-started.md'

@@ -18,7 +18,7 @@ The `gluu-gateway` service is used to manage all GG components, including the Ad
 * Configure Konga by setting properties in the local.js file. This is used to set the port, oxd, OP and client settings.
 
     ```
-     /opt/gluu-gateway/konga/config/local.js
+     /opt/gluu-gateway-ui/config/local.js
     ```
 
     |Property|Description|

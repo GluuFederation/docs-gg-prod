@@ -196,6 +196,6 @@ There only two steps:
 
       ```
         curl -X GET https://<your_kong_proxy_host>/posts
-            --Header "Authorization: Bearer <YOUR_NEW_RPT>"
+            --Header "Authorization: Bearer <YOUR_NEW_OAUTH_TOKEN>"
             --Header "Host: oauth-demo.example.com"
       ```
