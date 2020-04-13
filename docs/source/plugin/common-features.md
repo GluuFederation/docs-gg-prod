@@ -41,7 +41,7 @@ The priority for the elements are:
 !!! Warning
     Multiple times `??` in path not supported.
 
-Examples: 
+### Examples
 
 Assume that all paths below are registered in one plugin:
 
@@ -57,6 +57,55 @@ Assume that all paths below are registered in one plugin:
 | `/path/{abc|xyz}/image.jpg` | <ul><li>/path/abc/image.jpg</li> <li>/path/xyz/image.jpg</li></ul> | |
 | `/users/?/{todos|photos}` | <ul><li>/users/123/todos</li> <li>/users/xxx/photos</li></ul> | |
 | `/users/?/{todos|photos}/?` | <ul><li>/users/123/todos/</li> <li>/users/123/todos/321</li> <li>/users/123/photos/321</li></ul> | |
+
+### Spontaneous scope
+
+Gluu Gateway and Gluu Server are now supports spontaneous scope. Sometime their is need for dynamic scope as per the request.
+ 
+**For example:** `/transactions/45` and `transactions/46`, you want to issue two diff scope `read: 45` and `read: 46` like wise for every dynamic protected resources, In this case spontaneous scope will help you. where you can issue the dynamic scope.
+
+Plugin supports the [PCRE regexp](https://en.wikipedia.org/wiki/Perl_Compatible_Regular_Expressions) for dynamic path and spontaneous scope registration. To map dynamic path value with scope, we recommended to use the `PCRE Capture Group names` for spontaneous scope registration.
+
+Usually we need that `spontaneous scope` match some path element, but it is not mandatory. The variable part of `protected path` may be detected as `path capture`. 2 types of our wildcard/regexp notation may catch path capture(s):
+
+- `?` single path element
+- `{<regexp)>}` - regexp path element. Regexp may contain **one or more PCRE capture group(s)**, otherwise the whole match is used as path capture.
+
+!!! Warning
+    Allowing multiple wildcard elements **??** is considered too wide and cannot be used as path capture.    
+
+**For example:** 
+
+The path `/posts/?/image/?` has two `path captures`. First `?` and Second `?`. then your spontaneous scope will be like `posts: (?P<PC1>.+)$` and `image: (?P<PC2>.+)$`. Here the `PC1` and `PC2` is the `Named Capture Group`. `PC` stand for `Path Capture`.  You can say the variable in the expression. It is just a name, you can give any name. Copy this expression `(?P<PC1>.+)$` and put it in online regexp tool [https://regex101.com](https://regex101.com). You will get idea how `PCRE Capture Group names` works.
+
+So `posts: (?P<PC1>.+)$` scope try to match with the first path capture `?` value and `posts: (?P<PC2>.+)$` scope try to match with the second path capture `?` value. 
+
+The real request path example `/posts/123/images/ps.jpg`. In order to access this page, the AT should be authorized with `posts:123abc` abd `images: 321cba` scope.
+
+#### OAuth Spontaneous scope workflow
+
+1. Register `spontaneous scope` in OAuth client for example: `posts: (?P<PC1>.+)$`.
+1. Request for spontaneous scope for example: `posts: 1234` which match the `spontaneous scope` regexp.
+1. Gluu CE persists `user: 1234` with some TLL.
+1. GG may introspect the Access Token and see a valid scope i.e. `user: 1234`.
+1. `gluu-oauth-pep` plugin  may be provisioned to match not only to fixed scopes, but also against SS regexp.
+
+### Examples
+
+| Path |Total Path Capture| Spontaneous Scope |
+|------|------------------|-------------------|
+|`/posts/?`|<ol><li>`?`</li></ol>|`posts: (?P<PC1>.+)$`|
+|`/posts/?/image/?`|<ol><li>`?`</li><li>`?`</li></ol>|`posts: (?P<PC1>.+)$` and `images: (?P<PC2>.+)$`|
+|`/users/??/?`|<ol><li>`?`</li></ol>|`posts: (?P<PC1>.+)$`|
+|`/images/?/{(.+)\.(jpg|png)}`|<ol><li>`?`</li><li>`(.+)`</li><li>`(jpg|png)`</li></ol>|`imgname: (?P<PC1>.+)$`, `imgname: (?P<PC2>.+)$` and `imgtype: (?P<PC3>.+)$`|
+
+The syntax of a PCRE is too rich, and in general it's not possible to build a match from a PCRE and some known named groups. We added some SS regexp limitations, for example:
+
+1. Only named capturing groups are allowed
+1. Only named capturing groups may contain variable characters parts
+1. Accepted capturing group names are from PC1 to PC9, it should be enough, one single digit simplify parsing a lot
+1. Capturing groups shouldn't be nested and recursive
+1. All special characters outside capturing groups should be escaped in accordance with PCRE rules
 
 ## Custom Headers
 
