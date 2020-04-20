@@ -76,15 +76,15 @@ Usually we need that `spontaneous scope` match some path element, but it is not 
 
 **For example:** 
 
-The path `/posts/?/image/?` has two `path captures`. First `?` and Second `?`. then your spontaneous scope will be like `posts: (?P<PC1>.+)$` and `image: (?P<PC2>.+)$`. Here the `PC1` and `PC2` is the `Named Capture Group`. `PC` stand for `Path Capture`.  You can say the variable in the expression. It is just a name, you can give any name. Copy this expression `(?P<PC1>.+)$` and put it in online regexp tool [https://regex101.com](https://regex101.com). You will get idea how `PCRE Capture Group names` works.
+The path `/posts/?/image/?` has two `path captures`. First `?` and Second `?`. then your spontaneous scope will be like `posts: (?<PC1>.+)$` and `image: (?<PC2>.+)$`. Here the `PC1` and `PC2` is the `Named Capture Group`. `PC` stand for `Path Capture`.  You can say the variable in the expression. Copy this expression `(?<PC1>.+)$` and put it in online regexp tool [https://regex101.com](https://regex101.com). You will get idea how `PCRE Capture Group names` works.
 
-So `posts: (?P<PC1>.+)$` scope try to match with the first path capture `?` value and `posts: (?P<PC2>.+)$` scope try to match with the second path capture `?` value. 
+So `posts: (?<PC1>.+)$` scope try to match with the first path capture `?` value and `posts: (?<PC2>.+)$` scope try to match with the second path capture `?` value. 
 
 The real request path example `/posts/123/images/ps.jpg`. In order to access this page, the AT should be authorized with `posts:123abc` abd `images: 321cba` scope.
 
 #### OAuth Spontaneous scope workflow
 
-1. Register `spontaneous scope` in OAuth client for example: `posts: (?P<PC1>.+)$`.
+1. Register `spontaneous scope` in OAuth client for example: `posts: (?<PC1>.+)$`.
 1. Request for spontaneous scope for example: `posts: 1234` which match the `spontaneous scope` regexp.
 1. Gluu CE persists `user: 1234` with some TLL.
 1. GG may introspect the Access Token and see a valid scope i.e. `user: 1234`.
@@ -94,16 +94,19 @@ The real request path example `/posts/123/images/ps.jpg`. In order to access thi
 
 | Path |Total Path Capture| Spontaneous Scope |
 |------|------------------|-------------------|
-|`/posts/?`|<ol><li>`?`</li></ol>|`posts: (?P<PC1>.+)$`|
-|`/posts/?/image/?`|<ol><li>`?`</li><li>`?`</li></ol>|`posts: (?P<PC1>.+)$` and `images: (?P<PC2>.+)$`|
-|`/users/??/?`|<ol><li>`?`</li></ol>|`posts: (?P<PC1>.+)$`|
-|`/images/?/{(.+)\.(jpg|png)}`|<ol><li>`?`</li><li>`(.+)`</li><li>`(jpg|png)`</li></ol>|`imgname: (?P<PC1>.+)$`, `imgname: (?P<PC2>.+)$` and `imgtype: (?P<PC3>.+)$`|
+|`/posts/?/??`|<ol><li>`?`</li></ol>|`posts: (?<PC1>.+)$`|
+|`/posts/?/image/?`|<ol><li>`?`</li><li>`?`</li></ol>|`posts: (?<PC1>.+)$` and `images: (?<PC2>.+)$`|
+|`/users/??/?`|<ol><li>`?`</li></ol>|`posts: (?<PC1>.+)$`|
+|`/images/?/{(.+)\.(jpg|png)}`|<ol><li>`?`</li><li>`(.+)`</li><li>`(jpg|png)`</li></ol>|`imgname: (?<PC1>.+)$`, `imgname: (?<PC2>.+)$` and `imgtype: (?<PC3>.+)$`|
+|`/??`|<ul><li style="color:green">No capture group</li></ul>|<ul><li style="color:green">Plugin checks all registered scopes. You can use spontaneous scope here too.</li></ul>|
+|`/comments/{\d\d\d}`|<ul><li style="color:green">No capture group</li></ul>|<ul><li style="color:green">Plugin use whole match. You can use spontaneous scope here too.</li></ul>|
+
 
 The syntax of a PCRE is too rich, and in general it's not possible to build a match from a PCRE and some known named groups. We added some SS regexp limitations, for example:
 
-1. Only named capturing groups are allowed
-1. Only named capturing groups may contain variable characters parts
-1. Accepted capturing group names are from PC1 to PC9, it should be enough, one single digit simplify parsing a lot
+1. Only `named capturing groups` are allowed
+1. Only `named capturing groups` may contain variable characters parts
+1. Accepted capturing group names are from `PC1` to `PC9`, it should be enough, one single digit simplify parsing a lot
 1. Capturing groups shouldn't be nested and recursive
 1. All special characters outside capturing groups should be escaped in accordance with PCRE rules
 
