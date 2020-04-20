@@ -29,6 +29,8 @@ An OAuth Client is required to add a consumer in Kong. This is the same client t
      | **RPT as JWT**(optional) |It will create client with `RPT as JWT:true`. It is used to return access token(RPT) as JWT. The Gluu UMA PEP plugin supports JWT RPT access tokens.|
      | **Token signing algorithm**(optional) | The default token signing algorithm for the client. It is used for both OAuth access tokens and UMA RPT tokens. Currently, plugins only support 3 algorithms: **RS256**, **RS384** and **RS512**.|
      | **Scope**|The scope for the OP Client. `uma_protection` is required in UMA(gluu-uma-auth plugin) authentication case. Note: Press Enter to accept a value.|
+     | **Allow Spontaneous Scope**|Used to configure client which Allow client to issue and register the spontaneous scope.|
+     | **Spontaneous Scope** |Used to add list of spontaneous scope. Which supports the PCRE regexp. Chech [here](../../plugin/common-features/#spontaneous-scope) for more details.|
 
 ## Add Kong Consumer
 
