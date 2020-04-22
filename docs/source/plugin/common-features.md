@@ -60,55 +60,194 @@ Assume that all paths below are registered in one plugin:
 
 ### Spontaneous scope
 
-Gluu Gateway and Gluu Server are now supports spontaneous scope. Sometime their is need for dynamic scope as per the request.
- 
-**For example:** `/transactions/45` and `transactions/46`, you want to issue two diff scope `read: 45` and `read: 46` like wise for every dynamic protected resources, In this case spontaneous scope will help you. where you can issue the dynamic scope.
+From version 4.2, Gluu Server supports OAuth2 [spontaneous scopes](https://gluu.org/docs/gluu-server/4.2/admin-guide/openid-connect/#spontaneous-scopes).
 
-Plugin supports the [PCRE regexp](https://en.wikipedia.org/wiki/Perl_Compatible_Regular_Expressions) for dynamic path and spontaneous scope registration. To map dynamic path value with scope, we recommended to use the `PCRE Capture Group names` for spontaneous scope registration.
 
-Usually we need that `spontaneous scope` match some path element, but it is not mandatory. The variable part of `protected path` may be detected as `path capture`. 2 types of our wildcard/regexp notation may catch path capture(s):
+#### OAuth2 client perspective
+
+1. A client may register spontaneous scopes templates as regular expression: `^transaction:.+$`.
+1. Later the client may request an access token with the scope which matches regexp above: `transaction:123asd`
+1. Gluu Server matches the scope to the template and persists the scope with some configured TTL, issue the access token to the client.
+1. Now client may use the access token to transaction-related requests to API.
+
+#### Spontaneous scope interception scripts
+
+Gluu Server may be configured with spontaneous scope interception script, which may allow/reject spontaneous scope request. OAuth2 client should always check the response to be sure that all requested scopes returned.
+
+#### Gluu Gateway spontaneous scope extension
+
+The `gluu-oauth-pep` plugin, which stands for Gluu OAuth2 Policy Enforcement Point, provides additional spontaneous scope related features.
+
+In [scope expression](https://gluu.org/docs/gg/plugin/gluu-oauth-auth-pep/#oauth-scope-expression) instead of static scopes, we may use scope templates in PCRE regex notation. For example:
+
+```JSON
+{
+  "path": "/posts/??",
+  "conditions": [{
+    "httpMethods": [
+      "GET",
+      "POST"
+    ],
+    "scope_expression": {
+      "rule": {
+        "and": [
+          {
+            "var": 0
+          }
+        ]
+      },
+      "data": [
+        "^posts:(.+)$"
+      ]
+    }
+  }]
+}
+```
+
+In order to access paths with `/posts` prefix we need ANY scope which matches `^posts:(.+)$` regex.
+
+#### Scopes to URI mapping
+
+The `gluu-oauth-pep` plugin is able to map the part(s) of request URI to spontaneous scopes. For this purposes, we introduce the Path Capture entity.
+
+The variable parts of `protected path` may be referred to as `path captures`. 2 types of our wildcard/regexp protected path notation may catch path capture(s):
 
 - `?` single path element
 - `{<regexp)>}` - regexp path element. Regexp may contain **one or more PCRE capture group(s)**, otherwise the whole match is used as path capture.
 
-!!! Warning
-    Allowing multiple wildcard elements **??** is considered too wide and cannot be used as path capture.    
+We believe that multiple wildcard elements ?? is too wide and our implementation doesn't catch path capture here.
 
-**For example:** 
+**For example**, the path `/todos/?/command/{^(\d\d\d)-([a-d]{4})$}` has 3 path captures. First `?` catches one and `{…}` catches 2 others that is `(\d\d\d)` and `([a-d]{4})` which is inside `(...)`. Copy and paste regexp expression inside `{}` to (https://regex101.com)[https://regex101.com/], you will get idea about capture groups.
 
-The path `/posts/?/image/?` has two `path captures`. First `?` and Second `?`. then your spontaneous scope will be like `posts: (?<PC1>.+)$` and `image: (?<PC2>.+)$`. Here the `PC1` and `PC2` is the `Named Capture Group`. `PC` stand for `Path Capture`.  You can say the variable in the expression. Copy this expression `(?<PC1>.+)$` and put it in online regexp tool [https://regex101.com](https://regex101.com). You will get idea how `PCRE Capture Group names` works.
+Upon `/todos/hh/command/123-abcd` request the plugin catches 3 path captures:
 
-So `posts: (?<PC1>.+)$` scope try to match with the first path capture `?` value and `posts: (?<PC2>.+)$` scope try to match with the second path capture `?` value. 
+1. `hh`
+1. `123`
+1. `abcd`
 
-The real request path example `/posts/123/images/ps.jpg`. In order to access this page, the AT should be authorized with `posts:123abc` abd `images: 321cba` scope.
+We may specify 3 spontaneous scopes templates in scope expression:
 
-#### OAuth Spontaneous scope workflow
+1. `^todos:(.+)$`
+1. `^command:(\d\d\d)$`
+1. `^subcommand:([a-d]{4})$`
 
-1. Register `spontaneous scope` in OAuth client for example: `posts: (?<PC1>.+)$`.
-1. Request for spontaneous scope for example: `posts: 1234` which match the `spontaneous scope` regexp.
-1. Gluu CE persists `user: 1234` with some TLL.
-1. GG may introspect the Access Token and see a valid scope i.e. `user: 1234`.
-1. `gluu-oauth-pep` plugin  may be provisioned to match not only to fixed scopes, but also against SS regexp.
+But we need some metadata on how to map path capture(s) to scope(s).
 
-### Examples
+We require that spontaneous scope in scope expressions follow the convention:
+
+1. Scope part which should match the path capture must be formed as PCRE named capturing group, `(?<group_name>...)` syntax is recommended.
+1. The names of such groups should be `PC1`, `PC2`, ..., `PC9`. We support up to nine path capture per protected path.
+
+Now we have enough metadata for mapping. For example:
+
+```JSON
+{
+  "path": "/todos/?/command/{^(\\d\\d\\d)-([a-d]{4})$}",
+  "conditions": [{
+    "httpMethods": [
+      "GET",
+      "POST"
+    ],
+    "scope_expression": {
+      "rule": {
+        "and": [
+          {
+            "var": 0
+          }
+        ]
+      },
+      "data": [
+        "^todos:(?<PC1>.+)$",
+        "^command:(?<PC2>\\d\\d\\d)$",
+        "^subcommand:(?<PC3>[a-d]{4})$",
+        "^profile:.+$",
+        "email"
+      ]
+    }
+  }]
+}
+```
+
+In order to access our API OAuth2 client needs to register spontaneous scopes:
+
+- `^todos:.+$`
+- `^command:\d\d\d$`
+- `^subcommand:[a-d]{4}$`
+- `^profile:.+$`
+
+You see that scopes to be registered are not obligated to contain capturing groups metadata. Gluu server has nothing to do with it. But for simplicity you may include it in registered scopes, Gluu server just ignores this:
+
+- `^todos:(?<PC1>.+$`
+- `^command:(?<PC2>\d\d\d)$`
+- `^subcommand:(?<PC3>[a-d]{4})$`
+- `^profile:.+$`
+
+Keep in mind that for different protected paths the same spontaneous scope may match a path capture with a different number, for example:
+
+```JSON
+[
+  {
+    "path": "/todos/?/command/{^(\\d\\d\\d)-([a-d]{4})$}",
+    "conditions": [{
+      "httpMethods": [
+        "GET",
+        "POST"
+      ],
+      "scope_expression": {
+        "rule": {
+          "and": [
+            {
+              "var": 0
+            }
+          ]
+        },
+        "data": [
+          "^todos:(?<PC1>.+)$",
+          "^command:(?<PC2>\\d\\d\\d)$",
+          "^subcommand:(?<PC3>[a-d]{4})$",
+          "^profile:.+$",
+          "email"
+        ]
+      }
+    }]
+  },
+  {
+    "path": "/command/{^(\\d\\d\\d)-([a-d]{4})$}",
+    "conditions": [{
+      "httpMethods": [
+        "GET",
+        "POST"
+      ],
+      "scope_expression": {
+        "rule": {
+          "and": [
+            {
+              "var": 0
+            }
+          ]
+        },
+        "data": [
+          "^command:(?<PC1>\\d\\d\\d)$",
+          "^subcommand:(?<PC2>[a-d]{4})$"
+        ]
+      }
+    }]
+  }
+]
+```
+
+So we recommend omitting named capturing groups metadata for Gluu server registration, It may reduce the number of registered scopes and avoid ambiguities.
+
+#### More examples
 
 | Path |Total Path Capture| Spontaneous Scope |
 |------|------------------|-------------------|
-|`/posts/?/??`|<ol><li>`?`</li></ol>|`posts: (?<PC1>.+)$`|
-|`/posts/?/image/?`|<ol><li>`?`</li><li>`?`</li></ol>|`posts: (?<PC1>.+)$` and `images: (?<PC2>.+)$`|
-|`/users/??/?`|<ol><li>`?`</li></ol>|`posts: (?<PC1>.+)$`|
-|`/images/?/{(.+)\.(jpg|png)}`|<ol><li>`?`</li><li>`(.+)`</li><li>`(jpg|png)`</li></ol>|`imgname: (?<PC1>.+)$`, `imgname: (?<PC2>.+)$` and `imgtype: (?<PC3>.+)$`|
+|`/posts/?/??`|<ol><li>`?`</li></ol>|<ol><li>`posts: (?<PC1>.+)$`</li></ol>|
+|`/posts/?/image/?`|<ol><li>`?`</li><li>`?`</li></ol>|<ol><li>`posts: (?<PC1>.+)$`</li><li>`images: (?<PC2>.+)$`</li></ol>|
+|`/users/??/?`|<ol><li>`?`</li></ol>|<ol><li>`users: (?<PC1>.+)$`</li></ol>|
+|`/images/?/{(.+)\.(jpg|png)}`|<ol><li>`?`</li><li>`(.+)`</li><li>`(jpg|png)`</li></ol>|<ol><li>`imgname: (?<PC1>.+)$`</li><li>`imgname: (?<PC2>.+)$`</li><li>`imgtype: (?<PC3>jpg|png)$`</li></ol>|
 |`/??`|<ul><li style="color:green">No capture group</li></ul>|<ul><li style="color:green">Plugin checks all registered scopes. You can use spontaneous scope here too.</li></ul>|
-|`/comments/{\d\d\d}`|<ul><li style="color:green">No capture group</li></ul>|<ul><li style="color:green">Plugin use whole match. You can use spontaneous scope here too.</li></ul>|
-
-
-The syntax of a PCRE is too rich, and in general it's not possible to build a match from a PCRE and some known named groups. We added some SS regexp limitations, for example:
-
-1. Only `named capturing groups` are allowed
-1. Only `named capturing groups` may contain variable characters parts
-1. Accepted capturing group names are from `PC1` to `PC9`, it should be enough, one single digit simplify parsing a lot
-1. Capturing groups shouldn't be nested and recursive
-1. All special characters outside capturing groups should be escaped in accordance with PCRE rules
+|`/comments/{\d\d\d}`|<ul><li style="color:green">No capture group but path capture is `{\d\d\d}`</li></ul>|<ul><li style="color:green">Plugin use whole match. You can use spontaneous scope here too.</li></ul>|
 
 ## Custom Headers
 
