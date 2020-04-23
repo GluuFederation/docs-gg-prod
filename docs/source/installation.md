@@ -193,11 +193,11 @@ yum install gluu-gateway
 !!! Info
     If you are behind the corporate proxy, you need to export `HTTP_PROXY`, `HTTPS_PROXY`. [More details](https://github.com/GluuFederation/gluu-gateway/issues/352)
 
-```
+```bash
 cd /opt/gluu-gateway-setup
 ```
 
-```
+```bash
 python setup-gluu-gateway.py
 ```
 
@@ -217,9 +217,8 @@ After acknowledging the Gluu Stepped-Up Support License, you will be prompted to
 | **Enter Email Address** | Used to generate web X.509 certificates |
 | **Password** | If you already have a postgres database password for user `postgres`, enter it here. Otherwise, enter a new password. |
 | **OP Server Host** | The hostname of the Gluu Server that will be used for OAuth 2.0 client credentials and access management. **Example**: your-op.server.com |
-| **Install OXD Server?** | If you choose Y(yes) then it will install fresh oxd server in your machine. If you choose N(No) then it will ask you next question `Enter your existing OXD server URL`, where you need to enter your existing oxd server URL. Check [here](https://gluu.org/docs/oxd/4.1/) for more details about oxd server. | 
-| **OXD Server URL** | If oxd is installed on a different hostname than Gluu Gateway, provide its URL. If not, enter the hostname for Gluu Gateway|
-| **Generate client credentials to call oxd-server API's?** | Register an OpenID Client for Konga, or enter existing client credentials manually. Take care about your Client at your OP server side; make sure to [extend this expiration date](https://www.gluu.org/docs/oxd/4.1/faq/#client-expires-how-can-i-avoid-it). It will create a client with the `openid`, `oxd`, `permission` and `username` scope. You need to enable all this scope for dynamic client registration so that it will include during client creation. In case if missing then you can add this scope after setup complete using [Gluu oxTrust UI](https://gluu.org/docs/ce/4.1/admin-guide/openid-connect/#dynamic-client-registration). If you enter existing client details, make sure your client in Redirect Login URIs and Post Logout Redirect URIs field has the value `https://localhost:1338`.|
+| **Enter OXD server URL** | Enter your OXD Server URL e.g. `https://oxd.server.com:8443`|
+| **Generate client credentials to call oxd-server API's?** | Register an OpenID Client for GG UI, or enter existing client credentials manually. Take care about your Client at your OP server side; make sure to [extend this expiration date](https://www.gluu.org/docs/oxd/4.1/faq/#client-expires-how-can-i-avoid-it). It will create a client with the `openid`, `oxd`, `permission` and `username` scope. You need to enable all this scope for dynamic client registration so that it will include during client creation. In case if missing then you can add this scope after setup complete using [Gluu oxTrust UI](https://gluu.org/docs/ce/4.1/admin-guide/openid-connect/#dynamic-client-registration). If you enter existing client details, make sure your client in Redirect Login URIs and Post Logout Redirect URIs field has the value `https://localhost:1338`.|
 | **OXD Id** | Used to manually set the oxd ID. |
 | **Client Id** | Used to manually set the client ID. |
 | **Client Secret** | Used to manually set the client secret. |
@@ -234,7 +233,7 @@ If you see the above message, it means the installation was successful. To log i
 
 At Linux terminal you can create the tunnel as:
 
-```
+```bash
 ssh -L 1338:localhost:1338 user@your_linux_host
 
 ```
