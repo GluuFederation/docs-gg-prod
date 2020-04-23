@@ -40,15 +40,11 @@ There are two approaches in Kong for configuration storage.
 
      You need to install Kong on every Node. Which will share the same Database and Configurations.
 
-2. **OXD-Server**
-
-     Kong(Plugins) uses the OXD-Server for every operation to communicate with OP Server. For OXD-Server clustering you need to deploy OXD-Server on every node and use the same `redis` for central data storage and access. For more details check [OXD redis setup](https://gluu.org/docs/oxd/4.1/configuration/redis/) docs. 
-     
-3. **GG UI**
+1. **GG UI**
 
      You need only `one UI` to configure Kong. In `DB-Less` mode, you only see the configurations. To update the configuration, you need to update the YAML Config file.   
 
-4. **Plugins**
+1. **Plugins**
 
      You can use any kong approach to store the configurations. In diagrams there is one `rate-limiting` plugin example. Which point to same `redis` server for data store, accsss and share between all the kong nodes.
 
