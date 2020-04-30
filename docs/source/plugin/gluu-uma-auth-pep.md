@@ -107,7 +107,7 @@ Clicking on the `+` icon will bring up the below form. Check [here](#parameters)
 #### Add Plugin using Kong API
 
 !!! Note
-    Use [OXD API](https://gluu.org/docs/oxd/4.1/) for [client registration](https://gluu.org/docs/oxd/4.1/api/#register-site).
+    Use [OXD API](https://gluu.org/docs/oxd/) for [client registration](https://gluu.org/docs/oxd/api/#register-site).
 
 Configuration for `gluu-uma-auth`. Check [here](#gluu-uma-auth) for parameter descriptions.
 
@@ -191,7 +191,7 @@ In some cases, there is a requirement that bearer token for outside of the netwo
 It is stringify json. It used to register the resources in a resource server. See more details in the [Gluu Server docs](https://gluu.org/docs/ce/admin-guide/uma/#scopes-expressions).
 
 !!! Important
-    GG UI registers the resources for you during plugin configuration. If you are using APIs, you need to register `client` and `resources` using [OXD APIs](https://gluu.org/docs/oxd/4.1/api). You don't need to pass stringify json during resource registration using OXD API. It is required only in the plugin configuration.
+    GG UI registers the resources for you during plugin configuration. If you are using APIs, you need to register `client` and `resources` using [OXD APIs](https://gluu.org/docs/oxd/api). You don't need to pass stringify json during resource registration using OXD API. It is required only in the plugin configuration.
 
 - `path`: it is your url which you want to protect. There is a regular expression facility for path configuration. Check [here](../common-features/#dynamic-resource-protection) for more dynamic path registration details.
     - `condition`: it is the array of conditions for the path where you can define acr values to the path. You can add multiple conditions with different Http Method.
@@ -299,4 +299,4 @@ This information can be used to implement additional logic. For example, use the
 
 1. [OpenID Connect Authentication and UMA PEP Authorization](/tutorials/oidc-uma-tutorial/)
 
-1. [Shell script for configuration and quick test](https://github.com/GluuFederation/gluu-gateway-setup/blob/version_4.1/scripts/run_tests.sh#L104)
+1. [Shell script for configuration and quick test](https://github.com/GluuFederation/gluu-gateway-setup/blob/version_4.2.0/scripts/run_tests.sh#L104)

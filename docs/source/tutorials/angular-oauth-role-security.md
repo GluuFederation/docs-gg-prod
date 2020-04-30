@@ -10,11 +10,11 @@ For OpenID Connect Authorization Code flow, we are integrating the [AppAuthJS](h
 
 ## Requirements
 
-- Gluu Server 4.1: This is our OpenID Connect Server (OP Server), from where Requesting(Relying) party issue the OAuth token with scopes. [Install Gluu](https://gluu.org/docs/ce/4.1/installation-guide/install-ubuntu/). You can use Gluu CE 4.0 also.
+- Gluu Server 4.2: This is our OpenID Connect Server (OP Server), from where Requesting(Relying) party issue the OAuth token with scopes. [Install Gluu](https://gluu.org/docs/ce/4.2/installation-guide/install-ubuntu/).
 
-- Gluu Gateway 4.1: This is our Resource Server (RS), where it checks the token first. In the second step, scope expressions are enforced, a.k.a. the Policy Enforcement Point (PEP) and check the scopes, whether the token has sufficient scopes or not to access resources, a.k.a. the Policy Decision Point (PDP). [Install Gluu Gateway Beta](https://github.com/GluuFederation/gluu-gateway/wiki/Installation-development-build). 
+- Gluu Gateway 4.2: This is our Resource Server (RS), where it checks the token first. In the second step, scope expressions are enforced, a.k.a. the Policy Enforcement Point (PEP) and check the scopes, whether the token has sufficient scopes or not to access resources, a.k.a. the Policy Decision Point (PDP). [Install Gluu Gateway Beta](https://github.com/GluuFederation/gluu-gateway/wiki/Installation-development-build). 
 
-- Protected Upstream(target or backend) APIs: In our demo, we are using a demo Node.js App, available [here](https://github.com/GluuFederation/gluu-gateway-setup/tree/version_4.1/gg-demo/node-api-2). You should have to deploy this app on Gluu-Gateway machine. 
+- Protected Upstream(target or backend) APIs: In our demo, we are using a demo Node.js App, available [here](https://github.com/GluuFederation/gluu-gateway-setup/tree/version_4.2.0/gg-demo/node-api-2). You should have to deploy this app on Gluu-Gateway machine. 
 
 - Angular Client: This is the client which request to protected resources. Please check below instruction for Angular Client project setup.
 
@@ -52,7 +52,7 @@ Gluu Server has great feature where you can add custom logic to modify the respo
 
 1. Navigate to `Configuration > Manage Custom Script > Introspection`
 
-1. We have demo script. Copy the introspection script from [here](https://raw.githubusercontent.com/GluuFederation/gluu-gateway-setup/version_4.1/gg-demo/introspection_script.py) and replace it in `Script` field and `enable` the `introspection_sample` script. You can add new script or update existing.
+1. We have demo script. Copy the introspection script from [here](https://raw.githubusercontent.com/GluuFederation/gluu-gateway-setup/version_4.2.0/gg-demo/introspection_script.py) and replace it in `Script` field and `enable` the `introspection_sample` script. You can add new script or update existing.
 
 ![angular-demo-10.png](../img/angular-demo-10.png)
 
@@ -85,7 +85,7 @@ Log in to the Gluu Gateway Admin GUI(:1338) and follow the below steps.
 
 Register the upstream website as a Service.
 
-This demo uses [`http://localhost:3000`](https://github.com/GluuFederation/gluu-gateway-setup/tree/version_4.1/gg-demo/node-api-2) as the Upstream Website, the application which will be protected by Gluu Gateway security.
+This demo uses [`http://localhost:3000`](https://github.com/GluuFederation/gluu-gateway-setup/tree/version_4.2.0/gg-demo/node-api-2) as the Upstream Website, the application which will be protected by Gluu Gateway security.
 
 Follow these step to add a Service using GG UI
  

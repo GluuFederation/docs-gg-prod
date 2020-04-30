@@ -109,7 +109,7 @@ Clicking on the `+` icon will bring up the below form. Check [here](#parameters)
 #### Add Plugin using Kong API
 
 !!! Note
-    Use [OXD API](https://gluu.org/docs/oxd/4.1/) for [client registration](https://gluu.org/docs/oxd/4.1/api/#register-site).
+    Use [OXD API](https://gluu.org/docs/oxd/) for [client registration](https://gluu.org/docs/oxd/api/#register-site).
 
 Configuration for `gluu-oauth-auth`. Check [here](#gluu-oauth-auth) for parameter descriptions.
 
@@ -323,4 +323,4 @@ This information can be used to implement additional logic. For example, use the
 
 1. [OAuth API protection and Open Policy Agent policy security tutorial](/tutorials/oauth-auth-opa-pep-tutorial/)
 
-1. [Shell script for configuration and quick test](https://github.com/GluuFederation/gluu-gateway-setup/blob/version_4.1/scripts/run_tests.sh#L18)
+1. [Shell script for configuration and quick test](https://github.com/GluuFederation/gluu-gateway-setup/blob/version_4.2.0/scripts/run_tests.sh#L18)

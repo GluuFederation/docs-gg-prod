@@ -126,11 +126,11 @@ Below is a sample:
    }
    ```
 
-Sample OPA Policy Example is [here](https://github.com/GluuFederation/gluu-gateway/blob/version_4.1/t/specs/gluu-opa-pep/policy.rego)
+Sample OPA Policy Example is [here](https://github.com/GluuFederation/gluu-gateway/blob/version_4.2.0/t/specs/gluu-opa-pep/policy.rego)
 
 ## Configuration
 
-Plugins can be configured at the **Service**, **Route** or **Global** level. There are several possibilities for plugin configuration with services and routes. For information on plugin precedence, [read the Kong docs](https://docs.konghq.com/0.14.x/admin-api/#precedence).
+Plugins can be configured at the **Service**, **Route** or **Global** level. There are several possibilities for plugin configuration with services and routes. For information on plugin precedence, [read the Kong docs](https://docs.konghq.com/2.0.x/admin-api/#precedence).
 
 ### Service Level
 

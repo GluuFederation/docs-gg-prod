@@ -8,15 +8,15 @@ In the demo, we will protect `/posts` api with `read` oauth scope. Plugin will c
 
 ## Requirements
 
-- Gluu Gateway 4.1: This is our Resource Server (RS), where it checks the token first. In the second step, scope expressions are enforced, a.k.a. the Policy Enforcement Point (PEP). 
+- Gluu Gateway 4.2: This is our Resource Server (RS), where it checks the token first. In the second step, scope expressions are enforced, a.k.a. the Policy Enforcement Point (PEP). 
 
 - Open Policy Agent(OPA) Server: This is policy server. It executes the policy and check whether the token has sufficient scopes or not to access resources, a.k.a. the Policy Decision Point (PDP). Install OPA from [here](https://openpolicyagent.org) and add [below policy](#opa-policy). 
 
-- Gluu Server 4.1: This is our OpenID Connect Server (OP Server), from where Requesting(Relying) party issue the OAuth token with scopes. [Install Gluu](https://gluu.org/docs/ce/4.1/installation-guide/install-ubuntu/)
+- Gluu Server 4.2: This is our OpenID Connect Server (OP Server), from where Requesting(Relying) party issue the OAuth token with scopes. [Install Gluu](https://gluu.org/docs/ce/4.2/installation-guide/install-ubuntu/)
 
 - Python Script demo app: This is our Requesting Party (RqP), which will be making authentication and authorization requests on behalf of the user. Installation instructions [below](#demo-app-configuration-rqp)
 
-- Protected(Upstream) API: In our demo, we are using a demo Node.js App. Take Node.js demo from [here](https://github.com/GluuFederation/gluu-gateway-setup/tree/version_4.1/gg-demo/node-api). 
+- Protected(Upstream) API: In our demo, we are using a demo Node.js App. Take Node.js demo from [here](https://github.com/GluuFederation/gluu-gateway-setup/tree/version_4.2.0/gg-demo/node-api). 
 
 ## OPA Policy
 
@@ -76,7 +76,7 @@ Login into Gluu Gateway Admin GUI(:1338) and follow the below steps.
 
 Register your upstream API as a Service.
 
-We are using [`http://localhost:3000`](https://github.com/GluuFederation/gluu-gateway-setup/tree/version_4.1/gg-demo/node-api) as the Upstream API, it is your application where you want to add security.
+We are using [`http://localhost:3000`](https://github.com/GluuFederation/gluu-gateway-setup/tree/version_4.2.0/gg-demo/node-api) as the Upstream API, it is your application where you want to add security.
 
 Follow these step to add Service using GG UI
  
@@ -157,7 +157,7 @@ Follow these steps to make a **new OP Client** and **consumer** using GG UI:
 
 ## Demo app configuration (RqP) 
 
-The demo app is a Python script. There is only one file. Download the `oauth-opa-demo.py` from the [GG repository here](https://github.com/GluuFederation/gluu-gateway/blob/version_4.1/gg-demo/oauth-opa-demo.py). 
+The demo app is a Python script. There is only one file. Download the `oauth-opa-demo.py` from the [GG repository here](https://github.com/GluuFederation/gluu-gateway/blob/version_4.2.0/gg-demo/oauth-opa-demo.py). 
 
 Run `oauth-opa-demo.py` file using the below command.
 

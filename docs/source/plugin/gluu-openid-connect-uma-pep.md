@@ -303,4 +303,4 @@ Check [here](../common-features/#custom-headers) to setup custom headers.
 
 1. [OpenID Connect Authentication and OPA PEP Authorization Tutorial](/tutorials/oidc-opa-tutorial/)
 
-1. [Shell script for configuration and quick test](https://github.com/GluuFederation/gluu-gateway-setup/blob/version_4.1/scripts/run_tests.sh#L191)
+1. [Shell script for configuration and quick test](https://github.com/GluuFederation/gluu-gateway-setup/blob/version_4.2.0/scripts/run_tests.sh#L191)

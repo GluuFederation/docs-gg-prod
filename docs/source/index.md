@@ -44,8 +44,6 @@ Gluu Gateway includes the following components.
 
 - [Gluu Gateway plugins](https://github.com/GluuFederation/gluu-gateway/tree/version_4.1/kong/plugins): Plugins that leverage the Gluu Server for central client management and to control access to upstream APIs using OAuth 2.0 and UMA 2.0.
 
-- [oxd Server v4.1](https://www.gluu.org/docs/oxd/4.1): Middleware server for OpenID, OAuth, and UMA client communication with an associated OAuth Authorization Server, typically an instance of the Gluu Server. Gluu-gateway uses oxd server endpoints to communicate with OP Server.
-
 - Others: The following runtime environment is required by the Gluu Gateway package:
     - OpenJDK v8
     - Python v2.x
@@ -55,7 +53,9 @@ Gluu Gateway includes the following components.
     
 ## Dependencies 
 
-- To support OAuth2, UMA and OpenID Connect use cases, GG requires an external [Gluu Server Authorization Server](https://gluu.org/). 
+- To support OAuth2, UMA and OpenID Connect use cases, GG requires an external [Gluu Server Authorization Server 4.2](https://gluu.org/). 
+
+- [OXD Server 4.2](https://www.gluu.org/docs/oxd): Middleware server for OpenID, OAuth, and UMA client communication with an associated OAuth Authorization Server, typically an instance of the Gluu Server. Gluu-gateway uses oxd server endpoints to communicate with OP Server.
 
 - To support OPA use cases, GG requires an external [OPA Policy Engine](https://gluu.org/). 
 

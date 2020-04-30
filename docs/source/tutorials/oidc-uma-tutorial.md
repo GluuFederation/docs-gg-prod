@@ -11,11 +11,11 @@ In the demo, the user will first be **authenticated by OpenID Connect** and for 
 
 ## Requirements
 
-- Gluu Gateway 4.1: This is our an OpenID Connect relying party(RP) between the client and the upstream service. [Install Gluu Gateway](../installation.md). [OXD Server](https://gluu.org/docs/oxd/4.1/) is a static APIs web application which will install during GG installation.
+- Gluu Gateway 4.2.0: This is our an OpenID Connect relying party(RP) between the client and the upstream service. [Install Gluu Gateway](../installation.md). [OXD Server](https://gluu.org/docs/oxd/4.2.0/) is a static APIs web application which will install during GG installation.
 
-- Gluu Server 4.1: This is our OpenID Connect Server. [Install Gluu](https://gluu.org/docs/ce/4.1/installation-guide/install-ubuntu/)
+- Gluu Server 4.2.0: This is our OpenID Connect Server. [Install Gluu](https://gluu.org/docs/ce/4.2/installation-guide/install-ubuntu/)
 
-- Protected(Upstream) Website: In our demo, we are using a demo Node.js App. Take Node.js demo from [here](https://github.com/GluuFederation/gluu-gateway-setup/tree/version_4.1/gg-demo/node-ejs). 
+- Protected(Upstream) Website: In our demo, we are using a demo Node.js App. Take Node.js demo from [here](https://github.com/GluuFederation/gluu-gateway-setup/tree/version_4.2.0/gg-demo/node-ejs). 
 
     
 ## Gluu Gateway configuration (RP)
@@ -39,7 +39,7 @@ Login into Gluu Gateway Admin GUI(:1338) and follow the below steps.
 
 Register your upstream website as a Service.
 
-We are using [`http://localhost:4400`](https://github.com/GluuFederation/gluu-gateway-setup/tree/version_4.1/gg-demo/node-ejs) as the Upstream Website, it is your application where you want to add OpenID Connect Authentication. End-users always request to first kong proxy, the plugin will perform authentication and if all is ok then kong will forward a request to the upstream website and serve content which is return by the upstream website.
+We are using [`http://localhost:4400`](https://github.com/GluuFederation/gluu-gateway-setup/tree/version_4.2.0/gg-demo/node-ejs) as the Upstream Website, it is your application where you want to add OpenID Connect Authentication. End-users always request to first kong proxy, the plugin will perform authentication and if all is ok then kong will forward a request to the upstream website and serve content which is return by the upstream website.
 
 Follow these step to add Service using GG UI
  

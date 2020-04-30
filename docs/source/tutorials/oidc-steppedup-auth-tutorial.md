@@ -10,11 +10,11 @@ It is fully configurable, you can add stepped-up authentication on multiple reso
 
 ## Requirements
 
-- Gluu Gateway 4.1: This is an OpenID Connect relying party(RP) between the client and the upstream service. [Install Gluu Gateway](../installation.md). The [oxd server](https://gluu.org/docs/oxd/4.1/) is a static API web application that will install during GG installation.
+- Gluu Gateway 4.2.0: This is an OpenID Connect relying party(RP) between the client and the upstream service. [Install Gluu Gateway](../installation.md). The [oxd server](https://gluu.org/docs/oxd/4.2.0/) is a static API web application that will install during GG installation.
 
-- [Gluu Server 4.1](https://gluu.org/docs/ce/4.1/installation-guide/install-ubuntu/)
+- [Gluu Server 4.2.0](https://gluu.org/docs/ce/4.2/installation-guide/install-ubuntu/)
 
-- Protected (Upstream) Website: In our demo, we are using a demo Node.js App, available [here](https://github.com/GluuFederation/gluu-gateway-setup/tree/version_4.1/gg-demo/node-ejs). 
+- Protected (Upstream) Website: In our demo, we are using a demo Node.js App, available [here](https://github.com/GluuFederation/gluu-gateway-setup/tree/version_4.2.0/gg-demo/node-ejs). 
 
 ## Gluu Server configuration (OpenID Connect Server)
    
@@ -51,7 +51,7 @@ Log in to the Gluu Gateway Admin GUI(:1338) and follow the below steps.
 
 Register the upstream website as a Service.
 
-This demo uses [`http://localhost:4400`](https://github.com/GluuFederation/gluu-gateway-setup/tree/version_4.1/gg-demo/node-ejs) as the Upstream Website, the application where OpenID Connect Authentication is added. End-users always request to the Kong proxy first, then the plugin performs authentication. If it's successful, Kong will forward the request to the upstream website and serve the content returned by the upstream website.
+This demo uses [`http://localhost:4400`](https://github.com/GluuFederation/gluu-gateway-setup/tree/version_4.2.0/gg-demo/node-ejs) as the Upstream Website, the application where OpenID Connect Authentication is added. End-users always request to the Kong proxy first, then the plugin performs authentication. If it's successful, Kong will forward the request to the upstream website and serve the content returned by the upstream website.
 
 Follow these step to add a Service using GG UI
  
