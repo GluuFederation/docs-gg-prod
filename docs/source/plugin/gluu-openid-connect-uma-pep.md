@@ -268,7 +268,7 @@ Some important point:
 
 * An admin has a choice to select and configure any storage. For detailed description check [here](https://github.com/bungle/lua-resty-session#pluggable-storage-adapters).
 
-* To set configuration, we recommend make one file with any name for example: `/etc/kong/injected_http.conf` and save the configuration command in this config file. Include this file in `/etc/kong/kong.conf` using environment Kong variable `KONG_NGINX_PROXY_INCLUDE=/etc/kong/injected_http.conf`. Keep in mind that this config will be shared between all gluu-openid-connect plugins.
+* To set configuration, we recommend make one file with any name for example: `/etc/kong/injected_http.conf` and save the configuration command in this config file. Include this file in `/etc/kong/kong.conf` using environment Kong variable `KONG_NGINX_PROXY_INCLUDE=/etc/kong/injected_http.conf` or you can add `nginx_proxy_include=/etc/kong/injected_http.conf` in kong.conf. Keep in mind that this config will be shared between all gluu-openid-connect plugins.
 
 #### Session secret in cluster
 
