@@ -1,5 +1,5 @@
 # Project Information
-site_name: Gluu Gateway 4.1 Docs
+site_name: Gluu Gateway 4.2 Docs
 site_description: Documentation for Gluu Gateway
 
 # Copyright
@@ -8,12 +8,12 @@ copyright: Copyright &copy; 2020, Gluu, Inc.
 # Repository
 docs_dir: source
 repo_url: https://github.com/GluuFederation/docs-gg-prod/
-edit_uri: edit/4.1/docs/source
+edit_uri: edit/4.2/docs/source
 repo_name: GluuFederation/docs-gg-prod
 
 # Configuration
 extra:
-    version: '4.1'
+    version: '4.2'
 theme:
     name: material
 #    custom_dir: 'theme'
@@ -40,9 +40,9 @@ markdown_extensions:
 # Navigation Menu
 nav:
 - 'Versions':
+    - '4.2': 'https://gluu.org/docs/gg/4.2'
     - '4.1': 'https://gluu.org/docs/gg/4.1'
     - '4.0': 'https://gluu.org/docs/gg/4.0/'
-    - '1.0': 'https://gluu.org/docs/gg/1.0/'
 - ' ': 'https://gluu.org'
 - ' ': 'https://gluu.org'
 - Home: 'index.md'
