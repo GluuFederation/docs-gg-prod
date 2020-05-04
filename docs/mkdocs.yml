@@ -73,6 +73,7 @@ nav:
     - '› Claim Gathering Authorization': 'tutorials/uma-claim-gathering-tutorial.md'
     - '› OpenID Connect Authentication and OPA PEP Authorization': 'tutorials/oidc-opa-tutorial.md'
     - '› OpenID Connect Authentication and UMA PEP Authorization': 'tutorials/oidc-uma-tutorial.md'
+    - '› OAuth Spontaneous Scope security': 'tutorials/oauth-spontaneous-scope-auth-pep-tutorial.md'
     - '› OAuth API protection and Scope security': 'tutorials/oauth-auth-pep-tutorial.md'
     - '› Angular OAuth Role Security': 'tutorials/angular-oauth-role-security.md'
 - 'FAQ' : 'faq.md'

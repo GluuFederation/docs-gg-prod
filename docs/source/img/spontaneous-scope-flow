@@ -1,0 +1,9 @@
+title OAuth2 client perspective flow
+
+Client->Gluu: A client register spontaneous \n scopes templates as regular expression: `^transaction:.+$`
+Client->Gluu: Later the client request an access token with the scope \n which matches regexp above: `transaction:123asd`
+Gluu->Client: Gluu Server matches the scope to the template and persists the scope\n with some configured TTL, issue the access token to the client: `transaction:123asd` 
+note over Client
+Now client can use the access token to 
+transaction-related requests to API.
+end note

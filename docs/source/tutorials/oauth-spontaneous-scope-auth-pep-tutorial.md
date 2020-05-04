@@ -1,10 +1,16 @@
-# OAuth API protection and OAuth scope security
+# OAuth Spontaneous scope and API Security
 
 ## Overview
 
-In this tutorial, we will use the [GLUU-OAuth-Auth](../plugin/gluu-oauth-auth-pep.md) and [GLUU-OAuth-PEP](../plugin/gluu-oauth-auth-pep.md) plugins to protect the APIs using OAuth token and check scope to authorize the request.  
+From version 4.2, Gluu Server supports OAuth2 [spontaneous scopes](https://gluu.org/docs/gluu-server/4.2/admin-guide/openid-connect/#spontaneous-scopes). 
 
-In the demo, we will protect `/posts/` api with `read` oauth scope. Plugin will check the request has token is active or not if true then check the scopes of the token. If a token has sufficient scope, the user is granted access. If not, access is denied. 
+**For example:** You have transaction API like `/transactions/45`, `transactions/46`, `transactions/n`, you want to issue OAuth scope `read: 45` and `read: 46` like wise for every resources, In this case spontaneous scope will help you. OP Client will be able to issue the scope as per request.
+
+Below flow diagram from OAuth OP Client Perspective:
+
+![ss-1](../img/ss-1.png)
+
+In this tutorial, we will use the [GLUU-OAuth-Auth](../plugin/gluu-oauth-auth-pep.md) and [GLUU-OAuth-PEP](../plugin/gluu-oauth-auth-pep.md) plugins to protect the APIs using OAuth token and check spontaneous scope to authorize the request.  
 
 ## Requirements
 
@@ -14,21 +20,7 @@ In the demo, we will protect `/posts/` api with `read` oauth scope. Plugin will 
 
 - Python Script demo app: This is our Requesting Party (RqP), which will be making authentication and authorization requests on behalf of the user. Installation instructions [below](#demo-app-configuration-rqp)
 
-- Protected(Upstream) API: In our demo, we are using a demo Node.js App. Take Node.js demo from [here](https://github.com/GluuFederation/gluu-gateway-setup/tree/version_4.2.0/gg-demo/node-api). 
-
-## Gluu Server configuration (OP Server)
-   
-We need to add `read` scope at OP server so we can add it to OP Client and later on we can issue token along with the `read` scope. To add `read` scope, configure the following settings inside your Gluu Server: 
-
-1. In oxTrust, navigate to `OpenID Connect` > `Scopes` 
-
-1. Click on the `+ Add Scope` button
-
-1. It will show the below form, Fill the `read` in display name and check the `Allow for dynamic registration` radio box.
-
-    ![oauth-demo4.png](../img/oauth-demo4.png)
-
-1. Click on the `Add` button 
+- Protected(Upstream) API: In our demo, we are using a demo Node.js App. Take Node.js demo from [here](https://github.com/GluuFederation/gluu-gateway-setup/tree/version_4.2.0/gg-demo/node-api-2). 
 
 ## Gluu Gateway configuration (RS)
 
@@ -51,7 +43,7 @@ Login into Gluu Gateway Admin GUI(:1338) and follow the below steps.
 
 Register your upstream API as a Service.
 
-We are using [`http://localhost:3000`](https://github.com/GluuFederation/gluu-gateway-setup/tree/version_4.2.0/gg-demo/node-api) as the Upstream API, it is your application where you want to add security.
+We are using [`http://localhost:3000`](https://github.com/GluuFederation/gluu-gateway-setup/tree/version_4.2.0/gg-demo/node-api-2) as the Upstream API, it is your application where you want to add security.
 
 Follow these step to add Service using GG UI
  
@@ -90,9 +82,9 @@ Configure Gluu-OAuth-Auth and Gluu-OAuth-PEP with OAuth scopes and resources. Fo
 
 - Click on the `+` of the title `Gluu OAuth Auth & PEP`
 
-- It will show the plugin configuration form. Click on `+ ADD PATH` and add `/posts/??` path, check `and` radio, `http methods` and `read` scope. Check [here](/plugin/gluu-oauth-auth-pep/#oauth-scope-expression) to add more complex dynamic path.
+- It will show the plugin configuration form. Click on `+ ADD PATH` and add `/transactions/?` path, check `and` radio, `http methods` and `^transactions:.+$` scope. Check [here](/plugin/gluu-oauth-auth-pep/#oauth-scope-expression) to add more complex dynamic path.
 
-![oauth-demo3.png](../img/oauth-demo3.png)
+![ss-2.png](../img/ss-2.png)
 
 - Click on the `Add Plugin` button at end of the page.
 
@@ -106,9 +98,11 @@ Follow these steps to make a **new OP Client** and **consumer** using GG UI:
 
 - Click on `+ CREATE CLIENT` button
 
-- Add `client name` and submit the form
+- Fill `^transactions:.+$` in spontaneous scope field and **press enter** to accept value.
 
-![oauth-demo5.png](../img/oauth-demo5.png)
+- Submit the form
+
+![ss-3.png](../img/ss-3.png)
 
 - It will create a client in your OP Server and show you all the client details. You need to copy all the details. let's call it **consumer_op_client** so it will help you in the next steps.
 
@@ -118,21 +112,25 @@ Follow these steps to make a **new OP Client** and **consumer** using GG UI:
 
 ![oauth-demo7.png](../img/oauth-demo7.png)
 
+You can also check in Gluu CE UI in client configuration. it will show the registered spontaneous scope.
+
+![ss-5.png](../img/ss-5.png)
+
 ## Demo app configuration (RqP) 
 
-The demo app is a Python script. There is only one file. Download the `oauth-demo.py` from the [GG repository here](https://github.com/GluuFederation/gluu-gateway-setup/blob/version_4.2.0/gg-demo/oauth-demo.py). 
+The demo app is a Python script. There is only one file. Download the `oauth-ss-demo.py` from the [GG repository here](https://github.com/GluuFederation/gluu-gateway-setup/blob/version_4.2.0/gg-demo/oauth-ss-demo.py). 
 
 Run `oauth-demo.py` file using the below command.
 
 ```
-$ python oauth-demo.py
+$ python oauth-ss-demo.py
 ```
 
-It will return the resource result i.e. the output of `/posts/` endpoint. If not then you need to check the response.
+It will return the resource result i.e. the output of `/transactions/123` endpoint. If not then you need to check the response.
 
 #### Configuration
 
-In `oauth-demo.py`, you need to set your configuration. Configuration details as below:
+In `oauth-ss-demo.py`, you need to set your configuration. Configuration details as below:
 
 | Config | Details |
 |--------|---------|
@@ -147,18 +145,20 @@ In `oauth-demo.py`, you need to set your configuration. Configuration details as
 
 There only two steps:
 
-1. Get the OAuth token. we protected the resource with just the `read` scope so we just need to request for a token with `read` scope.
+1. Get the OAuth token. we protected the resource with just the `transactions:123` scope so we just need to request for a token with `transactions:123` scope.
 
       ```
         curl -X POST https://<your_oxd_server_host>:8443/get-client-token
             --Header "Content-Type: application/json"
-            --data '{"client_id": "<CONSUMER_OP_CLIENT_ID>", "client_secret": "<CONSUMER_OP_CLIENT_SECRET>", "op_host": "<YOUR_OP_SERVER>", "scope":["read"]}'
+            --data '{"client_id": "<CONSUMER_OP_CLIENT_ID>", "client_secret": "<CONSUMER_OP_CLIENT_SECRET>", "op_host": "<YOUR_OP_SERVER>", "scope":["transactions:123"]}'
       ```
 
 1. Request resource with above token
 
       ```
-        curl -X GET https://<your_kong_proxy_host>/posts/1
+        curl -X GET https://<your_kong_proxy_host>/transactions/123
             --Header "Authorization: Bearer <ACCESS_TOKEN>"
             --Header "Host: oauth-demo.example.com"
       ```
+
+[Click here more details about GG Spontaneous scope configuration](../plugin/common-features.md#spontaneous-scope).
