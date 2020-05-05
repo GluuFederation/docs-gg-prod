@@ -10,7 +10,7 @@ Below are the following features available in `gluu-openid-connect` plugin:
 
 - User authentication using **OpenID Connect Authorization code flow** and `ID Token` verification.
 - Configurable `ID Token` based authentication user session. This setting used to configure user login session time.
-- Stepped-up authentication which is URL Based `acr_values` resource registration and configuration which forces a user to go through one more step to access the resources. For more details check [Gluu CE Docs](https://gluu.org/docs/ce/4.1/admin-guide/openid-connect/#authentication) for all available acr technique available in Gluu CE.
+- Stepped-up authentication which is URL Based `acr_values` resource registration and configuration which forces a user to go through one more step to access the resources. For more details check [Gluu CE Docs](https://gluu.org/docs/ce/admin-guide/openid-connect/#authentication) for all available acr technique available in Gluu CE.
 - `required_acrs_expression` feature where you have more control to authenticate the resources. You can easily add or remove the authentication on the register resources(URL Path).
 - Easy integration and communication with `gluu-uma-pep` plugin for user authorization i.e. `UMA Claim gathering`. You just need to add the `gluu-uma-pep`. 
 - Easy integration and communication with `gluu-opa-pep` plugin for user authorization. Check [`gluu-opa-pep`](../plugin/gluu-opa-pep.md) docs for more details.
@@ -80,7 +80,7 @@ This section is used to add the `gluu-uma-pep` plugin. Check [here](#uma-scope-e
 #### Configure Plugin using Kong Admin API
 
 !!! Note
-    Use [OXD API](https://gluu.org/docs/oxd/4.1/) for [client registration](https://gluu.org/docs/oxd/4.1/api/#register-site) and [UMA resource registration](https://gluu.org/docs/oxd/4.1/api/#uma-rs-protect-resources).
+    Use [OXD API](https://gluu.org/docs/oxd/) for [client registration](https://gluu.org/docs/oxd/api/#register-site) and [UMA resource registration](https://gluu.org/docs/oxd/api/#uma-rs-protect-resources).
 
 Configuration for `gluu-openid-connect` plugin. See [here](#gluu-openid-connect) all available parameters for plugin.
 
@@ -226,7 +226,7 @@ As per the above example,
 
 #### Configure Pushed Claims Lua Expression
 
-You can pass some more extra information to [UMA Policy](https://www.gluu.org/docs/ce/4.1/admin-guide/uma/#uma-rpt-authorization-policies) so that you can make more configurable authorization policy using UMA and UMA Policies. After OpenID Connect authentication, you can pass userinfo to UMA Policy for authorization. So `gluu-uma-pep` has facility to build a custom Push Claim token. It provides 3 environments
+You can pass some more extra information to [UMA Policy](https://www.gluu.org/docs/ce/admin-guide/uma/#uma-rpt-authorization-policies) so that you can make more configurable authorization policy using UMA and UMA Policies. After OpenID Connect authentication, you can pass userinfo to UMA Policy for authorization. So `gluu-uma-pep` has facility to build a custom Push Claim token. It provides 3 environments
 
 |Environments|Description| 
 |------------|-----------|
