@@ -278,6 +278,153 @@ set $session_secret <your_secret>;
 set $session_storage <your storage>;
 <storage configuration parameters>
 ```
+## DB-Less Configuration
+
+For DB-Less configuration you need `1 OP client`. You need to use OXD APIs to create OP Client.
+
+### Plugin Client
+
+This client will be used to configure the plugin.
+
+Below is the curl to create client:
+
+```bash
+curl -k -X POST https://<oxd_host>:8443/register-site \
+-d '{
+  "op_host":"<your_op_server_url>",
+  "oxd_url":"<your_oxd_url>",
+  "redirect_uris":["https://<gg_host>/callback"],
+  "client_name":"oidc-plugin-client",
+  "post_logout_redirect_uris":["https://<gg_host>/logout_redirect_uri"],
+  "scope":["openid","oxd","email","profile","uma_protection"],
+  "grant_types":["client_credentials","authorization_code","refresh_token"],
+  "claims_redirect_uri":["https://<gg_host>/claims_callback"]
+  }'
+```
+
+The `redirect_uris`, `post_logout_redirect_uris` and `claims_redirect_uri` is depende on your route configuration. As per below route configured there is only the host in route so in above `curl` request there is only `<gg_host>`. 
+
+If you have host and path in route e.g. `/auth` then you should have to add `<gg_host>/auth` in URIs, your configuration should be look like:
+
+```
+"redirect_uris":["https://<gg_host>/auth/callback"]
+"post_logout_redirect_uris":["https://<gg_host>/auth/logout_redirect_uri"]
+"claims_redirect_uri":["https://<gg_host>/auth/claims_callback"]
+```
+
+### Register the UMA resource
+
+If you want to configure the `gluu-uma-pep` plugin with `gluu-openid-connect` plugin then you also need to register UMA resources with Plugin OP Client.
+
+You need to first get AT using `/get-client-token` endpoint.
+
+```bash
+curl -k -X POST https://<your_oxd_host>:8443/get-client-token \
+-d '{
+  "op_host":"<your_op_server_url>",
+  "client_id":"<plugin_client_id>",
+  "client_secret":"<plugin_client_secret>",
+  "scope":["openid","oxd"]
+  }'
+```
+
+It will return AT token, you need to use this token in `/uma-rs-protect` request. Below is the `curl` for resource registration. We are registering `scope_expression`. Below is just a **example**. Please check [here](../plugin/gluu-uma-auth-pep.md/#uma-scope-expression) for more information about `scope_expression`.
+
+```bash
+curl -k -X POST https://ce-dev6.gluu.org:8443/uma-rs-protect \
+-H 'Authorization: Bearer <AT_Token>' \
+-d '{
+  "oxd_id":"40feebf4-cb18-4b9f-b815-a60ff9956ee5",
+  "resources":[{"path":"/settings/??","conditions":[{"httpMethods":["GET"],"scope_expression":{"rule":{"and":[{"var":0}]},"data":["with-claims"]}}]}]
+  }'
+```
+
+### Plugin configuration
+
+Below is the example of `kong.yml` with plugin configurations. For more details about plugin parameters chech [here](#parameters).
+
+`uma_scope_expression` is same as `resources` which you registered in `/uma-rs-protect`, it is only in JSON Stringify format.
+
+```json
+{
+  "_format_version": "1.1",
+  "routes": [
+    {
+      "hosts": [
+        "<your_host>"
+      ],
+      "name": "demo-route",
+      "service": "demo-service"
+    }
+  ],
+  "services": [
+    {
+      "name": "demo-service",
+      "url": "<your_upstream_app_url>"
+    }
+  ],
+  "plugins": [
+    {
+      "name": "gluu-openid-connect",
+      "route": "demo-route",
+      "config": {
+        "oxd_id": "<plugin_clients_oxd_id>",
+        "oxd_url": "https://<oxd_host>:8443",
+        "client_id": "<plugin_client_id>",
+        "client_secret": "<plugin_client_secret>",
+        "op_url": "<your_op_server_url>",
+        "authorization_redirect_path": "/callback", // as per route configuration
+        "logout_path": "/logout", // as per route configuration
+        "post_logout_redirect_path_or_url": "/logout_redirect_uri", // as per route configuration
+        "requested_scopes": [
+          "openid",
+          "oxd",
+          "email",
+          "profile",
+          "uma_protection"
+        ],
+        "required_acrs_expression": "[{\"path\":\"/users/??\",\"conditions\":[{\"httpMethods\":[\"?\"],\"required_acrs\":[\"otp\"],\"no_auth\":false}]},{\"path\":\"/??\",\"conditions\":[{\"httpMethods\":[\"?\"],\"required_acrs\":[\"simple_password_auth\"],\"no_auth\":false}]},{\"path\":\"/home\",\"conditions\":[{\"httpMethods\":[\"GET\"],\"no_auth\":true}]}]", // just example
+        "max_id_token_age": 3600,
+        "max_id_token_auth_age": 3600,
+        "custom_headers": [
+          {
+            "header_name": "http-kong-userinfo",
+            "value_lua_exp": "userinfo",
+            "format": "jwt",
+            "iterate": false,
+            "sep": " "
+          },
+          {
+            "header_name": "http-kong-id-token",
+            "value_lua_exp": "id_token",
+            "format": "jwt",
+            "iterate": false,
+            "sep": " "
+          }
+        ]
+      }
+    },
+    {
+      "name": "gluu-uma-pep",
+      "route": "demo-route",
+      "config": {
+        "oxd_id": "<plugin_clients_oxd_id>",
+        "oxd_url": "https://<oxd_host>:8443",
+        "client_id": "<plugin_client_id>",
+        "client_secret": "<plugin_client_secret>",
+        "op_url": "<your_op_server_url>",
+        "uma_scope_expression": "[{\"path\":\"/settings/??\",\"conditions\":[{\"httpMethods\":[\"GET\"],\"scope_expression\":{\"rule\":{\"and\":[{\"var\":0}]},\"data\":[\"with-claims\"]}}]}]", // just example
+        "deny_by_default": false,
+        "require_id_token": true,
+        "obtain_rpt": true,
+        "redirect_claim_gathering_url": true,
+        "claims_redirect_path": "/claims_callback", // as per route configuration
+        "pushed_claims_lua_exp": "{id_token=id_token,userinfo=userinfo}"
+      }
+    }
+  ]
+}
+```
 
 ## Usage
 
