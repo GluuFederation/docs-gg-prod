@@ -129,6 +129,7 @@ Here is a list of all the parameters which can be used in this plugin's configur
 |**max_id_token_age**||Maximum age of `id token` in seconds |
 |**max_id_token_auth_age**||Maximum authentication age of `id_token` in seconds |
 |**custom_headers**||Used to set the custom headers, which is passed to upstream service by kong after authentication. Check [here for more details](../common-features/#custom-headers)|
+|**restore_original_auth_params**|false|It use to Handle POST request after OpenID Connect authentication and redirects. Plugin store the request object and after auth plugin will redirect with the same POST requested parameters.|
 
 #### Dynamic URL Base ACRs stepped up authentication
 
@@ -334,7 +335,7 @@ It will return AT token, you need to use this token in `/uma-rs-protect` request
 curl -k -X POST https://ce-dev6.gluu.org:8443/uma-rs-protect \
 -H 'Authorization: Bearer <AT_Token>' \
 -d '{
-  "oxd_id":"40feebf4-cb18-4b9f-b815-a60ff9956ee5",
+  "oxd_id":"<plugin_client_oxd_id>",
   "resources":[{"path":"/settings/??","conditions":[{"httpMethods":["GET"],"scope_expression":{"rule":{"and":[{"var":0}]},"data":["with-claims"]}}]}]
   }'
 ```
@@ -344,6 +345,7 @@ curl -k -X POST https://ce-dev6.gluu.org:8443/uma-rs-protect \
 Below is the example of `kong.yml` with plugin configurations. For more details about plugin parameters chech [here](#parameters).
 
 `uma_scope_expression` is same as `resources` which you registered in `/uma-rs-protect`, it is only in JSON Stringify format.
+
 
 ```json
 {
@@ -373,6 +375,7 @@ Below is the example of `kong.yml` with plugin configurations. For more details 
         "client_id": "<plugin_client_id>",
         "client_secret": "<plugin_client_secret>",
         "op_url": "<your_op_server_url>",
+        "restore_original_auth_params": false,
         "authorization_redirect_path": "/callback", // as per route configuration
         "logout_path": "/logout", // as per route configuration
         "post_logout_redirect_path_or_url": "/logout_redirect_uri", // as per route configuration

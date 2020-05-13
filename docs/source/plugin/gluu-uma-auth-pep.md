@@ -248,6 +248,173 @@ JSON expression in string format(stringify json)
 
 There are 3 elements to make more dynamic path registration and protection. Check [here](../common-features/#dynamic-resource-protection) for more details.
 
+## DB-Less Configuration
+
+For DB-Less configuration you need `2 OP client`. You need to use OXD APIs to create OP Client.
+
+### Plugin Client
+
+This client will be used to configure the plugin. During runtime, It use by plugin to introspect the token.
+
+Below is the curl to create client:
+
+```bash
+curl -k -X POST https://<oxd_host>:8443/register-site \
+-d '{
+  "op_host":"https://<op_host>",
+  "redirect_uris":["https://client.example.com/cb"],
+  "client_name":"gluu-oauth-client",
+  "scope":["openid","oxd", "uma_protection"],
+  "grant_types":["client_credentials"]
+}'
+```
+
+### Register the UMA resource
+
+You also need to register UMA resources with Plugin OP Client which is for `gluu-uma-pep` plugin.
+
+You need to first get AT using `/get-client-token` endpoint.
+
+```bash
+curl -k -X POST https://<your_oxd_host>:8443/get-client-token \
+-d '{
+  "op_host":"<your_op_server_url>",
+  "client_id":"<plugin_client_id>",
+  "client_secret":"<plugin_client_secret>",
+  "scope":["openid","oxd"]
+  }'
+```
+
+It will return AT token, you need to use this token in `/uma-rs-protect` request. Below is the `curl` for resource registration. We are registering `scope_expression`. Below is just a **example**. Please check [here](../plugin/gluu-uma-auth-pep.md/#uma-scope-expression) for more information about `scope_expression`.
+
+```bash
+curl -k -X POST https://ce-dev6.gluu.org:8443/uma-rs-protect \
+-H 'Authorization: Bearer <AT_Token>' \
+-d '{
+  "oxd_id":"<plugin_client_oxd_id>",
+  "resources":[{"path":"/settings/??","conditions":[{"httpMethods":["GET"],"scope_expression":{"rule":{"and":[{"var":0}]},"data":["with-claims"]}}]}]
+  }'
+```
+
+
+### Consumer Client
+
+This client will be used to configure the Consumer.
+
+Below is the curl to create client:
+
+```bash
+curl -k -X POST https://<oxd_host>:8443/register-site \
+-d '{
+  "op_host":"https://<op_host>",
+  "redirect_uris":["https://client.example.com/cb"],"client_name":"uma-consumer",
+  "scope":["openid","oxd", "uma_protection"],
+  "grant_types":["client_credentials"]
+  }'
+```
+
+### Plugin configuration
+
+Below is the example of `kong.yml` with plugin configurations. For more details about plugin parameters chech [here](#parameters).
+
+```json
+{
+  "_format_version": "1.1",
+  "routes": [
+    {
+      "hosts": [
+        "<your_host>"
+      ],
+      "name": "demo-route",
+      "service": "demo-service"
+    }
+  ],
+  "services": [
+    {
+      "name": "demo-service",
+      "url": "<your_upstream_app_url>"
+    }
+  ],
+  "plugins": [
+    {
+      "name": "gluu-uma-auth",
+      "tags": null,
+      "config": {
+        "oxd_id": "<plugin_client_oxd_id>",
+        "client_id": "<plugin_client_id>",
+        "client_secret": "<plugin_client_secret>",
+        "op_url": "<your_op_server_url>",
+        "oxd_url": "<your_oxd_server_url>",
+        "anonymous": "anonymous",
+        "pass_credentials": "pass",
+        "custom_headers": [
+          {
+            "header_name": "x-consumer-id",
+            "value_lua_exp": "consumer.id",
+            "format": "string",
+            "sep": " ",
+            "iterate": false
+          },
+          {
+            "header_name": "x-oauth-client-id",
+            "value_lua_exp": "introspect_data.client_id",
+            "format": "string",
+            "sep": " ",
+            "iterate": false
+          },
+          {
+            "header_name": "x-consumer-custom-id",
+            "value_lua_exp": "introspect_data.client_id",
+            "format": "string",
+            "iterate": false,
+            "sep": " "
+          },
+          {
+            "header_name": "x-oauth-expiration",
+            "value_lua_exp": "introspect_data.exp",
+            "format": "string",
+            "iterate": false,
+            "sep": " "
+          },
+          {
+            "header_name": "x-authenticated-scope",
+            "value_lua_exp": "introspect_data.scope",
+            "format": "list",
+            "iterate": false,
+            "sep": ","
+          }
+        ],
+        "consumer_mapping": true
+      },
+      "route": "demo_route"
+    },
+    {
+      "name": "gluu-uma-pep",
+      "config": {
+        "oxd_id": "<plugin_client_oxd_id>",
+        "client_id": "<plugin_client_id>",
+        "client_secret": "<plugin_client_secret>",
+        "op_url": "<your_op_server_url>",
+        "oxd_url": "<your_oxd_server_url>",
+        "uma_scope_expression": "[{\"path\":\"/settings/??\",\"conditions\":[{\"httpMethods\":[\"GET\"],\"scope_expression\":{\"rule\":{\"and\":[{\"var\":0}]},\"data\":[\"with-claims\"]}}]}]",
+        "deny_by_default": true
+      },
+      "route": "demo-route"
+    }
+  ],
+  "consumers": [
+    {
+      "custom_id": "<consumer_clients_client_id>",
+      "username": "<give_any_unique_name>"
+    },
+    {
+      "custom_id": "anonymous",
+      "username": "anonymous"
+    }
+  ]
+}
+```
+
 ## Usage
 
 ### Create Client
