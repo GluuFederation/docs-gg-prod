@@ -129,7 +129,7 @@ Here is a list of all the parameters which can be used in this plugin's configur
 |**max_id_token_age**||Maximum age of `id token` in seconds |
 |**max_id_token_auth_age**||Maximum authentication age of `id_token` in seconds |
 |**custom_headers**||Used to set the custom headers, which is passed to upstream service by kong after authentication. Check [here for more details](../common-features/#custom-headers)|
-|**restore_original_auth_params**|false|It use to Handle POST request after OpenID Connect authentication and redirects. Plugin store the request object and after auth plugin will redirect with the same POST requested parameters.|
+|**restore_original_auth_params**|false|It use to restore original request's method, content-related headers and body after successful redirection from OP. It is useful if original request has methods like `POST`, `PUT`, `PATCH`, `DELETE`.|
 
 #### Dynamic URL Base ACRs stepped up authentication
 
