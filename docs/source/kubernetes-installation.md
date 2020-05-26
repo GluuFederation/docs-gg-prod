@@ -6,29 +6,29 @@ Kubernetes cluster must have the following minimum requirements available:
 
 |CPU Unit|RAM |Disk Space|Processor Type|
 |--------|--- |----------|--------------|
-|1       |2 GB|10 GB     |64 Bit
+|1       |2 GB|10 GB     |64 Bit        |
 
 ## DB-less mode(Recommended)
 
 To install Gluu Gateway on kuberentes, follow these steps:
 
-1. [Pre-requirement] Install Gluu on [kubernetes](https://gluu.org/docs/gluu-server/4.1/installation-guide/install-kubernetes/) if not already installed and make sure OXD server is chosen as an option. Answer `N` to prompt `Install Gluu Gateway Database mode` as this option is for Database mode.
+1. [Pre-requirement] Install Gluu on [kubernetes](https://gluu.org/docs/gluu-server/4.1/installation-guide/install-kubernetes/) if not already installed and make sure OXD server is installed by answering `Y` to `Install Casa`. Answer `N` to prompt `Install Gluu Gateway Database mode` as this option is for Database mode. 
 
-1. Install Kong with GG plugins. The only component that must be changed inside kongs manifests is the `image:tag` of kong to `gluufederation/gluu-gateway:4.1.0_dev`. Please refer to [kongs](https://docs.konghq.com/latest/kong-for-kubernetes/install) kubernetes installation for more tweaks and detail.
+1. Install Kong with GG plugins. The only component that must be changed inside kongs manifests is the `image:tag` of kong to `gluufederation/gluu-gateway:4.2.0_dev`. Please refer to [kongs](https://docs.konghq.com/latest/kong-for-kubernetes/install) kubernetes installation for more tweaks and detail.
     
     - With yaml manifests
     
         ```bash
-          wget https://bit.ly/kong-ingress-dbless && cat kong-ingress-dbless | sed -s "s@image: kong:2.0@image: gluufederation/gluu-gateway:4.1.0_dev@g" | kubectl apply -f -
+           wget https://bit.ly/kong-ingress-dbless && cat kong-ingress-dbless | sed -s "s@image: kong:2.0@image: gluufederation/gluu-gateway:4.1.0_dev@g" | kubectl apply -f -
         ```
         
     - With Helm. Please refer to kongs official [chart](https://github.com/Kong/charts/tree/master/charts/kong) for more options.
  
-         ```bash
-         helm repo add kong https://charts.konghq.com
-         helm repo update
-         # Helm 3
-         helm install gg-kong kong/kong --set ingressController.installCRDs=false --set image.repository=gluufederation/gluu-gateway --set image.tag=4.2.0_dev --set --namespace=gluu-gateway
+        ```bash
+           helm repo add kong https://charts.konghq.com
+           helm repo update
+           # Helm 3
+           helm install gg-kong kong/kong --set ingressController.installCRDs=false --set image.repository=gluufederation/gluu-gateway --set image.tag=4.2.0_dev --set --namespace=gluu-gateway
         ```   
 
 !!! Note
@@ -50,9 +50,9 @@ Head to [DB-less](db-less-setup.md) for more information. Please note that loadi
   
      ```bash
         ./pygluu-kubernetes.pyz install
-        # ToInstall Gluu-Gateway only: Gluu must be already installed in the same kubernetes cluster
+        # To install Gluu-Gateway only: Gluu must be already installed in the same kubernetes cluster
         ./pygluu-kubernetes.pyz install-gg-dbmode
-    ```
+     ```
 
 ### Helm
 
