@@ -19,7 +19,7 @@ To install Gluu Gateway on kuberentes, follow these steps:
     - With yaml manifests
     
         ```bash
-           wget https://bit.ly/kong-ingress-dbless && cat kong-ingress-dbless | sed -s "s@image: kong:2.0@image: gluufederation/gluu-gateway:4.1.0_dev@g" | kubectl apply -f -
+           wget https://bit.ly/kong-ingress-dbless && cat kong-ingress-dbless | sed -s "s@image: kong:2.0@image: gluufederation/gluu-gateway:4.2.0_dev@g" | kubectl apply -f -
         ```
         
     - With Helm. Please refer to kongs official [chart](https://github.com/Kong/charts/tree/master/charts/kong) for more options.
