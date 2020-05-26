@@ -19,7 +19,7 @@ To install Gluu Gateway on kuberentes, follow these steps:
     - With yaml manifests
     
         ```bash
-        wget https://bit.ly/kong-ingress-dbless && cat kong-ingress-dbless | sed -s "s@image: kong:2.0@image: gluufederation/gluu-gateway:4.1.0_dev@g" | kubectl apply -f -
+          wget https://bit.ly/kong-ingress-dbless && cat kong-ingress-dbless | sed -s "s@image: kong:2.0@image: gluufederation/gluu-gateway:4.1.0_dev@g" | kubectl apply -f -
         ```
         
     - With Helm. Please refer to kongs official [chart](https://github.com/Kong/charts/tree/master/charts/kong) for more options.
@@ -27,9 +27,8 @@ To install Gluu Gateway on kuberentes, follow these steps:
          ```bash
          helm repo add kong https://charts.konghq.com
          helm repo update
-        
-        # Helm 3
-        helm install gg-kong kong/kong --set ingressController.installCRDs=false --set image.repository=gluufederation/gluu-gateway --set image.tag=4.2.0_dev --set --namespace=gluu-gateway
+         # Helm 3
+         helm install gg-kong kong/kong --set ingressController.installCRDs=false --set image.repository=gluufederation/gluu-gateway --set image.tag=4.2.0_dev --set --namespace=gluu-gateway
         ```   
 
 !!! Note
@@ -39,9 +38,9 @@ Head to [DB-less](db-less-setup.md) for more information. Please note that loadi
 
 ### Uninstall
 
-    ```bash
-    helm delete gg-kong -n gluu-gateway
-    ```
+```bash
+   helm delete gg-kong -n gluu-gateway
+```
 
 ## DB mode
 
@@ -50,12 +49,11 @@ Head to [DB-less](db-less-setup.md) for more information. Please note that loadi
 1. Install Gluu with Gluu gateway on [kubernetes](https://gluu.org/docs/gluu-server/4.1/installation-guide/install-kubernetes/).
   
      ```bash
-    ./pygluu-kubernetes.pyz install
-    
-    # Just install Gluu-Gateway if Gluu is already installed in the same kubernetes cluster
- 
-    ./pygluu-kubernetes.pyz install-gg-dbmode
- 
+        ./pygluu-kubernetes.pyz install
+        
+        # ToInstall Gluu-Gateway only: Gluu must be already installed in the same kubernetes cluster
+     
+        ./pygluu-kubernetes.pyz install-gg-dbmode
     ```
 
 ## Helm
@@ -63,25 +61,26 @@ Head to [DB-less](db-less-setup.md) for more information. Please note that loadi
 1. Install Gluu and Postgres run. Answer `Y` to prompt `Install Gluu Gateway`. This will install Gluu, Postgres, and setup the databases and required secrets for Gluu-Gateway and Gluu-Gateway-UI.
 
     ```bash
-    ./pygluu-kubernetes.pyz helm-install
+       ./pygluu-kubernetes.pyz helm-install
     ```
 
 1. Wait until Gluu is up and running. Make sure oxd server and oxauth pods are running
 
     ```bash
-    kubectl -n gluu wait --for=condition=available --timeout=900s deploy/gluu-oxauth
-    kubectl -n gluu wait --for=condition=available --timeout=300s deploy/gluu-oxd-server
+        kubectl -n gluu wait --for=condition=available --timeout=900s deploy/gluu-oxauth
+        kubectl -n gluu wait --for=condition=available --timeout=300s deploy/gluu-oxd-server
     ```
+    
 1. Install Gluu Gateway and Gluu Gateway UI
 
     ```bash
-    ./pygluu-kubernetes.pyz helm-install-gg-dbmode
+        ./pygluu-kubernetes.pyz helm-install-gg-dbmode
     ``` 
 
 ### Uninstall
 
-    ```bash
+```bash
     ./pygluu-kubernetes.pyz uninstall-gg-dbmode
-    # or with helm
+    # With helm
     ./pygluu-kubernetes.pyz helm-uninstall-gg-dbmode
-    ```
+```
