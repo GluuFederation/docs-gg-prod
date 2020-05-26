@@ -44,19 +44,17 @@ Head to [DB-less](db-less-setup.md) for more information. Please note that loadi
 
 ## DB mode
 
-## Automatic full installation
+### Automatic full installation
 
 1. Install Gluu with Gluu gateway on [kubernetes](https://gluu.org/docs/gluu-server/4.1/installation-guide/install-kubernetes/).
   
      ```bash
         ./pygluu-kubernetes.pyz install
-        
         # ToInstall Gluu-Gateway only: Gluu must be already installed in the same kubernetes cluster
-     
         ./pygluu-kubernetes.pyz install-gg-dbmode
     ```
 
-## Helm
+### Helm
 
 1. Install Gluu and Postgres run. Answer `Y` to prompt `Install Gluu Gateway`. This will install Gluu, Postgres, and setup the databases and required secrets for Gluu-Gateway and Gluu-Gateway-UI.
 
