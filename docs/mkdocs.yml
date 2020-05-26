@@ -49,6 +49,7 @@ nav:
 - Release Notes: 'release-notes.md'
 - Installation Guide:
     - 'Installation' : 'installation.md'
+    - 'Kubernetes' : 'kubernetes-installation.md'
     - 'Clustering' : 'clustering.md'
     - 'Databaseless Setup': 'db-less-setup.md'
     - 'Upgrade': 'upgrade.md'
