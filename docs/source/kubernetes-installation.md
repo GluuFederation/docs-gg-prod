@@ -58,6 +58,10 @@ Head to [DB-less](db-less-setup.md) for more information. Please note that loadi
 !!! Note
     Please make sure that the Kubernetes cluster is `1.16.x`. Higher versions has an issue with the current postgres operator setup.
 
+## Pre-requisites
+
+- Please install [Helm v3]("https://helm.sh/docs/intro/install/") which is required for KubeDB in both methods of installation below.
+
 ### Automatic full installation
 
 1. Install Gluu with Gluu gateway on [kubernetes](https://gluu.org/docs/gluu-server/4.1/installation-guide/install-kubernetes/).
