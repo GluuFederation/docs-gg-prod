@@ -10,9 +10,6 @@ Kubernetes cluster must have the following minimum requirements available:
 
 ## DB-less mode(Recommended)
 
-!!! Note
-    Please make sure that the Kubernetes cluster is `1.16.x`. Higher versions has an issue with the current postgres operator setup.
-
 To install Gluu Gateway on kuberentes, follow these steps:
 
 1. [Pre-requirement] Install Gluu on [kubernetes](https://gluu.org/docs/gluu-server/4.1/installation-guide/install-kubernetes/) if not already installed and make sure OXD server is installed by answering `Y` to `Install Casa`. Answer `N` to prompt `Install Gluu Gateway Database mode` as this option is for Database mode. 
@@ -57,6 +54,9 @@ Head to [DB-less](db-less-setup.md) for more information. Please note that loadi
 ```
 
 ## DB mode
+
+!!! Note
+    Please make sure that the Kubernetes cluster is `1.16.x`. Higher versions has an issue with the current postgres operator setup.
 
 ### Automatic full installation
 
