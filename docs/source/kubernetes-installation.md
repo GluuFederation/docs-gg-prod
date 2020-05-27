@@ -42,7 +42,7 @@ To install Gluu Gateway on kuberentes, follow these steps:
            helm repo add kong https://charts.konghq.com
            helm repo update
            # Helm 3
-           helm install gg-kong kong/kong --set ingressController.installCRDs=false --set image.repository=gluufederation/gluu-gateway --set image.tag=4.2.0_dev --set --namespace=gluu-gateway
+           helm install gg-kong kong/kong --set ingressController.installCRDs=false --set image.repository=gluufederation/gluu-gateway --set image.tag=4.2.0_dev --set --namespace=kong
         ```   
 
 Head to [DB-less](db-less-setup.md) for more information. Please note that loading `kong.yml` occurs automatically as the `kong.yml` gets pulled from secrets and loaded if changes occur to it.
