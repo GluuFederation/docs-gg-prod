@@ -17,6 +17,20 @@ To install Gluu Gateway on kuberentes, follow these steps:
 
 1. [Pre-requirement] Install Gluu on [kubernetes](https://gluu.org/docs/gluu-server/4.1/installation-guide/install-kubernetes/) if not already installed and make sure OXD server is installed by answering `Y` to `Install Casa`. Answer `N` to prompt `Install Gluu Gateway Database mode` as this option is for Database mode. 
 
+1. Create namespace `kong` for Gluu-Gateway
+
+    ```bash
+    kubectl create ns kong
+    ```
+
+1. Create `kong.yml` declarative configuration before proceeding. Head to [DB-less](db-less-setup.md) for more information. Please note that loading `kong.yml` occurs automatically as the `kong.yml` gets pulled from secrets and loaded if changes occur to it.
+
+1. Once done with creating `kong.yml` create secret called `kong-config`  in the same namespace as Gluu Gateway
+
+    ```bash
+    kubectl create secret generic kong-config -n kong --from-file=kong.yml
+    ```
+        
 1. Install Kong with GG plugins. The only component that must be changed inside kongs manifests is the `image:tag` of kong to `gluufederation/gluu-gateway:4.2.0_dev`. Please refer to [kongs](https://docs.konghq.com/latest/kong-for-kubernetes/install) kubernetes installation for more tweaks and detail.
     
     - With yaml manifests
@@ -34,9 +48,6 @@ To install Gluu Gateway on kuberentes, follow these steps:
            helm install gg-kong kong/kong --set ingressController.installCRDs=false --set image.repository=gluufederation/gluu-gateway --set image.tag=4.2.0_dev --set --namespace=gluu-gateway
         ```   
 
-!!! Note
-    Please make sure to create a secret called `kong-config`  in the same namespace Kong was deployed in containing the `kong.yml` declaration file and restart gg-kong deployment.
-    
 Head to [DB-less](db-less-setup.md) for more information. Please note that loading `kong.yml` occurs automatically as the `kong.yml` gets pulled from secrets and loaded if changes occur to it.
 
 ### Uninstall
