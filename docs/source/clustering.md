@@ -50,7 +50,7 @@ There are two approaches in Kong for configuration storage.
 
 ## Set up the Gluu Gateway node
 
-Before Setup Nodes, You need to [install the GG](installation.md) one any one node so you have `GG UI`, `Postgres DB` and `OXD Server`. which you can connect to other nodes for quick setup.
+Before Setup Nodes, You need to [install the GG](installation.md) one any one node so you have `GG UI` and `Postgres DB`. which you can connect to other nodes for quick setup.
 
 Below are the 2 steps to setup the kong nodes.
 
