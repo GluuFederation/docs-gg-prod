@@ -18,6 +18,14 @@ Please visit the [Gluu Gateway docs](./index.md) for more complete documentation
  
 ## Gluu Gateway 4.2
 
-The most important update in Gluu Gateway 4.1 is the upgrade from Kong 1.3 to 2.0. Additionally, several improvements have been made to metrics and access tokens.
+The most important update in Gluu Gateway 4.2 is the upgrade from Kong 2.0.1 to 2.0.4 Additionally, several improvements have been made to metrics and access tokens.
 
 ### Changes
+
+- [#407](https://github.com/GluuFederation/gluu-gateway/issues/407) - OpenId Connect user sessions with server side storage
+- [#414](https://github.com/GluuFederation/gluu-gateway/issues/414) - Add spontaneous scopes support to gluu-oauth-pep
+- [#423](https://github.com/GluuFederation/gluu-gateway/issues/423) - /?? reg expression should not have to add / at last
+- [#424](https://github.com/GluuFederation/gluu-gateway/issues/424) - Sometime Getting 400 from kong
+- [#426](https://github.com/GluuFederation/gluu-gateway/issues/426) - Ensure that `??` pattern in protected path present not more then one time
+- [#432](https://github.com/GluuFederation/gluu-gateway/issues/432) - Fixed Unexpected error and redirection problem
+- [#441](https://github.com/GluuFederation/gluu-gateway/issues/441) - Handle POST request after OpenID Connect authentication and redirects
