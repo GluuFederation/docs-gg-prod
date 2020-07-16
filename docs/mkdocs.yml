@@ -43,6 +43,7 @@ nav:
     - '4.2': 'https://gluu.org/docs/gg/4.2'
     - '4.1': 'https://gluu.org/docs/gg/4.1'
     - '4.0': 'https://gluu.org/docs/gg/4.0/'
+    - 'EOL Versions': 'https://gluu.org/docs/eol'
 - ' ': 'https://gluu.org'
 - ' ': 'https://gluu.org'
 - Home: 'index.md'
