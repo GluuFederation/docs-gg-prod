@@ -182,7 +182,7 @@ yum clean all
 ```
 
 ```
-yum install gluu-gateway-4.0~*
+yum install gluu-gateway-4.0
 ```
 
 ## Run the setup script
