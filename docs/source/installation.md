@@ -172,7 +172,7 @@ apt update
 ```
 
 ```
-apt install gluu-gateway
+apt install gluu-gateway=4.0~*
 ```
 
 ### Centos 7, RHEL 7
@@ -182,7 +182,7 @@ yum clean all
 ```
 
 ```
-yum install gluu-gateway
+yum install gluu-gateway-4.0~*
 ```
 
 ## Run the setup script
@@ -194,7 +194,7 @@ yum install gluu-gateway
     If you are behind the corporate proxy, you need to export `HTTP_PROXY`, `HTTPS_PROXY`. [More details](https://github.com/GluuFederation/gluu-gateway/issues/352)
 
 ```
-cd /opt/gluu-gateway-setup/
+cd /opt/gluu-gateway/setup/
 ```
 
 ```
