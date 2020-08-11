@@ -1,4 +1,4 @@
-# Installation [Alpha]
+# Installation [Beta]
 
 ## Minimum Requirements
 
@@ -55,6 +55,9 @@ Head to [DB-less](db-less-setup.md) for more information. Please note that loadi
 
 ## DB mode
 
+!!! Warning
+    Installing Gluu Gateway ui automatically adds an ingress and allows access through the loadbalancer for Gluu deployment. This is a security risk and it is better to use `kubectl port-forward <gg-ui-pod> 443:8443 -n <gluu-namespace>` to access the UI when needed. You can delete the ingress definition using `kubectl delete <gg-ui-ingress-name> -n <gluu-namespace>`. 
+    
 !!! Note
     Please make sure that the Kubernetes cluster is `1.16.x`. Higher versions has an issue with the current postgres operator setup.
 
