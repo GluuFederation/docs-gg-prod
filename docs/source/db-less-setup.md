@@ -15,6 +15,7 @@ To use Kong in DB-less mode, set the `database` directive of kong.conf to `off`.
 ### Creating a Declarative Configuration File
 
 === "Community edition"
+    ## VM based installation
 
     To load entities into DB-less Kong, we need a declarative configuration file. Run the following command to create the configuration file:
 
@@ -138,7 +139,8 @@ To use Kong in DB-less mode, set the `database` directive of kong.conf to `off`.
       ```
 
 
-=== "Cloud Native edition"
+=== "Cloud Native Edition"
+    ## Kubernetes
 
     To load entities into DB-less Kong, we need a declarative configuration file. Run the following command to create the configuration file:
 
