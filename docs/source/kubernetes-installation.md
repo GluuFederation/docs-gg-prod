@@ -20,7 +20,7 @@ To install Gluu Gateway on kuberentes, follow these steps:
     kubectl create ns kong
     ```
 
-1. Create `kong.yml` declarative configuration before proceeding. Head to [DB-less](db-less-setup.md) for more information. Please note that loading `kong.yml` occurs automatically as the `kong.yml` gets pulled from secrets and loaded if changes occur to it.
+1. Create `kong.yml` declarative configuration before proceeding. Head to [DB-less](db-less-setup.md) Cloud Native edition section and finish steps there, then continue here. Please note that loading `kong.yml` occurs automatically as the `kong.yml` gets pulled from secrets and loaded if changes occur to it.
 
 1. Once done with creating `kong.yml` create secret called `kong-config`  in the same namespace as Gluu Gateway
 
