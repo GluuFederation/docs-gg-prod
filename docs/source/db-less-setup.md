@@ -152,9 +152,9 @@ To use Kong in DB-less mode, set the `database` directive of kong.conf to `off`.
     
     1. Log into oxAuth pod.
     
-       ```bash
-       kubectl exec -ti <oxauth-pod-name> -n <gluu-namespace> -- bash
-       ```
+           ```bash
+           kubectl exec -ti <oxauth-pod-name> -n <gluu-namespace> -- bash
+           ```
 
     1. First, create two OP Clients for the `gluu-oauth-auth` plugin using the oxd `/register-site` endpoint.
 
