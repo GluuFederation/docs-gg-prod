@@ -31,11 +31,12 @@ google_analytics:
 # Extensions
 markdown_extensions:
 - admonition
+- attr_list
 - toc:
      permalink: '#'
-- pymdownx.superfences
 - codehilite
-- pymdownx.snippets
+- pymdownx.superfences
+- pymdownx.tabbed
 
 # Navigation Menu
 nav:
