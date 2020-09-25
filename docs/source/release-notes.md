@@ -16,6 +16,14 @@ Gluu Gateway is an API Gateway which leverages the [Gluu Server](https://gluu.or
 
 Please visit the [Gluu Gateway docs](./index.md) for more complete documentation.   
  
+## Gluu Gateway 4.2.1
+
+The most important update in Gluu Gateway 4.2.1 is the upgrade from Kong 2.1.1 to 2.0.4 Additionally, several improvements have been made to metrics and access tokens.
+
+- [#33](https://github.com/GluuFederation/gluu-gateway-ui/issues/33) - Bump googleapis from 33.0.0 to 59.0.0 
+- [#29](https://github.com/GluuFederation/gluu-gateway-ui/issues/29) - Upgrade Kong to version 2.1.1
+- [#15](https://github.com/GluuFederation/gluu-gateway-setup/issues/15) - Adding installation support for gg in new linux distros.
+
 ## Gluu Gateway 4.2
 
 The most important update in Gluu Gateway 4.2 is the upgrade from Kong 2.0.1 to 2.0.4 Additionally, several improvements have been made to metrics and access tokens.
