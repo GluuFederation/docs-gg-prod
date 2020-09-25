@@ -1,6 +1,6 @@
 # Clustering
 
-Gluu Gateway is based on the [Kong Gateway](https://konghq.com/kong/), which supports clustering. Kong's docs about clustering are available [here](https://docs.konghq.com/2.0.x/clustering/).
+Gluu Gateway is based on the [Kong Gateway](https://konghq.com/kong/), which supports clustering. Kong's docs about clustering are available [here](https://docs.konghq.com/2.1.x/clustering/).
 
 A Kong cluster can scale the system horizontally by adding more machines/VMs/containers to handle more incoming requests.
 
@@ -24,11 +24,11 @@ There are two approaches in Kong for configuration storage.
 
 ### GG Kong DB-less Clustering
 
-   In this approach Kong uses the second configuration file, in YAML or JSON, using [declarative configuration](https://docs.konghq.com/2.0.x/db-less-and-declarative-config/#what-is-declarative-configuration). 
+   In this approach Kong uses the second configuration file, in YAML or JSON, using [declarative configuration](https://docs.konghq.com/2.1.x/db-less-and-declarative-config/#what-is-declarative-configuration). 
    
    To use Kong in DB-less mode, set the `database` directive of `kong.conf` to `off`. As usual, you can do this by editing `kong.conf` and setting `database=off` or via environment variables. You can then start Kong as usual.
    
-   Check [here](https://docs.konghq.com/2.0.x/db-less-and-declarative-config/) for Kong DB-less configurations.
+   Check [here](https://docs.konghq.com/2.1.x/db-less-and-declarative-config/) for Kong DB-less configurations.
    
    In below diagram there is no `Kong Database`. It use YAML Configuration file on every node with same configurations.
    
@@ -56,46 +56,25 @@ Below are the 2 steps to setup the kong nodes.
 
 ### 1. Install Kong
 
-1. Ubuntu 16
-    
-      - Download Kong 2.0.4 from [here](https://bintray.com/kong/kong-deb/download_file?file_path=kong-2.0.4.xenial.amd64.deb).
-      - 
-        ```
-        sudo apt-get update
-        sudo apt-get install openssl libpcre3 procps perl
-        sudo dpkg -i kong-*.deb
-        ``` 
+1. Ubuntu 20/18
+
+      - Follow [this link](https://docs.konghq.com/install/ubuntu/) to download and install kong on Ubuntu (Focal or Bionic).
       
-1. Ubuntu 18
+1. Debian 10/9
     
-      - Download Kong 2.0.4 from [here](https://bintray.com/kong/kong-deb/download_file?file_path=kong-2.0.4.bionic.amd64.deb).
-      - 
-        ```
-        sudo apt-get update
-        sudo apt-get install openssl libpcre3 procps perl
-        sudo dpkg -i kong-*.deb
-        ``` 
+      - Follow [this link](https://docs.konghq.com/install/debian/) to download and install kong on Debian (Buster or Stretch).
 
-1. RHEL 7
+1. RHEL 8/7
   
-      - Download Kong 2.0.4 from [here](https://bintray.com/kong/kong-rpm/download_file?file_path=rhel/7/kong-2.0.4.rhel7.amd64.rpm)
-      - 
-        ```
-        sudo yum install kong-*.rpm --nogpgcheck
-        ```
+      - Follow [this link](https://docs.konghq.com/install/redhat/) to download and install kong on RHEL.
 
-1. CentOS 7
+1. CentOS 8/7
 
-      - Download Kong 2.0.4 from [here](https://bintray.com/kong/kong-rpm/download_file?file_path=centos/7/kong-2.0.4.el7.amd64.rpm)
-      - 
-        ```
-        sudo yum install epel-release
-        sudo yum install kong-*.rpm --nogpgcheck
-        ```
+      - Follow [this link](https://docs.konghq.com/install/centos/) to download and install kong on CentOS.
 
 ### 2. Set up GG plugins and libraries
 
-- Download [gluu-gateway-node-deps.tar.gz](https://github.com/GluuFederation/gluu-gateway-setup/blob/version_4.2.0/setup/gluu-gateway-node-deps.tar.gz)
+- Download [gluu-gateway-node-deps.tar.gz](https://github.com/GluuFederation/gluu-gateway-setup/blob/version_4.2.1/setup/gluu-gateway-node-deps.tar.gz)
 
 - `tar -xvzf gluu-gateway-node-deps.tar.gz`
 
