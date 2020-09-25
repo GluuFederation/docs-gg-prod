@@ -55,7 +55,7 @@ Follow these steps to upgrade from 4.x to 4.2.
       mv konga.sql kong.sql /opt/gluu-gateway-setup/templates
       ```
 
-1. [Download upgrade script from here](https://raw.githubusercontent.com/GluuFederation/gluu-gateway-setup/version_4.2.0/setup/gg-upgrade-4-1-to-4-2-1.py) and start installation with the following command.
+1. [Download upgrade script from here](https://raw.githubusercontent.com/GluuFederation/gluu-gateway-setup/version_4.2.1/setup/gg-upgrade-4-1-to-4-2-1.py) and start installation with the following command.
       
       - When asked to `generate client`, select `n` and it will prompt to ask oxd_id.
       - Open a new terminal, open `local.js` which you have take backup in step-2. Open it and copy past the oxd_id, client_id and client_secret.
