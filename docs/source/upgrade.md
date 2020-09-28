@@ -62,7 +62,7 @@ Follow these steps to upgrade from 4.x to 4.2.
 
       ```
       cd /opt/gluu-gateway-setup/
-      python gg-upgrade-4-1-to-4-2-1.py
+      python3 gg-upgrade-4-1-to-4-2-1.py
       ```
 
 1. The upgrade is done here. If there are any configuration missing from the config files, update manually. Please check all the services running using command `netstat -ntlp`.
