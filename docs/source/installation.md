@@ -30,6 +30,33 @@ Gluu Gateway is compatible with the following versions of Gluu:
 !!! Important 
     Always run the following commands as root.
 
+### Ubuntu 20
+* Add the Gluu repo:
+
+```
+echo "deb https://repo.gluu.org/ubuntu/ focal main" > /etc/apt/sources.list.d/gluu-repo.list
+```
+
+```
+curl https://repo.gluu.org/ubuntu/gluu-apt.key | apt-key add -
+```
+
+* Add the PostgreSQL 10 repo:
+
+```
+echo "deb http://apt.postgresql.org/pub/repos/apt/ focal-pgdg main" > /etc/apt/sources.list.d/psql.list
+```
+
+```
+wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
+```
+
+* Add the Node repo:
+
+```
+curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
+```
+
 ### Ubuntu 18
 * Add the Gluu repo:
 
@@ -57,50 +84,92 @@ wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-
 curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
 ```
 
-### Ubuntu 16
-
+### Debian 10
 * Add the Gluu repo:
 
 ```
-echo "deb https://repo.gluu.org/ubuntu/ xenial main" > /etc/apt/sources.list.d/gluu-repo.list
+echo "deb https://repo.gluu.org/debian/ buster-stable main" > /etc/apt/sources.list.d/gluu-repo.list
 ```
 
 ```
-curl https://repo.gluu.org/ubuntu/gluu-apt.key | apt-key add -
+curl https://repo.gluu.org/debian/gluu-apt.key | apt-key add -
 ```
 
 * Add the PostgreSQL 10 repo:
 
 ```
-echo "deb http://apt.postgresql.org/pub/repos/apt/ xenial-pgdg main" > /etc/apt/sources.list.d/psql.list
+echo "deb http://apt.postgresql.org/pub/repos/apt/ buster-pgdg main" > /etc/apt/sources.list.d/psql.list
 ```
 
 ```
 wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
 ```
+
 * Add the Node repo:
 
 ```
 curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
 ```
 
-<!--
 ### Debian 9
 * Add the Gluu repo:
+
 ```
-# echo "deb https://repo.gluu.org/debian/ stretch-testing main" > /etc/apt/sources.list.d/gluu-repo.list
-# curl https://repo.gluu.org/debian/gluu-apt.key | apt-key add -
+echo "deb https://repo.gluu.org/debian/ stretch-stable main" > /etc/apt/sources.list.d/gluu-repo.list
 ```
+
+```
+curl https://repo.gluu.org/debian/gluu-apt.key | apt-key add -
+```
+
 * Add the PostgreSQL 10 repo:
+
 ```
-# echo "deb http://apt.postgresql.org/pub/repos/apt/ stretch-pgdg main" > /etc/apt/sources.list.d/psql.list
-# wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
+echo "deb http://apt.postgresql.org/pub/repos/apt/ stretch-pgdg main" > /etc/apt/sources.list.d/psql.list
 ```
+
+```
+wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
+```
+
 * Add the Node repo:
+
 ```
-# curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
+curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
 ```
--->
+
+### CentOS 8
+
+* Add the Gluu repo:
+
+```
+wget https://repo.gluu.org/centos/Gluu-centos8.repo -O /etc/yum.repos.d/Gluu.repo
+```
+
+```
+wget https://repo.gluu.org/centos/RPM-GPG-KEY-GLUU -O /etc/pki/rpm-gpg/RPM-GPG-KEY-GLUU
+```
+
+```
+rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-GLUU
+```
+
+* Add the PostgreSQL 10 repo:
+
+```
+rpm -Uvh https://yum.postgresql.org/10/redhat/rhel-8-x86_64/pgdg-redhat-repo-latest.noarch.rpm
+```
+
+```
+rpm -Uvh https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
+```
+
+* Add the Node repo:
+
+```
+curl -sL https://rpm.nodesource.com/setup_10.x | sudo -E bash -
+```
+
 
 ### CentOS 7
 
@@ -122,6 +191,42 @@ rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-GLUU
 
 ```
 rpm -Uvh https://yum.postgresql.org/10/redhat/rhel-7-x86_64/pgdg-redhat-repo-latest.noarch.rpm
+```
+
+```
+rpm -Uvh https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+```
+
+* Add the Node repo:
+
+```
+curl -sL https://rpm.nodesource.com/setup_10.x | sudo -E bash -
+```
+
+### RHEL 8
+
+* Add the Gluu repo:
+
+```
+wget https://repo.gluu.org/rhel/Gluu-rhel8.repo -O /etc/yum.repos.d/Gluu.repo
+```
+
+```
+wget https://repo.gluu.org/rhel/RPM-GPG-KEY-GLUU -O /etc/pki/rpm-gpg/RPM-GPG-KEY-GLUU
+```
+
+```
+rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-GLUU
+```
+
+* Add the PostgreSQL 10 repo:
+
+```
+rpm -Uvh https://yum.postgresql.org/10/redhat/rhel-8-x86_64/pgdg-redhat-repo-latest.noarch.rpm
+```
+
+```
+rpm -Uvh https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
 ```
 
 * Add the Node repo:
@@ -153,19 +258,22 @@ rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-GLUU
 rpm -Uvh https://yum.postgresql.org/10/redhat/rhel-7-x86_64/pgdg-redhat-repo-latest.noarch.rpm
 ```
 
+```
+rpm -Uvh https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+```
+
 * Add the Node repo:
 
 ```
 curl -sL https://rpm.nodesource.com/setup_10.x | sudo -E bash -
 ```
 
-
 ## Install the Gluu Gateway package
 
 !!! important
     The Gluu Gateway package installs the following required components: PostgreSQL v10, oxd Server 4.2, NodeJS v8, Kong Community Edition v0.14.1.
 
-### Ubuntu 16, 18
+### Ubuntu 20/18, Debian 10/9
 
 ```
 apt update
@@ -175,7 +283,7 @@ apt update
 apt install gluu-gateway
 ```
 
-### Centos 7, RHEL 7
+### Centos 8/7, RHEL 8/7
 
 ```
 yum clean all
@@ -198,7 +306,7 @@ cd /opt/gluu-gateway-setup
 ```
 
 ```bash
-python setup-gluu-gateway.py
+python3 setup-gluu-gateway.py
 ```
 
 After acknowledging the Gluu Stepped-Up Support License, you will be prompted to answer several questions. Just hit Enter to accept the default values, which are specified in square brackets.
