@@ -34,7 +34,7 @@ Gluu Gateway is compatible with the following versions of Gluu:
 * Add the Gluu repo:
 
 ```
-echo "deb https://repo.gluu.org/ubuntu/ focal-devel main" > /etc/apt/sources.list.d/gluu-repo.list
+echo "deb https://repo.gluu.org/ubuntu/ focal main" > /etc/apt/sources.list.d/gluu-repo.list
 ```
 
 ```
@@ -61,7 +61,7 @@ curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
 * Add the Gluu repo:
 
 ```
-echo "deb https://repo.gluu.org/ubuntu/ bionic-devel main" > /etc/apt/sources.list.d/gluu-repo.list
+echo "deb https://repo.gluu.org/ubuntu/ bionic main" > /etc/apt/sources.list.d/gluu-repo.list
 ```
 
 ```
@@ -88,11 +88,11 @@ curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
 * Add the Gluu repo:
 
 ```
-echo "deb https://repo.gluu.org/debian/ buster-testing main" > /etc/apt/sources.list.d/gluu-repo.list
+echo "deb https://repo.gluu.org/debian/ buster-stable main" > /etc/apt/sources.list.d/gluu-repo.list
 ```
 
 ```
-curl https://repo.gluu.org/ubuntu/gluu-apt.key | apt-key add -
+curl https://repo.gluu.org/debian/gluu-apt.key | apt-key add -
 ```
 
 * Add the PostgreSQL 10 repo:
@@ -115,11 +115,11 @@ curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
 * Add the Gluu repo:
 
 ```
-echo "deb https://repo.gluu.org/debian/ stretch-testing main" > /etc/apt/sources.list.d/gluu-repo.list
+echo "deb https://repo.gluu.org/debian/ stretch-stable main" > /etc/apt/sources.list.d/gluu-repo.list
 ```
 
 ```
-curl https://repo.gluu.org/ubuntu/gluu-apt.key | apt-key add -
+curl https://repo.gluu.org/debian/gluu-apt.key | apt-key add -
 ```
 
 * Add the PostgreSQL 10 repo:
@@ -143,7 +143,7 @@ curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
 * Add the Gluu repo:
 
 ```
-wget https://repo.gluu.org/centos/Gluu-centos-8-testing.repo -O /etc/yum.repos.d/Gluu.repo
+wget https://repo.gluu.org/centos/Gluu-centos8.repo -O /etc/yum.repos.d/Gluu.repo
 ```
 
 ```
@@ -176,7 +176,7 @@ curl -sL https://rpm.nodesource.com/setup_10.x | sudo -E bash -
 * Add the Gluu repo:
 
 ```
-wget https://repo.gluu.org/centos/Gluu-centos-7-testing.repo -O /etc/yum.repos.d/Gluu.repo
+wget https://repo.gluu.org/centos/Gluu-centos7.repo -O /etc/yum.repos.d/Gluu.repo
 ```
 
 ```
@@ -208,7 +208,7 @@ curl -sL https://rpm.nodesource.com/setup_10.x | sudo -E bash -
 * Add the Gluu repo:
 
 ```
-wget https://repo.gluu.org/rhel/Gluu-rhel-8-testing.repo -O /etc/yum.repos.d/Gluu.repo
+wget https://repo.gluu.org/rhel/Gluu-rhel8.repo -O /etc/yum.repos.d/Gluu.repo
 ```
 
 ```
@@ -241,7 +241,7 @@ curl -sL https://rpm.nodesource.com/setup_10.x | sudo -E bash -
 * Add the Gluu repo:
 
 ```
-wget https://repo.gluu.org/rhel/Gluu-rhel-7-testing.repo -O /etc/yum.repos.d/Gluu.repo
+wget https://repo.gluu.org/rhel/Gluu-rhel7.repo -O /etc/yum.repos.d/Gluu.repo
 ```
 
 ```
