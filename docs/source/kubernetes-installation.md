@@ -28,12 +28,12 @@ To install Gluu Gateway on kuberentes, follow these steps:
     kubectl create secret generic kong-config -n kong --from-file=kong.yml
     ```
         
-1. Install Kong with GG plugins. The only component that must be changed inside kongs manifests is the `image:tag` of kong to `gluufederation/gluu-gateway:4.2.1_02`. Please refer to [kongs](https://docs.konghq.com/latest/kong-for-kubernetes/install) kubernetes installation for more tweaks and detail.
+1. Install Kong with GG plugins. The only component that must be changed inside kongs manifests is the `image:tag` of kong to `gluufederation/gluu-gateway:4.2.1_03`. Please refer to [kongs](https://docs.konghq.com/latest/kong-for-kubernetes/install) kubernetes installation for more tweaks and detail.
     
     - With yaml manifests
     
         ```bash
-           wget https://bit.ly/kong-ingress-dbless && cat kong-ingress-dbless | sed -s "s@image: kong:2.1@image: gluufederation/gluu-gateway:4.2.1_02@g" | kubectl apply -f -
+           wget https://bit.ly/kong-ingress-dbless && cat kong-ingress-dbless | sed -s "s@image: kong:2.1@image: gluufederation/gluu-gateway:4.2.1_03@g" | kubectl apply -f -
         ```
         
     - With Helm. Please refer to kongs official [chart](https://github.com/Kong/charts/tree/master/charts/kong) for more options.
@@ -42,7 +42,7 @@ To install Gluu Gateway on kuberentes, follow these steps:
            helm repo add kong https://charts.konghq.com
            helm repo update
            # Helm 3
-           helm install gg-kong kong/kong --set ingressController.installCRDs=false --set image.repository=gluufederation/gluu-gateway --set image.tag=4.2.1_02 --set --namespace=kong
+           helm install gg-kong kong/kong --set ingressController.installCRDs=false --set image.repository=gluufederation/gluu-gateway --set image.tag=4.2.1_03 --set --namespace=kong
         ```   
 
 Head to [DB-less](db-less-setup.md) for more information. Please note that loading `kong.yml` occurs automatically as the `kong.yml` gets pulled from secrets and loaded if changes occur to it.
