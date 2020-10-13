@@ -20,30 +20,57 @@ To install Gluu Gateway on kuberentes, follow these steps:
     kubectl create ns kong
     ```
 
-1. Create `kong.yml` declarative configuration before proceeding. Head to [DB-less](db-less-setup.md) Cloud Native edition section and finish steps there, then continue here. Please note that loading `kong.yml` occurs automatically as the `kong.yml` gets pulled from secrets and loaded if changes occur to it.
+1. Create `kong.yml` declarative configuration before proceeding. Head to [DB-less](db-less-setup.md) Cloud Native edition section and finish steps there, then continue here. Please note that loading `kong.yml` occurs automatically as the `kong.yml` gets pulled from secrets and loaded if changes occur to it. An update on `kong.yml` requires only an update to the secret created in the next step. The deployment will automatically re-load upon changes. 
+
 
 1. Once done with creating `kong.yml` create secret called `kong-config`  in the same namespace as Gluu Gateway
 
     ```bash
     kubectl create secret generic kong-config -n kong --from-file=kong.yml
     ```
+    
         
 1. Install Kong with GG plugins. The only component that must be changed inside kongs manifests is the `image:tag` of kong to `gluufederation/gluu-gateway:4.2.1_03`. Please refer to [kongs](https://docs.konghq.com/latest/kong-for-kubernetes/install) kubernetes installation for more tweaks and detail.
     
-    - With yaml manifests
+    === "YAML"
     
         ```bash
            wget https://bit.ly/kong-ingress-dbless && cat kong-ingress-dbless | sed -s "s@image: kong:2.1@image: gluufederation/gluu-gateway:4.2.1_03@g" | kubectl apply -f -
         ```
         
-    - With Helm. Please refer to kongs official [chart](https://github.com/Kong/charts/tree/master/charts/kong) for more options.
+    === "Helm"
+    
+        Please refer to kongs official [chart](https://github.com/Kong/charts/tree/master/charts/kong) for more options.
  
         ```bash
            helm repo add kong https://charts.konghq.com
            helm repo update
            # Helm 3
            helm install gg-kong kong/kong --set ingressController.installCRDs=false --set image.repository=gluufederation/gluu-gateway --set image.tag=4.2.1_03 --set --namespace=kong
-        ```   
+        ```
+        
+1. In order for the kong deployment to read the secret containing `kong.yml` you must grant it permissions by adding the `get` to to the `CluserRole` of kong handling the `secrets` resource.
+
+    ```bash
+    kubectl edit ClusterRole kong-ingress-clusterrole
+    
+    apiVersion: rbac.authorization.k8s.io/v1beta1
+    kind: ClusterRole
+    metadata:
+      name: kong-ingress-clusterrole
+    rules:
+    - apiGroups:
+      - ""
+      resources:
+      - endpoints
+      - nodes
+      - pods
+      - secrets
+      verbs:
+      - list
+      - watch
+      - get # <---- Add this here
+    ```
 
 Head to [DB-less](db-less-setup.md) for more information. Please note that loading `kong.yml` occurs automatically as the `kong.yml` gets pulled from secrets and loaded if changes occur to it.
 
