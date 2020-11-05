@@ -138,8 +138,8 @@ To use Kong in DB-less mode, set the `database` directive of kong.conf to `off`.
             "services": [{ ... }],
             "certificates": [
               {
-                 "cert": "-----BEGIN CERTIFICATE-----",
-                 "key": "-----BEGIN RSA PRIVATE KEY-----",
+                 "cert": "-----BEGIN CERTIFICATE-----...",
+                 "key": "-----BEGIN RSA PRIVATE KEY-----...",
                  "snis": [
                     {
                        "name": "ssl-example.com"
@@ -285,7 +285,38 @@ To use Kong in DB-less mode, set the `database` directive of kong.conf to `off`.
             ]
           }
           ```
-
+          
+          **Certificate Object**
+          
+          A certificate object represents a public certificate, and can be optionally paired with the corresponding private key. In DB-less mode certificates should be added in kong.yml. Check Kong [Certificate Object](https://docs.konghq.com/2.1.x/admin-api/#certificate-object) docs for more details.
+          ```json
+          {
+            "_format_version": "1.1",
+            "consumers": [{ ... }],
+            "plugins": [{ ... }],
+            "routes": [{ ... }],
+            "services": [{ ... }],
+            "certificates": [
+              {
+                 "cert": "-----BEGIN CERTIFICATE-----...",
+                 "key": "-----BEGIN RSA PRIVATE KEY-----...",
+                 "snis": [
+                    {
+                       "name": "ssl-example.com"
+                    }
+                 ]
+              }
+            ]
+          }
+          ```
+          
+          | **Attributes** | **Description** |
+          |----------|-------------|
+          | **cert** | PEM-encoded public certificate chain of the SSL key pair. |
+          | **key** | PEM-encoded private key of the SSL key pair. |
+          | **tags** (optional) | An optional set of strings associated with the Certificate for grouping and filtering. |
+          | **snis** | An array of zero or more hostnames to associate with this certificate as SNIs. This is a sugar parameter that will, under the hood, create an SNI object and associate it with this certificate for your convenience. To set this attribute this certificate must have a valid private key associated with it. |
+          
 After starting Kong, you can see configuration in GG UI, but can't edit it. You always need to update the `kong.yml` file. 
 
 In this example, we configured the `gluu-oauth-auth` plugin, and you can similarly configure the all other plugins using `kong.yml`. In the `Plugins` section, you can see the parameters for every plugin.
