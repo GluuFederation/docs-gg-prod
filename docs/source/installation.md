@@ -172,7 +172,7 @@ apt update
 ```
 
 ```
-apt install gluu-gateway
+apt install gluu-gateway=4.1~*
 ```
 
 ### Centos 7, RHEL 7
@@ -182,7 +182,7 @@ yum clean all
 ```
 
 ```
-yum install gluu-gateway
+yum install gluu-gateway-4.1
 ```
 
 ## Run the setup script
