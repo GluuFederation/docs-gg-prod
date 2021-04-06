@@ -1,5 +1,8 @@
 # Gluu Gateway 4.2.x
 
+!!! Attention There will be no furthur release of Gluu Gateway after version `4.2`. The EOL of this product will be announced soon.
+
+
 ## Overview
 
 Gluu Gateway (GG) is an authentication and authorization solution for APIs and websites. 
