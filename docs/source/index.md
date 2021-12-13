@@ -1,7 +1,7 @@
 # Gluu Gateway 4.2.x
 
 !!! Attention 
-    There will be no further release of Gluu Gateway after version `4.2`. The EOL of this product will be announced soon.
+    There will be no further release of Gluu Gateway after version `4.2`. This product is no longer supported for new deployments as of the release of version 4.3.
 
 
 ## Overview
